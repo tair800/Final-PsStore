@@ -1,6 +1,14 @@
 using Final.Api.Middlewares;
+using Final.Application.Dtos.CategoryDtos;
 using Final.Application.Profiles;
+using Final.Application.Services.Implementations;
+using Final.Application.Services.Interfaces;
+using Final.Core.Repositories;
 using Final.Data.Data;
+using Final.Data.Implementations;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,6 +49,17 @@ builder.Services.AddDbContext<FinalDbContext>(opt =>
 {
     opt.UseSqlServer(config.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddFluentValidationAutoValidation()
+        .AddFluentValidationClientsideAdapters()
+        .AddValidatorsFromAssemblyContaining<CategoryCreateDto>()
+        .AddFluentValidationRulesToSwagger();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 builder.Services.AddAutoMapper(opt =>
 {

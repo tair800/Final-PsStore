@@ -147,3 +147,5 @@ C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\runtimes\win\lib\ne
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Application.dll
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Application.pdb
+C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Api.staticwebassets.runtime.json
+C:\Users\taira\source\repos\Final\Final.Api\obj\Debug\net8.0\Final.Api.sourcelink.json

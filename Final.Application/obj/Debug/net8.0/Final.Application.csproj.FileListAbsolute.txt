@@ -15,3 +15,4 @@ C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Appli
 C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\ref\Final.Application.dll
 C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Data.dll
 C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Data.pdb
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Application.sourcelink.json

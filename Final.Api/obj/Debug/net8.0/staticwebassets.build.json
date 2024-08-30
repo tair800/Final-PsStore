@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "sFbMMPu4+liRwH6Cmq8z+muudbtglY8rNAcWRjamtV4=",
+  "Hash": "Z59yH1i/A2w6dcx5TMLD+ei5BzuCgrpRh9KEQsbJoZw=",
   "Source": "Final.Api",
   "BasePath": "_content/Final.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Final.Api\\wwwroot",
+      "Source": "Final.Api",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\",
+      "BasePath": "_content/Final.Api",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

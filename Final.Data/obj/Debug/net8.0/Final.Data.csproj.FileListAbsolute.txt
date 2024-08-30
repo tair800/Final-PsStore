@@ -15,3 +15,4 @@ C:\Users\taira\source\repos\Final\Final.Data\bin\Debug\net8.0\Final.Core.dll
 C:\Users\taira\source\repos\Final\Final.Data\bin\Debug\net8.0\Final.Core.pdb
 C:\Users\taira\source\repos\Final\Final.Data\obj\Debug\net8.0\Final.Data.csproj.Up2Date
 C:\Users\taira\source\repos\Final\Final.Data\obj\Debug\net8.0\Final.Data.genruntimeconfig.cache
+C:\Users\taira\source\repos\Final\Final.Data\obj\Debug\net8.0\Final.Data.sourcelink.json

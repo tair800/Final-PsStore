@@ -10,3 +10,4 @@ C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.dll
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\refint\Final.Core.dll
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.pdb
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\ref\Final.Core.dll
+C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.sourcelink.json
