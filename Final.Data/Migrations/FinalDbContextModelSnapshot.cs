@@ -48,7 +48,7 @@ namespace Final.Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Baskets", (string)null);
+                    b.ToTable("Baskets");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.BasketGame", b =>
@@ -83,7 +83,7 @@ namespace Final.Data.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("BasketGames", (string)null);
+                    b.ToTable("BasketGames");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.Category", b =>
@@ -109,7 +109,7 @@ namespace Final.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.Dlc", b =>
@@ -143,7 +143,7 @@ namespace Final.Data.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Dlcs", (string)null);
+                    b.ToTable("Dlcs");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.Game", b =>
@@ -164,6 +164,10 @@ namespace Final.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -181,7 +185,7 @@ namespace Final.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.GamePlatform", b =>
@@ -213,7 +217,7 @@ namespace Final.Data.Migrations
 
                     b.HasIndex("PlatformId");
 
-                    b.ToTable("GamePlatforms", (string)null);
+                    b.ToTable("GamePlatforms");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.Platform", b =>
@@ -239,7 +243,7 @@ namespace Final.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Platforms", (string)null);
+                    b.ToTable("Platforms");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.User", b =>
@@ -341,7 +345,7 @@ namespace Final.Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Wishlists", (string)null);
+                    b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.WishlistGame", b =>
@@ -373,7 +377,7 @@ namespace Final.Data.Migrations
 
                     b.HasIndex("WishlistId");
 
-                    b.ToTable("WishlistGames", (string)null);
+                    b.ToTable("WishlistGames");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

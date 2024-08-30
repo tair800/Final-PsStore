@@ -57,6 +57,8 @@ builder.Services.AddFluentValidationAutoValidation()
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

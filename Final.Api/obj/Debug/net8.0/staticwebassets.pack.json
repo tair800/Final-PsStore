@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\5052abc8-3c03-45a4-bf99-1d220d712124gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\5052abc8-3c03-45a4-bf99-1d220d712124gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\ac23fc44-b5ae-4d05-9bdb-7e54d5a6e1dbgta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\ac23fc44-b5ae-4d05-9bdb-7e54d5a6e1dbgta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\cedf6ad1-0e3a-41eb-a71d-acc95f1893e4gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\cedf6ad1-0e3a-41eb-a71d-acc95f1893e4gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\f9be3180-ecf3-4a27-bb2f-0ad87ba1500bgta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\f9be3180-ecf3-4a27-bb2f-0ad87ba1500bgta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\gta.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Final.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Final.Api.props",
+      "PackagePath": "build\\Final.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Final.Api.props",
+      "PackagePath": "buildMultiTargeting\\Final.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Final.Api.props",
+      "PackagePath": "buildTransitive\\Final.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -5,10 +5,10 @@ namespace Final.Application.Services.Interfaces
 {
     public interface IGameService
     {
-
-        IEnumerable<Game> GetAllGames();
-
         Task<int> Create(GameCreateDto createDto);
+        Task<List<Game>> GetAll();
+        Task<Game> GetOne(string name);
+
     }
 
 }
