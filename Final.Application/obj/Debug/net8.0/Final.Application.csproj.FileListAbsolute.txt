@@ -1,0 +1,17 @@
+C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Application.deps.json
+C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Application.dll
+C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Application.pdb
+C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Core.dll
+C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Core.pdb
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Application.csproj.AssemblyReference.cache
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Application.AssemblyInfoInputs.cache
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Application.AssemblyInfo.cs
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Application.csproj.CoreCompileInputs.cache
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Ap.77021F9C.Up2Date
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Application.dll
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\refint\Final.Application.dll
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\Final.Application.pdb
+C:\Users\taira\source\repos\Final\Final.Application\obj\Debug\net8.0\ref\Final.Application.dll
+C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Data.dll
+C:\Users\taira\source\repos\Final\Final.Application\bin\Debug\net8.0\Final.Data.pdb
