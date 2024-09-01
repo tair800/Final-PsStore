@@ -25,6 +25,17 @@ namespace Final.Application.Services.Implementations
 
             var game = _mapper.Map<Game>(createDto);
             await _unitOfWork.gameRepository.Create(game);
+
+            foreach (var platformId in createDto.PlatformIds)
+            {
+                var gamePlatform = new GamePlatform
+                {
+                    GameId = game.Id,
+                    PlatformId = platformId
+                };
+                await _unitOfWork.gamePlatformRepository.Create(gamePlatform);
+            }
+
             _unitOfWork.Commit();
 
             return game.Id;
