@@ -7,6 +7,5 @@ namespace Final.Data.Implementations
         void Commit();
         public ICategoryRepository categoryRepository { get; }
         public IGameRepository gameRepository { get; }
-        public IGamePlatformRepository gamePlatformRepository { get; }
     }
 }

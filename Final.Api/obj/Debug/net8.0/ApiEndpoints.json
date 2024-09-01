@@ -70,13 +70,13 @@
         "IsRequired": false
       },
       {
-        "Name": "PlatformIds",
-        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Name": "ImgUrl",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       },
       {
-        "Name": "ImgUrl",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "Name": "Platform",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -103,6 +103,58 @@
       {
         "Name": "name",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "CreateRole",
+    "RelativePath": "api/User",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "Login",
+    "RelativePath": "api/User/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "Final.Application.Dtos.UserDtos.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "GetProfile",
+    "RelativePath": "api/User/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "Register",
+    "RelativePath": "api/User/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerDto",
+        "Type": "Final.Application.Dtos.UserDtos.RegisterDto",
         "IsRequired": true
       }
     ],

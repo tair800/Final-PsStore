@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Final.Core.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 
 namespace Final.Application.Dtos.GameDtos
@@ -9,8 +10,8 @@ namespace Final.Application.Dtos.GameDtos
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
-        public List<int> PlatformIds { get; set; }
         public IFormFile ImgUrl { get; set; }
+        public Platform Platform { get; set; }
 
     }
     public class GameCreateDtoValidator : AbstractValidator<GameCreateDto>
@@ -32,9 +33,9 @@ namespace Final.Application.Dtos.GameDtos
                 .NotEmpty().WithMessage("Category is required.")
                 .GreaterThan(0).WithMessage("Category ID must be greater than zero.");
 
-            RuleFor(g => g.PlatformIds)
+            RuleFor(g => g.Platform)
                 .NotEmpty().WithMessage("At least one platform must be selected.")
-                .Must(p => p.Count > 0).WithMessage("You must select at least one platform.");
+                .WithMessage("You must select at least one platform.");
         }
     }
 }

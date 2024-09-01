@@ -29,3 +29,6 @@ C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\refint\Final.Mvc.dl
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.pdb
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.genruntimeconfig.cache
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\ref\Final.Mvc.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.csproj.AssemblyReference.cache
+C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.csproj.Up2Date

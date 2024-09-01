@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "XdN0juF3RMo=",
+  "dgSpecHash": "tXww8FoJIVc=",
   "success": true,
   "projectFilePath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Final.Mvc.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\taira\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -12,8 +12,6 @@ namespace Final.Data.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Dlc> Dlcs { get; set; }
         public DbSet<Game> Games { get; set; }
-        public DbSet<GamePlatform> GamePlatforms { get; set; }
-        public DbSet<Platform> Platforms { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<WishlistGame> WishlistGames { get; set; }
 

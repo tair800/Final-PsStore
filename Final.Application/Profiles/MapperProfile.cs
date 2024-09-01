@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Final.Application.Dtos.CategoryDtos;
 using Final.Application.Dtos.GameDtos;
+using Final.Application.Dtos.UserDtos;
 using Final.Application.Extensions;
 using Final.Core.Entities;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +26,9 @@ namespace Final.Application.Profiles
             CreateMap<GameCreateDto, Game>()
                 .ForMember(s => s.ImgUrl, map => map.MapFrom(d => d.ImgUrl.Save(Directory.GetCurrentDirectory(), "uploads/images/")));
 
-
+            //user
+            CreateMap<UserReturnDto, User>();
+            CreateMap<RegisterDto, User>();
 
             //category
             CreateMap<CategoryCreateDto, Category>();

@@ -171,6 +171,9 @@ namespace Final.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Platform")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -186,64 +189,6 @@ namespace Final.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Games");
-                });
-
-            modelBuilder.Entity("Final.Core.Entities.GamePlatform", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("PlatformId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("PlatformId");
-
-                    b.ToTable("GamePlatforms");
-                });
-
-            modelBuilder.Entity("Final.Core.Entities.Platform", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Platforms");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.User", b =>
@@ -565,25 +510,6 @@ namespace Final.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Final.Core.Entities.GamePlatform", b =>
-                {
-                    b.HasOne("Final.Core.Entities.Game", "Game")
-                        .WithMany("GamePlatforms")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Final.Core.Entities.Platform", "Platform")
-                        .WithMany("GamePlatforms")
-                        .HasForeignKey("PlatformId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-
-                    b.Navigation("Platform");
-                });
-
             modelBuilder.Entity("Final.Core.Entities.Wishlist", b =>
                 {
                     b.HasOne("Final.Core.Entities.User", "User")
@@ -681,14 +607,7 @@ namespace Final.Data.Migrations
 
                     b.Navigation("Dlcs");
 
-                    b.Navigation("GamePlatforms");
-
                     b.Navigation("WishlistGames");
-                });
-
-            modelBuilder.Entity("Final.Core.Entities.Platform", b =>
-                {
-                    b.Navigation("GamePlatforms");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.User", b =>

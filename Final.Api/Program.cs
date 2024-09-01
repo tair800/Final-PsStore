@@ -3,6 +3,7 @@ using Final.Application.Dtos.CategoryDtos;
 using Final.Application.Profiles;
 using Final.Application.Services.Implementations;
 using Final.Application.Services.Interfaces;
+using Final.Application.Settings;
 using Final.Core.Entities;
 using Final.Core.Repositories;
 using Final.Data.Data;
@@ -10,9 +11,13 @@ using Final.Data.Implementations;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -52,6 +57,8 @@ builder.Services.AddDbContext<FinalDbContext>(opt =>
     opt.UseSqlServer(config.GetConnectionString("DefaultConnection"));
 });
 
+
+
 builder.Services.AddFluentValidationAutoValidation()
         .AddFluentValidationClientsideAdapters()
         .AddValidatorsFromAssemblyContaining<CategoryCreateDto>()
@@ -61,7 +68,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
-builder.Services.AddScoped<IGamePlatformRepository, GamePlatformRepository>();
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -71,6 +80,59 @@ builder.Services.AddAutoMapper(opt =>
 {
     opt.AddProfile(new MapperProfile(new HttpContextAccessor()));
 });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = config["Jwt:Issuer"],
+        ValidAudience = config["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:SecretKey"])),
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+builder.Services.Configure<JwtSettings>(config.GetSection("Jwt"));
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Shop App (API)",
+        Version = "v1"
+    });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+        {
+            new OpenApiSecurityScheme {
+                Reference = new OpenApiReference {
+                    Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
+
+
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -109,7 +171,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
