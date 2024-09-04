@@ -34,5 +34,17 @@ namespace Final.Api.Controllers
 
             return Ok(data);
         }
+
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> Delete(string name)
+        {
+            if (!string.IsNullOrEmpty(name))
+            {
+                await _categoryService.Delete(name);
+                return Ok($"Dlc named - '{name}' is deleted successfully");
+            }
+            throw new CustomExceptions(400, "Name", "Given name doesnt exist.");
+
+        }
     }
 }

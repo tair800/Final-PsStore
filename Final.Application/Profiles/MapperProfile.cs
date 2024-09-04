@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Final.Application.Dtos.CategoryDtos;
+using Final.Application.Dtos.DlcDtos;
 using Final.Application.Dtos.GameDtos;
 using Final.Application.Dtos.UserDtos;
 using Final.Application.Extensions;
@@ -26,12 +27,35 @@ namespace Final.Application.Profiles
             CreateMap<GameCreateDto, Game>()
                 .ForMember(s => s.ImgUrl, map => map.MapFrom(d => d.ImgUrl.Save(Directory.GetCurrentDirectory(), "uploads/images/")));
 
+            CreateMap<Game, GameReturnDto>()
+                .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs.Select(d => d.Name).ToList()))
+                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images" + src.ImgUrl));
+
+            CreateMap<Game, GameUpdateDto>();
+
+
+
+
+
+            //category
+            CreateMap<CategoryCreateDto, Category>();
+            CreateMap<Category, CategoryReturnDto>();
+
             //user
             CreateMap<UserReturnDto, User>();
             CreateMap<RegisterDto, User>();
 
-            //category
-            CreateMap<CategoryCreateDto, Category>();
+            //dlc
+            CreateMap<DlcCreateDto, Dlc>();
+            CreateMap<Dlc, DlcReturnDto>();
+
+
+
+
+
+
+
+
 
             ////student
             //CreateMap<StudentCreateDto, Student>()

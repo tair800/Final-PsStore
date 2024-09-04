@@ -6,8 +6,8 @@ C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.Generat
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.AssemblyInfoInputs.cache
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.AssemblyInfo.cs
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.csproj.CoreCompileInputs.cache
+C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.sourcelink.json
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.dll
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\refint\Final.Core.dll
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.pdb
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\ref\Final.Core.dll
-C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.sourcelink.json

@@ -1,0 +1,24 @@
+﻿@using Final.Mvc.ViewModels.GameVMs
+@model List<GameListItemVM>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">SalePrice</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in Model)
+        {
+            <tr>
+                <td>@game.Id</td>
+                <td>@game.Title</td>
+                <td>@game.Price</td>
+                <td>@game.SalePrice</td>
+                <td>@game.Platform</td>
+            </tr>
+        }
+    </tbody>
+</table>

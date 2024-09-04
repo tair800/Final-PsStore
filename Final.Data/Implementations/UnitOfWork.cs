@@ -8,10 +8,12 @@ namespace Final.Data.Implementations
         private readonly FinalDbContext _context;
         public ICategoryRepository categoryRepository { get; private set; }
         public IGameRepository gameRepository { get; private set; }
+        public IDlcRepository dlcRepository { get; private set; }
 
 
         public ICategoryRepository CategoryRepository => throw new NotImplementedException();
         public IGameRepository GameRepository => throw new NotImplementedException();
+        public IDlcRepository DlcRepository => throw new NotImplementedException();
 
 
         public UnitOfWork(FinalDbContext context)
@@ -19,6 +21,7 @@ namespace Final.Data.Implementations
             _context = context;
             categoryRepository = new CategoryRepository(_context);
             gameRepository = new GameRepository(_context);
+            dlcRepository = new DlcRepository(_context);
         }
 
         public void Commit()

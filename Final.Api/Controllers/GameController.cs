@@ -31,10 +31,10 @@ namespace Final.Api.Controllers
             return Ok(await _gameService.GetAll());
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> Get(string name)
+        [HttpGet("{title}")]
+        public async Task<IActionResult> Get(string title)
         {
-            var data = await _gameService.GetOne(name);
+            var data = await _gameService.GetOne(title);
 
             if (data is null)
             {
@@ -43,5 +43,27 @@ namespace Final.Api.Controllers
 
             return Ok(data);
         }
+
+        [HttpDelete("{title}")]
+        public async Task<IActionResult> Delete(string title)
+        {
+            if (!string.IsNullOrEmpty(title))
+            {
+                await _gameService.Delete(title);
+                return Ok("Game Deleted Successfully.");
+            }
+            throw new CustomExceptions(400, "Title", "Given title doesnt exist.");
+        }
+        [HttpPut("{title}")]
+        public async Task<IActionResult> Update(string title, GameUpdateDto gameUpdateDto)
+        {
+            if (!string.IsNullOrEmpty(title))
+            {
+                await _gameService.Update(title, gameUpdateDto);
+                return Ok("Game updated successfully");
+            }
+            throw new CustomExceptions(400, "Title", "Given title doesnt exist.");
+        }
+
     }
 }

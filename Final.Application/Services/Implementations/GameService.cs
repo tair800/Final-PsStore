@@ -33,11 +33,38 @@ namespace Final.Application.Services.Implementations
             return game.Id;
         }
 
-        public async Task<List<Game>> GetAll() => await _unitOfWork.gameRepository.GetAll();
-
-        public async Task<Game> GetOne(string name)
+        public async Task<List<GameReturnDto>> GetAll()
         {
-            return await _unitOfWork.gameRepository.GetEntity(g => g.Title == name);
+            var games = await _unitOfWork.gameRepository.GetAll(null, "Dlcs", "Category");
+            return _mapper.Map<List<GameReturnDto>>(games);
+        }
+
+        public async Task<GameReturnDto> GetOne(string title)
+        {
+            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Title == title, "Dlcs", "Category");
+            return _mapper.Map<GameReturnDto>(game);
+        }
+
+        public async Task Delete(string title)
+        {
+            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Title.ToLower() == title.ToLower());
+            if (game is null)
+                throw new CustomExceptions(404, "Game", "Game not found.");
+
+            await _unitOfWork.gameRepository.Delete(game);
+            _unitOfWork.Commit();
+        }
+
+        public async Task Update(string title, GameUpdateDto gameUpdateDto)
+        {
+            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Title.ToLower() == title.ToLower());
+            if (game is null)
+                throw new CustomExceptions(404, "Game", "Game not found.");
+
+            _mapper.Map(gameUpdateDto, game);
+
+            await _unitOfWork.gameRepository.Update(game);
+
         }
     }
 }

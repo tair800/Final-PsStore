@@ -6,6 +6,8 @@ C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Mvc.deps.json
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Mvc.runtimeconfig.json
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Mvc.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Mvc.pdb
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.csproj.AssemblyReference.cache
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.AssemblyInfoInputs.cache
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.AssemblyInfo.cs
@@ -24,11 +26,15 @@ C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\staticwebassets.pac
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\scopedcss\bundle\Final.Mvc.styles.css
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\scopedcss\projectbundle\Final.Mvc.bundle.scp.css
+C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.csproj.Up2Date
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\refint\Final.Mvc.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.pdb
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.genruntimeconfig.cache
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\ref\Final.Mvc.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Newtonsoft.Json.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.csproj.AssemblyReference.cache
-C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.csproj.Up2Date
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Core.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Core.pdb

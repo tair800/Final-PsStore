@@ -42,6 +42,80 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Final.Api.Controllers.CategoryController",
+    "Method": "Delete",
+    "RelativePath": "api/Category/{name}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.DlcController",
+    "Method": "Create",
+    "RelativePath": "api/Dlc",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dlcCreateDto",
+        "Type": "Final.Application.Dtos.DlcDtos.DlcCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.DlcController",
+    "Method": "GetAll",
+    "RelativePath": "api/Dlc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.DlcController",
+    "Method": "Get",
+    "RelativePath": "api/Dlc/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.DlcController",
+    "Method": "Delete",
+    "RelativePath": "api/Dlc/{name}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Final.Api.Controllers.GameController",
     "Method": "Create",
     "RelativePath": "api/Game",
@@ -62,6 +136,11 @@
       {
         "Name": "Price",
         "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "SalePrice",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -95,14 +174,51 @@
   {
     "ContainingType": "Final.Api.Controllers.GameController",
     "Method": "Get",
-    "RelativePath": "api/Game/{name}",
+    "RelativePath": "api/Game/{title}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
+        "Name": "title",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.GameController",
+    "Method": "Delete",
+    "RelativePath": "api/Game/{title}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "title",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.GameController",
+    "Method": "Update",
+    "RelativePath": "api/Game/{title}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "title",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "gameUpdateDto",
+        "Type": "Final.Application.Dtos.GameDtos.GameUpdateDto",
         "IsRequired": true
       }
     ],

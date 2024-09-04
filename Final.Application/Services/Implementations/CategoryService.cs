@@ -30,14 +30,37 @@ namespace Final.Application.Services.Implementations
             return category.Id;
         }
 
-        public async Task<List<Category>> GetAll()
+        public async Task Delete(string name)
         {
-            return await _unitOfWork.categoryRepository.GetAll();
+            var category = await _unitOfWork.categoryRepository.GetEntity(c => c.Name.ToLower() == name.ToLower());
+            if (category == null)
+                throw new CustomExceptions(404, "Category", "Category not found.");
+
+            await _unitOfWork.categoryRepository.Delete(category);
+            _unitOfWork.Commit();
+
         }
 
-        public async Task<Category> GetOne(string name)
+        public async Task<List<CategoryReturnDto>> GetAll()
         {
-            return await _unitOfWork.categoryRepository.GetEntity(g => g.Name == name, "Games");
+            var categories = await _unitOfWork.categoryRepository.GetAll(null, "Games");
+            return _mapper.Map<List<CategoryReturnDto>>(categories);
+
+        }
+
+
+        public async Task<CategoryReturnDto> GetOne(string name)
+        {
+            var category = await _unitOfWork.categoryRepository.GetEntity(g => g.Name == name, "Games");
+
+            if (category == null)
+            {
+                throw new CustomExceptions(404, "Category", "Category not found.");
+            }
+
+            var categoryDto = _mapper.Map<CategoryReturnDto>(category);
+
+            return categoryDto;
         }
     }
 }
