@@ -46,5 +46,18 @@ namespace Final.Api.Controllers
             throw new CustomExceptions(400, "Name", "Given name doesnt exist.");
 
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, CategoryUpdateDto categoryUpdateDto)
+        {
+            if (id > 0)
+            {
+                await _categoryService.Update(id, categoryUpdateDto);
+                return Ok("Category update successfully.");
+            }
+
+            throw new CustomExceptions(404, "Id", "Given id is invalid");
+
+        }
     }
 }

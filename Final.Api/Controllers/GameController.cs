@@ -64,19 +64,15 @@ namespace Final.Api.Controllers
             throw new CustomExceptions(400, "Id", "Given id doesnt exist.");
         }
 
-
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] GameUpdateDto gameUpdateDto)
         {
-            if (id != null || gameUpdateDto != null)
+            if (id > 0)
             {
                 await _gameService.Update(id, gameUpdateDto);
                 return Ok("Game updated successfully.");
-
             }
-
-            throw new CustomExceptions(404, "Title", "Something went wrong");
-
+            throw new CustomExceptions(404, "Id", "Given id is invalid");
         }
     }
 }

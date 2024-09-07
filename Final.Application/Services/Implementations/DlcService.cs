@@ -68,6 +68,25 @@ namespace Final.Application.Services.Implementations
             return _mapper.Map<DlcReturnDto>(dlc);
         }
 
+        public async Task Update(int id, DlcUpdateDto dlcUpdateDto)
+        {
+            var dlc = await _unitOfWork.dlcRepository.GetEntity(d => d.Id == id);
 
+            if (dlc is null)
+                throw new CustomExceptions(404, "Dlc", "Dlc not found.");
+
+            var gameExists = await _unitOfWork.gameRepository.isExists(g => g.Id == dlcUpdateDto.GameId);
+            if (!gameExists)
+                throw new CustomExceptions(404, "Game", "The provided GameId does not exist.");
+
+
+            dlc.UpdatedDate = DateTime.Now;
+
+            _mapper.Map(dlcUpdateDto, dlc);
+
+            await _unitOfWork.dlcRepository.Update(dlc);
+            _unitOfWork.Commit();
+
+        }
     }
 }

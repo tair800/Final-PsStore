@@ -32,8 +32,14 @@ namespace Final.Application.Profiles
                 .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));
 
 
-            CreateMap<GameUpdateDto, Game>();
+            // Mapping from GameUpdateDto to Game entity (for update)
+            CreateMap<GameUpdateDto, Game>()
+                .ForMember(dest => dest.ImgUrl, opt => opt.Ignore()); // ImgUrl handled separately
 
+            // Mapping from Game entity to GameUpdateDto (for fetching data to edit form)
+            CreateMap<Game, GameUpdateDto>()
+                .ForMember(dest => dest.File, opt => opt.Ignore())
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
 
 
@@ -42,6 +48,8 @@ namespace Final.Application.Profiles
             //category
             CreateMap<CategoryCreateDto, Category>();
             CreateMap<Category, CategoryReturnDto>();
+            CreateMap<CategoryUpdateDto, Category>()
+               .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             //user
             CreateMap<UserReturnDto, User>();
@@ -50,6 +58,7 @@ namespace Final.Application.Profiles
             //dlc
             CreateMap<DlcCreateDto, Dlc>();
             CreateMap<Dlc, DlcReturnDto>();
+            CreateMap<DlcUpdateDto, Dlc>();
 
 
 

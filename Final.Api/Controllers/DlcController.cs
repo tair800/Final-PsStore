@@ -47,6 +47,17 @@ namespace Final.Api.Controllers
 
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, DlcUpdateDto dlcUpdateDto)
+        {
+            if (id > 0)
+            {
+                await _dlcService.Update(id, dlcUpdateDto);
+                return Ok("Dlc updated successfully.");
+            }
+            return BadRequest();
+        }
+
 
     }
 }

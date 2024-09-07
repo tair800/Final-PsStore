@@ -8,5 +8,6 @@ namespace Final.Application.Services.Interfaces
         Task<List<CategoryReturnDto>> GetAll();
         Task Delete(int id);
         Task<CategoryReturnDto> GetOne(int id);
+        Task Update(int id, CategoryUpdateDto updateDto);
     }
 }

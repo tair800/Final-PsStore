@@ -27,8 +27,6 @@ namespace Final.Application.Services.Implementations
             var game = _mapper.Map<Game>(createDto);
             await _unitOfWork.gameRepository.Create(game);
 
-
-
             _unitOfWork.Commit();
 
             return game.Id;
@@ -59,17 +57,25 @@ namespace Final.Application.Services.Implementations
         public async Task Update(int id, GameUpdateDto updateDto)
         {
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id);
-
             if (game == null)
                 throw new CustomExceptions(404, "Game", "Game not found.");
 
-            FileExtension.DeleteImage(game.ImgUrl);
-            var filName = updateDto.File.Save(Directory.GetCurrentDirectory(), "uploads/images/");
+            if (updateDto.File != null)
+            {
+                if (!string.IsNullOrEmpty(game.ImgUrl))
+                {
+                    FileExtension.DeleteImage(game.ImgUrl);
+                }
 
-            var existGame = _mapper.Map(updateDto, game);
-            existGame.ImgUrl = filName;
+                var newFileName = updateDto.File.Save(Directory.GetCurrentDirectory(), "uploads/images/");
+                game.ImgUrl = newFileName;
+            }
 
-            await _unitOfWork.gameRepository.Update(existGame);
+            game.UpdatedDate = DateTime.Now;
+
+            _mapper.Map(updateDto, game);
+
+            await _unitOfWork.gameRepository.Update(game);
             _unitOfWork.Commit();
         }
     }

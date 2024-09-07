@@ -1,8 +1,16 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\01286807-c227-4e3d-b672-b433f65ddb96gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\01286807-c227-4e3d-b672-b433f65ddb96gta.jpg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\4a78abe4-12f0-427d-bc30-76bf14949e71gta.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\4a78abe4-12f0-427d-bc30-76bf14949e71gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Final.Api.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -62,5 +62,22 @@ namespace Final.Application.Services.Implementations
 
             return categoryDto;
         }
+
+        public async Task Update(int id, CategoryUpdateDto updateDto)
+        {
+            var category = await _unitOfWork.categoryRepository.GetEntity(c => c.Id == id);
+
+            if (category == null)
+                throw new CustomExceptions(404, "Category", "Category not found.");
+
+
+            category.UpdatedDate = DateTime.UtcNow;
+
+
+            _mapper.Map(updateDto, category);
+
+            await _unitOfWork.categoryRepository.Update(category);
+            _unitOfWork.Commit();
+        }
     }
 }
