@@ -38,9 +38,9 @@ namespace Final.Application.Services.Implementations
             return dlc.Id;
         }
 
-        public async Task Delete(string name)
+        public async Task Delete(int id)
         {
-            var dlc = await _unitOfWork.dlcRepository.GetEntity(d => d.Name.ToLower() == name.ToLower());
+            var dlc = await _unitOfWork.dlcRepository.GetEntity(d => d.Id == id);
             if (dlc == null)
                 throw new CustomExceptions(400, "Name", "Dlc not found.");
 
@@ -57,9 +57,9 @@ namespace Final.Application.Services.Implementations
         }
 
 
-        public async Task<DlcReturnDto> GetOne(string name)
+        public async Task<DlcReturnDto> GetOne(int id)
         {
-            var dlc = await _unitOfWork.dlcRepository.GetEntity(d => d.Name == name, "Game");
+            var dlc = await _unitOfWork.dlcRepository.GetEntity(d => d.Id == id, "Game");
             if (dlc == null)
             {
                 throw new CustomExceptions(404, "DLC", "DLC not found.");

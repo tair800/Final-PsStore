@@ -20,11 +20,12 @@ namespace Final.Mvc.Controllers
             }
             return BadRequest("error");
         }
-        public async Task<IActionResult> Detail(string name)
+        public async Task<IActionResult> Detail(int id)
+
         {
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/Game/{name}");
+            HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/Game/Get/{id}");
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();

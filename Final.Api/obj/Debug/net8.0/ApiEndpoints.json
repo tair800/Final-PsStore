@@ -28,14 +28,14 @@
   {
     "ContainingType": "Final.Api.Controllers.CategoryController",
     "Method": "Get",
-    "RelativePath": "api/Category/{name}",
+    "RelativePath": "api/Category/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -44,14 +44,14 @@
   {
     "ContainingType": "Final.Api.Controllers.CategoryController",
     "Method": "Delete",
-    "RelativePath": "api/Category/{name}",
+    "RelativePath": "api/Category/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -85,15 +85,15 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.DlcController",
-    "Method": "Get",
-    "RelativePath": "api/Dlc/{name}",
-    "HttpMethod": "GET",
+    "Method": "Delete",
+    "RelativePath": "api/Dlc/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -101,15 +101,20 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.DlcController",
-    "Method": "Delete",
+    "Method": "Get",
     "RelativePath": "api/Dlc/{name}",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "name",
-        "Type": "System.String",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -173,31 +178,15 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.GameController",
-    "Method": "Get",
-    "RelativePath": "api/Game/{title}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "title",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.GameController",
     "Method": "Delete",
-    "RelativePath": "api/Game/{title}",
+    "RelativePath": "api/Game/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "title",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -206,19 +195,65 @@
   {
     "ContainingType": "Final.Api.Controllers.GameController",
     "Method": "Update",
-    "RelativePath": "api/Game/{title}",
+    "RelativePath": "api/Game/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "title",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "gameUpdateDto",
-        "Type": "Final.Application.Dtos.GameDtos.GameUpdateDto",
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Price",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "SalePrice",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Platform",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.GameController",
+    "Method": "Get",
+    "RelativePath": "api/Game/Get/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

@@ -85,7 +85,10 @@ namespace Final.Data.Implementations
                 {
                     query = GetAllIncludes(includes);
                 }
-                return predicate == null ? await query.FirstOrDefaultAsync() : await query.FirstOrDefaultAsync(predicate);
+
+                var a = predicate == null ? await query.FirstOrDefaultAsync() : await query.FirstOrDefaultAsync(predicate);
+
+                return a;
             }
             catch (Exception ex)
             {

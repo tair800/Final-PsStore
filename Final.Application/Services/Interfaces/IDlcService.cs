@@ -6,7 +6,7 @@ namespace Final.Application.Services.Interfaces
     {
         Task<int> Create(DlcCreateDto dlcCreateDto);
         Task<List<DlcReturnDto>> GetAll();
-        Task Delete(string name);
-        Task<DlcReturnDto> GetOne(string name);
+        Task Delete(int id);
+        Task<DlcReturnDto> GetOne(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Final.Application.Dtos.GameDtos;
 using Final.Application.Exceptions;
+using Final.Application.Extensions;
 using Final.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,10 +32,10 @@ namespace Final.Api.Controllers
             return Ok(await _gameService.GetAll());
         }
 
-        [HttpGet("{title}")]
-        public async Task<IActionResult> Get(string title)
+        [HttpGet("Get/{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            var data = await _gameService.GetOne(title);
+            var data = await _gameService.GetOne(id);
 
             if (data is null)
             {
@@ -44,26 +45,38 @@ namespace Final.Api.Controllers
             return Ok(data);
         }
 
-        [HttpDelete("{title}")]
-        public async Task<IActionResult> Delete(string title)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!string.IsNullOrEmpty(title))
+            if (id > 0)
             {
-                await _gameService.Delete(title);
+                var game = await _gameService.GetOne(id);
+                if (game == null)
+                {
+                    throw new CustomExceptions(404, "Game", "Game not found.");
+                }
+
+                FileExtension.DeleteImage(game.ImgUrl);
+                await _gameService.Delete(id);
+
                 return Ok("Game Deleted Successfully.");
             }
-            throw new CustomExceptions(400, "Title", "Given title doesnt exist.");
-        }
-        [HttpPut("{title}")]
-        public async Task<IActionResult> Update(string title, GameUpdateDto gameUpdateDto)
-        {
-            if (!string.IsNullOrEmpty(title))
-            {
-                await _gameService.Update(title, gameUpdateDto);
-                return Ok("Game updated successfully");
-            }
-            throw new CustomExceptions(400, "Title", "Given title doesnt exist.");
+            throw new CustomExceptions(400, "Id", "Given id doesnt exist.");
         }
 
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromForm] GameUpdateDto gameUpdateDto)
+        {
+            if (id != null || gameUpdateDto != null)
+            {
+                await _gameService.Update(id, gameUpdateDto);
+                return Ok("Game updated successfully.");
+
+            }
+
+            throw new CustomExceptions(404, "Title", "Something went wrong");
+
+        }
     }
 }

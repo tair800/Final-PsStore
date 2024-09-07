@@ -6,9 +6,9 @@ namespace Final.Application.Services.Interfaces
     {
         Task<int> Create(GameCreateDto createDto);
         Task<List<GameReturnDto>> GetAll();
-        Task<GameReturnDto> GetOne(string title);
-        Task Delete(string title);
-        Task Update(string title, GameUpdateDto gameUpdateDto);
+        Task<GameReturnDto> GetOne(int id);
+        Task Delete(int id);
+        Task Update(int id, GameUpdateDto updateDto);
     }
 
 }

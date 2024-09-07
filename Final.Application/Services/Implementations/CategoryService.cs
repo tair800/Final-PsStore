@@ -30,9 +30,9 @@ namespace Final.Application.Services.Implementations
             return category.Id;
         }
 
-        public async Task Delete(string name)
+        public async Task Delete(int id)
         {
-            var category = await _unitOfWork.categoryRepository.GetEntity(c => c.Name.ToLower() == name.ToLower());
+            var category = await _unitOfWork.categoryRepository.GetEntity(c => c.Id == id);
             if (category == null)
                 throw new CustomExceptions(404, "Category", "Category not found.");
 
@@ -49,9 +49,9 @@ namespace Final.Application.Services.Implementations
         }
 
 
-        public async Task<CategoryReturnDto> GetOne(string name)
+        public async Task<CategoryReturnDto> GetOne(int id)
         {
-            var category = await _unitOfWork.categoryRepository.GetEntity(g => g.Name == name, "Games");
+            var category = await _unitOfWork.categoryRepository.GetEntity(g => g.Id == id, "Games");
 
             if (category == null)
             {

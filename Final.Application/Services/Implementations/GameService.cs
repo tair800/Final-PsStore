@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Final.Application.Dtos.GameDtos;
 using Final.Application.Exceptions;
+using Final.Application.Extensions;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;
 using Final.Data.Implementations;
@@ -39,15 +40,15 @@ namespace Final.Application.Services.Implementations
             return _mapper.Map<List<GameReturnDto>>(games);
         }
 
-        public async Task<GameReturnDto> GetOne(string title)
+        public async Task<GameReturnDto> GetOne(int id)
         {
-            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Title == title, "Dlcs", "Category");
+            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id, "Dlcs", "Category");
             return _mapper.Map<GameReturnDto>(game);
         }
 
-        public async Task Delete(string title)
+        public async Task Delete(int id)
         {
-            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Title.ToLower() == title.ToLower());
+            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id);
             if (game is null)
                 throw new CustomExceptions(404, "Game", "Game not found.");
 
@@ -55,16 +56,21 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
         }
 
-        public async Task Update(string title, GameUpdateDto gameUpdateDto)
+        public async Task Update(int id, GameUpdateDto updateDto)
         {
-            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Title.ToLower() == title.ToLower());
-            if (game is null)
+            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id);
+
+            if (game == null)
                 throw new CustomExceptions(404, "Game", "Game not found.");
 
-            _mapper.Map(gameUpdateDto, game);
+            FileExtension.DeleteImage(game.ImgUrl);
+            var filName = updateDto.File.Save(Directory.GetCurrentDirectory(), "uploads/images/");
 
-            await _unitOfWork.gameRepository.Update(game);
+            var existGame = _mapper.Map(updateDto, game);
+            existGame.ImgUrl = filName;
 
+            await _unitOfWork.gameRepository.Update(existGame);
+            _unitOfWork.Commit();
         }
     }
 }

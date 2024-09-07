@@ -22,10 +22,10 @@ namespace Final.Api.Controllers
         [HttpGet("")]
         public async Task<IActionResult> GetAll() => Ok(await _categoryService.GetAll());
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> Get(string name)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            var data = await _categoryService.GetOne(name);
+            var data = await _categoryService.GetOne(id);
 
             if (data is null)
             {
@@ -35,13 +35,13 @@ namespace Final.Api.Controllers
             return Ok(data);
         }
 
-        [HttpDelete("{name}")]
-        public async Task<IActionResult> Delete(string name)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!string.IsNullOrEmpty(name))
+            if (id > 0)
             {
-                await _categoryService.Delete(name);
-                return Ok($"Dlc named - '{name}' is deleted successfully");
+                await _categoryService.Delete(id);
+                return Ok($"Dlc  - '{id}' is deleted successfully");
             }
             throw new CustomExceptions(400, "Name", "Given name doesnt exist.");
 

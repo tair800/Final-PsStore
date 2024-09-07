@@ -28,10 +28,12 @@ namespace Final.Application.Profiles
                 .ForMember(s => s.ImgUrl, map => map.MapFrom(d => d.ImgUrl.Save(Directory.GetCurrentDirectory(), "uploads/images/")));
 
             CreateMap<Game, GameReturnDto>()
-                .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs.Select(d => d.Name).ToList()))
-                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images" + src.ImgUrl));
+                .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs.Select(d => d.Name)))
+                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));
 
-            CreateMap<Game, GameUpdateDto>();
+
+            CreateMap<GameUpdateDto, Game>();
+
 
 
 

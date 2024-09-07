@@ -6,7 +6,7 @@ namespace Final.Application.Services.Interfaces
     {
         Task<int> Create(CategoryCreateDto categoryCreateDto);
         Task<List<CategoryReturnDto>> GetAll();
-        Task Delete(string name);
-        Task<CategoryReturnDto> GetOne(string name);
+        Task Delete(int id);
+        Task<CategoryReturnDto> GetOne(int id);
     }
 }

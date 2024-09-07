@@ -25,9 +25,9 @@ namespace Final.Api.Controllers
             Ok(await _dlcService.GetAll());
 
         [HttpGet("{name}")]
-        public async Task<IActionResult> Get(string name)
+        public async Task<IActionResult> Get(int id)
         {
-            var data = await _dlcService.GetOne(name);
+            var data = await _dlcService.GetOne(id);
             if (data == null)
             {
                 throw new CustomExceptions(400, "Name", "Given dlc doesnt exist.");
@@ -35,15 +35,15 @@ namespace Final.Api.Controllers
             return Ok(data);
         }
 
-        [HttpDelete("{name}")]
-        public async Task<IActionResult> Delete(string name)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!string.IsNullOrEmpty(name))
+            if (id > 0)
             {
-                await _dlcService.Delete(name);
-                return Ok($"Dlc named - '{name}' is deleted successfully");
+                await _dlcService.Delete(id);
+                return Ok($"Dlc - '{id}' is deleted successfully");
             }
-            throw new CustomExceptions(400, "Name", "Given name doesnt exist.");
+            throw new CustomExceptions(400, "Id", "Given id doesnt exist.");
 
         }
 
