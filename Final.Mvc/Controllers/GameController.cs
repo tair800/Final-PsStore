@@ -21,7 +21,6 @@ namespace Final.Mvc.Controllers
             return BadRequest("error");
         }
         public async Task<IActionResult> Detail(int id)
-
         {
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
@@ -34,5 +33,6 @@ namespace Final.Mvc.Controllers
             }
             return NotFound("Game not found.");
         }
+
     }
 }

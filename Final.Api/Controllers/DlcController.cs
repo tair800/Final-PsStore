@@ -24,7 +24,7 @@ namespace Final.Api.Controllers
         public async Task<IActionResult> GetAll() =>
             Ok(await _dlcService.GetAll());
 
-        [HttpGet("{name}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var data = await _dlcService.GetOne(id);

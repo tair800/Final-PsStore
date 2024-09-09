@@ -1,6 +1,4 @@
-﻿using Final.Core.Entities;
-
-namespace Final.Mvc.ViewModels.GameVMs
+﻿namespace Final.Mvc.ViewModels.GameVMs
 {
     public class GameReturnVM
     {
@@ -21,7 +19,7 @@ namespace Final.Mvc.ViewModels.GameVMs
         public decimal? SalePrice { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public CategoryInGame Category { get; set; }
+        public string CategoryName { get; set; }
     }
 
     public class CategoryInGame

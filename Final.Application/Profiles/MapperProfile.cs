@@ -47,12 +47,13 @@ namespace Final.Application.Profiles
 
             //category
             CreateMap<CategoryCreateDto, Category>();
-            CreateMap<Category, CategoryReturnDto>();
+            CreateMap<Category, CategoryReturnDto>()
+                .ForMember(dest => dest.GameNames, opt => opt.MapFrom(src => src.Games.Select(g => g.Title).ToList()));
             CreateMap<CategoryUpdateDto, Category>()
                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             //user
-            CreateMap<UserReturnDto, User>();
+            CreateMap<User, UserReturnDto>();
             CreateMap<RegisterDto, User>();
 
             //dlc

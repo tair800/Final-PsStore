@@ -9,15 +9,17 @@
         public decimal? SalePrice { get; set; }
         public string ImgUrl { get; set; }
         public int CategoryId { get; set; }
-        public CategoryGame Category { get; set; }
+        public string CategoryName { get; set; }
+        public int DlcId { get; set; }
+        public List<string> DlcNames { get; set; }
         public Platform Platform { get; set; }
     }
 
-    public class CategoryGame
-    {
-        public string Name { get; set; }
-        public int GamesCount { get; set; }
-    }
+    //public class CategoryGame
+    //{
+    //    public string Name { get; set; }
+    //    public int GamesCount { get; set; }
+    //}
 
     public enum Platform
     {

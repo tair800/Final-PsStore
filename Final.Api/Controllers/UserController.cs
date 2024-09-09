@@ -3,7 +3,6 @@ using Final.Application.Dtos.UserDtos;
 using Final.Application.Services.Interfaces;
 using Final.Application.Settings;
 using Final.Core.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -48,20 +47,20 @@ namespace Final.Api.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> CreateRole()
-        {
-            if (!await _roleManager.RoleExistsAsync("member"))
-                await _roleManager.CreateAsync(new IdentityRole() { Name = "member" });
+        //[HttpGet]
+        //public async Task<IActionResult> CreateRole()
+        //{
+        //    if (!await _roleManager.RoleExistsAsync("member"))
+        //        await _roleManager.CreateAsync(new IdentityRole() { Name = "member" });
 
-            if (!await _roleManager.RoleExistsAsync("admin"))
-                await _roleManager.CreateAsync(new IdentityRole() { Name = "admin" });
+        //    if (!await _roleManager.RoleExistsAsync("admin"))
+        //        await _roleManager.CreateAsync(new IdentityRole() { Name = "admin" });
 
-            if (!await _roleManager.RoleExistsAsync("superAdmin"))
-                await _roleManager.CreateAsync(new IdentityRole() { Name = "superAdmin" });
+        //    if (!await _roleManager.RoleExistsAsync("superAdmin"))
+        //        await _roleManager.CreateAsync(new IdentityRole() { Name = "superAdmin" });
 
-            return StatusCode(201);
-        }
+        //    return StatusCode(201);
+        //}
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
@@ -84,14 +83,43 @@ namespace Final.Api.Controllers
             return Ok(new { token = _tokenService.GetToken(secretKet, audience, issuer, user, roles) });
         }
 
-        [HttpGet("profile")]
-        [Authorize]
-        public async Task<IActionResult> GetProfile()
+        [HttpGet("profiles")]
+        public async Task<IActionResult> GetAll()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user is null) return BadRequest();
 
-            return Ok(_mapper.Map<UserReturnDto>(user));
+            var users = _userManager.Users.ToList();
+            var userDtos = new List<UserReturnDto>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                var userDto = _mapper.Map<UserReturnDto>(user);
+                userDto.UserRoles = roles.ToList();
+
+                userDtos.Add(userDto);
+            }
+
+            return Ok(userDtos);
         }
+
+        [HttpGet("profile/{name}")]
+        public async Task<IActionResult> GetOne(string name)
+        {
+            var user = await _userManager.FindByNameAsync(name);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var userDto = _mapper.Map<UserReturnDto>(user);
+            userDto.UserRoles = roles.ToList();
+
+            return Ok(userDto);
+        }
+
+
     }
 }
