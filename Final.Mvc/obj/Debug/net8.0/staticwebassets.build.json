@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1lK3xChk+i9ZTaa91u98ze7Vzg8j2NUKL/b5NeHegzw=",
+  "Hash": "r/J8GG65SGCikk57bXoUFiObyuLn8Pe7I0tQ25vtJxQ=",
   "Source": "Final.Mvc",
   "BasePath": "_content/Final.Mvc",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Final.Mvc.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\index.css",
+      "SourceId": "Final.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\",
+      "BasePath": "_content/Final.Mvc",
+      "RelativePath": "css/index.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\index.css"
     }
   ]
 }

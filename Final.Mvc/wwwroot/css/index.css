@@ -1,0 +1,91 @@
+body {
+    background-color: #000;
+    color: white;
+    background-image: url('./img/background_dark.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.btn-outline-light {
+    width: 100%;
+}
+
+.text-white {
+    text-align: center;
+    margin-top: 1rem;
+}
+.login-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-container h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.btn-next {
+    background-color: #666;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.btn-next:hover {
+    background-color: #555;
+}
+
+.btn-create-account {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 4px;
+}
+
+.btn-create-account:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.links {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.links a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 2rem auto;
+    width: 80px;
+}

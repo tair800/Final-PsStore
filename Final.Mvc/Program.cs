@@ -2,6 +2,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient(); // This registers IHttpClientFactory
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -19,6 +21,11 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+           name: "areas",
+           pattern: "{area:exists}/{controller=DashBoard}/{action=Index}/{id?}"
+         );
 
 app.MapControllerRoute(
     name: "default",

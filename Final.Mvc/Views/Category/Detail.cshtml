@@ -1,0 +1,13 @@
+﻿@model CategoryDetailVM
+
+<h1>@Model.Name</h1>
+<p>Number of Games: @Model.GameCount</p>
+
+
+    <div class="games-list">
+        @foreach (var game in Model.GameNames)
+        {
+            <span>@game</span>
+        }
+    </div>
+
