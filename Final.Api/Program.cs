@@ -80,6 +80,11 @@ builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IDlcRepository, DlcRepository>();
 builder.Services.AddScoped<IDlcService, DlcService>();
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBasketGameRepository, BasketGameRepository>();
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();

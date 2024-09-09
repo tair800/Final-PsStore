@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Final.Application.Dtos.BasketDtos;
 using Final.Application.Dtos.CategoryDtos;
 using Final.Application.Dtos.DlcDtos;
 using Final.Application.Dtos.GameDtos;
@@ -60,6 +61,14 @@ namespace Final.Application.Profiles
             CreateMap<DlcCreateDto, Dlc>();
             CreateMap<Dlc, DlcReturnDto>();
             CreateMap<DlcUpdateDto, Dlc>();
+
+            //basket
+            CreateMap<Basket, BasketDto>()
+                .ForMember(dest => dest.Games, opt => opt.MapFrom(src => src.BasketGames));
+
+            CreateMap<BasketGame, BasketGameDto>()
+                .ForMember(dest => dest.GameName, opt => opt.MapFrom(src => src.Game.Title))
+                .ForMember(dest => dest.GamePrice, opt => opt.MapFrom(src => src.Game.Price));
 
 
 

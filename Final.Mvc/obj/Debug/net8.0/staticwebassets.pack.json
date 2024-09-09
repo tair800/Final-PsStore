@@ -5,8 +5,16 @@
       "PackagePath": "staticwebassets\\Final.Mvc.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\header.css",
+      "PackagePath": "staticwebassets\\css\\header.css"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\index.css",
       "PackagePath": "staticwebassets\\css\\index.css"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\js\\script.js",
+      "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Final.Mvc.Microsoft.AspNetCore.StaticWebAssets.props",

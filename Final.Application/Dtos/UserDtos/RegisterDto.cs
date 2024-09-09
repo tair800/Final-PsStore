@@ -5,8 +5,7 @@ namespace Final.Application.Dtos.UserDtos
 {
     public class RegisterDto
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string FullName { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -16,17 +15,12 @@ namespace Final.Application.Dtos.UserDtos
     {
         public RegisterDtoValidator()
         {
-            RuleFor(r => r.Name)
+            RuleFor(r => r.FullName)
                 .NotNull()
-                .WithMessage(" Name is required.")
-                .MaximumLength(10)
-                .WithMessage(" Name cannot exceed 10 characters.");
+                .WithMessage(" Fullname is required.")
+                .MaximumLength(25)
+                .WithMessage(" FullName cannot exceed 10 characters.");
 
-            RuleFor(r => r.Surname)
-               .NotNull()
-               .WithMessage(" Name is required.")
-               .MaximumLength(15)
-               .WithMessage(" Name cannot exceed 15 characters.");
 
             RuleFor(r => r.UserName)
                 .NotNull()

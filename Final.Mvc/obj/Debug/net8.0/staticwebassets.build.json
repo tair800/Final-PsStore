@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "r/J8GG65SGCikk57bXoUFiObyuLn8Pe7I0tQ25vtJxQ=",
+  "Hash": "YW4AXgoac6sefs3cmKLZ9tGbsurfDwdAM8pKDaAChcM=",
   "Source": "Final.Mvc",
   "BasePath": "_content/Final.Mvc",
   "Mode": "Default",
@@ -55,6 +55,25 @@
       "OriginalItemSpec": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Final.Mvc.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\header.css",
+      "SourceId": "Final.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\",
+      "BasePath": "_content/Final.Mvc",
+      "RelativePath": "css/header.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\header.css"
+    },
+    {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\index.css",
       "SourceId": "Final.Mvc",
       "SourceType": "Discovered",
@@ -72,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\index.css"
+    },
+    {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\js\\script.js",
+      "SourceId": "Final.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\",
+      "BasePath": "_content/Final.Mvc",
+      "RelativePath": "js/script.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\script.js"
     }
   ]
 }
