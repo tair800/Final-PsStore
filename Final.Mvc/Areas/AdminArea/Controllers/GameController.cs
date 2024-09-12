@@ -179,14 +179,14 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
             var formContent = new MultipartFormDataContent
-            {
-                { new StringContent(model.Title ?? ""), "Title" },
-                { new StringContent(model.Description ?? ""), "Description" },
-                { new StringContent(model.Price.ToString()), "Price" },
-                { new StringContent(model.SalePrice?.ToString() ?? "0"), "SalePrice" },
-                { new StringContent(model.CategoryId.ToString()), "CategoryId" },
-                { new StringContent(model.Platform.ToString()), "Platform" }
-            };
+    {
+        { new StringContent(model.Title ?? ""), "Title" },
+        { new StringContent(model.Description ?? ""), "Description" },
+        { new StringContent(model.Price.ToString()), "Price" },
+        { new StringContent(model.SalePrice?.ToString() ?? "0"), "SalePrice" },
+        { new StringContent(model.CategoryId.ToString()), "CategoryId" },
+        { new StringContent(model.Platform.ToString()), "Platform" }
+    };
 
             if (model.ImgUrl != null)
             {
@@ -196,14 +196,16 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
 
             var response = await client.PostAsync("https://localhost:7047/api/Game", formContent);
 
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                var errorContent = await response.Content.ReadAsStringAsync();
+                ModelState.AddModelError("", $"Error creating game: {response.StatusCode}. Response: {errorContent}");
+                return View(model);
             }
 
-            ModelState.AddModelError("", "There was an error creating the game.");
-            return View(model);
+            return RedirectToAction("Index");
         }
+
 
 
     }

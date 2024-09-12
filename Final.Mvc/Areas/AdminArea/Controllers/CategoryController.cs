@@ -65,6 +65,39 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new AdminCategoryCreateVM());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(AdminCategoryCreateVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            // Convert the model to JSON
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
+
+            // Send the POST request with JSON content
+            var response = await client.PostAsync("https://localhost:7047/api/Category", jsonContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Error creating category.");
+            return View(model);
+        }
+
+
 
     }
 }

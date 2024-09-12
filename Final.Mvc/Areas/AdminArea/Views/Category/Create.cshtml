@@ -1,0 +1,23 @@
+﻿@model AdminCategoryCreateVM
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create New Category</h4>
+            <form method="post">
+                <div class="form-group">
+                    <label for="Name">Category Name</label>
+                    <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Category</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

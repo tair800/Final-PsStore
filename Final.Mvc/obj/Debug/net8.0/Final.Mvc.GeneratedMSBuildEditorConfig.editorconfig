@@ -26,6 +26,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\taira\source\repos\Final\Final.Mvc
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/taira/source/repos/Final/Final.Mvc/Areas/AdminArea/Views/Category/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXENhdGVnb3J5XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/taira/source/repos/Final/Final.Mvc/Areas/AdminArea/Views/Category/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXENhdGVnb3J5XERldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
