@@ -1,0 +1,27 @@
+﻿@model BasketListVM
+
+
+@{
+    Layout = null;
+}
+<h2>Your Basket</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Game Title</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var basketGame in Model.BasketGames)
+        {
+            <tr>
+                <td>@basketGame.Game.Title</td>
+                <td>@basketGame.Quantity</td>
+                <td>@basketGame.Game.Price</td>
+                <td>@basketGame.Game.SalePrice</td>
+            </tr>
+        }
+    </tbody>
+</table>

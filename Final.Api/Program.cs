@@ -22,14 +22,13 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
-// Add services to the container.
 
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(opt =>
     {
         opt.InvalidModelStateResponseFactory = context =>
         {
-            // Aggregate all errors per field
+
             var errors = context.ModelState
                 .Where(e => e.Value?.Errors.Count > 0)
                 .ToDictionary(
@@ -37,7 +36,7 @@ builder.Services.AddControllers()
                     kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
                 );
 
-            // Customize the response object
+
             var responseObj = new
             {
                 message = "One or more validation errors occurred.",

@@ -1,0 +1,44 @@
+﻿@model AdminDlcReturnVM
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="game-details">
+
+                <div class="col-md-4">
+                    <!-- Game Image -->
+                    <div class="image-container text-center mb-4">
+                        <img src="https://html.com/wp-content/uploads/flamingo-fallback.jpg" alt="dlc Image" class="img-fluid rounded" style="width: 100%; max-height: 300px; object-fit: cover;" />
+                    </div>
+                </div>
+                <h1 class="display-4 mb-3 text-primary">@Model.Name</h1>
+
+                <div class="mb-3">
+                    <h4>Dlc Price</h4>
+                    <h3 class="text-muted">$@Model.Price</h3>
+                </div>
+
+                <div class="mb-3">
+                    <h4>Game Name</h4>
+                    <h5 class="text-muted">@Model.GameTitle</h5>
+
+                    <h4>Game Id</h4>
+                    <h5 class="text-muted">@Model.GameId</h5>
+                    
+                </div>
+                <div class="mb-3">
+                    <h4>CreateDate </h4>
+                    <h5 class="text-muted">@Model.CreateDate.ToString("dd-MM-yyyy")</h5>
+
+                    <h4>UpdateDate Id</h4>
+                    <h5 class="text-muted">@Model.UpdateDate?.ToString("dd-MM-yyyy")</h5>
+
+                </div>
+
+                <div class="mb-3">
+                    <h4>Dlc ID</h4>
+                    <h5 class="text-muted">@Model.Id</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

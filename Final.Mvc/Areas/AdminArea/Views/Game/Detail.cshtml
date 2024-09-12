@@ -1,0 +1,55 @@
+﻿@model AdminGameReturnVM
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Game Image -->
+                    <div class="image-container text-center mb-4">
+                        <img src="https://html.com/wp-content/uploads/flamingo-fallback.jpg" alt="Game Image" class="img-fluid rounded" style="width: 100%; max-height: 300px; object-fit: cover;" />
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <!-- Game Details -->
+                    <div class="game-details">
+                        <h1 class="display-4 mb-3 text-primary">@Model.Title</h1>
+                        <p class="text-muted">@Model.Description  </p>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <h4 >Price</h4>
+                                <h3 class="text-muted">$@Model.Price</h3>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h4 >Sale Price</h4>
+                                <h3 class="text-muted">$@Model.SalePrice</h3>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <h4 >Category</h4>
+                                <h5 class="text-muted">@Model.CategoryName</h5>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h4 >DLC Names</h4>
+                                @foreach (var dlc in Model.DlcNames)
+                                {
+                                    <h5 class="text-muted">@dlc</h5>
+
+                                }
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 >Game ID</h4>
+                                <h5 class="text-muted">@Model.Id</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

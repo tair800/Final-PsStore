@@ -1,7 +1,7 @@
+C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Api.exe
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\appsettings.json
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Api.staticwebassets.runtime.json
-C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Api.exe
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Api.deps.json
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Api.runtimeconfig.json
 C:\Users\taira\source\repos\Final\Final.Api\bin\Debug\net8.0\Final.Api.dll

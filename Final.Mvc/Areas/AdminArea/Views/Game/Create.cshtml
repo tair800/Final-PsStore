@@ -1,0 +1,70 @@
+﻿@model AdminGameCreateVM
+@{
+    Layout = null;
+}
+
+@{
+    ViewData["Title"] = "Create Game";
+}
+
+<h1>Create Game</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" id="Description" name="Description">@Model.Description</textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input type="number" class="form-control" id="Price" name="Price" value="@Model.Price" step="0.01" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="SalePrice">Sale Price</label>
+        <input type="number" class="form-control" id="SalePrice" name="SalePrice" value="@Model.SalePrice" step="0.01" />
+        <span asp-validation-for="SalePrice" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="CategoryId">Category</label>
+        <select class="form-control" id="CategoryId" name="CategoryId">
+            <option value="">Select a Category</option>
+            @foreach (var category in Model.Categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Platform">Platform</label>
+        <select class="form-control" id="Platform" name="Platform">
+            <option value="PS4">PS4</option>
+            <option value="PS5">PS5</option>
+            <option value="PS4PS5">PS4 & PS5</option>
+        </select>
+        <span asp-validation-for="Platform" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ImgUrl">Image</label>
+        <input type="file" class="form-control" id="ImgUrl" name="ImgUrl" />
+        <span asp-validation-for="ImgUrl" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Game</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
