@@ -10,6 +10,7 @@ namespace Final.Application.Dtos.UserDtos
         public string Email { get; set; }
         public string Password { get; set; }
         public string RePassword { get; set; }
+
     }
     public class RegisterDtoValidator : AbstractValidator<RegisterDto>
     {

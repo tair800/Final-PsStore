@@ -82,10 +82,8 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            // Convert the model to JSON
             var jsonContent = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
 
-            // Send the POST request with JSON content
             var response = await client.PostAsync("https://localhost:7047/api/Category", jsonContent);
 
             if (response.IsSuccessStatusCode)

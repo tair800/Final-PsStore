@@ -1,7 +1,4 @@
-﻿
-using Final.Mvc.ViewModels.GameVMs;
-
-namespace Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
+﻿namespace Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
 {
     public class AdminGameUpdateVM
     {
@@ -11,11 +8,12 @@ namespace Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
         public decimal? Price { get; set; }
         public decimal? SalePrice { get; set; }
         public IFormFile? File { get; set; }
-        public int? CategoryId { get; set; }
-        public string ImgUrl { get; set; }
-        public Platform? Platform { get; set; }
+        public int CategoryId { get; set; }
+        public string? CategoryName { get; set; }
+        public string? ImgUrl { get; set; }
+        public Platforms? Platform { get; set; }
 
-        public List<CategoryVM> Categories { get; set; }
+        public List<CategoryVM> Categories { get; set; } = new();
     }
 
     public class CategoryVM
@@ -23,5 +21,10 @@ namespace Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
         public int Id { get; set; }
         public string Name { get; set; }
     }
-
+    public enum Platforms
+    {
+        PS4,
+        PS5,
+        PS4PS5
+    }
 }

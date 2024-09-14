@@ -30,10 +30,29 @@
                                 <td> @game.Price </td>
                                 <td> @game.SalePrice </td>
                                 <td>
-                                    <img src="@Url.Content("~/uploads/images/" + game.Image)" alt="Game Image" style="width: 80px; height: auto; border-radius:0px" />
+                                    <img src="@Url.Content(game.ImgUrl)" alt="Game Image" style="width: 80px; height: auto; border-radius:0px" />
                                 </td>
-                                <td> @game.CreateDate.ToString("dd-MM-yyyy") </td>
-                                <td> @game.UpdateDate.ToString("dd-MM-yyyy") </td>
+                                <td>
+                                    @if (game.CreatedDate != null)
+                                    {
+                                        @game.CreatedDate.ToString("dd-MM-yyyy")
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (game.UpdatedDate != null)
+                                    {
+                                        @game.UpdatedDate.ToString("dd-MM-yyyy")
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                    }
+                                </td>
+                                <td>
                                 <td>
 
                                     <form asp-action="Delete" method="post" asp-route-id="@game.Id" style="display:inline;">
@@ -42,6 +61,10 @@
                                     <a asp-action="Detail" asp-route-id="@game.Id" class="btn btn-success btn-sm">
                                         <i class="fa fa-id-card"></i> 
                                     </a>
+                                    <a asp-action="Update" asp-route-id="@game.Id" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
 
                                 </td>
                             </tr>

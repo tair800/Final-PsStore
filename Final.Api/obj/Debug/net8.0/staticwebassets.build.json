@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yWBkLABWWMDY9UyKvjVOj4EZWzp/RehsE8E5POtMRrU=",
+  "Hash": "+gDWgJrqtmXF1tJ4FRaOF93WliyddN33UfqSg0SBVq4=",
   "Source": "Final.Api",
   "BasePath": "_content/Final.Api",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\images\\1b490eb2-95a5-4e83-8018-b1d2499112ebgta.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\2e9481a2-d23c-4f83-b0fa-326197768d6aa9fc1afa-2025-4ace-99bd-17c1b342200f1b490eb2-95a5-4e83-8018-b1d2499112ebgta.jpg",
+      "SourceId": "Final.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\",
+      "BasePath": "_content/Final.Api",
+      "RelativePath": "uploads/images/2e9481a2-d23c-4f83-b0fa-326197768d6aa9fc1afa-2025-4ace-99bd-17c1b342200f1b490eb2-95a5-4e83-8018-b1d2499112ebgta.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\images\\2e9481a2-d23c-4f83-b0fa-326197768d6aa9fc1afa-2025-4ace-99bd-17c1b342200f1b490eb2-95a5-4e83-8018-b1d2499112ebgta.jpg"
     },
     {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\35a2ed18-e000-494f-bd80-43f43a4898dd93525a5b-42c6-4cbb-b9f5-c24a1df331a0gta.jpg",
@@ -129,6 +148,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\images\\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\8f5e8027-da49-4960-b6ab-29b19a2ba21840414b7d-5845-4afd-99be-c1787cf80ce593525a5b-42c6-4cbb-b9f5-c24a1df331a0gta.jpg",
+      "SourceId": "Final.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\",
+      "BasePath": "_content/Final.Api",
+      "RelativePath": "uploads/images/8f5e8027-da49-4960-b6ab-29b19a2ba21840414b7d-5845-4afd-99be-c1787cf80ce593525a5b-42c6-4cbb-b9f5-c24a1df331a0gta.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\images\\8f5e8027-da49-4960-b6ab-29b19a2ba21840414b7d-5845-4afd-99be-c1787cf80ce593525a5b-42c6-4cbb-b9f5-c24a1df331a0gta.jpg"
     },
     {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\92c4c70b-aa55-4cc9-b43d-1ac2ee454c41gta.jpg",
