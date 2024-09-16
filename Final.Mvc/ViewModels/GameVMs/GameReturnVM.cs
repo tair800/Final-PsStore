@@ -15,6 +15,7 @@
         public string Description { get; set; }
         public decimal Price { get; set; }
         public Platform Platform { get; set; }
+        public string Image { get; set; }
 
         public decimal? SalePrice { get; set; }
         public DateTime CreatedDate { get; set; }

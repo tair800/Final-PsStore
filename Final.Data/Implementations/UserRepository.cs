@@ -108,6 +108,11 @@ namespace Final.Data.Implementations
             throw new NotImplementedException();
         }
 
+        public Task<List<User>> Search(Expression<Func<User, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task Update(User entity)
         {
             try

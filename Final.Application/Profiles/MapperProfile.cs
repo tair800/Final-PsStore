@@ -3,6 +3,7 @@ using Final.Application.Dtos.BasketDtos;
 using Final.Application.Dtos.CategoryDtos;
 using Final.Application.Dtos.DlcDtos;
 using Final.Application.Dtos.GameDtos;
+using Final.Application.Dtos.SettingsDto;
 using Final.Application.Dtos.UserDtos;
 using Final.Application.Extensions;
 using Final.Core.Entities;
@@ -71,6 +72,12 @@ namespace Final.Application.Profiles
                 .ForMember(dest => dest.GamePrice, opt => opt.MapFrom(src => src.Game.Price));
 
 
+            //settings
+
+            CreateMap<Setting, SettingsReturnDto>();
+
+            CreateMap<SettingCreateDto, Setting>();
+            CreateMap<SettingUpdateDto, Setting>();
 
 
 

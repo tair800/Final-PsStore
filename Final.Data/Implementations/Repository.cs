@@ -114,6 +114,8 @@ namespace Final.Data.Implementations
         {
             try
             {
+                entity.UpdatedDate = DateTime.Now;
+
                 var result = _context.Entry(entity);
                 result.State = EntityState.Modified;
             }
@@ -140,6 +142,18 @@ namespace Final.Data.Implementations
             catch (Exception ex)
             {
 
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<List<T>> Search(Expression<Func<T, bool>> predicate = null)
+        {
+            try
+            {
+                return await _table.Where(predicate).ToListAsync();
+            }
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
         }

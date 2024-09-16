@@ -11,8 +11,18 @@
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public int DlcId { get; set; }
-        public List<string> DlcNames { get; set; }
+        public string DlcName { get; set; }
+        public int DlcPrice { get; set; }
+        //public List<DlcDetail> DlcDetails { get; set; }
         public Platform Platform { get; set; }
+    }
+
+    public class DlcDetail
+    {
+
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        //public string ImgUrl { get; set; }  // Added image URL for DLC
     }
 
     //public class CategoryGame

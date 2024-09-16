@@ -1,9 +1,9 @@
 using Final.Api.Middlewares;
 using Final.Application.Dtos.CategoryDtos;
+using Final.Application.JwtSettings;
 using Final.Application.Profiles;
 using Final.Application.Services.Implementations;
 using Final.Application.Services.Interfaces;
-using Final.Application.Settings;
 using Final.Core.Entities;
 using Final.Core.Repositories;
 using Final.Data.Data;
@@ -21,6 +21,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
+
 
 
 builder.Services.AddControllers()
@@ -61,10 +62,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddDbContext<FinalDbContext>(opt =>
-{
-    opt.UseSqlServer(config.GetConnectionString("DefaultConnection"));
-});
+
 
 
 
@@ -84,12 +82,21 @@ builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IBasketGameRepository, BasketGameRepository>();
+builder.Services.AddScoped<ISettingService, SettingService>();
+builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddDbContext<FinalDbContext>(opt =>
+{
+    opt.UseSqlServer(config.GetConnectionString("DefaultConnection"),
+                x => x.MigrationsAssembly("Final.Api"));
+});
+
 
 
 
@@ -117,6 +124,8 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
+
+
 
 builder.Services.Configure<JwtSettings>(config.GetSection("Jwt"));
 

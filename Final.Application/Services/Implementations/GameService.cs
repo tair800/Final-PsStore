@@ -78,5 +78,13 @@ namespace Final.Application.Services.Implementations
             await _unitOfWork.gameRepository.Update(game);
             _unitOfWork.Commit();
         }
+
+        public async Task<List<GameReturnDto>> SearchGames(string title)
+        {
+            var games = await _unitOfWork.gameRepository.Search(g => g.Title.Contains(title));
+            return _mapper.Map<List<GameReturnDto>>(games);
+        }
+
+
     }
 }

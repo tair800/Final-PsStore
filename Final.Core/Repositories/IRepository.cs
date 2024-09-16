@@ -10,6 +10,8 @@ namespace Final.Core.Repositories
         Task Update(T entity);
         Task Delete(T entity);
         Task<bool> isExists(Expression<Func<T, bool>> predicate = null);
+        Task<List<T>> Search(Expression<Func<T, bool>> predicate);
+
         Task Commit();
     }
 }

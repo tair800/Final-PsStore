@@ -8,5 +8,6 @@ namespace Final.Core.Entities
         public decimal Price { get; set; }
         public int GameId { get; set; }
         public Game Game { get; set; }
+
     }
 }

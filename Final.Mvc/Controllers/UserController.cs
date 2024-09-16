@@ -18,7 +18,7 @@ namespace Final.Mvc.Controllers
         public async Task<IActionResult> Login(LoginVM model)
         {
             using HttpClient client = new();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(new { model }), Encoding.UTF8, "application/json");
+            StringContent content = new(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.PostAsync("https://localhost:7047/api/user/login", content);
 
@@ -38,13 +38,12 @@ namespace Final.Mvc.Controllers
 
         public IActionResult Register()
         {
-            return View();
+            return View(new RegisterVM());
         }
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
-            // Check if the model is valid (server-side validation)
             if (!ModelState.IsValid)
             {
                 return View(registerVM);
@@ -53,17 +52,14 @@ namespace Final.Mvc.Controllers
             using HttpClient client = new();
             StringContent content = new StringContent(JsonConvert.SerializeObject(registerVM), Encoding.UTF8, "application/json");
 
-            // Send the registration data to the API
             HttpResponseMessage response = await client.PostAsync("https://localhost:7047/api/user/register", content);
 
             if (response.IsSuccessStatusCode)
             {
-                // On successful registration, redirect to the login page
                 return RedirectToAction("Login");
             }
             else
             {
-                // If registration fails, get the error message from the API response
                 var errorContent = await response.Content.ReadAsStringAsync();
                 ModelState.AddModelError("", $"Registration failed: {errorContent}");
                 return View(registerVM);

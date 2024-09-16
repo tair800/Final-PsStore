@@ -1,0 +1,34 @@
+﻿@model Final.Mvc.Areas.AdminArea.ViewModels.Categories.AdminCategoryUpdateVM
+
+@{
+    ViewBag.Title = "Update Category";
+    Layout = null;
+}
+
+<h2 class="text-center">Update Category</h2>
+
+<div class="container mt-5">
+    <form asp-action="Update" method="post" class="form-horizontal">
+        <!-- Hidden field to store the Category ID -->
+      
+        <!-- Category Name Field -->
+        <div class="form-group mb-3">
+            <label asp-for="Name" class="form-label">Category Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+    
+
+       
+
+        <!-- Submit Button -->
+        <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary w-100">Update Category</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

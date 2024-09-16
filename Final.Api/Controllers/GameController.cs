@@ -74,5 +74,23 @@ namespace Final.Api.Controllers
             }
             throw new CustomExceptions(404, "Id", "Given id is invalid");
         }
+
+        [HttpGet("Search")]
+        public async Task<IActionResult> Search([FromQuery] string title)
+        {
+            if (string.IsNullOrEmpty(title))
+            {
+                return BadRequest("Search term cannot be empty.");
+            }
+
+            var games = await _gameService.SearchGames(title);
+
+            if (games == null || !games.Any())
+            {
+                return NotFound("No games found.");
+            }
+
+            return Ok(games);
+        }
     }
 }

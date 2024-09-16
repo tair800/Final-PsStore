@@ -1,0 +1,32 @@
+﻿body {
+    background-color: #000;
+    color: white;
+    background-image: url("~/img/background_dark.jpg"); /* Path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 500px;
+}
+
+.btn-outline-light {
+    width: 100%;
+}
+
+.btn-light {
+    width: 100%;
+}
+
+.text-white {
+    text-align: center;
+    margin-top: 1rem;
+}

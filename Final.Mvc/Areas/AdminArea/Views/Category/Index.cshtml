@@ -27,16 +27,38 @@
                                 <td> @category.GameCount </td>
 
 
-                                <td> @category.CreateDate.ToString("dd-MM-yyyy") </td>
-                                <td> @category.UpdateDate?.ToString("dd-MM-yyyy") </td>
+                                <td>
+                                    @if (category.CreatedDate != null)
+                                    {
+                                        @category.CreatedDate.ToString("dd-MM-yyyy")
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (category.UpdatedDate != null)
+                                    {
+                                        @category.UpdatedDate?.ToString("dd-MM-yyyy")
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                    }
+                                </td>
                                 <td>
 
                                     <form asp-action="Delete" method="post" asp-route-id="@category.Id" style="display:inline;">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                                     </form>
-                                    <a asp-action="Detail" asp-route-id="@category.Id" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i> Detail
+                                    <a asp-action="Detail" asp-route-id="@category.Id" class="btn btn-success btn-sm">
+                                        <i class="fa fa-id-card"></i>
                                     </a>
+                                    <a asp-action="Update" asp-route-id="@category.Id" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
                                 </td>
                             </tr>
                         }

@@ -1,7 +1,6 @@
 ﻿using Final.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace Final.Data.Data
 {
@@ -14,14 +13,15 @@ namespace Final.Data.Data
         public DbSet<Game> Games { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<WishlistGame> WishlistGames { get; set; }
+        public DbSet<Setting> Settings { get; set; }
 
-        public FinalDbContext(DbContextOptions options) : base(options)
+        public FinalDbContext(DbContextOptions<FinalDbContext> options) : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(FinalDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
     }

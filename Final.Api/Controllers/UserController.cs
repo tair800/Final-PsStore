@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Final.Application.Dtos.UserDtos;
+using Final.Application.JwtSettings;
 using Final.Application.Services.Interfaces;
-using Final.Application.Settings;
 using Final.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,19 +33,29 @@ namespace Final.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
+
+
             var existUser = await _userManager.FindByNameAsync(registerDto.UserName);
-            if (existUser != null) return Conflict(new { message = "Username already exists." });
+            if (existUser != null)
+            {
+                return Conflict(new { message = "Username already exists." });
+            }
 
             var user = _mapper.Map<User>(registerDto);
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
-            if (!result.Succeeded) return BadRequest(result.Errors);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
 
             await _userManager.AddToRoleAsync(user, "member");
 
             return StatusCode(201);
 
+
         }
+
 
         //[HttpGet]
         //public async Task<IActionResult> CreateRole()
@@ -80,7 +90,9 @@ namespace Final.Api.Controllers
             var audience = _jwtSettings.Audience;
             var issuer = _jwtSettings.Issuer;
 
-            return Ok(new { token = _tokenService.GetToken(secretKet, audience, issuer, user, roles) });
+            var a = _tokenService.GetToken(secretKet, audience, issuer, user, roles);
+
+            return Ok(new { token = a });
         }
 
         [HttpGet("profiles")]

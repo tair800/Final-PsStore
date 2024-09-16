@@ -4,6 +4,81 @@
     "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Final.Mvc.csproj": {}
   },
   "projects": {
+    "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Final.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Final.Application.csproj",
+        "projectName": "Final.Application",
+        "projectPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Final.Application.csproj",
+        "packagesPath": "C:\\Users\\taira\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\taira\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Final.Data.csproj": {
+                "projectPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Final.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Final.Core.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -71,14 +146,14 @@
         }
       }
     },
-    "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Final.Mvc.csproj": {
+    "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Final.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Final.Mvc.csproj",
-        "projectName": "Final.Mvc",
-        "projectPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Final.Mvc.csproj",
+        "projectUniqueName": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Final.Data.csproj",
+        "projectName": "Final.Data",
+        "projectPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Final.Data.csproj",
         "packagesPath": "C:\\Users\\taira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\obj\\",
+        "outputPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\taira\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -117,6 +192,100 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Final.Mvc.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Final.Mvc.csproj",
+        "projectName": "Final.Mvc",
+        "projectPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Final.Mvc.csproj",
+        "packagesPath": "C:\\Users\\taira\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\taira\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Final.Application.csproj": {
+                "projectPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Final.Application.csproj"
+              },
+              "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Final.Core.csproj": {
+                "projectPath": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Final.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.4, )"

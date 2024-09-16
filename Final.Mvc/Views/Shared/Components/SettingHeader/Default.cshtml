@@ -1,0 +1,18 @@
+﻿@using Final.Mvc.ViewModels.SettingVMs
+@model HeaderVM
+
+<header>
+    <h1>@Model.Settings["SiteTitle"]</h1>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="user-info">
+            <span>Welcome, @Model.UserFullName!</span>
+        </div>
+    }
+
+    <div class="basket-info">
+        <span>Items in basket: @Model.BasketCount</span>
+        <span>Total: $@Model.TotalPrice</span>
+    </div>
+</header>

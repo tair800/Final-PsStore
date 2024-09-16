@@ -14,6 +14,7 @@ namespace Final.Data.Implementations
         public IBasketRepository basketRepository { get; private set; }
         public IUserRepository userRepository { get; private set; }
         public IBasketGameRepository basketGameRepository { get; private set; }
+        public ISettingRepository settingsRepository { get; private set; }
 
 
         public ICategoryRepository CategoryRepository => throw new NotImplementedException();
@@ -22,6 +23,7 @@ namespace Final.Data.Implementations
         public IBasketRepository BasketRepository => throw new NotImplementedException();
         public IUserRepository UserRepository => throw new NotImplementedException();
         public IBasketGameRepository BasketGameRepository => throw new NotImplementedException();
+        public ISettingRepository SettingsRepository => throw new NotImplementedException();
 
 
         public UnitOfWork(FinalDbContext context)
@@ -33,6 +35,7 @@ namespace Final.Data.Implementations
             basketRepository = new BasketRepository(_context);
             userRepository = new UserRepository(_context);
             basketGameRepository = new BasketGameRepository(_context);
+            settingsRepository = new SettingRepository(_context);
         }
 
         public void Commit()

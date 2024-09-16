@@ -11,5 +11,6 @@ namespace Final.Data.Implementations
         public IBasketRepository basketRepository { get; }
         public IUserRepository userRepository { get; }
         public IBasketGameRepository basketGameRepository { get; }
+        public ISettingRepository settingsRepository { get; }
     }
 }

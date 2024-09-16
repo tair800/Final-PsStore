@@ -21,11 +21,10 @@ namespace Final.Application.Services.Implementations
             var ci = new ClaimsIdentity();
 
             ci.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+            ci.AddClaim(new Claim(ClaimTypes.GivenName, user.FullName));
             ci.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
-            ci.AddClaim(new Claim(ClaimTypes.GivenName, user.Name));
-            ci.AddClaim(new Claim(ClaimTypes.Surname, user.Surname));
             ci.AddClaim(new Claim(ClaimTypes.Email, user.Email));
-            ci.AddClaim(new Claim("Adress", "Baku"));//isdediyimizi bele elave edirik,key value mentigi ile
+            //ci.AddClaim(new Claim("Adress", "Baku"));//isdediyimizi bele elave edirik,key value mentigi ile
 
             ci.AddClaims(roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList());
 

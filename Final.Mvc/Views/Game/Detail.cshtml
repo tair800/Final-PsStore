@@ -1,22 +1,50 @@
-﻿@model Final.Mvc.ViewModels.GameVMs.GameDetailVM
+﻿@section Links {
+    <link href="~/css/detail.css" rel="stylesheet" />
+}
 
-<h1>Game Details @Model.Id</h1>
+@model Final.Mvc.ViewModels.GameVMs.GameDetailVM
 
-<div>
-    <h2>@Model.Title</h2>
-    <p>@Model.Description</p>
-    <p>Price: $@Model.Price</p>
-    <p>Sale Price: $@Model.SalePrice</p>
-
-    <p>Platform: @Model.Platform.ToString()</p>
-
-    <p>Category: @Model.CategoryName</p>
-
-    <h3>Available DLCs:</h3>
-    @foreach (var dlc in Model.DlcNames)
-    {
-        <h4>@dlc</h4>
+<style>
+    .game-banner{
+        background-image:url(@Model.ImgUrl)
     }
+</style>
+<!-- Game Banner -->
+<div class="game-banner d-flex align-items-end">
+    <div class="container">
+        <div class="game-info text-white p-4 mb-4">
+            <h1 class="fw-bold">@Model.Title</h1>
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-secondary me-2">@Model.Platform</span>
+                <span class="me-2">4.35</span>
+                <span class="me-2 rating-star">⭐</span>
+                <span>67K ratings</span>
+            </div>
+            <p class="game-price">$@Model.Price</p>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-warning text-dark cart-btn">Add to Cart</button>
+                <button class="btn btn-link text-white ms-3">
+                    <i class="fa fa-heart text-3xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <p><img src="@Url.Content(Model.ImgUrl)" alt="@Model.Title" style="width: 200px;" /></p>
+<!-- Add-Ons Section -->
+<div class="container py-5">
+    <h2 class="text-center mb-5">Add-Ons</h2>
+    <div class="d-flex justify-content-center">
+      @*    @foreach (var dlc in Model.DlcId)
+         {
+             <div class="addon-item text-center">
+                 <img class="addon-img rounded" src="https://image.api.playstation.com/vulcan/ap/rnd/202405/2117/98954d14c0d9c88ef33f74d4734ab5da03fab034ae37fcd1.png?w=5000&thumb=false"
+                      alt="e Edition Upgrade">
+                 <h3 class="fs-5 mt-2">@dlc.Name</h3>
+                 <p class="fs-5 fw-bold">$@dlc.Price</p>
+             </div>
+
+         } *@
+     
+    </div>
 </div>

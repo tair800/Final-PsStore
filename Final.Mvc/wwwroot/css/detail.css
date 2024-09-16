@@ -1,0 +1,42 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.game-banner {
+/*    background-image: url('https://image.api.playstation.com/vulcan/ap/rnd/202405/2117/98954d14c0d9c88ef33f74d4734ab5da03fab034ae37fcd1.png?w=5000&thumb=false');*/
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+}
+
+.game-info {
+    background-color: rgb(31 32 35);
+    padding: 20px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.cart-btn {
+    padding: 10px 60px;
+    font-size: 18px;
+}
+
+.addon-img {
+    width: 100%;
+    height: auto;
+}
+
+.rating-star {
+    color: gold;
+}
+
+.addon-item {
+    margin-right: 20px;
+}
+
+.game-price {
+    font-size: 2rem;
+    font-weight: bold;
+}

@@ -13,6 +13,7 @@ namespace Final.Application.Dtos.GameDtos
         public string CategoryName { get; set; }
         public int CategoryId { get; set; }
         public Platform Platform { get; set; }
+        public int DlcId { get; set; }
         public List<string> DlcNames { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
