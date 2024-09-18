@@ -12,6 +12,6 @@ namespace Final.Core.Entities
 
         public int Quantity { get; set; }
 
-        public decimal Sum { get; set; }
+        public double Sum { get; set; }
     }
 }

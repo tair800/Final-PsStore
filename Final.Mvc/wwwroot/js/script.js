@@ -28,3 +28,6 @@ squareImages.forEach(img => {
     });
 });
 
+
+
+

@@ -12,11 +12,13 @@ namespace Final.Application.Services.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
-        public GameService(IUnitOfWork unitOfWork, IMapper mapper)
+        public GameService(IUnitOfWork unitOfWork, IMapper mapper, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public async Task<int> Create(GameCreateDto createDto)
@@ -27,7 +29,15 @@ namespace Final.Application.Services.Implementations
             var game = _mapper.Map<Game>(createDto);
             await _unitOfWork.gameRepository.Create(game);
 
+
+
             _unitOfWork.Commit();
+
+
+            List<string> emails = new() { "tahir.aslanlee@gmail.com" };
+            string body = $"<a href='http://localhost:7047/game/detail/{game.Id}'>Go to Game post</a>";
+            _emailService.SendEmail(emails, body, "New Game Post", "View game post");
+
 
             return game.Id;
         }

@@ -310,12 +310,18 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.GameController",
-    "Method": "Get",
+    "Method": "GetAll",
     "RelativePath": "api/Game",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -498,6 +504,22 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "ForgotPassword",
+    "RelativePath": "api/User/forgotPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "forgotPasswordDto",
+        "Type": "Final.Application.Dtos.UserDtos.ForgotPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "Login",
     "RelativePath": "api/User/Login",
     "HttpMethod": "POST",
@@ -550,6 +572,53 @@
         "Name": "registerDto",
         "Type": "Final.Application.Dtos.UserDtos.RegisterDto",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/User/resetPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetPasswordDto",
+        "Type": "Final.Application.Dtos.UserDtos.ResetPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "CreateRole",
+    "RelativePath": "api/User/Role",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "VerifyEmail",
+    "RelativePath": "api/User/verifyEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

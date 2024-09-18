@@ -1,8 +1,20 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\templates\\emailTemplate\\emailConfirm.html",
+      "PackagePath": "staticwebassets\\templates\\emailTemplate\\emailConfirm.html"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\templates\\passwordTemplate\\forgotPassword.html",
+      "PackagePath": "staticwebassets\\templates\\passwordTemplate\\forgotPassword.html"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\01286807-c227-4e3d-b672-b433f65ddb96gta.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\01286807-c227-4e3d-b672-b433f65ddb96gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\12c27b78-09d2-4b39-a3b3-9355efe50819ba03142b-ddb9-4b9d-963d-ea6909f6a3d7fc4f5b6e-09bb-4670-866e-e1f64bd519f6gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\12c27b78-09d2-4b39-a3b3-9355efe50819ba03142b-ddb9-4b9d-963d-ea6909f6a3d7fc4f5b6e-09bb-4670-866e-e1f64bd519f6gta.jpg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\1b490eb2-95a5-4e83-8018-b1d2499112ebgta.jpg",

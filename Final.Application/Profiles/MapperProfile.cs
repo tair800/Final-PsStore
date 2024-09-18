@@ -31,6 +31,8 @@ namespace Final.Application.Profiles
 
             CreateMap<Game, GameReturnDto>()
                 .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs.Select(d => d.Name)))
+                .ForMember(dest => dest.DlcId, opt => opt.MapFrom(src => src.Dlcs.Any() ? src.Dlcs.FirstOrDefault().Id : 0))
+
                 .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));
 
 

@@ -23,6 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
 
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(opt =>
@@ -84,12 +85,16 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IBasketGameRepository, BasketGameRepository>();
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+builder.Services.AddSession();
 
 builder.Services.AddDbContext<FinalDbContext>(opt =>
 {
@@ -183,7 +188,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
         //todo:email confirm sondurmusen
         RequireUniqueEmail = true,
     };
-    //options.SignIn.RequireConfirmedEmail = true;
+    options.SignIn.RequireConfirmedEmail = true;
 
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<FinalDbContext>();
 

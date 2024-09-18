@@ -1,54 +1,55 @@
-﻿    @section Links {
-        <link href="~/css/header.css" rel="stylesheet" />
-    }
+﻿@section Links {
+    <link href="~/css/header.css" rel="stylesheet" />
+}
+@model GameReturnVM
 
-    <!-- Primary Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container d-flex flex-column flex-lg-row align-items-start">
-            <!-- Top-left for small screens -->
-            <div class="top-left-container d-lg-none">
-                <a class="nav-link signin-btn" href="#">Sign In</a>
-                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></a>
-            </div>
-
-            <!-- Logo -->
-            <a class="navbar-brand me-3" href="#">
-                <i class="fa-brands fa-playstation ps-logo-header"></i>
-            </a>
-
-            <!-- Responsive toggle button for small screens -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navigation links -->
-            <div class="collapse navbar-collapse w-100" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Games </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">PS5 </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">PS4 </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Support</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto align-items-center d-none d-lg-flex">
-                    <li class="nav-item">
-                        <a class="nav-link signin-btn" href="#">Sign In</a>
-                    </li>
-                    <li class="nav-item me-3">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></a>
-                    </li>
-                </ul>
-            </div>
+<!-- Primary Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container d-flex flex-column flex-lg-row align-items-start">
+        <!-- Top-left for small screens -->
+        <div class="top-left-container d-lg-none">
+            <a class="nav-link signin-btn" href="#">Sign In</a>
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></a>
         </div>
-    </nav>
+
+        <!-- Logo -->
+        <a class="navbar-brand me-3" href="#">
+            <i class="fa-brands fa-playstation ps-logo-header"></i>
+        </a>
+
+        <!-- Responsive toggle button for small screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation links -->
+        <div class="collapse navbar-collapse w-100" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Games </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PS5 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PS4 </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Support</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto align-items-center d-none d-lg-flex">
+                <li class="nav-item">
+                    <a class="nav-link signin-btn" href="#">Sign In</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
 <!-- Search Modal -->
@@ -75,520 +76,477 @@
 </div>
 
 
-    <!-- Promotional Section -->
-    <section class="promo-section ">
-        <img id="promoImage" src="./img/1721388324-8953.avif" width="100%" height="auto" alt="">
-    </section>
+<!-- Promotional Section -->
+<section class="promo-section ">
+    <img id="promoImage" src="./img/1721388324-8953.avif" width="100%" height="auto" alt="">
+</section>
 
-    <!-- Squares Section -->
+<!-- Squares Section -->
+<div class="container">
+    <div class="image-row">
+        <div class="image-square">
+            <img src="./img/gta.jpg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/vrising.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <!-- Slider Section -->
+    <h2 class="mb-4">All Deals</h2>
+    <div id="dealsCarousel" class="carousel slide position-relative" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+
+                  @*    @foreach (var game in Model.Items)
+                     {
+
+                             <div class="col-6 col-md-4 col-lg-2 mb-4">
+                                 <div class="card custom-deal-card">
+                                     <div class="position-relative">
+                                         <img src="@game.ImgUrl" class="card-img-top" alt="@game.Title">
+                                         @if (game.SalePrice.HasValue)
+                                         {
+                                             <span class="custom-discount-badge">-@(Math.Round((1 - (game.SalePrice.Value / game.Price)) * 100))%</span>
+                                         }
+                                     </div>
+                                     <div class="card-body">
+                                         <h5 class="card-title">@game.Title</h5>
+                                          @if (game.SalePrice.HasValue)
+                                          {
+                                              <p class="custom-deal-price">$@game.SalePrice.Value <span class="custom-price-text">$@game.Price</span></p>
+                                          }
+                                          else
+                                          {
+                                              <p class="custom-deal-price">$@game.Price</p>
+                                          }
+                                     </div>
+                                 </div>
+                             </div>
+
+                     } *@
+
+                    <!-- Add more deal cards here as needed -->
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <div class="row">
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow2.jpeg" class="card-img-top" alt="Deal 1">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Add more deal cards here as needed -->
+                </div>
+            </div>
+            <!-- You can add more carousel-item sections here if needed -->
+
+        </div>
+        <button class="carousel-control-prev custom-carousel-control-prev" type="button"
+                data-bs-target="#dealsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next custom-carousel-control-next" type="button"
+                data-bs-target="#dealsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Slider Section for New Games -->
+    <h2 class="mb-4 mt-5">New Games</h2>
+    <div id="newGamesCarousel" class="carousel slide position-relative" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
+                                <span class="custom-discount-badge">-10%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">New Game 1</h5>
+                                <p class="custom-deal-price">
+                                    $49.99 <span class="custom-price-text">$54.99</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
+                                <span class="custom-discount-badge">-10%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">New Game 1</h5>
+                                <p class="custom-deal-price">
+                                    $49.99 <span class="custom-price-text">$54.99</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
+                                <span class="custom-discount-badge">-10%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">New Game 1</h5>
+                                <p class="custom-deal-price">
+                                    $49.99 <span class="custom-price-text">$54.99</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
+                                <span class="custom-discount-badge">-10%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">New Game 1</h5>
+                                <p class="custom-deal-price">
+                                    $49.99 <span class="custom-price-text">$54.99</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
+                                <span class="custom-discount-badge">-10%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">New Game 1</h5>
+                                <p class="custom-deal-price">
+                                    $49.99 <span class="custom-price-text">$54.99</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
+                                <span class="custom-discount-badge">-10%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">New Game 1</h5>
+                                <p class="custom-deal-price">
+                                    $49.99 <span class="custom-price-text">$54.99</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat similar blocks for the other 5 cards -->
+                </div>
+            </div>
+            <!-- Add more carousel-item sections as needed -->
+            <div class="carousel-item ">
+                <div class="row">
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow2.jpeg" class="card-img-top" alt="Deal 1">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 mb-4">
+                        <div class="card custom-deal-card">
+                            <div class="position-relative">
+                                <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
+                                <span class="custom-discount-badge">-85%</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
+                                <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Add more deal cards here as needed -->
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev custom-carousel-control-prev" type="button"
+                data-bs-target="#newGamesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next custom-carousel-control-next" type="button"
+                data-bs-target="#newGamesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="category-card">
+                <h5 class="bg-white text-dark w-50 rounded-2">PS5</h5>
+                <h3>Games</h3>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="category-card">
+                <h5 class="bg-white text-dark w-50 rounded-2">PS4</h5>
+                <h3>Games</h3>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="category-card">
+                <h5><i class="fa-solid fa-tags"></i></h5>
+                <h3>All Deals</h3>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="category-card">
+                <h5><i class="fa-solid fa-puzzle-piece"></i></h5>
+                <h3>DLC</h3>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="category-card">
+                <h5><i class="fa-regular fa-handshake"></i></h5>
+                <h3>Free to Play</h3>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="category-card">
+                <h5><i class="fa-solid fa-vr-cardboard"></i></h5>
+                <h3>VR</h3>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="category-card">
+                <h5><i class="fa-solid fa-square-plus"></i></h5>
+                <h3>PS Plus</h3>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="category-card">
+                <h5><i class="bi bi-vr"></i></h5>
+                <h3>PS VR2</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer mt-auto py-3 ">
     <div class="container">
-        <div class="image-row">
-            <div class="image-square">
-                <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="d-flex align-items-center">
+                    <i class="fa-brands fa-playstation ps-logo-footer"></i>
+                </div>
             </div>
-            <div class="image-square">
-                <img src="img/vrising.jpeg" alt="Astro Bot" class="square-img">
+            <div class="col-md-3">
+                <ul class="list-unstyled">
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Do Not Share My Personal Information</a></li>
+                    <li><a href="#">Website Terms of Use</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                    <li><a href="#">PlayStation Studios</a></li>
+                    <li><a href="#">Legal</a></li>
+                    <li><a href="#">About SIE</a></li>
+                </ul>
             </div>
-            <div class="image-square">
-                <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+            <div class="col-md-3">
+                <ul class="list-unstyled">
+                    <li><a href="#">PSN Terms of Service</a></li>
+                    <li><a href="#">PS Store Cancellation Policy</a></li>
+                    <li><a href="#">Health Warnings</a></li>
+                    <li><a href="#">About Ratings</a></li>
+                </ul>
             </div>
-            <div class="image-square">
-                <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+            <div class="col-md-3">
+                <ul class="list-unstyled">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">X</a></li>
+                    <li><a href="https://www.youtube.com/PLAYSTATION">YouTube</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Android App</a></li>
+                    <li><a href="#">iOS App</a></li>
+                </ul>
             </div>
-            <div class="image-square">
-                <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-            </div>
-            <div class="image-square">
-                <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-            </div>
-            <div class="image-square">
-                <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-            </div>
-            <div class="image-square">
-                <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-            </div>
+        </div>
+        <div class="text-center mt-3">
+            <p>© 2024 Sony Interactive Entertainment LLC</p>
         </div>
     </div>
+</footer>
 
-    <div class="container mt-4">
-        <!-- Slider Section -->
-        <h2 class="mb-4">All Deals</h2>
-        <div id="dealsCarousel" class="carousel slide position-relative" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row">
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 1">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Get the promo image element
+    const promoImage = document.getElementById("promoImage");
 
-                        <!-- Add more deal cards here as needed -->
-                    </div>
-                </div>
-                <div class="carousel-item ">
-                    <div class="row">
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow2.jpeg" class="card-img-top" alt="Deal 1">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
+    // Get all images in the squares section
+    const squareImages = document.querySelectorAll(".square-img");
 
-
-                        <!-- Add more deal cards here as needed -->
-                    </div>
-                </div>
-                <!-- You can add more carousel-item sections here if needed -->
-
-            </div>
-            <button class="carousel-control-prev custom-carousel-control-prev" type="button"
-                    data-bs-target="#dealsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next custom-carousel-control-next" type="button"
-                    data-bs-target="#dealsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
-        <!-- Slider Section for New Games -->
-        <h2 class="mb-4 mt-5">New Games</h2>
-        <div id="newGamesCarousel" class="carousel slide position-relative" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row">
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
-                                    <span class="custom-discount-badge">-10%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">New Game 1</h5>
-                                    <p class="custom-deal-price">
-                                        $49.99 <span class="custom-price-text">$54.99</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
-                                    <span class="custom-discount-badge">-10%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">New Game 1</h5>
-                                    <p class="custom-deal-price">
-                                        $49.99 <span class="custom-price-text">$54.99</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
-                                    <span class="custom-discount-badge">-10%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">New Game 1</h5>
-                                    <p class="custom-deal-price">
-                                        $49.99 <span class="custom-price-text">$54.99</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
-                                    <span class="custom-discount-badge">-10%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">New Game 1</h5>
-                                    <p class="custom-deal-price">
-                                        $49.99 <span class="custom-price-text">$54.99</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
-                                    <span class="custom-discount-badge">-10%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">New Game 1</h5>
-                                    <p class="custom-deal-price">
-                                        $49.99 <span class="custom-price-text">$54.99</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/vrising.jpeg" class="card-img-top" alt="New Game 1">
-                                    <span class="custom-discount-badge">-10%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">New Game 1</h5>
-                                    <p class="custom-deal-price">
-                                        $49.99 <span class="custom-price-text">$54.99</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Repeat similar blocks for the other 5 cards -->
-                    </div>
-                </div>
-                <!-- Add more carousel-item sections as needed -->
-                <div class="carousel-item ">
-                    <div class="row">
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow2.jpeg" class="card-img-top" alt="Deal 1">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-lg-2 mb-4">
-                            <div class="card custom-deal-card">
-                                <div class="position-relative">
-                                    <img src="./img/rainbow.jpeg" class="card-img-top" alt="Deal 2">
-                                    <span class="custom-discount-badge">-85%</span>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Tom Clancy's Rainbow Six Siege Deluxe Edition</h5>
-                                    <p class="custom-deal-price">$5.99 <span class="custom-price-text">$39.99</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Add more deal cards here as needed -->
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev custom-carousel-control-prev" type="button"
-                    data-bs-target="#newGamesCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next custom-carousel-control-next" type="button"
-                    data-bs-target="#newGamesCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-
-    <div class="container mt-4">
-        <div class="row g-3">
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="category-card">
-                    <h5 class="bg-white text-dark w-50 rounded-2">PS5</h5>
-                    <h3>Games</h3>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="category-card">
-                    <h5 class="bg-white text-dark w-50 rounded-2">PS4</h5>
-                    <h3>Games</h3>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="category-card">
-                    <h5><i class="fa-solid fa-tags"></i></h5>
-                    <h3>All Deals</h3>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="category-card">
-                    <h5><i class="fa-solid fa-puzzle-piece"></i></h5>
-                    <h3>DLC</h3>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="category-card">
-                    <h5><i class="fa-regular fa-handshake"></i></h5>
-                    <h3>Free to Play</h3>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="category-card">
-                    <h5><i class="fa-solid fa-vr-cardboard"></i></h5>
-                    <h3>VR</h3>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="category-card">
-                    <h5><i class="fa-solid fa-square-plus"></i></h5>
-                    <h3>PS Plus</h3>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="category-card">
-                    <h5><i class="bi bi-vr"></i></h5>
-                    <h3>PS VR2</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer mt-auto py-3 ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="d-flex align-items-center">
-                        <i class="fa-brands fa-playstation ps-logo-footer"></i>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <ul class="list-unstyled">
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Do Not Share My Personal Information</a></li>
-                        <li><a href="#">Website Terms of Use</a></li>
-                        <li><a href="#">Sitemap</a></li>
-                        <li><a href="#">PlayStation Studios</a></li>
-                        <li><a href="#">Legal</a></li>
-                        <li><a href="#">About SIE</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <ul class="list-unstyled">
-                        <li><a href="#">PSN Terms of Service</a></li>
-                        <li><a href="#">PS Store Cancellation Policy</a></li>
-                        <li><a href="#">Health Warnings</a></li>
-                        <li><a href="#">About Ratings</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <ul class="list-unstyled">
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">X</a></li>
-                        <li><a href="https://www.youtube.com/PLAYSTATION">YouTube</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Android App</a></li>
-                        <li><a href="#">iOS App</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-center mt-3">
-                <p>© 2024 Sony Interactive Entertainment LLC</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Get the promo image element
-        const promoImage = document.getElementById("promoImage");
-
-        // Get all images in the squares section
-        const squareImages = document.querySelectorAll(".square-img");
-
-        // Add click event to all square images
-        squareImages.forEach(img => {
-            img.addEventListener("click", function () {
-                // Change the promo image's src to the clicked image's src
-                promoImage.src = this.src;
-            });
+    // Add click event to all square images
+    squareImages.forEach(img => {
+        img.addEventListener("click", function () {
+            // Change the promo image's src to the clicked image's src
+            promoImage.src = this.src;
         });
+    });
 
+    // Handle the search form submission
     document.getElementById('searchForm').addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -622,7 +580,17 @@
             });
     });
 
+    // Get the search input, results, and modal elements
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const searchModal = document.getElementById('searchModal');
 
+    // Add an event listener for when the modal is hidden
+    searchModal.addEventListener('hidden.bs.modal', function () {
+        // Clear the search input field and search results when the modal is closed
+        searchInput.value = "";
+        searchResults.innerHTML = "";
+    });
+</script>
 
-    </script>
 

@@ -30,7 +30,7 @@ namespace Final.Mvc.ViewComponents
             }
 
             int basketCount = 0;
-            decimal totalPrice = 0;
+            double totalPrice = 0;
 
             if (existUser != null)
             {
@@ -38,7 +38,7 @@ namespace Final.Mvc.ViewComponents
                 if (basket != null)
                 {
                     basketCount = basket.BasketGames.Sum(m => m.Quantity);
-                    totalPrice = basket.BasketGames.Sum(m => m.Game.Price * m.Quantity);
+                    totalPrice = (int)basket.BasketGames.Sum(m => m.Game.Price * m.Quantity);
                 }
             }
 
@@ -49,7 +49,7 @@ namespace Final.Mvc.ViewComponents
             {
                 Settings = settings,
                 BasketCount = basketCount,
-                TotalPrice = totalPrice,
+                TotalPrice = (int)totalPrice,
                 UserFullName = existUser?.FullName
             };
 
