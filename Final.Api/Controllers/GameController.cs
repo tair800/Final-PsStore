@@ -27,21 +27,22 @@ namespace Final.Api.Controllers
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> GetAll([FromQuery] int page = 1)
+        public async Task<IActionResult> GetAll()
         {
             var games = await _gameService.GetAll();
 
-            // Implement pagination
-            var paginatedGames = games.
-                Skip((page - 1) * 2)
-                .Take(2);
 
-            if (!paginatedGames.Any())
-            {
-                return NotFound("No games found for the given page.");
-            }
 
-            return Ok(paginatedGames);
+            //var paginatedGames = games.
+            //    Skip((page - 1) * 2)
+            //    .Take(2);
+
+            //if (!paginatedGames.Any())
+            //{
+            //    return NotFound("No games found for the given page.");
+            //}
+
+            return Ok(games);
         }
 
 

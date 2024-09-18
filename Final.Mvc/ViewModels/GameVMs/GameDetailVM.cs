@@ -2,6 +2,7 @@
 {
     public class GameDetailVM
     {
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -10,10 +11,10 @@
         public string ImgUrl { get; set; }
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public int DlcId { get; set; }
         public string DlcName { get; set; }
-        public int DlcPrice { get; set; }
-        //public List<DlcDetail> DlcDetails { get; set; }
+        public int DlcId { get; set; }
+        public string DlcImage { get; set; }
+        public List<DlcDetail> Dlcs { get; set; }
         public Platform Platform { get; set; }
     }
 
@@ -22,7 +23,7 @@
 
         public string Name { get; set; }
         public decimal Price { get; set; }
-        //public string ImgUrl { get; set; }  // Added image URL for DLC
+        public string ImgUrl { get; set; }
     }
 
     //public class CategoryGame

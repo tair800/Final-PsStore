@@ -12,12 +12,12 @@ namespace Final.Mvc.Controllers
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Game?page=1");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Game");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<GameReturnVM>(data);
+                var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(data);
                 return View(result);  // Send the list to the view
             }
 
@@ -26,6 +26,7 @@ namespace Final.Mvc.Controllers
 
 
         public async Task<IActionResult> Detail(int id)
+
         {
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);

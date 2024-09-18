@@ -51,7 +51,18 @@ namespace Final.Application.Services.Implementations
         public async Task<GameReturnDto> GetOne(int id)
         {
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id, "Dlcs", "Category");
-            return _mapper.Map<GameReturnDto>(game);
+            if (game == null)
+            {
+                throw new CustomExceptions(404, "Game", "Game not found.");
+            }
+
+            var gameReturnDto = _mapper.Map<GameReturnDto>(game);
+
+            // Manually map DLCs if needed
+            gameReturnDto.DlcNames = game.Dlcs.Select(dlc => dlc.Name).ToList();
+
+            return gameReturnDto;
+
         }
 
         public async Task Delete(int id)
