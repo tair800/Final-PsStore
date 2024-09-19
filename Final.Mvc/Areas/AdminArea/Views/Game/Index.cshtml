@@ -1,9 +1,7 @@
 ﻿
 @using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
 
-@{
-    Layout = null;
-}
+
 @model List<GameListVM>
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
@@ -12,7 +10,7 @@
             <a asp-action="Create" class="btn btn-success mb-3">Create New Game</a>
 
             <div class="table-responsive">
-                <table class="table table-bordered " style="width:1200px !important">
+                <table class="table table-bordered ">
                     <thead>
                         <tr>
                             <th> Id</th>
@@ -60,13 +58,15 @@
                                 <td>
 
                                     <form asp-action="Delete" method="post" asp-route-id="@game.Id" style="display:inline;">
-                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                            </button>
                                     </form>
                                     <a asp-action="Detail" asp-route-id="@game.Id" class="btn btn-success btn-sm">
-                                        <i class="fa fa-id-card"></i> 
+                                        <i class="fa-solid fa-id-card"></i>
                                     </a>
                                     <a asp-action="Update" asp-route-id="@game.Id" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-edit"></i>
+                                        <i class="fa-solid fa-gear"></i>
                                     </a>
 
 
