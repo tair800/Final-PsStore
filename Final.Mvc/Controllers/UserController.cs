@@ -31,8 +31,12 @@ namespace Final.Mvc.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                ViewBag.ErrorMessage = $"Login failed: {errorContent}";
+            }
 
-            ViewBag.ErrorMessage = "Invalid username or password.";
             return View();
         }
 

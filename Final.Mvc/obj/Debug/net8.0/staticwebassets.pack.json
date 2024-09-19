@@ -481,6 +481,10 @@
       "PackagePath": "staticwebassets\\css\\register.css"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\setting.css",
+      "PackagePath": "staticwebassets\\css\\setting.css"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\img\\background_dark.jpg",
       "PackagePath": "staticwebassets\\img\\background_dark.jpg"
     },

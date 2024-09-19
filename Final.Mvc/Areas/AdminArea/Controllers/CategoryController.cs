@@ -15,7 +15,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        // Index action to list games
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();

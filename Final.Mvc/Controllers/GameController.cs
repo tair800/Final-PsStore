@@ -18,7 +18,7 @@ namespace Final.Mvc.Controllers
             {
                 var data = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(data);
-                return View(result);  // Send the list to the view
+                return View(result);
             }
 
             return BadRequest("error");

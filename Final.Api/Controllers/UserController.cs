@@ -95,25 +95,29 @@ namespace Final.Api.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            //var user = await _userManager.FindByEmailAsync(loginDto.Email);
-
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
-            if (user is null) return BadRequest("Username or Email is wrong");
+            if (user == null)
+                return BadRequest("Invalid username.");
+
+            if (user.IsBlocked)
+                return Forbid("Your account has been blocked. Please contact support.");
 
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
-            if (!result) return BadRequest();
+            if (!result)
+                return BadRequest("Invalid password.");
 
-            //jwt
             var roles = await _userManager.GetRolesAsync(user);
-            var secretKet = _jwtSettings.SecretKey;
+
+            var secretKey = _jwtSettings.SecretKey;
             var audience = _jwtSettings.Audience;
             var issuer = _jwtSettings.Issuer;
 
-            var a = _tokenService.GetToken(secretKet, audience, issuer, user, roles);
+            var token = _tokenService.GetToken(secretKey, audience, issuer, user, roles);
 
-            return Ok(new { token = a });
+            return Ok(new { token });
         }
+
 
 
 
@@ -138,10 +142,10 @@ namespace Final.Api.Controllers
 
 
 
-        [HttpGet("profile/{name}")]
-        public async Task<IActionResult> GetOne(string name)
+        [HttpGet("profile/{id}")]
+        public async Task<IActionResult> GetOne(string id)
         {
-            var user = await _userManager.FindByNameAsync(name);
+            var user = await _userManager.FindByIdAsync(id);
 
             if (user == null)
             {
@@ -228,6 +232,41 @@ namespace Final.Api.Controllers
 
             return Ok(new { message = "Email verified successfully. You can now log in.", redirectUrl = "https://yourapp.com/login" });
         }
+
+        [HttpPost("changeStatus/{id}")]
+        public async Task<IActionResult> ChangeStatus(string id)
+        {
+            // Ensure the ID is provided
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("User ID cannot be null or empty.");
+            }
+
+            // Find the user by their ID
+            var user = await _userManager.FindByIdAsync(id);
+
+            // If user does not exist, return a bad request
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Toggle the IsBlocked status
+            user.IsBlocked = !user.IsBlocked;
+
+            // Update the user's status
+            var result = await _userManager.UpdateAsync(user);
+
+            // Check if the update was successful
+            if (!result.Succeeded)
+            {
+                return BadRequest("Unable to change the user's status.");
+            }
+
+            // Return success response
+            return Ok(new { message = user.IsBlocked ? "User has been blocked." : "User has been unblocked." });
+        }
+
 
 
 

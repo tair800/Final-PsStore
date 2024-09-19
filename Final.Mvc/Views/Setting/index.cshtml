@@ -1,0 +1,67 @@
+﻿@model Dictionary<string,string>
+
+@section Links {
+    <link href="/css/setting.css" rel="stylesheet" />
+}
+<div class=" mt-5">
+    <div class="row">
+        <!-- Contact Info Section -->
+        <div class="col-md-4">
+            <div class="contact-info text-center">
+                <i class="bi bi-geo-alt-fill"></i>
+                <h5>Address</h5>
+                <p>Baku, Azerbaijan</p>
+            </div>
+
+            <div class="contact-info text-center">
+                <i class="bi bi-telephone-fill"></i>
+                <h5>Phone</h5>
+                <p>+880 548 986 898 87</p>
+            </div>
+
+            <div class="contact-info text-center">
+                <i class="bi bi-telephone-fill"></i>
+                <h5>Whatsapp</h5>
+                <p>+880 548 986 898 87</p>
+            </div>
+
+            <div class="contact-info text-center">
+                <i class="bi bi-telephone-fill"></i>
+                <h5>Instagram</h5>
+                <p>+880 548 986 898 87</p>
+            </div>
+
+            <div class="contact-info text-center">
+                <i class="bi bi-envelope-fill"></i>
+                <h5>Tik tok</h5>
+                <p>@Model["Email"]</p>
+            </div>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="col-md-8">
+            <h2>LEAVE A MESSAGE</h2>
+            <p>I must explain to you how all this a mistaken idea of ncing great explorer of the truth...</p>
+
+            <form action="" class="form-container">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" id="subject" placeholder="Enter subject">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Enter your message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>

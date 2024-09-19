@@ -9,7 +9,7 @@ namespace Final.Mvc.ViewComponents
     [ViewComponent(Name = "SettingHeader")]
     public class SettingHeaderViewComponent : ViewComponent
     {
-        private readonly ISettingService _settingService; // Make sure it matches your actual interface
+        private readonly ISettingService _settingService;
         private readonly IBasketService _basketService;
         private readonly UserManager<User> _userManager;
 
@@ -42,7 +42,7 @@ namespace Final.Mvc.ViewComponents
                 }
             }
 
-            var settings = (await _settingService.GetAll()) // Make sure this method returns a list
+            var settings = (await _settingService.GetAll())
                 .ToDictionary(s => s.Key, s => s.Value);
 
             var model = new HeaderVM

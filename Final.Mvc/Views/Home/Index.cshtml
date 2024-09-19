@@ -8,8 +8,8 @@
     <div class="container d-flex flex-column flex-lg-row align-items-start">
         <!-- Top-left for small screens -->
         <div class="top-left-container d-lg-none">
-            <a class="nav-link signin-btn" href="#">Sign In</a>
-            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></a>
+            <a class="nav-link signin-btn" href="/user/login">Sign In</a>
+            <a class="nav-link" asp-controller="user" asp-action="login" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></a>
         </div>
 
         <!-- Logo -->
@@ -41,7 +41,7 @@
             </ul>
             <ul class="navbar-nav ms-auto align-items-center d-none d-lg-flex">
                 <li class="nav-item">
-                    <a class="nav-link signin-btn" href="#">Sign In</a>
+                    <a class="nav-link signin-btn" asp-controller="user" asp-action="login">Sign In</a>
                 </li>
                 <li class="nav-item me-3">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></a>

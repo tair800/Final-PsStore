@@ -15,12 +15,16 @@ namespace Final.Api.Controllers
             _settingService = settingService;
         }
 
+
         [HttpGet]
         public async Task<IActionResult> GetAllSettings()
         {
             var settings = await _settingService.GetAll();
-            return Ok(settings);
+            var settingsDictionary = settings.ToDictionary(s => s.Key, s => s.Value);
+            return Ok(settingsDictionary);
         }
+
+
 
         [HttpGet("{key}")]
         public async Task<IActionResult> GetSettingByKey(string key)
@@ -63,14 +67,12 @@ namespace Final.Api.Controllers
 
             try
             {
-                // Find the setting by the key from the URL
                 var existingSetting = await _settingService.Get(key);
                 if (existingSetting == null)
                 {
                     return NotFound(new { Message = $"Setting with key '{key}' not found." });
                 }
 
-                // Update key and/or value
                 await _settingService.Update(key, settingsUpdateDto);
 
                 return Ok(new { Message = "Setting updated successfully." });

@@ -1,6 +1,7 @@
 ﻿body {
     color: white;
-/*    background-image: url("~/img/background_dark.jpg");*/
+    /*background-image: url("~/img/background_dark.jpg");*/
+    background-image: url("https://my.account.sony.com/sonyacct/signin/dsb_signin_9589/assets/images/background_dark.jpg");
     /* Path to your background image */
     background-size: cover;
     background-repeat: no-repeat;
@@ -48,7 +49,7 @@
 
     .btn-create-account:hover {
         background-color: #fff;
-        color: #000;
+        color:black;
     }
 
 .links {
@@ -71,4 +72,9 @@
     display: block;
     margin: 0 auto 2rem auto;
     width: 80px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }

@@ -99,7 +99,7 @@ builder.Services.AddSession();
 builder.Services.AddDbContext<FinalDbContext>(opt =>
 {
     opt.UseSqlServer(config.GetConnectionString("DefaultConnection"),
-                x => x.MigrationsAssembly("Final.Api"));
+                x => x.MigrationsAssembly("Final.Data"));
 });
 
 
