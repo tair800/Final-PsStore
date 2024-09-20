@@ -9,7 +9,7 @@ namespace Final.Application.Services.Implementations
         public void SendEmail(List<string> emails, string body, string title, string subject)
         {
             MailMessage mail = new();
-            mail.From = new MailAddress("tair.final800@gmail.com", "PlaystationAze");
+            mail.From = new MailAddress("code.final@outlook.com", "PlaystationAze");
             foreach (var email in emails)
             {
                 mail.To.Add(new MailAddress(email));
@@ -20,10 +20,10 @@ namespace Final.Application.Services.Implementations
 
             SmtpClient smtpClient = new()
             {
-                Host = "smtp.gmail.com",
+                Host = "smtp-mail.outlook.com", // Use Outlook's SMTP server
                 Port = 587,
                 EnableSsl = true,
-                Credentials = new NetworkCredential("tair.final800@gmail.com", "Good13579!"),
+                Credentials = new NetworkCredential("code.final@outlook.com", "mhwwfxncpitphspw!"),
             };
             smtpClient.Send(mail);
         }

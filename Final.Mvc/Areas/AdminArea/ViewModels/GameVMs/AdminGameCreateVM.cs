@@ -17,6 +17,7 @@ namespace Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
 
         [Required]
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
 
         [Required]
         public Platform Platform { get; set; }

@@ -141,6 +141,27 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var model = new AdminGameCreateVM();
+
+            // Fetch categories
+            var client = _httpClientFactory.CreateClient();
+            var categoryResponse = await client.GetAsync("https://localhost:7047/api/Category");
+
+            if (categoryResponse.IsSuccessStatusCode)
+            {
+                var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+                model.Categories = JsonConvert.DeserializeObject<List<AdminCategoryVM>>(categoryData);
+            }
+            else
+            {
+                model.Categories = new List<AdminCategoryVM>();
+            }
+
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create(AdminGameCreateVM model)

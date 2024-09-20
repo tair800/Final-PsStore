@@ -94,6 +94,8 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
+
+
 builder.Services.AddSession();
 
 builder.Services.AddDbContext<FinalDbContext>(opt =>

@@ -35,7 +35,7 @@ namespace Final.Application.Services.Implementations
 
 
             List<string> emails = new() { "tahir.aslanlee@gmail.com" };
-            string body = $"<a href='http://localhost:7047/game/detail/{game.Id}'>Go to Game post</a>";
+            string body = $"<a href='http://localhost:7296/game/detail/{game.Id}'>Go to Game post</a>";
             _emailService.SendEmail(emails, body, "New Game Post", "View game post");
 
 
