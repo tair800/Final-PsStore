@@ -6,6 +6,7 @@ using Final.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Final.Api.Controllers
@@ -302,6 +303,33 @@ namespace Final.Api.Controllers
             return Ok("Password has been successfully reset.");
         }
 
+        [HttpPost("update/{id}")]
+        public async Task<IActionResult> Update(string id, [FromBody] UpdateUserDto updateUserDto)
+        {
+            if (string.IsNullOrEmpty(id))
+                return BadRequest("Id cannot be null or empty.");
 
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+                return NotFound("User not found.");
+
+            var passwordCheck = await _userManager.CheckPasswordAsync(user, updateUserDto.PasswordConfirmation);
+            if (!passwordCheck)
+                return Unauthorized(" Confirm password is incorrect.");
+
+            if (await _userManager.Users.AnyAsync(u => u.UserName == updateUserDto.UserName && u.Id != user.Id))
+                return Conflict("Username is already taken.");
+
+            _mapper.Map(updateUserDto, user);
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            var updatedUserDto = _mapper.Map<UserReturnDto>(user);
+
+            return Ok(updatedUserDto);
+        }
     }
 }

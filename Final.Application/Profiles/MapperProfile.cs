@@ -64,6 +64,9 @@ namespace Final.Application.Profiles
             CreateMap<User, UserReturnDto>();
             CreateMap<RegisterDto, User>();
 
+            CreateMap<UpdateUserDto, User>()
+           .ForMember(dest => dest.Email, opt => opt.Ignore());
+
             //dlc
             CreateMap<DlcCreateDto, Dlc>();
             CreateMap<Dlc, DlcReturnDto>();

@@ -17,7 +17,6 @@ namespace Final.Application.Services.Implementations
             _mapper = mapper;
         }
 
-        // Get user by email
         public async Task<UserReturnDto> GetUserByEmail(string email)
         {
             var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email);
@@ -29,7 +28,6 @@ namespace Final.Application.Services.Implementations
             return _mapper.Map<UserReturnDto>(user);
         }
 
-        // Create new user
         public async Task<UserReturnDto> CreateUser(RegisterDto registerDto)
         {
             var userEntity = _mapper.Map<User>(registerDto);
@@ -40,7 +38,6 @@ namespace Final.Application.Services.Implementations
             return _mapper.Map<UserReturnDto>(userEntity);
         }
 
-        // Delete user by email
         public async Task<bool> DeleteUser(string email)
         {
             var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email);
@@ -54,7 +51,6 @@ namespace Final.Application.Services.Implementations
             return true;
         }
 
-        // Update user
         public async Task<UserReturnDto> UpdateUser(string email, UpdateUserDto updateUserDto)
         {
             var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email);
@@ -70,7 +66,6 @@ namespace Final.Application.Services.Implementations
             return _mapper.Map<UserReturnDto>(user);
         }
 
-        // Get all users
         public async Task<List<UserReturnDto>> GetAllUsers()
         {
             var users = await _unitOfWork.userRepository.GetAll();

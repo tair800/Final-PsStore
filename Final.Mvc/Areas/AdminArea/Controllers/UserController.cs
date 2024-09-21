@@ -1,4 +1,5 @@
-﻿using Final.Mvc.Areas.AdminArea.ViewModels.UserVMs;
+﻿using Final.Application.Dtos.UserDtos;
+using Final.Mvc.Areas.AdminArea.ViewModels.UserVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -164,6 +165,71 @@ namespace YourProjectNamespace.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Update(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return BadRequest("Id cannot be null or empty.");
 
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/user/profile/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                var user = JsonConvert.DeserializeObject<UserUpdateVM>(data);
+
+                return View(user);
+            }
+
+            TempData["ErrorMessage"] = "Unable to retrieve user data.";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(string id, UserUpdateVM model)
+        {
+            if (string.IsNullOrEmpty(model.PasswordConfirmation))
+            {
+                TempData["ErrorMessage"] = "Password confirmation is required.";
+                return View(model);
+            }
+
+            var updateUserDto = new UpdateUserDto
+            {
+                UserName = model.UserName,
+                FullName = model.FullName,
+                PasswordConfirmation = model.PasswordConfirmation
+            };
+
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            var content = new StringContent(JsonConvert.SerializeObject(updateUserDto), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync($"https://localhost:7047/api/user/update/{id}", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "User information has been updated successfully.";
+                return RedirectToAction("Index");
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
+            {
+                TempData["ErrorMessage"] = "Username is already taken.";
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                TempData["ErrorMessage"] = "Password confirmation is incorrect.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to update user information.";
+            }
+
+            return View(model);
+        }
     }
 }
