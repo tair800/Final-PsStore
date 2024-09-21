@@ -1,4 +1,5 @@
-﻿using Final.Core.Entities;
+﻿using Final.Application.Dtos.DlcDtos;
+using Final.Core.Entities;
 
 namespace Final.Application.Dtos.GameDtos
 {
@@ -14,7 +15,7 @@ namespace Final.Application.Dtos.GameDtos
         public int CategoryId { get; set; }
         public Platform Platform { get; set; }
         public int DlcId { get; set; }
-        public List<string> DlcNames { get; set; }
+        public List<DlcReturnDto> DlcNames { get; set; } = new List<DlcReturnDto>(); // Use List of DlcReturnDto
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
     }

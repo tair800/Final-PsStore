@@ -194,6 +194,9 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<FinalDbContext>();
 
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -207,7 +210,7 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();

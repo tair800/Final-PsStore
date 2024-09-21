@@ -1,6 +1,7 @@
-using Final.Mvc.Models;
+using Final.Mvc.ViewModels.GameVMs;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace Final.Mvc.Controllers
 {
@@ -13,20 +14,23 @@ namespace Final.Mvc.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            using HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Game");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(data);
+                return View(result);
+            }
+
+            return BadRequest("Error fetching games.");
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

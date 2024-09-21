@@ -3,6 +3,7 @@ using Final.Application.Dtos.UserDtos;
 using Final.Application.JwtSettings;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -38,7 +39,10 @@ namespace Final.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
-
+            //if (!IsValidEmail(registerDto.Email))
+            //{
+            //    return BadRequest("Invalid email address.");
+            //}
 
             var existUser = await _userManager.FindByNameAsync(registerDto.UserName);
             if (existUser != null)
@@ -50,12 +54,13 @@ namespace Final.Api.Controllers
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded)
-            {
                 return BadRequest(result.Errors);
-            }
+
+            await _userManager.AddToRoleAsync(user, "member");
+
 
             string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            string link = Url.Action(nameof(VerifyEmail), "Account", new { email = user.Email, token },
+            string link = Url.Action(nameof(VerifyEmail), "User", new { email = user.Email, token },
                 Request.Scheme, Request.Host.ToString());
 
             string body = string.Empty;
@@ -63,11 +68,9 @@ namespace Final.Api.Controllers
             {
                 body = reader.ReadToEnd();
             };
-            body = body.Replace("{{link}}", link);
-            body = body.Replace("{{username}}", user.FullName);
+            body = body.Replace("{{link}}", link).Replace("{{UserName}}", user.FullName);
             _emailService.SendEmail(new() { user.Email }, body, "Email verification", "Verify email");
 
-            await _userManager.AddToRoleAsync(user, "member");
 
             return StatusCode(201);
 
@@ -120,18 +123,23 @@ namespace Final.Api.Controllers
 
 
 
-
         [HttpGet("profiles")]
         public async Task<IActionResult> GetAll()
         {
-
             var users = _userManager.Users.ToList();
+            if (users == null || !users.Any())
+            {
+                return NotFound("No users found.");
+            }
+
             var userDtos = new List<UserReturnDto>();
 
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
                 var userDto = _mapper.Map<UserReturnDto>(user);
+
+                // Ensure roles are included in the UserReturnDto
                 userDto.UserRoles = roles.ToList();
 
                 userDtos.Add(userDto);
@@ -142,9 +150,15 @@ namespace Final.Api.Controllers
 
 
 
+
         [HttpGet("profile/{id}")]
         public async Task<IActionResult> GetOne(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("User ID cannot be null.");
+            }
+
             var user = await _userManager.FindByIdAsync(id);
 
             if (user == null)
@@ -164,56 +178,13 @@ namespace Final.Api.Controllers
 
 
 
-        [HttpPost("forgotPassword")]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
-        {
-            var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
-            if (user == null)
-            {
-                return BadRequest("Email not found.");
-            }
-
-            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-            var resetLink = Url.Action(nameof(ResetPassword), "User"
-                , new { email = user.Email, token = resetToken }
-                , Request.Scheme
-                , Request.Host.ToString());
-
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader("wwwroot/templates/passwordTemplate/forgotPassword.html"))
-            {
-                body = reader.ReadToEnd();
-            }
-            body = body.Replace("{{link}}", resetLink);
-            body = body.Replace("{{username}}", user.FullName);
-
-            _emailService.SendEmail(new() { user.Email }, body, "Password Reset", "Reset your password");
-
-            return Ok("Password reset link has been sent to your email.");
-        }
 
 
-        [HttpPost("resetPassword")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
-        {
-            var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
-            if (user == null)
-            {
-                return BadRequest("Invalid request.");
-            }
-
-            var result = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.NewPassword);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return Ok("Password has been reset successfully.");
-        }
 
 
-        [HttpPost("verifyEmail")]
+
+
+        [HttpGet("verifyEmail")]
         public async Task<IActionResult> VerifyEmail(string email, string token)
         {
             User user = await _userManager.FindByEmailAsync(email);
@@ -228,46 +199,108 @@ namespace Final.Api.Controllers
                 return BadRequest("Invalid token or confirmation failed.");
             }
 
-            await _signInManager.SignInAsync(user, true);
+            //await _signInManager.SignInAsync(user, true);
 
-            return Ok(new { message = "Email verified successfully. You can now log in.", redirectUrl = "https://yourapp.com/login" });
+            return Redirect("https://localhost:7296/user/login");
         }
+
+
 
         [HttpPost("changeStatus/{id}")]
         public async Task<IActionResult> ChangeStatus(string id)
         {
-            // Ensure the ID is provided
             if (string.IsNullOrEmpty(id))
-            {
                 return BadRequest("User ID cannot be null or empty.");
-            }
 
-            // Find the user by their ID
+
             var user = await _userManager.FindByIdAsync(id);
 
-            // If user does not exist, return a bad request
             if (user == null)
-            {
                 return NotFound("User not found.");
-            }
 
-            // Toggle the IsBlocked status
+
             user.IsBlocked = !user.IsBlocked;
 
-            // Update the user's status
             var result = await _userManager.UpdateAsync(user);
 
-            // Check if the update was successful
             if (!result.Succeeded)
-            {
                 return BadRequest("Unable to change the user's status.");
-            }
 
-            // Return success response
+
             return Ok(new { message = user.IsBlocked ? "User has been blocked." : "User has been unblocked." });
         }
 
 
+        [HttpPost("editRole")]
+        public async Task<IActionResult> EditRole(EditRoleDto editRoleDto)
+        {
+            var user = await _userManager.FindByIdAsync(editRoleDto.UserId);
+
+            if (user == null)
+                return NotFound("User not found.");
+
+            // Remove the user's current roles
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            var result = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+
+            if (!result.Succeeded)
+                return BadRequest("Failed to remove old roles.");
+
+            // Assign the newly selected roles
+            result = await _userManager.AddToRolesAsync(user, editRoleDto.Roles);
+
+            if (!result.Succeeded)
+                return BadRequest("Failed to add new roles.");
+
+            return Ok();
+        }
+
+        [HttpGet("roles")]
+        public async Task<IActionResult> GetAllRoles()
+        {
+            var roles = _roleManager.Roles.Select(r => r.Name).ToList();
+
+            if (roles == null || !roles.Any())
+            {
+                return NotFound("No roles found.");
+            }
+
+            return Ok(roles);
+        }
+
+
+
+        [Authorize]
+        [HttpPost("resetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Get the authenticated user
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+                return NotFound("User not found.");
+
+            // Check if the old password is correct
+            var passwordCheck = await _userManager.CheckPasswordAsync(user, resetPasswordDto.OldPassword);
+
+            if (!passwordCheck)
+                return BadRequest("Old password is incorrect.");
+
+            // Check if new password and confirm password match
+            if (resetPasswordDto.NewPassword != resetPasswordDto.ConfirmNewPassword)
+                return BadRequest("New password and confirm password do not match.");
+
+            // Change the password
+            var result = await _userManager.ChangePasswordAsync(user, resetPasswordDto.OldPassword, resetPasswordDto.NewPassword);
+
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            return Ok("Password has been successfully reset.");
+        }
 
 
     }

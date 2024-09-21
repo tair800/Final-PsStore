@@ -1,7 +1,7 @@
 ﻿@section Links {
     <link href="~/css/header.css" rel="stylesheet" />
 }
-@model GameReturnVM
+@model List<GameListItemVM>
 
 <!-- Primary Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-custom">
@@ -36,7 +36,7 @@
                     <a class="nav-link" href="#">PS4 </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Support</a>
+                    <a class="nav-link"asp-controller="setting" asp-action="index">Support</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto align-items-center d-none d-lg-flex">
@@ -119,33 +119,33 @@
             <div class="carousel-item active">
                 <div class="row">
 
-                  @*    @foreach (var game in Model.Items)
-                     {
+                    @foreach (var game in Model )
+                    {
 
-                             <div class="col-6 col-md-4 col-lg-2 mb-4">
-                                 <div class="card custom-deal-card">
-                                     <div class="position-relative">
-                                         <img src="@game.ImgUrl" class="card-img-top" alt="@game.Title">
-                                         @if (game.SalePrice.HasValue)
-                                         {
-                                             <span class="custom-discount-badge">-@(Math.Round((1 - (game.SalePrice.Value / game.Price)) * 100))%</span>
-                                         }
-                                     </div>
-                                     <div class="card-body">
-                                         <h5 class="card-title">@game.Title</h5>
-                                          @if (game.SalePrice.HasValue)
-                                          {
-                                              <p class="custom-deal-price">$@game.SalePrice.Value <span class="custom-price-text">$@game.Price</span></p>
-                                          }
-                                          else
-                                          {
-                                              <p class="custom-deal-price">$@game.Price</p>
-                                          }
-                                     </div>
-                                 </div>
-                             </div>
+                        <div class="col-6 col-md-4 col-lg-2 mb-4">
+                            <div class="card custom-deal-card">
+                                <div class="position-relative">
+                                    <img src="@game.ImgUrl" class="card-img-top" alt="@game.Title">
+                                    @if (game.SalePrice.HasValue)
+                                    {
+                                        <span class="custom-discount-badge">-@(Math.Round((1 - (game.SalePrice.Value / game.Price)) * 100))%</span>
+                                    }
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@game.Title</h5>
+                                    @if (game.SalePrice.HasValue)
+                                    {
+                                        <p class="custom-deal-price">$@game.SalePrice.Value <span class="custom-price-text">$@game.Price</span></p>
+                                    }
+                                    else
+                                    {
+                                        <p class="custom-deal-price">$@game.Price</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
 
-                     } *@
+                    }
 
                     <!-- Add more deal cards here as needed -->
                 </div>
@@ -494,7 +494,6 @@
             </div>
             <div class="col-md-3">
                 <ul class="list-unstyled">
-                    <li><a href="#">Support</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Do Not Share My Personal Information</a></li>
                     <li><a href="#">Website Terms of Use</a></li>
@@ -592,5 +591,4 @@
         searchResults.innerHTML = "";
     });
 </script>
-
 

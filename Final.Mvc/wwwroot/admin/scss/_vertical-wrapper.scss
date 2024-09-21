@@ -27,7 +27,7 @@
 
 .content-wrapper {
   background: $content-bg;
-  padding: 2.1rem 1.04rem;
+  padding: 2.1rem 3.04rem;
   width: 100%;
   @include flex-grow(1);
   @media(max-width: 767px) {

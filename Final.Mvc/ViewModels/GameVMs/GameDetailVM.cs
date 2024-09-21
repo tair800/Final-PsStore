@@ -14,7 +14,7 @@
         public string DlcName { get; set; }
         public int DlcId { get; set; }
         public string DlcImage { get; set; }
-        public List<DlcDetail> Dlcs { get; set; }
+        public List<DlcDetail> DlcNames { get; set; }
         public Platform Platform { get; set; }
     }
 

@@ -30,17 +30,20 @@ namespace Final.Application.Profiles
                 .ForMember(s => s.ImgUrl, map => map.MapFrom(d => d.ImgUrl.Save(Directory.GetCurrentDirectory(), "uploads/images/")));
 
             CreateMap<Game, GameReturnDto>()
-                .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs.Select(d => d.Name)))
-                .ForMember(dest => dest.DlcId, opt => opt.MapFrom(src => src.Dlcs.Any() ? src.Dlcs.FirstOrDefault().Id : 0))
+                .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs.Select(dlc => new DlcReturnDto
+                {
+                    Id = dlc.Id,
+                    Name = dlc.Name,
+                    Price = (int)dlc.Price,
+                    ImgUrl = dlc.Image  // Ensure proper mapping from Dlc.Image to DlcReturnDto.ImgUrl
+                }).ToList()))
+                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));  // Correctly map the main game image
 
-                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));
 
 
-            // Mapping from GameUpdateDto to Game entity (for update)
             CreateMap<GameUpdateDto, Game>()
-                .ForMember(dest => dest.ImgUrl, opt => opt.Ignore()); // ImgUrl handled separately
+                .ForMember(dest => dest.ImgUrl, opt => opt.Ignore());
 
-            // Mapping from Game entity to GameUpdateDto (for fetching data to edit form)
             CreateMap<Game, GameUpdateDto>()
                 .ForMember(dest => dest.File, opt => opt.Ignore())
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));

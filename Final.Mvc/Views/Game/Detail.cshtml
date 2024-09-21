@@ -35,14 +35,14 @@
  <div class="container py-5">
      <h2 class="text-center mb-5">Add-Ons</h2>
      <div class="d-flex justify-content-center">
-     @*      @foreach (var dlc in Model.Dlcs)
+          @foreach (var dlc in Model.DlcNames)
          {
              <div class="addon-item text-center">
-                 <img class="addon-img rounded" src="https://image.api.playstation.com/vulcan/ap/rnd/202405/2117/98954d14c0d9c88ef33f74d4734ab5da03fab034ae37fcd1.png?w=5000&thumb=false"
+                 <img class="addon-img rounded" src="@dlc.ImgUrl" alt="@dlc.Name"
                       alt="e Edition Upgrade">
                  <h3 class="fs-5 mt-2">@dlc.Price</h3>
                  <p class="fs-5 fw-bold">$@dlc.Name</p>
              </div>
-         } *@
+         }
      </div>
  </div>

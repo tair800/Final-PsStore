@@ -514,15 +514,15 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
-    "Method": "ForgotPassword",
-    "RelativePath": "api/User/forgotPassword",
+    "Method": "EditRole",
+    "RelativePath": "api/User/editRole",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "forgotPasswordDto",
-        "Type": "Final.Application.Dtos.UserDtos.ForgotPasswordDto",
+        "Name": "editRoleDto",
+        "Type": "EditRoleDto",
         "IsRequired": true
       }
     ],
@@ -614,9 +614,19 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "GetAllRoles",
+    "RelativePath": "api/User/roles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "VerifyEmail",
     "RelativePath": "api/User/verifyEmail",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
