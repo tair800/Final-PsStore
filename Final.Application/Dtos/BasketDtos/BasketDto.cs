@@ -8,8 +8,9 @@
 
     public class BasketGameDto
     {
-        public string GameName { get; set; }
-        public decimal GamePrice { get; set; }
+        public int id { get; set; }
+        public string GameTitle { get; set; }
+        public decimal Price { get; set; }
         public int Quantity { get; set; }
     }
 }

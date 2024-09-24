@@ -53,8 +53,7 @@
                             <i class="fa fa-info-circle"></i> Details
                         </a>
 
-                        <form asp-action="ChangeStatus" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="@user.Id" />
+                        <form asp-action="ChangeStatus" asp-route-id="@user.Id" method="post" class="d-inline">
                             <button type="submit" class="btn btn-warning">
                                 @if (user.IsBlocked)
                                 {

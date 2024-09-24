@@ -28,6 +28,7 @@ namespace Final.Mvc.Controllers
                 return View(result);
             }
 
+
             return BadRequest("Error fetching games.");
         }
 

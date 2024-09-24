@@ -3,7 +3,6 @@ using Final.Application.Dtos.UserDtos;
 using Final.Application.JwtSettings;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -78,9 +77,6 @@ namespace Final.Api.Controllers
 
         }
 
-
-
-
         [HttpGet("Role")]
         public async Task<IActionResult> CreateRole()
         {
@@ -119,10 +115,10 @@ namespace Final.Api.Controllers
 
             var token = _tokenService.GetToken(secretKey, audience, issuer, user, roles);
 
+
+
             return Ok(new { token });
         }
-
-
 
         [HttpGet("profiles")]
         public async Task<IActionResult> GetAll()
@@ -149,9 +145,6 @@ namespace Final.Api.Controllers
             return Ok(userDtos);
         }
 
-
-
-
         [HttpGet("profile/{id}")]
         public async Task<IActionResult> GetOne(string id)
         {
@@ -175,16 +168,6 @@ namespace Final.Api.Controllers
             return Ok(userDto);
         }
 
-
-
-
-
-
-
-
-
-
-
         [HttpGet("verifyEmail")]
         public async Task<IActionResult> VerifyEmail(string email, string token)
         {
@@ -205,8 +188,6 @@ namespace Final.Api.Controllers
             return Redirect("https://localhost:7296/user/login");
         }
 
-
-
         [HttpPost("changeStatus/{id}")]
         public async Task<IActionResult> ChangeStatus(string id)
         {
@@ -219,7 +200,6 @@ namespace Final.Api.Controllers
             if (user == null)
                 return NotFound("User not found.");
 
-
             user.IsBlocked = !user.IsBlocked;
 
             var result = await _userManager.UpdateAsync(user);
@@ -230,7 +210,6 @@ namespace Final.Api.Controllers
 
             return Ok(new { message = user.IsBlocked ? "User has been blocked." : "User has been unblocked." });
         }
-
 
         [HttpPost("editRole")]
         public async Task<IActionResult> EditRole(EditRoleDto editRoleDto)
@@ -269,40 +248,6 @@ namespace Final.Api.Controllers
             return Ok(roles);
         }
 
-
-
-        [Authorize]
-        [HttpPost("resetPassword")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            // Get the authenticated user
-            var user = await _userManager.GetUserAsync(User);
-
-            if (user == null)
-                return NotFound("User not found.");
-
-            // Check if the old password is correct
-            var passwordCheck = await _userManager.CheckPasswordAsync(user, resetPasswordDto.OldPassword);
-
-            if (!passwordCheck)
-                return BadRequest("Old password is incorrect.");
-
-            // Check if new password and confirm password match
-            if (resetPasswordDto.NewPassword != resetPasswordDto.ConfirmNewPassword)
-                return BadRequest("New password and confirm password do not match.");
-
-            // Change the password
-            var result = await _userManager.ChangePasswordAsync(user, resetPasswordDto.OldPassword, resetPasswordDto.NewPassword);
-
-            if (!result.Succeeded)
-                return BadRequest(result.Errors);
-
-            return Ok("Password has been successfully reset.");
-        }
-
         [HttpPost("update/{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] UpdateUserDto updateUserDto)
         {
@@ -331,5 +276,6 @@ namespace Final.Api.Controllers
 
             return Ok(updatedUserDto);
         }
+
     }
 }

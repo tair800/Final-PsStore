@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Final.Application.Dtos.BasketDtos;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;
 using Final.Data.Implementations;
@@ -16,28 +17,29 @@ namespace Final.Application.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<Basket> GetBasketByEmail(string email)
+        public async Task<UserBasketDto> GetBasketByEmail(string email)
         {
-            var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email);
+            var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email, "Basket.BasketGames.Game");
             if (user == null) throw new Exception("User not found.");
 
             var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames.Game");
-            if (basket == null)
-            {
-                basket = new Basket { UserId = user.Id, BasketGames = new List<BasketGame>() };
-                await _unitOfWork.basketRepository.Create(basket);
-                _unitOfWork.Commit();
-            }
+            if (basket == null) throw new Exception("Basket not found.");
 
-            return basket;
+            var userBasketDto = _mapper.Map<UserBasketDto>(user);
+
+            userBasketDto.BasketGames = _mapper.Map<List<BasketGameDto>>(basket.BasketGames);
+
+            return userBasketDto;
         }
+
 
         public async Task<Basket> Add(string email, int gameId, int quantity)
         {
             var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email);
             if (user == null) throw new Exception("User not found.");
 
-            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames");
+            // Include BasketGames in the basket
+            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames.Game");
 
             if (basket == null)
             {
@@ -73,7 +75,8 @@ namespace Final.Application.Services.Implementations
             var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email);
             if (user == null) throw new Exception("User not found.");
 
-            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames");
+            // Include BasketGames in the basket
+            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames.Game");
 
             if (basket == null) throw new Exception("Basket not found.");
 
@@ -98,7 +101,8 @@ namespace Final.Application.Services.Implementations
             var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email);
             if (user == null) throw new Exception("User not found.");
 
-            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames");
+            // Include BasketGames in the basket
+            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames.Game");
             if (basket == null) throw new Exception("Basket not found.");
 
             var basketGame = basket.BasketGames.FirstOrDefault(bg => bg.GameId == gameId);
@@ -118,7 +122,8 @@ namespace Final.Application.Services.Implementations
             var user = await _unitOfWork.userRepository.GetEntity(u => u.Email == email);
             if (user == null) throw new Exception("User not found.");
 
-            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames");
+            // Include BasketGames in the basket
+            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames.Game");
             if (basket == null) throw new Exception("Basket not found.");
 
             foreach (var basketGame in basket.BasketGames.ToList())
@@ -129,5 +134,7 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
             return true;
         }
+
+
     }
 }

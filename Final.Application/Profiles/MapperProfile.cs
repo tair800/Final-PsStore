@@ -76,10 +76,13 @@ namespace Final.Application.Profiles
             CreateMap<Basket, BasketDto>()
                 .ForMember(dest => dest.Games, opt => opt.MapFrom(src => src.BasketGames));
 
-            CreateMap<BasketGame, BasketGameDto>()
-                .ForMember(dest => dest.GameName, opt => opt.MapFrom(src => src.Game.Title))
-                .ForMember(dest => dest.GamePrice, opt => opt.MapFrom(src => src.Game.Price));
 
+            CreateMap<User, UserBasketDto>()
+                .ForMember(dest => dest.BasketGames, opt => opt.Ignore());
+
+            CreateMap<BasketGame, BasketGameDto>()
+                .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Game.Price));
 
             //settings
 

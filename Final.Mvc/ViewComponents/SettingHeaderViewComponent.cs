@@ -1,8 +1,7 @@
 ﻿using Final.Application.Services.Interfaces;
-using Final.Core.Entities;
 using Final.Mvc.ViewModels.SettingVMs;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Final.Mvc.ViewComponents
 {
@@ -11,34 +10,45 @@ namespace Final.Mvc.ViewComponents
     {
         private readonly ISettingService _settingService;
         private readonly IBasketService _basketService;
-        private readonly UserManager<User> _userManager;
 
-        public SettingHeaderViewComponent(ISettingService settingService, IBasketService basketService, UserManager<User> userManager)
+        public SettingHeaderViewComponent(ISettingService settingService, IBasketService basketService)
         {
             _settingService = settingService;
             _basketService = basketService;
-            _userManager = userManager;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            User existUser = null;
+            // Extract the token from the cookie
+            var token = Request.Cookies["token"];
 
-            if (User.Identity.IsAuthenticated)
+            string userName = null;
+            string fullName = null;
+            string email = null;
+
+            if (!string.IsNullOrEmpty(token))
             {
-                existUser = await _userManager.FindByEmailAsync(User.Identity.Name);
+                // Decode the JWT token
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(token);
+
+                // Extract claims
+                var claims = jwtToken.Claims.ToList();
+                userName = claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.UniqueName)?.Value;
+                fullName = claims.FirstOrDefault(c => c.Type == "given_name")?.Value;
+                email = claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email)?.Value;
             }
 
             int basketCount = 0;
             double totalPrice = 0;
 
-            if (existUser != null)
+            if (!string.IsNullOrEmpty(email))
             {
-                var basket = await _basketService.GetBasketByEmail(existUser.Email);
+                var basket = await _basketService.GetBasketByEmail(email);
                 if (basket != null)
                 {
                     basketCount = basket.BasketGames.Sum(m => m.Quantity);
-                    totalPrice = (int)basket.BasketGames.Sum(m => m.Game.Price * m.Quantity);
+                    totalPrice = basket.BasketGames.Sum(m => m.Game.Price * m.Quantity);
                 }
             }
 
@@ -49,8 +59,8 @@ namespace Final.Mvc.ViewComponents
             {
                 Settings = settings,
                 BasketCount = basketCount,
-                TotalPrice = (int)totalPrice,
-                UserFullName = existUser?.FullName
+                TotalPrice = (int)totalPrice,  // If totalPrice is a double, casting might not be necessary
+                FullName = fullName
             };
 
             return View(model);

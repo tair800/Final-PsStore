@@ -7,5 +7,6 @@ namespace Final.Mvc.ViewModels.UserVMs
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        public string Token { get; set; }
     }
 }

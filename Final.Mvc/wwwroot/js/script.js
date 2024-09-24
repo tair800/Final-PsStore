@@ -12,22 +12,58 @@ function openPage(pageName, elmnt, color) {
     elmnt.style.backgroundColor = color;
 }
 
-// Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
-// Get the promo image element
 const promoImage = document.getElementById("promoImage");
 
-// Get all images in the squares section
 const squareImages = document.querySelectorAll(".square-img");
 
-// Add click event to all square images
 squareImages.forEach(img => {
     img.addEventListener("click", function () {
-        // Change the promo image's src to the clicked image's src
+
         promoImage.src = this.src;
     });
 });
 
+document.getElementById('searchForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const searchInput = document.getElementById('searchInput').value;
+    const searchResults = document.getElementById('searchResults');
+
+    if (searchInput.trim() === "") {
+        searchResults.innerHTML = "<p>Please enter a search term.</p>";
+        return;
+    }
+
+    fetch(`/Game/Search?title=${encodeURIComponent(searchInput)}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/html'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Search request failed');
+            }
+            return response.text();
+        })
+        .then(data => {
+            searchResults.innerHTML = data;
+        })
+        .catch(error => {
+            searchResults.innerHTML = "<p>Error occurred while searching.</p>";
+            console.error('Error:', error);
+        });
+});
+
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const searchModal = document.getElementById('searchModal');
+
+searchModal.addEventListener('hidden.bs.modal', function () {
+    searchInput.value = "";
+    searchResults.innerHTML = "";
+});
 
 
 

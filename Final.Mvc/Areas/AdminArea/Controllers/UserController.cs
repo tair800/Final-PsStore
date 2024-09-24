@@ -12,7 +12,7 @@ namespace YourProjectNamespace.Areas.Admin.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            List<UserListVM> users = new List<UserListVM>();
+            List<UserListVM> users = new();
 
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);

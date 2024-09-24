@@ -588,22 +588,6 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
-    "Method": "ResetPassword",
-    "RelativePath": "api/User/resetPassword",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "resetPasswordDto",
-        "Type": "Final.Application.Dtos.UserDtos.ResetPasswordDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "CreateRole",
     "RelativePath": "api/User/Role",
     "HttpMethod": "GET",

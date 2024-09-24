@@ -32,16 +32,16 @@ namespace Final.Mvc.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var content = new StringContent(JsonConvert.SerializeObject(new { email, gameId, quantity }), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync($"https://localhost:7047/api/Basket/add?email={email}&gameId={gameId}&quantity={quantity}", content);
+            HttpResponseMessage response = await client.PostAsync($"https://localhost:7047/api/Basket/add", content);
 
             if (response.IsSuccessStatusCode)
             {
-                var updatedBasket = await response.Content.ReadAsStringAsync();
-                return RedirectToAction("GetBasket", new { email });
+                return Ok(); // Return success if the item was added to the basket
             }
 
-            return View("Error", new { Message = "Could not add game to basket." });
+            return BadRequest("Could not add game to basket.");
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Update(string email, int gameId, int quantity)

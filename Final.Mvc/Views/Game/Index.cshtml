@@ -1,5 +1,6 @@
 ﻿@using Final.Mvc.ViewModels.GameVMs
 @model List<GameListItemVM>
+
 @section Links {
     <link href="~/css/game.css" rel="stylesheet" />
 }
@@ -16,9 +17,9 @@
                         <label for="filterCategory" class="form-label">Category</label>
                         <select id="filterCategory" name="category" class="form-select">
                             <option value="">All Categories</option>
-                            @foreach (var category in Model) 
+                            @foreach (var category in Model)
                             {
-                            <option value="@category.CategoryId" >@category.CategoryName</option>
+                                <option value="@category.CategoryId">@category.CategoryName</option>
                             }
                         </select>
                     </div>
@@ -27,14 +28,12 @@
                     <div class="mb-3">
                         <label for="filterPlatform" class="form-label">Platform</label>
                         <select id="filterPlatform" name="platform" class="form-select">
-                             <option value="">All Platforms</option>@* 
-                             <option value="PS5" @(Request.Query["platform"] == "PS5" ? "selected" : "")>PS5</option>
-                             <option value="PS4" @(Request.Query["platform"] == "PS4" ? "selected" : "")>PS4</option> *@
+                            <option value="">All Platforms</option>
                         </select>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Apply Filters</button>
-                </form> 
+                </form>
             </div>
         </div>
 
@@ -43,53 +42,103 @@
             <div class="row">
                 @foreach (var game in Model)
                 {
-                   <a asp-action="Detail" asp-route-id="@game.Id">
-                        <div class="col-12 col-sm-6 col-lg-4 game-card-container">
-                            <div id="myBtn" class="game-card">
-                                <img src="./img/gta.jpg" alt="@game.Title">
-                                <button class="favorite-btn">
-                                    <i class="fas fa-heart"></i>
-                                </button>
+                    <div class="col-12 col-sm-6 col-lg-4 game-card-container">
+                        <div class="game-card">
+                            <img src="./img/gta.jpg" alt="@game.Title">
+                            <button class="favorite-btn">
+                                <i class="fas fa-heart"></i>
+                            </button>
 
-                                <!-- Dynamic Platform Labels based on Platform Enum -->
-                                <div class="platform-labels">
-                                    @if ((int)game.Platform == 1)
-                                    {
-                                        <div class="platform-label bg-white text-dark">PS5</div>
-                                    }
-                                    else if (game.Platform == 0)
-                                    {
-                                        <div class="platform-label bg-dark text-light">PS4</div>
-                                    }
-                                    else if ((int)game.Platform == 2) // Assuming PS4/PS5 dual platform
-                                    {
-                                        <div class="platform-label bg-white text-dark">PS5</div>
-                                        <div class="platform-label bg-dark text-light">PS4</div>
-                                    }
-                                </div>
-
-                                <div class="game-info">
-                                    <div class="game-title">@game.Title</div>
-
-                                    <!-- Display discounted price if applicable -->
-                                    <div class="game-price">
-                                        @if (game.SalePrice.HasValue)
-                                        {
-                                            <span class="original-price text-decoration-line-through">$@game.Price</span>
-                                            <span class="discount-price">$@game.SalePrice</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="regular-price">$@game.Price</span>
-                                        }
-                                    </div>
-                                </div>
-                                <button class="add-to-cart-btn">Add to Cart</button>
+                            <!-- Platform Labels -->
+                            <div class="platform-labels">
+                                @if ((int)game.Platform == 1)
+                                {
+                                    <div class="platform-label bg-white text-dark">PS5</div>
+                                }
+                                else if (game.Platform == 0)
+                                {
+                                    <div class="platform-label bg-dark text-light">PS4</div>
+                                }
+                                else if ((int)game.Platform == 2)
+                                {
+                                    <div class="platform-label bg-white text-dark">PS5</div>
+                                    <div class="platform-label bg-dark text-light">PS4</div>
+                                }
                             </div>
+
+                            <div class="game-info">
+                                <div class="game-title">@game.Title</div>
+
+                                <!-- Display discounted price if applicable -->
+                                <div class="game-price">
+                                    @if (game.SalePrice.HasValue)
+                                    {
+                                        <span class="original-price text-decoration-line-through">$@game.Price</span>
+                                        <span class="discount-price">$@game.SalePrice</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="regular-price">$@game.Price</span>
+                                    }
+                                </div>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToBasket('@game.Id')">Add to Cart</button>
                         </div>
-                   </a>
+                    </div>
                 }
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // Function to extract JWT token from cookies
+        function getJwtTokenFromCookie() {
+            const cookieString = document.cookie;
+            const cookies = cookieString.split('; ');
+            const tokenCookie = cookies.find(row => row.startsWith('token='));
+            return tokenCookie ? tokenCookie.split('=')[1] : null;
+        }
+
+        // Function to decode JWT token and extract the payload
+        function decodeJwtToken(token) {
+            if (!token) return null;
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            return JSON.parse(jsonPayload);
+        }
+
+        // Function to add a game to the basket
+        function addToBasket(gameId) {
+            const token = getJwtTokenFromCookie(); // Get the token from cookies
+            const decodedToken = decodeJwtToken(token); // Decode the JWT token
+            const email = decodedToken ? decodedToken.email : null; // Extract the email from the token
+
+            if (!email) {
+                alert("Please sign in to add items to the basket.");
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("AddToBasket", "Basket")', // Use your MVC Basket controller
+                type: 'POST',
+                data: {
+                    email: email,  // Send the decoded email
+                    gameId: gameId,
+                    quantity: 1  // Default quantity is 1
+                },
+                success: function (result) {
+                    alert('Game added to basket!');
+                },
+                error: function (xhr, status, error) {
+                    alert('Failed to add game to basket.');
+                }
+            });
+        }
+    </script>
+}
