@@ -1,25 +1,17 @@
 ﻿@model List<BasketItemVM>
 
-@if (Model == null || !Model.Any())
-{
-    <div class="alert alert-warning text-center">
-        <p>You are not logged in. Please log in to view your basket.</p>
-        <a href="/User/Login" class="btn btn-primary">Go to Login</a>
-    </div>
-}
-else
-{
-    <div class="list-group">
+<div>
+
         @foreach (var item in Model)
         {
-            <a href="#" class="list-group-item list-group-item-action">
-                @item.GameTitle - $@item.Price
-            </a>
+            <div>
+                <h4>@(item.GameTitle ?? "No Title")</h4> <!-- Ensure GameTitle is not null -->
+                <p>Price: $@(item.Price != 0 ? item.Price.ToString() : "N/A")</p> <!-- Check for valid Price -->
+                <p>Quantity: @(item.Quantity > 0 ? item.Quantity : 0)</p> <!-- Ensure Quantity is valid -->
+                <p>Total: $@(item.TotalPrice != 0 ? item.TotalPrice.ToString() : "N/A")</p>
+                <img src="@item.ImgUrl ?? " default.jpg"" alt="@item.GameTitle" /> <!-- Use default image if ImgUrl is null -->
+            </div>
         }
-    </div>
-    <div class="d-flex justify-content-between mt-3">
-        <h5>Total:</h5>
-        <h5>$@Model.Sum(x => x.Price)</h5>
-    </div>
-    <button class="btn btn-primary w-100 mt-3">Checkout</button>
-}
+    }
+
+</div>

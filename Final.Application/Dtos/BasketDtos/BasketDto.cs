@@ -1,17 +1,14 @@
-﻿using Final.Core.Entities;
-
-namespace Final.Application.Dtos.BasketDtos
+﻿namespace Final.Application.Dtos.BasketDtos
 {
     public class BasketDto
     {
         public string UserId { get; set; }
-        public List<BasketGameDto> Games { get; set; }
+        public List<BasketGameDto> BasketGames { get; set; }
     }
 
     public class BasketGameDto
     {
-        public int id { get; set; }
-        public Game Game { get; set; }
+        public int GameId { get; set; }
         public string GameTitle { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }

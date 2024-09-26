@@ -1,81 +1,111 @@
 ﻿using Final.Mvc.ViewModels.WishlistVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Security.Claims;
-using System.Text;
+using System.Net.Http.Headers;
 
 namespace Final.Mvc.Controllers
 {
     public class WishlistController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _client;
 
-        public WishlistController(IHttpClientFactory httpClientFactory)
+        public WishlistController(HttpClient client)
         {
-            _httpClientFactory = httpClientFactory;
+            _client = client;
         }
 
+        // Display the wishlist items in an Index view
         public async Task<IActionResult> Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userId))
+            var token = Request.Cookies["token"];
+            if (string.IsNullOrEmpty(token))
             {
+                Console.WriteLine("No token found in cookies.");
                 return RedirectToAction("Login", "User");
             }
 
-            var client = _httpClientFactory.CreateClient();
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/Wishlist/{userId}");
+            // Set the Authorization header with the JWT token
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            // Get the userId from the JWT token
+            var userId = Request.Cookies["userId"];  // Make sure you're storing userId in the cookie
+            if (string.IsNullOrEmpty(userId))
+            {
+                Console.WriteLine("No userId found in cookies.");
+                return RedirectToAction("Login", "User");
+            }
+
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Wishlist/get/{userId}");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                var wishlist = JsonConvert.DeserializeObject<WishlistVM>(data);
-                return View(wishlist);
+                var wishlist = JsonConvert.DeserializeObject<List<WishlistItemVM>>(data); // Ensure this deserialization step is correct
+                return View("Index", wishlist); // Ensure you're passing the correct data to the view
             }
-
-            return View("Error", new { Message = "Could not fetch wishlist." });
-        }
-        public async Task<IActionResult> Get(string userId)
-        {
-            var client = _httpClientFactory.CreateClient();
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/Wishlist/{userId}");
-
-            if (response.IsSuccessStatusCode)
+            else
             {
-                var data = await response.Content.ReadAsStringAsync();
-                var wishlist = JsonConvert.DeserializeObject<WishlistVM>(data);
-                return View(wishlist);
-            }
+                // Log for debugging
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error fetching wishlist: {error}");
 
-            return View("Error", new { Message = "Could not fetch wishlist." });
+                return View("Index", new List<WishlistItemVM>()); // Return an empty wishlist if there's an error
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(string userId, int gameId)
+        public async Task<IActionResult> AddToWishlist(int gameId)
         {
-            var client = _httpClientFactory.CreateClient();
-            var content = new StringContent(JsonConvert.SerializeObject(new { userId, gameId }), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync($"https://localhost:7047/api/Wishlist/{userId}/add", content);
+            // Check if the user is logged in
+            var userId = Request.Cookies["userId"];
+            var token = Request.Cookies["token"];
+
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                // If the user is not logged in, redirect to the login page
+                return RedirectToAction("Login", "User");
+            }
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            // Call the API to add the game to the wishlist
+            var response = await _client.PostAsync($"https://localhost:7047/api/Wishlist/add?userId={userId}&gameId={gameId}", null);
 
             if (response.IsSuccessStatusCode)
+            {
                 return Ok();
+            }
 
-
-            return BadRequest("Could not add game to wishlist.");
+            return BadRequest();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string userId, int gameId)
+        public async Task<IActionResult> RemoveFromWishlist(int gameId)
         {
-            var client = _httpClientFactory.CreateClient();
-            HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7047/api/Wishlist/{userId}/delete/{gameId}");
+            // Check if the user is logged in
+            var userId = Request.Cookies["userId"];
+            var token = Request.Cookies["token"];
+
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                // If the user is not logged in, redirect to the login page
+                return RedirectToAction("Login", "User");
+            }
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            // Call the API to remove the game from the wishlist
+            var response = await _client.DeleteAsync($"https://localhost:7047/api/Wishlist/remove?userId={userId}&gameId={gameId}");
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Get", new { userId });
+                return Ok();
             }
 
-            return View("Error", new { Message = "Could not remove game from wishlist." });
+            return BadRequest();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Final.Mvc.Controllers
                 // Store the token securely
                 Response.Cookies.Append("token", result.Token, new CookieOptions
                 {
-                    HttpOnly = true, // Ensure the token is only accessible via HTTP(S)
+                    HttpOnly = false, // Ensure the token is only accessible via HTTP(S)
                     Secure = true,   // Secure the cookie (HTTPS)
                     SameSite = SameSiteMode.Strict, // Ensure the token is sent with same-site requests only
                     Expires = DateTimeOffset.Now.AddHours(1) // Optional: set an expiration time

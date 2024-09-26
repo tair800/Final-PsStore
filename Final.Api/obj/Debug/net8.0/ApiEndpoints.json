@@ -1,42 +1,16 @@
 [
   {
     "ContainingType": "Final.Api.Controllers.BasketController",
-    "Method": "GetBasket",
-    "RelativePath": "api/Basket/{email}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "email",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.BasketController",
     "Method": "AddToBasket",
-    "RelativePath": "api/Basket/add",
+    "RelativePath": "api/Basket",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "gameId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "quantity",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "Final.Application.Dtos.BasketDtos.AddBasketDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -50,7 +24,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
+        "Name": "userId",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -66,7 +40,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
+        "Name": "userId",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -87,7 +61,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
+        "Name": "userId",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -640,7 +614,7 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.WishlistController",
-    "Method": "Get",
+    "Method": "GetWishlist",
     "RelativePath": "api/Wishlist/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -656,20 +630,15 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.WishlistController",
-    "Method": "Add",
-    "RelativePath": "api/Wishlist/{userId}/add",
+    "Method": "AddToWishlist",
+    "RelativePath": "api/Wishlist/add",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "wishlistItem",
-        "Type": "Final.Application.Dtos.WisihlistDtos.WishlistDto",
+        "Name": "request",
+        "Type": "Final.Application.Dtos.WishlistDtos.AddWishlistDto",
         "IsRequired": true
       }
     ],
@@ -677,8 +646,8 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.WishlistController",
-    "Method": "Remove",
-    "RelativePath": "api/Wishlist/{userId}/delete/{gameId}",
+    "Method": "ClearWishlist",
+    "RelativePath": "api/Wishlist/clear/{userId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -687,10 +656,37 @@
         "Name": "userId",
         "Type": "System.String",
         "IsRequired": true
-      },
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.WishlistController",
+    "Method": "RemoveFromWishlist",
+    "RelativePath": "api/Wishlist/remove",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Name": "gameId",
-        "Type": "System.Int32",
+        "Name": "request",
+        "Type": "Final.Application.Dtos.WishlistDtos.RemoveWishlistDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.BasketController",
+    "Method": "GetBasket",
+    "RelativePath": "get/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

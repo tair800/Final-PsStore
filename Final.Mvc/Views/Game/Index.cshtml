@@ -129,56 +129,29 @@
 
 @section Scripts {
     <script>
-        // Function to extract JWT token from cookies
-        function getJwtTokenFromCookie() {
-            const cookieString = document.cookie;
-            const cookies = cookieString.split('; ');
-            const tokenCookie = cookies.find(row => row.startsWith('token='));
-            return tokenCookie ? tokenCookie.split('=')[1] : null;
-        }
 
-        // Function to decode JWT token and extract the payload
-        function decodeJwtToken(token) {
-            if (!token) return null;
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
 
-            return JSON.parse(jsonPayload);
-        }
+     
 
-        // Function to add a game to the basket
-        function addToBasket(gameId) {
-            const token = getJwtTokenFromCookie(); // Get the token from cookies
-            const decodedToken = decodeJwtToken(token); // Decode the JWT token
-            const email = decodedToken ? decodedToken.email : null; // Extract the email from the token
-
-            if (!email) {
-                alert("Please sign in to add items to the basket.");
-                return;
+            // Function to extract JWT token from cookies
+            function getJwtTokenFromCookie() {
+                const cookieString = document.cookie;
+                const cookies = cookieString.split('; ');
+                const tokenCookie = cookies.find(row => row.startsWith('token='));
+                return tokenCookie ? tokenCookie.split('=')[1] : null;
             }
 
-            $.ajax({
-                url: '@Url.Action("AddToBasket", "Basket")', // Use your MVC Basket controller
-                type: 'POST',
-                data: {
-                    email: email,  // Send the decoded email
-                    gameId: gameId,
-                    quantity: 1  // Default quantity is 1
-                },
-                success: function (result) {
-                    alert('Game added to basket!');
-                },
-                error: function (xhr, status, error) {
-                    alert('Failed to add game to basket.');
-                }
-            });
-        }
+            // Function to decode JWT token and extract the payload
+            function decodeJwtToken(token) {
+                if (!token) return null;
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
 
-
-
+                return JSON.parse(jsonPayload);
+            }
 
                 // Function to get URL parameters
                 function getUrlParameter(name) {

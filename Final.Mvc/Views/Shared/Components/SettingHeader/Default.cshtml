@@ -59,7 +59,7 @@
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#basketModal">
-                            <i class="bi bi-basket"></i>
+                            <i class="bi bi-basket" ></i>
                         </a>
                     </li>
                     <!-- Wishlist Icon -->
@@ -191,14 +191,46 @@
 
 
 <script>
+
+    const basket = document.querySelector(".bi-basket")
+
+
+    function getCookie(name) {
+        const cookieArray = document.cookie.split('; ');
+        for (let i = 0; i < cookieArray.length; i++) {
+            const cookie = cookieArray[i].split('=');
+            if (cookie[0] === name) {
+                return cookie[1]; // Return the value of the specified cookie
+            }
+        }
+        return null; // Return null if the cookie is not found
+    }
+
+    
+    // Function to check for token in cookies
+    function checkForToken() {
+        const token = getCookie('token'); // Get token from cookies
+
+        console.log(token)
+
+        if (!token) {
+            // If no token, redirect to login page
+            window.location.href = '/User/Login';
+        }
+    }
+
+    // Call the function on page load
+    basket.onclick = function() {
+        checkForToken();
+    };
+
     document.getElementById('basketModal').addEventListener('show.bs.modal', function () {
         const basketContent = document.getElementById('basketContent');
 
-        // Fetch basket content
         fetch('/Basket/GetBasket')
             .then(response => response.text())
             .then(data => {
-                basketContent.innerHTML = data; // Inject the partial view content
+                basketContent.innerHTML = data; 
             })
             .catch(error => {
                 basketContent.innerHTML = `<div class="alert alert-danger">Failed to load basket. Please try again later.</div>`;

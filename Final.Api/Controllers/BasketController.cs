@@ -1,4 +1,8 @@
-﻿using Final.Application.Services.Interfaces;
+﻿using Final.Application.Dtos.BasketDtos;
+using Final.Application.Exceptions;
+using Final.Application.Services.Interfaces;
+using Final.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final.Api.Controllers
@@ -8,89 +12,92 @@ namespace Final.Api.Controllers
     public class BasketController : ControllerBase
     {
         private readonly IBasketService _basketService;
+        private readonly IHttpContextAccessor _httpContext;
+        private readonly UserManager<User> _userManager;
 
-        public BasketController(IBasketService basketService)
+        public BasketController(IBasketService basketService, IHttpContextAccessor httpContext, UserManager<User> userManager)
         {
             _basketService = basketService;
+            _httpContext = httpContext;
+            _userManager = userManager;
         }
 
-        [HttpGet("{email}")]
-        public async Task<IActionResult> GetBasket(string email)
+        [HttpGet("/get/{userId}")]
+        public async Task<IActionResult> GetBasket(string userId)
         {
             try
             {
-                var basket = await _basketService.GetBasketByEmail(email);
+                var basket = await _basketService.GetBasketByUser(userId);
                 if (basket == null)
                     return NotFound(new { Message = "Basket not found." });
 
                 return Ok(basket);
             }
-            catch (System.Exception ex)
+            catch (CustomExceptions ex)
             {
-                return BadRequest(new { Message = ex.Message });
+                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
             }
         }
 
-        [HttpPost("add")]
-        public async Task<IActionResult> AddToBasket([FromQuery] string email, [FromQuery] int gameId, [FromQuery] int quantity)
+        [HttpPost]
+        public async Task<IActionResult> AddToBasket([FromBody] AddBasketDto request)
         {
             try
             {
-                var updatedBasket = await _basketService.Add(email, gameId, quantity);
-                return Ok(updatedBasket);
+                var basket = await _basketService.Add(request.UserId, request.GameId, request.Quantity);
+                return Ok(basket);
             }
-            catch (System.Exception ex)
+            catch (CustomExceptions ex)
             {
-                return BadRequest(new { Message = ex.Message });
+                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
             }
         }
-
 
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateBasket(string email, int gameId, int quantity)
+        public async Task<IActionResult> UpdateBasket(string userId, int gameId, int quantity)
         {
             try
             {
-                var updatedBasket = await _basketService.Update(email, gameId, quantity);
+                var updatedBasket = await _basketService.Update(userId, gameId, quantity);
                 return Ok(updatedBasket);
             }
-            catch (System.Exception ex)
+            catch (CustomExceptions ex)
             {
-                return BadRequest(new { Message = ex.Message });
+                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
             }
         }
 
         [HttpDelete("remove")]
-        public async Task<IActionResult> RemoveFromBasket(string email, int gameId)
+        public async Task<IActionResult> RemoveFromBasket(string userId, int gameId)
         {
             try
             {
-                var result = await _basketService.Delete(email, gameId);
+                var result = await _basketService.Delete(userId, gameId);
                 if (result)
                     return Ok(new { Message = "Game removed from the basket." });
                 else
                     return NotFound(new { Message = "Game not found in basket." });
             }
-            catch (System.Exception ex)
+            catch (CustomExceptions ex)
             {
-                return BadRequest(new { Message = ex.Message });
+                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
             }
         }
 
         [HttpDelete("clear")]
-        public async Task<IActionResult> ClearBasket(string email)
+        public async Task<IActionResult> ClearBasket(string userId)
         {
             try
             {
-                var result = await _basketService.ClearBasket(email);
+                var result = await _basketService.ClearBasket(userId);
                 if (result)
                     return Ok(new { Message = "Basket cleared." });
                 else
                     return NotFound(new { Message = "Basket not found." });
             }
-            catch (System.Exception ex)
+            catch (CustomExceptions ex)
             {
-                return BadRequest(new { Message = ex.Message });
+                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
             }
         }
     }

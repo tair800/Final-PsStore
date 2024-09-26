@@ -1,26 +1,39 @@
-﻿@model WishlistVM
+﻿@model List<Final.Mvc.ViewModels.WishlistVMs.WishlistItemVM>
 
 <h2>Your Wishlist</h2>
 
-@if (Model.Items == null || !Model.Items.Any())
-{
-    <p>Your wishlist is empty.</p>
-}
-else
+@if (Model != null && Model.Any())
 {
     <ul>
-        @foreach (var item in Model.Items)
+        @foreach (var item in Model)
         {
             <li>
-                <img src="@item.ImgUrl" alt="@item.GameTitle" style="width:100px;height:auto;" />
-                <p>@item.GameTitle</p>
-                <p>Price: $@item.Price</p>
-                <form asp-action="Delete" method="post">
-                    <input type="hidden" name="userId" value="@Model.UserId" />
-                    <input type="hidden" name="gameId" value="@item.GameId" />
-                    <button type="submit" class="btn btn-danger">Remove</button>
-                </form>
+                <img src="@item.ImgUrl" alt="@item.GameTitle" />
+                <strong>@item.GameTitle</strong> - $@item.Price
+                <button type="button" onclick="removeFromWishlist(@item.GameId)">Remove</button>
             </li>
         }
     </ul>
+}
+else
+{
+    <p>Your wishlist is empty.</p>
+}
+
+@section Scripts {
+    <script>
+        function removeFromWishlist(gameId) {
+            $.ajax({
+                url: '@Url.Action("RemoveFromWishlist", "Wishlist")',
+                type: 'POST',
+                data: { gameId: gameId },
+                success: function () {
+                    location.reload(); // Reload the page after removing
+                },
+                error: function () {
+                    alert('Failed to remove item from wishlist');
+                }
+            });
+        }
+    </script>
 }

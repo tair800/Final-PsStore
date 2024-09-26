@@ -19,7 +19,6 @@ namespace Final.Mvc.Controllers
                 var data = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(data);
 
-                // Get distinct categories
                 var distinctCategories = result
                     .Select(g => new { g.CategoryId, g.CategoryName })
                     .Distinct()
@@ -35,7 +34,6 @@ namespace Final.Mvc.Controllers
                     result = result.Where(g => (int)g.Platform == platform).ToList();
                 }
 
-                // Sort by price
                 switch (sortByPrice)
                 {
                     case "price_asc":

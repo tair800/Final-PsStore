@@ -499,13 +499,11 @@ namespace Final.Data.Migrations
 
             modelBuilder.Entity("Final.Core.Entities.Basket", b =>
                 {
-                    b.HasOne("Final.Core.Entities.User", "User")
+                    b.HasOne("Final.Core.Entities.User", null)
                         .WithOne("Basket")
                         .HasForeignKey("Final.Core.Entities.Basket", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.BasketGame", b =>

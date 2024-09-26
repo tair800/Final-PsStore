@@ -1,18 +1,24 @@
-﻿namespace Final.Application.Dtos.WisihlistDtos
+﻿using Final.Application.Dtos.WishlistDtos;
+
+namespace Final.Application.Dtos.WishlistDtos
 {
     public class WishlistDto
     {
-        public int Id { get; set; }
         public string UserId { get; set; }
-        public ICollection<WishlistItem> Items { get; set; } = new List<WishlistItem>();
+        public List<WishlistGameDto> WishlistGames { get; set; }
     }
 
-    public class WishlistItem
+    public class WishlistGameDto
     {
-        public int Id { get; set; }
+        public int GameId { get; set; }
         public string GameTitle { get; set; }
         public decimal Price { get; set; }
-        public decimal SalePrice { get; set; }
-        public string ImgUrl { get; set; }
     }
+}
+
+public class UserWishlistDto
+{
+    public string UserId { get; set; }
+    public List<WishlistGameDto> WishlistGames { get; set; }
+    public decimal TotalPrice => WishlistGames?.Sum(wg => wg.Price) ?? 0;
 }

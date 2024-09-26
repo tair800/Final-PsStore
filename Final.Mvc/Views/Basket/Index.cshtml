@@ -1,0 +1,45 @@
+﻿@model List<BasketItemVM>
+
+<div class="container">
+    <h1>Your Basket</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.GameTitle</td>
+                        <td>@item.Quantity</td>
+                        <td>$@item.Price</td>
+                        <td>$@(item.Price * item.Quantity)</td>
+                        <td>
+                            <form asp-action="RemoveFromBasket" method="post">
+                                <input type="hidden" name="gameId" value="@item.GameId" />
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="basket-summary">
+            <h3>Total: $@Model.Sum(item => item.Price * item.Quantity)</h3>
+            <button class="btn btn-primary">Proceed to Checkout</button>
+        </div>
+    }
+    else
+    {
+        <p>Your basket is empty.</p>
+    }
+</div>

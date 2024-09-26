@@ -16,28 +16,24 @@ namespace Final.Mvc.Controllers
 
         public async Task<IActionResult> GetBasket()
         {
-            // Extract the token from cookies
             var token = Request.Cookies["token"];
             if (string.IsNullOrEmpty(token))
             {
-                // Log for debugging
                 Console.WriteLine("No token found in cookies.");
 
-                // Return the view with a message that the user is not logged in
                 return PartialView("_BasketPartial", null);
             }
 
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Basket/{email}"); // Adjust the {email} logic
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Basket/get/{userId}");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                var basket = JsonConvert.DeserializeObject<List<BasketItemVM>>(data); // Assuming basket is a list of items
-
-                return PartialView("_BasketPartial", basket); // Returning basket items to the partial view
+                var basket = JsonConvert.DeserializeObject<List<BasketItemVM>>(data); // Ensure this deserialization step is correct
+                return PartialView("_BasketPartial", basket); // Ensure you're passing the correct data to the view
             }
             else
             {
@@ -45,7 +41,7 @@ namespace Final.Mvc.Controllers
                 var error = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Error fetching basket: {error}");
 
-                return PartialView("_BasketPartial", null); // Return empty basket if not successful
+                return PartialView("_BasketPartial", null);
             }
         }
         [HttpPost]

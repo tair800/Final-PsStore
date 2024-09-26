@@ -22,9 +22,8 @@ namespace Final.Mvc.ViewComponents
             // Extract the token from the cookie
             var token = Request.Cookies["token"];
 
-            string userName = null;
+            string userId = null;
             string fullName = null;
-            string email = null;
 
             if (!string.IsNullOrEmpty(token))
             {
@@ -34,21 +33,20 @@ namespace Final.Mvc.ViewComponents
 
                 // Extract claims
                 var claims = jwtToken.Claims.ToList();
-                userName = claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.UniqueName)?.Value;
+                userId = claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value; // Assuming userId is in the "sub" claim
                 fullName = claims.FirstOrDefault(c => c.Type == "given_name")?.Value;
-                email = claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email)?.Value;
             }
 
             int basketCount = 0;
-            double totalPrice = 0;
+            decimal totalPrice = 0;
 
-            if (!string.IsNullOrEmpty(email))
+            if (!string.IsNullOrEmpty(userId))
             {
-                var basket = await _basketService.GetBasketByEmail(email);
+                var basket = await _basketService.GetBasketByUser(userId);
                 if (basket != null)
                 {
                     basketCount = basket.BasketGames.Sum(m => m.Quantity);
-                    totalPrice = basket.BasketGames.Sum(m => m.Game.Price * m.Quantity);
+                    totalPrice = basket.BasketGames.Sum(m => m.Price * m.Quantity);  // Ensure the price is properly fetched from BasketGame or Game
                 }
             }
 
@@ -59,7 +57,7 @@ namespace Final.Mvc.ViewComponents
             {
                 Settings = settings,
                 BasketCount = basketCount,
-                TotalPrice = (int)totalPrice,
+                TotalPrice = totalPrice,  // No need to cast to int, use decimal or double
                 FullName = fullName
             };
 
