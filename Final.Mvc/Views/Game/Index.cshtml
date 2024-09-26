@@ -17,11 +17,10 @@
                         <label for="filterCategory" class="form-label">Category</label>
                         <select id="filterCategory" name="category" class="form-select">
                             <option value="">All Categories</option>
-                     
-                            @foreach (var cat in Model)
+
+                            @foreach (var cat in ViewBag.Categories)
                             {
                                 <option value="@cat.CategoryId">@cat.CategoryName</option>
-
                             }
                         </select>
                     </div>
@@ -59,6 +58,7 @@
 
 
                     <button type="submit" class="btn btn-primary">Apply Filters</button>
+                        <button type="button" class="btn btn-secondary" id="resetFilters">Reset Filters</button>
                 </form>
             </div>
         </div>
@@ -176,5 +176,47 @@
                 }
             });
         }
+
+
+
+
+                // Function to get URL parameters
+                function getUrlParameter(name) {
+                    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                    const results = regex.exec(location.search);
+                    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+                }
+
+                // Set filter values based on URL parameters
+                function setFilterValues() {
+                    const category = getUrlParameter('category');
+                    const platform = getUrlParameter('platform');
+                    const sortByPrice = getUrlParameter('sortByPrice');
+                    const sortByDate = getUrlParameter('sortByDate');
+
+                    if (category) {
+                        document.getElementById('filterCategory').value = category;
+                    }
+                    if (platform) {
+                        document.getElementById('filterPlatform').value = platform;
+                    }
+                    if (sortByPrice) {
+                        document.getElementById('sortByPrice').value = sortByPrice;
+                    }
+                    if (sortByDate) {
+                        document.getElementById('sortByDate').value = sortByDate;
+                    }
+                }
+
+                // Reset Filters by clearing URL parameters and reloading the page
+                document.getElementById('resetFilters').addEventListener('click', function () {
+                    window.location.href = '@Url.Action("Index", "Game")';
+                });
+
+                // Call setFilterValues when the page loads
+                window.onload = function () {
+                    setFilterValues();
+                };
     </script>
 }

@@ -25,7 +25,14 @@ namespace Final.Mvc.Controllers
                 var data = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<UserToken>(data);
 
-                Response.Cookies.Append("token", result.Token, new CookieOptions { HttpOnly = true, Secure = true });
+                // Store the token securely
+                Response.Cookies.Append("token", result.Token, new CookieOptions
+                {
+                    HttpOnly = true, // Ensure the token is only accessible via HTTP(S)
+                    Secure = true,   // Secure the cookie (HTTPS)
+                    SameSite = SameSiteMode.Strict, // Ensure the token is sent with same-site requests only
+                    Expires = DateTimeOffset.Now.AddHours(1) // Optional: set an expiration time
+                });
 
                 return RedirectToAction("Index", "Home");
             }
@@ -37,6 +44,7 @@ namespace Final.Mvc.Controllers
 
             return View();
         }
+
         public IActionResult Register()
         {
             return View(new RegisterVM());

@@ -128,7 +128,6 @@
                     </div>
                     <!-- Search Results -->
                     <div id="searchResults" class="mt-3">
-
                     </div>
                 </div>
             </div>
@@ -146,22 +145,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Game 1 - $49.99
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Game 2 - $19.99
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Game 3 - $29.99
-                        </a>
+                    <div id="basketContent">
+                        <!-- Basket content will be loaded here via JavaScript -->
                     </div>
-                    <div class="d-flex justify-content-between mt-3">
-                        <h5>Total:</h5>
-                        <h5>$99.97</h5>
-                    </div>
-                    <button class="btn btn-primary w-100 mt-3">Checkout</button>
                 </div>
             </div>
         </div>
@@ -204,3 +190,18 @@
 </style>
 
 
+<script>
+    document.getElementById('basketModal').addEventListener('show.bs.modal', function () {
+        const basketContent = document.getElementById('basketContent');
+
+        // Fetch basket content
+        fetch('/Basket/GetBasket')
+            .then(response => response.text())
+            .then(data => {
+                basketContent.innerHTML = data; // Inject the partial view content
+            })
+            .catch(error => {
+                basketContent.innerHTML = `<div class="alert alert-danger">Failed to load basket. Please try again later.</div>`;
+            });
+    });
+</script>

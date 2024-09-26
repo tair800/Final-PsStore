@@ -1,90 +1,101 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Final.Mvc.ViewModels.BasketVMs;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text;
+using System.Net.Http.Headers;
 
 namespace Final.Mvc.Controllers
 {
     public class BasketController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _client;
 
-        public BasketController(IHttpClientFactory httpClientFactory)
+        public BasketController(HttpClient client)
         {
-            _httpClientFactory = httpClientFactory;
+            _client = client;
         }
 
-        public async Task<IActionResult> Get(string email)
+        public async Task<IActionResult> GetBasket()
         {
-            var client = _httpClientFactory.CreateClient();
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/Basket/{email}");
+            // Extract the token from cookies
+            var token = Request.Cookies["token"];
+            if (string.IsNullOrEmpty(token))
+            {
+                // Log for debugging
+                Console.WriteLine("No token found in cookies.");
+
+                // Return the view with a message that the user is not logged in
+                return PartialView("_BasketPartial", null);
+            }
+
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Basket/{email}"); // Adjust the {email} logic
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                var basket = JsonConvert.DeserializeObject<BasketListVM>(data);
-                return View(basket);
-            }
+                var basket = JsonConvert.DeserializeObject<List<BasketItemVM>>(data); // Assuming basket is a list of items
 
-            return View("Error", new { Message = "Could not fetch basket." });
+                return PartialView("_BasketPartial", basket); // Returning basket items to the partial view
+            }
+            else
+            {
+                // Log for debugging
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error fetching basket: {error}");
+
+                return PartialView("_BasketPartial", null); // Return empty basket if not successful
+            }
         }
         [HttpPost]
-        public async Task<IActionResult> AddToBasket(string email, int gameId, int quantity)
+        public async Task<IActionResult> AddToBasket(int gameId, int quantity)
         {
-            var client = _httpClientFactory.CreateClient();
-            var content = new StringContent(JsonConvert.SerializeObject(new { email, gameId, quantity }), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync($"https://localhost:7047/api/Basket/add", content);
+            // Check if the user is logged in
+            var email = Request.Cookies["userEmail"];
+            var token = Request.Cookies["token"];
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
+            {
+                // If the user is not logged in, redirect to the login page
+                return RedirectToAction("Login", "User");
+            }
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _client.PostAsync($"https://localhost:7047/api/Basket/add?email={email}&gameId={gameId}&quantity={quantity}", null);
 
             if (response.IsSuccessStatusCode)
             {
-                return Ok(); // Return success if the item was added to the basket
+                return Ok();
             }
 
-            return BadRequest("Could not add game to basket.");
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> Update(string email, int gameId, int quantity)
-        {
-            var client = _httpClientFactory.CreateClient();
-            var content = new StringContent(JsonConvert.SerializeObject(new { email, gameId, quantity }), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync($"https://localhost:7047/api/Basket/update?email={email}&gameId={gameId}&quantity={quantity}", content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var updatedBasket = await response.Content.ReadAsStringAsync();
-                return RedirectToAction("GetBasket", new { email });
-            }
-
-            return View("Error", new { Message = "Could not update basket." });
+            return BadRequest();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string email, int gameId)
+        public async Task<IActionResult> RemoveFromBasket(int gameId)
         {
-            var client = _httpClientFactory.CreateClient();
-            HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7047/api/Basket/remove?email={email}&gameId={gameId}");
+            // Check if the user is logged in
+            var email = Request.Cookies["userEmail"];
+            var token = Request.Cookies["token"];
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
+            {
+                // If the user is not logged in, redirect to the login page
+                return RedirectToAction("Login", "User");
+            }
+
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _client.DeleteAsync($"https://localhost:7047/api/Basket/remove?email={email}&gameId={gameId}");
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("GetBasket", new { email });
+                return Ok();
             }
 
-            return View("Error", new { Message = "Could not remove game from basket." });
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Clear(string email)
-        {
-            var client = _httpClientFactory.CreateClient();
-            HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7047/api/Basket/clear?email={email}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("GetBasket", new { email });
-            }
-
-            return View("Error", new { Message = "Could not clear basket." });
+            return BadRequest();
         }
     }
 }

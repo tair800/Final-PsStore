@@ -7,7 +7,7 @@ namespace Final.Mvc.Controllers
 {
     public class GameController : Controller
     {
-        public async Task<IActionResult> Index(string category = null, int? platform = null, string sortByPrice = null, string sortByDate = null)
+        public async Task<IActionResult> Index(int? category = null, int? platform = null, string sortByPrice = null, string sortByDate = null)
         {
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
@@ -19,10 +19,15 @@ namespace Final.Mvc.Controllers
                 var data = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(data);
 
-                // Apply filters on the game list
-                if (!string.IsNullOrEmpty(category))
+                // Get distinct categories
+                var distinctCategories = result
+                    .Select(g => new { g.CategoryId, g.CategoryName })
+                    .Distinct()
+                    .ToList();
+
+                if (category.HasValue)
                 {
-                    result = result.Where(g => g.CategoryName == category).ToList();
+                    result = result.Where(g => g.CategoryId == category).ToList();
                 }
 
                 if (platform.HasValue)
@@ -56,12 +61,13 @@ namespace Final.Mvc.Controllers
                         break;
                 }
 
+                ViewBag.Categories = distinctCategories;
+
                 return View(result);
             }
 
             return BadRequest("Error fetching games.");
         }
-
 
         public async Task<IActionResult> Detail(int id)
         {

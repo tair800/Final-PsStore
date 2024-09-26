@@ -32,7 +32,7 @@ namespace Final.Api.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddToBasket(string email, int gameId, int quantity)
+        public async Task<IActionResult> AddToBasket([FromQuery] string email, [FromQuery] int gameId, [FromQuery] int quantity)
         {
             try
             {
@@ -44,6 +44,7 @@ namespace Final.Api.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
         }
+
 
         [HttpPut("update")]
         public async Task<IActionResult> UpdateBasket(string email, int gameId, int quantity)

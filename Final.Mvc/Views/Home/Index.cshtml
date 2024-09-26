@@ -205,5 +205,43 @@ const debouncedSearch = debounce(function () {
         });
     });
 
+    //basket
+    function isUserLoggedIn() {
+        const userEmail = getCookie("userEmail");
+        const token = getCookie("token");
+        return userEmail && token;
+    }
+
+    // Function to get cookie by name
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Load the basket content when the modal is opened
+    document.getElementById('basketModal').addEventListener('show.bs.modal', function () {
+        const basketContent = document.getElementById('basketContent');
+        if (isUserLoggedIn()) {
+            // If user is logged in, load the basket content via API call
+            fetch('/Basket/GetBasket')
+                .then(response => response.text())
+                .then(data => {
+                    basketContent.innerHTML = data;
+                })
+                .catch(error => {
+                    basketContent.innerHTML = `<div class="alert alert-danger">Failed to load basket. Please try again later.</div>`;
+                });
+        } else {
+            // If user is not logged in, display a message and a login button
+            basketContent.innerHTML = `
+                    <div class="alert alert-warning text-center">
+                        <p>You are not logged in. Please log in to view your basket.</p>
+                        <a href="/User/Login" class="btn btn-primary">Go to Login</a>
+                    </div>
+                `;
+        }
+    });
+
 </script>
 
