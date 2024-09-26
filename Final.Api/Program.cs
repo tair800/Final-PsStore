@@ -1,9 +1,9 @@
 using Final.Api.Middlewares;
 using Final.Application.Dtos.CategoryDtos;
-using Final.Application.JwtSettings;
 using Final.Application.Profiles;
 using Final.Application.Services.Implementations;
 using Final.Application.Services.Interfaces;
+using Final.Application.Settings;
 using Final.Core.Entities;
 using Final.Core.Repositories;
 using Final.Data.Data;
@@ -11,6 +11,7 @@ using Final.Data.Implementations;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,7 @@ builder.Services.AddControllers()
 
 
 
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -97,7 +99,37 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+     .AddCookie(options =>
+     {
+         options.LoginPath = "/Account/Login";
 
+         options.Events.OnRedirectToLogin = context =>
+         {
+             if (context.Request.Path.StartsWithSegments("/api"))
+             {
+                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                 return Task.CompletedTask;
+             }
+             context.Response.Redirect(context.RedirectUri);
+             return Task.CompletedTask;
+         };
+
+         options.Events.OnRedirectToAccessDenied = context =>
+         {
+             if (context.Request.Path.StartsWithSegments("/api"))
+             {
+                 context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                 return Task.CompletedTask;
+             }
+             context.Response.Redirect(context.RedirectUri);
+             return Task.CompletedTask;
+         };
+     });
 
 builder.Services.AddSession();
 

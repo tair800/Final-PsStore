@@ -4,10 +4,16 @@ namespace Final.Application.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserReturnDto> GetUserByEmail(string email);
-        Task<UserReturnDto> CreateUser(RegisterDto registerDto);
-        Task<bool> DeleteUser(string email);
-        Task<UserReturnDto> UpdateUser(string email, UpdateUserDto updateUserDto);
+        Task<UserReturnDto> Register(RegisterDto registerDto, string urlScheme, string host);
         Task<List<UserReturnDto>> GetAllUsers();
+        Task<UserReturnDto> GetUserById(string id);
+        Task<string> Login(LoginDto loginDto);
+        Task<bool> ChangeUserStatus(string id);
+        Task<bool> EditUserRoles(EditRoleDto editRoleDto);
+        Task<bool> CreateRoles();
+        Task<UserReturnDto> UpdateUser(string id, UpdateUserDto updateUserDto);
+        Task<bool> VerifyEmail(string email, string token);
+        Task<UserReturnDto> Profile();
+
     }
 }

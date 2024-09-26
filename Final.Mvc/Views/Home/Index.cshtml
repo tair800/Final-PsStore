@@ -6,8 +6,9 @@
 
 <!-- Promotional Section -->
 <section class="promo-section">
-    <img id="promoImage" src="./img/1721388324-8953.avif" width="100%" height="auto" alt="">
+    <img id="promoImage" width="100%" height="auto" alt="Promo Image"> <!-- No default src -->
 </section>
+
 
 
 <!-- Squares Section -->
@@ -110,64 +111,34 @@
 <script>
 
 
-    let searchTimeout = null;
-
-// Debounce function to limit the frequency of search API calls
-function debouncedSearch() {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(performSearch, 300);  // 300ms debounce delay
+// Simple debounce function to limit API calls while typing
+function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
 }
 
-function performSearch() {
-    const query = document.getElementById("searchInput").value.trim();
-    
-    // Check if query is too short, and clear results if it is
-    if (query.length < 2) {
-        document.getElementById("searchResults").innerHTML = '<p>Please enter at least 2 characters.</p>';
+// Debounced search function
+const debouncedSearch = debounce(function () {
+    const query = document.getElementById('searchInput').value;
+
+    if (query.length < 1) {
+        document.getElementById('searchResults').innerHTML = '<div class="text-center text-muted">Type for searching...</div>';
         return;
     }
 
-    // Fetch search results from the API
-    fetch(`/Game/Search?title=${encodeURIComponent(query)}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        displaySearchResults(data);
-    })
-    .catch(error => {
-        console.error('There was a problem with the search:', error);
-        document.getElementById("searchResults").innerHTML = '<p>Error fetching search results. Please try again.</p>';
-    });
-}
-
-function displaySearchResults(results) {
-    const resultsContainer = document.getElementById("searchResults");
-    resultsContainer.innerHTML = '';
-
-    if (results.length > 0) {
-        results.forEach(game => {
-            const resultItem = document.createElement("div");
-            resultItem.classList.add("list-group-item", "list-group-item-action");
-            resultItem.innerHTML = `
-                <a href="/Game/Detail/${game.id}">
-                    <img src="${game.imgUrl}" alt="${game.title}" style="width: 50px; height: 50px; margin-right: 10px;">
-                    ${game.title} - $${game.price}
-                </a>`;
-            resultsContainer.appendChild(resultItem);
+    // Perform AJAX request to fetch the search results
+    fetch(`/Game/Search?title=${query}`)
+        .then(response => response.text()) // Expecting partial view HTML as response
+        .then(data => {
+            document.getElementById('searchResults').innerHTML = data; // Inject the partial view result
+        })
+        .catch(() => {
+            document.getElementById('searchResults').innerHTML = '<div class="text-center text-danger">Error while searching. Try again later.</div>';
         });
-    } else {
-        resultsContainer.innerHTML = '<p>No games found.</p>';
-    }
-}
+}, 300);
 
     $(document).ready(function () {
         console.log('Initializing Slick Carousel...');
@@ -176,7 +147,7 @@ function displaySearchResults(results) {
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 2000,
-            infinite: false,
+            infinite: true,
             rtl: false,
             arrows: true,
             responsive: [
@@ -207,15 +178,32 @@ function displaySearchResults(results) {
             ]
         });
     });
-            // Change direction after scrolling through all slides
-        $('.autoplay').on('afterChange', function(event, slick, currentSlide){
-            if(currentSlide === slick.slideCount - slick.options.slidesToShow){
-                // When at the last set of slides, reverse direction to scroll left
-                slick.slickSetOption('rtl', true, true);  // Scroll right-to-left
-            } else if (currentSlide === 0) {
-                // When back at the first slide, set it back to normal
-                slick.slickSetOption('rtl', false, true);  // Scroll left-to-right
-            }
+
+        const promoImage = document.getElementById("promoImage");
+
+    // Get all images in the squares section
+    const squareImages = document.querySelectorAll(".square-img");
+
+    // Add click event to all square images
+    squareImages.forEach(img => {
+        img.addEventListener("click", function () {
+            // Change the promo image's src to the clicked image's src
+            promoImage.src = this.src;
         });
+    });
+
+ 
+     if (squareImages.length > 0) {
+        promoImage.src = squareImages[0].src;  // Set the first image as the default promo image
+    }
+
+    // Add click event to all square images to change the promo image when clicked
+    squareImages.forEach(img => {
+        img.addEventListener("click", function () {
+            // Change the promo image's src to the clicked image's src
+            promoImage.src = this.src;
+        });
+    });
+
 </script>
 

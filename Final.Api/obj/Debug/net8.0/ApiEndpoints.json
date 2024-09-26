@@ -588,16 +588,6 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
-    "Method": "CreateRole",
-    "RelativePath": "api/User/Role",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "GetAllRoles",
     "RelativePath": "api/User/roles",
     "HttpMethod": "GET",

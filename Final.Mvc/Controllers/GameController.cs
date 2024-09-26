@@ -76,13 +76,12 @@ namespace Final.Mvc.Controllers
             }
             return NotFound("Game not found.");
         }
-
         [HttpGet]
         public async Task<IActionResult> Search(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
-                return Json(new List<GameListItemVM>());
+                return PartialView("_GameSearch", new List<GameListItemVM>());
             }
 
             using HttpClient client = new();
@@ -95,11 +94,12 @@ namespace Final.Mvc.Controllers
                 var data = await response.Content.ReadAsStringAsync();
                 var searchResults = JsonConvert.DeserializeObject<List<GameListItemVM>>(data);
 
-                // Return search results as JSON
-                return Json(searchResults);
+                return PartialView("_GameSearch", searchResults);
             }
 
-            return Json(new List<GameListItemVM>());
+            return PartialView("_GameSearch", new List<GameListItemVM>()); // Empty list on failure
         }
+
+
     }
 }
