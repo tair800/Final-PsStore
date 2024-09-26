@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cwgam/IVcHZpb5dVxuLpExVt8RzTiOpgwzj9EmM62+s=",
+  "Hash": "RsuNVBgA5JOcfk5GO8V9ib+p8AqBNTpCG9pxHT12SfE=",
   "Source": "Final.Mvc",
   "BasePath": "_content/Final.Mvc",
   "Mode": "Default",
@@ -2240,12 +2240,12 @@
       "OriginalItemSpec": "wwwroot\\css\\game.css"
     },
     {
-      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\header.css",
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\home.css",
       "SourceId": "Final.Mvc",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\",
       "BasePath": "_content/Final.Mvc",
-      "RelativePath": "css/header.css",
+      "RelativePath": "css/home.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2256,7 +2256,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\header.css"
+      "OriginalItemSpec": "wwwroot\\css\\home.css"
     },
     {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\index.css",

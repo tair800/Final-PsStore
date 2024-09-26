@@ -14,7 +14,7 @@ namespace Final.Core.Entities
         public Category Category { get; set; }
         public Platform Platform { get; set; }
         public ICollection<Dlc> Dlcs { get; set; }
-        public ICollection<WishlistGame> WishlistGames { get; set; }
+        public ICollection<WishlistGame> WishlistGames { get; set; } = new List<WishlistGame>();
         public ICollection<BasketGame> BasketGames { get; set; }
     }
 }

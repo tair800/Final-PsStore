@@ -86,6 +86,9 @@ builder.Services.AddScoped<IBasketGameRepository, BasketGameRepository>();
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IWishlistService, WishlistService>();
+builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
+builder.Services.AddScoped<IWishlistGameRepository, WishlistGameRepository>();
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();

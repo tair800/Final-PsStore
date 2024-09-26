@@ -1,0 +1,422 @@
+
+
+.navbar-custom {
+    background-color: white;
+    color: white;
+}
+
+    .navbar-custom .nav-link {
+        color: #7e7575 !important;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+        .navbar-custom .nav-link:hover {
+            color: #5d4f4f !important;
+        }
+
+.navbar-brand img {
+    width: 120px;
+}
+
+.navbar-brand {
+    margin-right: 1rem;
+}
+
+.promo-section {
+    text-align: center;
+}
+
+.navbar-light {
+    background-color: white !important;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+    .navbar-light .nav-link,
+    .navbar-light .form-control {
+        color: black;
+    }
+
+    .navbar-light .btn-outline-primary {
+        color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.ps-logo-header {
+    color: #0070d1;
+    font-size: 29px;
+}
+
+.signin-btn {
+    background-color: #0070d1;
+    color: white !important;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+}
+
+    .signin-btn:hover {
+        background-color: #005bb5;
+        color: white !important;
+    }
+
+.nav-link i {
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-link.rotate i {
+    transform: rotate(180deg);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .top-left-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        width: 100%;
+    }
+
+        .top-left-container .nav-item {
+            margin-right: 15px;
+        }
+
+    .navbar-nav.ms-auto {
+        order: -1;
+    }
+
+    .navbar-collapse {
+        margin-top: 10px;
+    }
+}
+
+.image-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.image-square {
+    flex: 0 0 calc(11.11% - 15px);
+    /* 9 items in a row with space between */
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+    .image-square img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .image-square:hover {
+        transform: scale(1.05);
+    }
+
+        .image-square:hover img {
+            transform: scale(1.1);
+        }
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .image-square {
+        flex: 0 0 calc(14.28% - 15px);
+        /* 7 items in a row with space between */
+    }
+}
+
+@media (max-width: 992px) {
+    .image-square {
+        flex: 0 0 calc(20% - 15px);
+        /* 5 items in a row with space between */
+    }
+}
+
+@media (max-width: 768px) {
+    .image-square {
+        flex: 0 0 calc(25% - 15px);
+        /* 4 items in a row with space between */
+    }
+}
+
+@media (max-width: 576px) {
+    .image-square {
+        flex: 0 0 calc(33.33% - 15px);
+        /* 3 items in a row with space between */
+    }
+}
+
+@media (max-width: 400px) {
+    .image-square {
+        flex: 0 0 calc(50% - 15px);
+        /* 2 items in a row with space between */
+    }
+}
+
+.custom-deal-card {
+    border: none;
+    width: 100%;
+}
+
+    .custom-deal-card img {
+        border-radius: 8px;
+    }
+
+.custom-discount-badge {
+    background-color: #000;
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.custom-price-text {
+    color: #999;
+    text-decoration: line-through;
+}
+
+.custom-deal-price {
+    font-weight: bold;
+}
+
+.custom-category-card {
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 210px;
+    transition: transform 0.3s ease;
+}
+
+    .custom-category-card:hover {
+        transform: scale(1.1);
+    }
+
+    .custom-category-card h5 {
+        margin-top: 1rem;
+        font-size: 3.2rem;
+    }
+
+    .custom-category-card h3 {
+        font-weight: 200;
+        margin-top: 1rem;
+        font-size: 2.2rem;
+    }
+
+.category-card {
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 210px;
+    transition: transform 0.3s ease;
+}
+
+    .category-card:hover {
+        transform: scale(1.1);
+    }
+
+    .category-card h5 {
+        margin-top: 1rem;
+        font-size: 3.2rem;
+    }
+
+    .category-card h3 {
+        font-weight: 200;
+        margin-top: 1rem;
+        font-size: 2.2rem;
+    }
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #333 !important;
+    font-weight: 500;
+}
+
+    .nav-link.active {
+        color: #0070d1 !important;
+    }
+
+.footer {
+    background-color: #003087;
+    color: white;
+    padding: 20px 0;
+    margin-top: 30px !important;
+}
+
+    .footer a {
+        color: white;
+        text-decoration: none;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+.ps-logo-footer {
+    font-size: 80px;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.autoplay {
+    width: 100%;
+}
+
+.card {
+    border-color: white;
+    border-radius: 10px;
+    padding: 5px;
+    /* Reduce padding to make the cards smaller */
+    text-align: center;
+    position: relative;
+    width: 180px !important;
+    /* Adjust card width to be slightly smaller */
+}
+
+    .card img {
+        width: 100%;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .card h3 {
+        font-size: 14px;
+        /* Reduce font size */
+        margin: 5px 0;
+        text-align: center;
+    }
+
+.price {
+    font-size: 12px;
+    /* Adjust font size */
+    color: #333;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.discount {
+    z-index:9 !important;
+    background-color: #000;
+    color: #fff;
+    padding: 4px;
+    /* Reduce padding for discount */
+    position: absolute;
+    top: 10px;
+    /* Adjust position */
+    right: 10px;
+    border-radius: 5px;
+    font-size: 10px;
+    /* Adjust font size */
+}
+
+/* Styling for the labels container */
+.ps-label-container {
+    position: absolute;
+    left: 12px;
+    bottom: 74px;
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for PS4 label */
+.ps4-label {
+    background-color: black;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 8px;
+    /* Adjust font size */
+    display: none;
+    font-weight: 700;
+}
+
+/* Styling for PS5 label */
+.ps5-label {
+    background-color: white;
+    color: black;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 8px;
+    /* Adjust font size */
+    display: none;
+    font-weight: 700;
+}
+
+/* Show the labels on hover */
+.card:hover .ps4-label,
+.card:hover .ps5-label {
+    display: inline-block;
+}
+
+/* Ensure no margins around slick slides */
+.slick-slide {
+    margin: 0;
+}
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    top: 38%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slick-prev {
+    left: 30px;
+    /* Adjust the position to the left of the slider */
+}
+
+.slick-next {
+    right: 30px;
+    /* Adjust the position to the right of the slider */
+}
+
+    .slick-prev:before,
+    .slick-next:before {
+        font-size: 50px;
+        /* Adjust the size of the arrow icons */
+        color: silver;
+    }
+

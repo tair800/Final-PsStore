@@ -15,6 +15,8 @@ namespace Final.Data.Implementations
         public IUserRepository userRepository { get; private set; }
         public IBasketGameRepository basketGameRepository { get; private set; }
         public ISettingRepository settingsRepository { get; private set; }
+        public IWishlistRepository wishlistRepository { get; private set; }
+        public IWishlistGameRepository wishlistGameRepository { get; private set; }
 
 
         public ICategoryRepository CategoryRepository => throw new NotImplementedException();
@@ -24,6 +26,8 @@ namespace Final.Data.Implementations
         public IUserRepository UserRepository => throw new NotImplementedException();
         public IBasketGameRepository BasketGameRepository => throw new NotImplementedException();
         public ISettingRepository SettingsRepository => throw new NotImplementedException();
+        public IWishlistRepository WishlistRepository => throw new NotImplementedException();
+        public IWishlistGameRepository WishlistGameRepository => throw new NotImplementedException();
 
 
         public UnitOfWork(FinalDbContext context)
@@ -36,6 +40,8 @@ namespace Final.Data.Implementations
             userRepository = new UserRepository(_context);
             basketGameRepository = new BasketGameRepository(_context);
             settingsRepository = new SettingRepository(_context);
+            wishlistRepository = new WishlistRepository(_context);
+            wishlistGameRepository = new WishlistGameRepository(_context);
         }
 
         public void Commit()

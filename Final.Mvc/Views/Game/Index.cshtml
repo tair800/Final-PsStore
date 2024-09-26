@@ -8,7 +8,7 @@
 <div class="page-container">
     <h1 class="mb-4">All Games</h1>
     <div class="row">
-        <!-- Filtering Options -->
+        <!-- Filtering Options on the Left -->
         <div class="col-12 col-md-3 mb-4">
             <div class="filter-container">
                 <form method="get" asp-action="Index">
@@ -17,9 +17,11 @@
                         <label for="filterCategory" class="form-label">Category</label>
                         <select id="filterCategory" name="category" class="form-select">
                             <option value="">All Categories</option>
-                            @foreach (var category in Model)
+                     
+                            @foreach (var cat in Model)
                             {
-                                <option value="@category.CategoryId">@category.CategoryName</option>
+                                <option value="@cat.CategoryId">@cat.CategoryName</option>
+
                             }
                         </select>
                     </div>
@@ -29,62 +31,96 @@
                         <label for="filterPlatform" class="form-label">Platform</label>
                         <select id="filterPlatform" name="platform" class="form-select">
                             <option value="">All Platforms</option>
+                            <option value="0">PS4</option>
+                            <option value="1">PS5</option>
+                            <option value="2">PS4 & PS5</option>
+                           
                         </select>
                     </div>
+
+                    <!-- Price Filter -->
+                    <div class="mb-3">
+                        <label for="sortByPrice" class="form-label">Sort By Price</label>
+                        <select id="sortByPrice" name="sortByPrice" class="form-select">
+                            <option value="">No Price Sorting</option>
+                            <option value="price_asc">Price (Low to High)</option>
+                            <option value="price_desc">Price (High to Low)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="sortByDate" class="form-label">Sort By Release Date</label>
+                        <select id="sortByDate" name="sortByDate" class="form-select">
+                            <option value="">No Date Sorting</option>
+                            <option value="date_asc">Release Date (Oldest to Newest)</option>
+                            <option value="date_desc">Release Date (Newest to Oldest)</option>
+                        </select>
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary">Apply Filters</button>
                 </form>
             </div>
         </div>
 
-        <!-- Games Display -->
+        <!-- Games Display on the Right -->
         <div class="col-12 col-md-9">
             <div class="row">
-                @foreach (var game in Model)
+                @if (Model != null && Model.Any())
                 {
-                    <div class="col-12 col-sm-6 col-lg-4 game-card-container">
-                        <div class="game-card">
-                            <img src="./img/gta.jpg" alt="@game.Title">
-                            <button class="favorite-btn">
-                                <i class="fas fa-heart"></i>
-                            </button>
+                    @foreach (var game in Model)
+                    {
+                        <div class="col-12 col-sm-6 col-lg-4 game-card-container mb-4">
+                            <div class="game-card">
+                                <img src="@game.ImgUrl" alt="@game.Title" class="game-image" />
+                                <button class="favorite-btn">
+                                    <i class="fas fa-heart"></i>
+                                </button>
 
-                            <!-- Platform Labels -->
-                            <div class="platform-labels">
-                                @if ((int)game.Platform == 1)
-                                {
-                                    <div class="platform-label bg-white text-dark">PS5</div>
-                                }
-                                else if (game.Platform == 0)
-                                {
-                                    <div class="platform-label bg-dark text-light">PS4</div>
-                                }
-                                else if ((int)game.Platform == 2)
-                                {
-                                    <div class="platform-label bg-white text-dark">PS5</div>
-                                    <div class="platform-label bg-dark text-light">PS4</div>
-                                }
-                            </div>
-
-                            <div class="game-info">
-                                <div class="game-title">@game.Title</div>
-
-                                <!-- Display discounted price if applicable -->
-                                <div class="game-price">
-                                    @if (game.SalePrice.HasValue)
+                                <!-- Platform Labels -->
+                                <div class="platform-labels">
+                                    @if ((int)game.Platform == 1)
                                     {
-                                        <span class="original-price text-decoration-line-through">$@game.Price</span>
-                                        <span class="discount-price">$@game.SalePrice</span>
+                                        <div class="platform-label bg-white text-dark">PS5</div>
                                     }
-                                    else
+                                    else if (game.Platform == 0)
                                     {
-                                        <span class="regular-price">$@game.Price</span>
+                                        <div class="platform-label bg-dark text-light">PS4</div>
+                                    }
+                                    else if ((int)game.Platform == 2)
+                                    {
+                                        <div class="platform-label bg-white text-dark">PS5</div>
+                                        <div class="platform-label bg-dark text-light">PS4</div>
                                     }
                                 </div>
+
+                                <!-- Game Info -->
+                                <div class="game-info">
+                                    <div class="game-title">@game.Title</div>
+
+                                    <!-- Display discounted price if applicable -->
+                                    <div class="game-price">
+                                        @if (game.SalePrice.HasValue)
+                                        {
+                                            <span class="original-price text-decoration-line-through">$@game.Price</span>
+                                            <span class="discount-price">$@game.SalePrice</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="regular-price">$@game.Price</span>
+                                        }
+                                    </div>
+                                </div>
+
+                                <!-- Add to Basket Button -->
+                                <button class="add-to-cart-btn" onclick="addToBasket('@game.Id')">Add to Cart</button>
                             </div>
-                            <button class="add-to-cart-btn" onclick="addToBasket('@game.Id')">Add to Cart</button>
                         </div>
-                    </div>
+                    }
+                }
+                else
+                {
+                    <p>No games found based on the selected filters.</p>
                 }
             </div>
         </div>

@@ -9,7 +9,7 @@ namespace Final.Application.Services.Interfaces
         Task<GameReturnDto> GetOne(int id);
         Task Delete(int id);
         Task Update(int id, GameUpdateDto updateDto);
-        Task<List<GameReturnDto>> SearchGames(string query);
+        Task<List<GameReturnDto>> SearchGames(string title);
     }
 
 }

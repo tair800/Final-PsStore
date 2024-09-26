@@ -8,6 +8,7 @@ namespace Final.Core.Entities
 
         public User User { get; set; }
 
-        public ICollection<WishlistGame> WishlistGames { get; set; }
+        public ICollection<WishlistGame> WishlistGames { get; set; } = new List<WishlistGame>();
+
     }
 }

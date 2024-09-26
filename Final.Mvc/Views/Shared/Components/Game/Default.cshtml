@@ -1,0 +1,53 @@
+﻿@model List<GameListItemVM>
+
+<div class="autoplay">
+    @foreach (var game in Model)
+    {
+        <div class="card">
+            <!-- Show discount if the game has a sale price -->
+            @if (game.SalePrice.HasValue)
+            {
+                <div class="discount">-@(Math.Round((1 - (game.SalePrice.Value / game.Price)) * 100))%</div>
+            }
+
+            <!-- Game Image -->
+            <img src="~/img/gta.jpg" alt="@game.Title">
+
+            <!-- Platform Label -->
+            <div class="ps-label-container">
+                @if ((int)game.Platform == 0)
+                {
+                    <div class="ps4-label">PS4</div> <!-- PS4 label -->
+                }
+                else if ((int)game.Platform == 1)
+                {
+                    <div class="ps5-label">PS5</div> <!-- PS5 label -->
+                }
+                else if ((int)game.Platform == 2)
+                {
+                    <div class="ps4-label">PS4</div> <!-- PS4 label -->
+
+                    <div class="ps5-label">PS5</div> <!-- PS5 label -->
+                }
+            </div>
+
+            <!-- Game Title -->
+            <h3>@game.Title</h3>
+
+            <!-- Price Section -->
+            <div class="price">
+                @if (game.SalePrice.HasValue)
+                {
+                    <!-- Show sale price with strikethrough for original price -->
+                    <span>$@game.SalePrice.Value</span>
+                    <span class="old-price">$@game.Price</span>
+                }
+                else
+                {
+                    <!-- Show regular price if no sale -->
+                    <span>$@game.Price</span>
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -647,5 +647,63 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.WishlistController",
+    "Method": "Get",
+    "RelativePath": "api/Wishlist/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.WishlistController",
+    "Method": "Add",
+    "RelativePath": "api/Wishlist/{userId}/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "wishlistItem",
+        "Type": "Final.Application.Dtos.WisihlistDtos.WishlistDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.WishlistController",
+    "Method": "Remove",
+    "RelativePath": "api/Wishlist/{userId}/delete/{gameId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

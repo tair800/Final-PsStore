@@ -59,7 +59,7 @@ namespace Final.Mvc.ViewComponents
             {
                 Settings = settings,
                 BasketCount = basketCount,
-                TotalPrice = (int)totalPrice,  // If totalPrice is a double, casting might not be necessary
+                TotalPrice = (int)totalPrice,
                 FullName = fullName
             };
 

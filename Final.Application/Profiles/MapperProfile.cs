@@ -5,6 +5,7 @@ using Final.Application.Dtos.DlcDtos;
 using Final.Application.Dtos.GameDtos;
 using Final.Application.Dtos.SettingsDto;
 using Final.Application.Dtos.UserDtos;
+using Final.Application.Dtos.WisihlistDtos;
 using Final.Application.Extensions;
 using Final.Core.Entities;
 using Microsoft.AspNetCore.Http;
@@ -92,7 +93,18 @@ namespace Final.Application.Profiles
             CreateMap<SettingUpdateDto, Setting>();
 
 
+            //wishlist
+            CreateMap<WishlistDto, Wishlist>()
+             .ForMember(dest => dest.WishlistGames, opt => opt.MapFrom(src => src.Items));
 
+            CreateMap<WishlistItem, WishlistGame>()
+                .ForMember(dest => dest.GameId, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<Game, WishlistItem>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => src.ImgUrl));
 
 
 

@@ -90,21 +90,22 @@ namespace Final.Api.Controllers
         }
 
         [HttpGet("Search")]
-        public async Task<IActionResult> Search([FromQuery] string title)
+        public async Task<IActionResult> Search(string title)
         {
-            if (string.IsNullOrEmpty(title))
+            if (string.IsNullOrWhiteSpace(title))
             {
                 return BadRequest("Search term cannot be empty.");
             }
 
-            var games = await _gameService.SearchGames(title);
-
-            if (games == null || !games.Any())
+            var searchResults = await _gameService.SearchGames(title);
+            if (searchResults == null || !searchResults.Any())
             {
                 return NotFound("No games found.");
             }
 
-            return Ok(games);
+            // Return JSON-formatted search results
+            return Ok(searchResults);
         }
+
     }
 }
