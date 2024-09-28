@@ -485,6 +485,10 @@
       "PackagePath": "staticwebassets\\css\\setting.css"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\wishlist.css",
+      "PackagePath": "staticwebassets\\css\\wishlist.css"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\img\\background_dark.jpg",
       "PackagePath": "staticwebassets\\img\\background_dark.jpg"
     },

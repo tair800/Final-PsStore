@@ -1,9 +1,14 @@
 ﻿@model List<GameListItemVM>
 
+
+
+
 <div class="autoplay">
-    @foreach (var game in Model)
+    <!-- Render up to 15 game cards (16th will be the redirect card) -->
+    @foreach (var game in Model.Take(15))
     {
-        <div class="card">
+
+        <div class="card" data-url="@Url.Action("Detail", "Game", new { id = game.Id })">
             <!-- Show discount if the game has a sale price -->
             @if (game.SalePrice.HasValue)
             {
@@ -26,13 +31,16 @@
                 else if ((int)game.Platform == 2)
                 {
                     <div class="ps4-label">PS4</div> <!-- PS4 label -->
-
                     <div class="ps5-label">PS5</div> <!-- PS5 label -->
                 }
             </div>
 
             <!-- Game Title -->
-            <h3>@game.Title</h3>
+
+            <h3> <a href="@Url.Action("Detail", "Game", new { id = game.Id })">
+                    @game.Title
+
+            </a> </h3>
 
             <!-- Price Section -->
             <div class="price">
@@ -50,4 +58,56 @@
             </div>
         </div>
     }
+
+    <!-- Ensure that the last card is the redirect card for sale games -->
+    <div class="card sale-redirect-card">
+        <a href="@Url.Action("Index", "Game", new { sale = true })">
+            <img src="~/img/gta.jpg" alt="View All Sales">
+            <div class="sale-banner-text">
+                <h3>View All Games on Sale</h3>
+            </div>
+        </a>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            console.log('Initializing Slick Carousel...');
+            $('.autoplay').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay: false,  // Disable autoplay to make it a manual carousel
+                infinite: false,  // Disable infinite scrolling
+                rtl: false,
+                arrows: true,
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 4
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}

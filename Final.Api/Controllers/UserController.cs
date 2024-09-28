@@ -80,5 +80,26 @@ namespace Final.Api.Controllers
             var result = await _userService.VerifyEmail(email, token);
             return result ? Redirect("https://localhost:7296/user/login") : BadRequest("Invalid token or confirmation failed.");
         }
+
+
+        [HttpPost("forgotPassword")]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            var message = await _userService.ForgotPassword(email, Request.Scheme, Request.Host.ToString());
+            return Ok(new { message });
+        }
+
+        [HttpPost("resetPassword")]
+        public async Task<IActionResult> ResetPassword(string email, string token, [FromBody] ResetPasswordDto resetPasswordDto)
+        {
+            if (resetPasswordDto.NewPassword != resetPasswordDto.ConfirmPassword)
+            {
+                return BadRequest("Passwords do not match.");
+            }
+
+            var result = await _userService.ResetPassword(email, token, resetPasswordDto);
+            return result ? Ok("Password has been reset successfully.") : BadRequest("Password reset failed.");
+        }
+
     }
 }

@@ -302,7 +302,7 @@ html {
     /* Reduce padding to make the cards smaller */
     text-align: center;
     position: relative;
-    width: 180px !important;
+    width: 274px !important;
     /* Adjust card width to be slightly smaller */
 }
 
@@ -341,15 +341,15 @@ html {
     /* Adjust position */
     right: 10px;
     border-radius: 5px;
-    font-size: 10px;
+    font-size: 15px;
     /* Adjust font size */
 }
 
 /* Styling for the labels container */
 .ps-label-container {
     position: absolute;
-    left: 12px;
-    bottom: 74px;
+    left: 15px;
+    bottom: 59px;
     display: flex;
     align-items: center;
 }
@@ -360,7 +360,7 @@ html {
     color: white;
     padding: 5px 8px;
     border-radius: 5px;
-    font-size: 8px;
+    font-size: 11px;
     /* Adjust font size */
     display: none;
     font-weight: 700;
@@ -372,7 +372,7 @@ html {
     color: black;
     padding: 5px 8px;
     border-radius: 5px;
-    font-size: 8px;
+    font-size: 11px;
     /* Adjust font size */
     display: none;
     font-weight: 700;
@@ -420,3 +420,18 @@ html {
         color: silver;
     }
 
+
+
+.slick-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}

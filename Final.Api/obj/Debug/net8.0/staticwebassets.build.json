@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BNRP6UUYEXUGoq2d/H1FTsRokE9xKPGoLPEjndjpCtU=",
+  "Hash": "732/gw562ARlROS8PktgflZe5Rk636Axxg0/QSUw/Ic=",
   "Source": "Final.Api",
   "BasePath": "_content/Final.Api",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\templates\\passwordTemplate\\forgotPassword.html"
+    },
+    {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "SourceId": "Final.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\",
+      "BasePath": "_content/Final.Api",
+      "RelativePath": "uploads/images/29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\images\\29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },
     {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",

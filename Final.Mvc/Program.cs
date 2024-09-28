@@ -52,7 +52,6 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
     options.User = new()
     {
-        //todo:email confirm sondurmusen
         RequireUniqueEmail = true,
     };
     options.SignIn.RequireConfirmedEmail = true;

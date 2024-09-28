@@ -1,5 +1,4 @@
-﻿using Final.Application.Dtos.BasketDtos;
-using Final.Application.Exceptions;
+﻿using Final.Application.Exceptions;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -22,7 +21,7 @@ namespace Final.Api.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("/get/{userId}")]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetBasket(string userId)
         {
             try
@@ -39,17 +38,17 @@ namespace Final.Api.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddToBasket([FromBody] AddBasketDto request)
+        [HttpPost("add")]
+        public async Task<IActionResult> AddToBasket(string userId, int gameId, int quantity)
         {
             try
             {
-                var basket = await _basketService.Add(request.UserId, request.GameId, request.Quantity);
-                return Ok(basket);
+                await _basketService.Add(userId, gameId, quantity);
+                return Ok();
             }
-            catch (CustomExceptions ex)
+            catch (Exception ex)
             {
-                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+                return BadRequest(ex.Message);
             }
         }
 

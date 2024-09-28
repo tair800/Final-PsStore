@@ -1,16 +1,42 @@
 [
   {
     "ContainingType": "Final.Api.Controllers.BasketController",
+    "Method": "GetBasket",
+    "RelativePath": "api/Basket/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.BasketController",
     "Method": "AddToBasket",
-    "RelativePath": "api/Basket",
+    "RelativePath": "api/Basket/add",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "Final.Application.Dtos.BasketDtos.AddBasketDto",
-        "IsRequired": true
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "quantity",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -504,6 +530,22 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "ForgotPassword",
+    "RelativePath": "api/User/forgotPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "Login",
     "RelativePath": "api/User/Login",
     "HttpMethod": "POST",
@@ -555,6 +597,32 @@
       {
         "Name": "registerDto",
         "Type": "Final.Application.Dtos.UserDtos.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/User/resetPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "resetPasswordDto",
+        "Type": "ResetPasswordDto",
         "IsRequired": true
       }
     ],
@@ -671,22 +739,6 @@
       {
         "Name": "request",
         "Type": "Final.Application.Dtos.WishlistDtos.RemoveWishlistDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.BasketController",
-    "Method": "GetBasket",
-    "RelativePath": "get/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
         "IsRequired": true
       }
     ],

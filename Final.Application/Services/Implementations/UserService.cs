@@ -208,5 +208,47 @@ namespace Final.Application.Services.Implementations
 
         }
 
+
+
+        public async Task<string> ForgotPassword(string email, string urlScheme, string host)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                throw new CustomExceptions(404, "UserNotFound", "User not found.");
+            }
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            string link = $"{urlScheme}://{host}/user/resetPassword?email={user.Email}&token={token}";
+
+            string body = await File.ReadAllTextAsync("wwwroot/templates/passwordTemplate/forgotPassword.html");
+            body = body.Replace("{{link}}", link).Replace("{{UserName}}", user.FullName);
+
+            _emailService.SendEmail(new() { user.Email }, body, "Password Reset", "Reset Your Password");
+
+            return "Password reset link sent to your email.";
+        }
+
+        public async Task<bool> ResetPassword(string email, string token, ResetPasswordDto resetPasswordDto)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                throw new CustomExceptions(404, "UserNotFound", "User not found.");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, token, resetPasswordDto.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                throw new CustomExceptions(400, "InvalidToken", "Password reset failed. Invalid token or password.");
+            }
+
+            return true;
+        }
+
+
+
+
     }
 }

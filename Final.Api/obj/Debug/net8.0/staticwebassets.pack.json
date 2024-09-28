@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\templates\\passwordTemplate\\forgotPassword.html"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },

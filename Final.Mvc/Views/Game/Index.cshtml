@@ -113,7 +113,7 @@
                                 </div>
 
                                 <!-- Add to Basket Button -->
-                                <button class="add-to-cart-btn" onclick="addToBasket('@game.Id')">Add to Cart</button>
+                                <button class="add-to-cart-btn" gameId="@game.Id">Add to Cart</button>
                             </div>
                         </div>
                     }
@@ -133,13 +133,13 @@
 
      
 
-            // Function to extract JWT token from cookies
-            function getJwtTokenFromCookie() {
-                const cookieString = document.cookie;
-                const cookies = cookieString.split('; ');
-                const tokenCookie = cookies.find(row => row.startsWith('token='));
-                return tokenCookie ? tokenCookie.split('=')[1] : null;
-            }
+          function getJwtTokenFromCookie() {
+            const cookieString = document.cookie;
+            const cookies = cookieString.split('; ');
+            const tokenCookie = cookies.find(row => row.startsWith('token='));
+            return tokenCookie ? tokenCookie.split('=')[1] : null;
+        }
+
 
             // Function to decode JWT token and extract the payload
             function decodeJwtToken(token) {
@@ -188,6 +188,78 @@
                 });
 
                 // Call setFilterValues when the page loads
+                window.onload = function () {
+                    setFilterValues();
+                };
+
+                // const addBasket = document.querySelectorAll(".add-to-cart-btn");
+
+                // addToBasket.forEach((btn) => {
+                //     btn.addEventListener("click", function() {
+                //         console.log("ggg")
+                //         const token = getJwtTokenFromCookie();
+                //     console.log(token)
+                //     if (!token) {
+                //         alert("Please log in to add games to the basket.");
+                //         return;
+                //     }
+                //     const gameId = this.getAttribute("gameId");
+
+                //     // Send the AJAX request to add the game to the basket
+                //     $.ajax({
+                //         url: '/Basket/AddToBasket',  // Assuming you have this action in BasketController
+                //         type: 'POST',
+                //         headers: {
+                //             'Authorization': `Bearer ${token}`  // Include the JWT token in the request headers
+                //         },
+                //         contentType: 'application/json',
+                //         data: {
+                //             gameId: gameId,
+                //             quantity: 1  // Default quantity is 1
+                //         },
+                //         success: function (response) {
+                //             alert('Game added to basket!');
+                //         }
+                //     });
+                //     })
+                // });
+
+
+                $('.add-to-cart-btn').each(function() {
+    $(this).on("click", function() {
+        console.log("ggg");
+
+        const token = getJwtTokenFromCookie();
+        console.log(token);
+        if (!token) {
+            alert("Please log in to add games to the basket.");
+            return;
+        }
+
+        const gameId = $(this).attr("gameId");
+
+        // Send the AJAX request to add the game to the basket
+        $.ajax({
+            url: `/Basket/AddToBasket?userId=null&gameId=${gameId}&quantity=1`,  // Assuming you have this action in BasketController
+            type: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`  // Include the JWT token in the request headers
+            },
+            contentType: 'application/json',
+            success: function(response) {
+                alert('Game added to basket!');
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', xhr.responseText || error);
+                alert('Failed to add game to basket.');
+            }
+        });
+    });
+});
+
+
+
+                // Other existing functions like setFilterValues, etc.
                 window.onload = function () {
                     setFilterValues();
                 };

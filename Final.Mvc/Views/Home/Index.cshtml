@@ -42,9 +42,26 @@
 </div>
 
 
-<div class="game-list">
-    <h1> All Deals</h1>
+<div class="game-list pb-3">
+    <h1 class="pb-2"> All Deals</h1>
     @await Component.InvokeAsync("Game")
+
+    <h1 class="pb-2"> All Deals</h1>
+    @await Component.InvokeAsync("Game")
+
+    <h1 class="pb-2"> All Deals</h1>
+    @await Component.InvokeAsync("Game")
+
+    <!-- Special Card: Redirect to Latest Created Games -->
+    <div class="card latest-games-redirect-card">
+        <a href="@Url.Action("Index", "Game", new { sortByDate = "date_desc" })">
+            <img src="~/img/new-games.jpg" alt="View Latest Games" class="special-img">
+            <div class="sale-banner-text">
+                <h3>View Latest Games</h3>
+            </div>
+        </a>
+    </div>
+</div>
 
 </div>
 
@@ -111,6 +128,82 @@
 <script>
 
 
+
+
+
+    $(document).ready(function () {
+            console.log('Initializing Slick Carousel...');
+
+            if ($('.autoplay').length) {
+                const $slider = $('.autoplay');
+
+                $slider.slick({
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    autoplay: false,  // Disable autoplay for manual sliding
+                    infinite: false,  // Disable infinite scrolling
+                    rtl: false,
+                    arrows: true,
+                    responsive: [
+                        {
+                            breakpoint: 1200,
+                            settings: {
+                                slidesToShow: 4
+                            }
+                        },
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 576,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+
+                function updateNavigation() {
+                    var currentSlide = $slider.slick('slickCurrentSlide');
+                    var totalSlides = $slider.slick('getSlick').slideCount - $slider.slick('slickGetOption', 'slidesToShow');
+
+                    if (currentSlide >= totalSlides-2) {
+                        $('.slick-next').addClass('slick-disabled'); // Disable next button
+                    } else {
+                        $('.slick-next').removeClass('slick-disabled'); // Enable next button
+                    }
+                }
+
+                $slider.on('afterChange', function (event, slick, currentSlide) {
+                    updateNavigation();
+                });
+
+                updateNavigation();
+            } else {
+                console.log('Slick Carousel container not found.');
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
 // Simple debounce function to limit API calls while typing
 function debounce(func, delay) {
     let timer;
@@ -140,44 +233,7 @@ const debouncedSearch = debounce(function () {
         });
 }, 300);
 
-    $(document).ready(function () {
-        console.log('Initializing Slick Carousel...');
-        $('.autoplay').slick({
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            infinite: true,
-            rtl: false,
-            arrows: true,
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 4
-                    }
-                },
-                {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 576,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }
-            ]
-        });
-    });
+
 
         const promoImage = document.getElementById("promoImage");
 

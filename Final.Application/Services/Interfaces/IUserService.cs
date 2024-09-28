@@ -15,5 +15,10 @@ namespace Final.Application.Services.Interfaces
         Task<bool> VerifyEmail(string email, string token);
         Task<UserReturnDto> Profile();
 
+
+        Task<string> ForgotPassword(string email, string urlScheme, string host);
+        Task<bool> ResetPassword(string email, string token, ResetPasswordDto resetPasswordDto);
     }
+
 }
+

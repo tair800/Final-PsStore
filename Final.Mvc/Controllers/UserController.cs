@@ -1,6 +1,7 @@
 ﻿using Final.Mvc.ViewModels.UserVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Final.Mvc.Controllers
@@ -78,6 +79,75 @@ namespace Final.Mvc.Controllers
         {
             Response.Cookies.Delete("token");
             return RedirectToAction("Login");
+        }
+
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        // Send reset password email
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            var content = new StringContent(JsonConvert.SerializeObject(new { email = model.Email }), System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync("https://localhost:7047/api/User/forgotPassword", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["Message"] = "Reset link has been sent to your email.";
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Failed to send reset link.");
+                return View(model);
+            }
+        }
+
+        // Reset password view
+        [HttpGet]
+        public IActionResult ResetPassword(string email, string token)
+        {
+            return View(new ResetPasswordVM { Email = email, Token = token });
+        }
+
+        // Reset password action
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            var content = new StringContent(JsonConvert.SerializeObject(new { email = model.Email, token = model.Token, newPassword = model.NewPassword }), System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync("https://localhost:7047/api/User/resetPassword", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["Message"] = "Password has been reset successfully.";
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Failed to reset password.");
+                return View(model);
+            }
         }
         public class UserToken
         {

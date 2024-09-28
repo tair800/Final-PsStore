@@ -23,16 +23,20 @@ namespace Final.Api.Controllers
             try
             {
                 var wishlist = await _wishlistService.GetWishlistByUser(userId);
-                if (wishlist == null)
+                if (wishlist == null || wishlist.WishlistGames == null || !wishlist.WishlistGames.Any())
                 {
-                    return NotFound(new { Message = "Wishlist not found." });
+                    return NotFound(new { Message = "No items found in the wishlist." });
                 }
 
-                return Ok(wishlist);
+                return Ok(new { Message = "Wishlist retrieved successfully.", Data = wishlist });
             }
             catch (CustomExceptions ex)
             {
                 return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An unexpected error occurred.", Error = ex.Message });
             }
         }
 
@@ -44,11 +48,20 @@ namespace Final.Api.Controllers
             try
             {
                 var wishlist = await _wishlistService.Add(request.UserId, request.GameId);
-                return Ok(wishlist);
+                if (wishlist == null)
+                {
+                    return BadRequest(new { Message = "Failed to add the game to the wishlist." });
+                }
+
+                return Ok(new { Message = "Game added to wishlist successfully.", Data = wishlist });
             }
             catch (CustomExceptions ex)
             {
                 return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An unexpected error occurred.", Error = ex.Message });
             }
         }
 
@@ -62,13 +75,18 @@ namespace Final.Api.Controllers
                 var result = await _wishlistService.Delete(request.UserId, request.GameId);
                 if (result)
                 {
-                    return Ok(new { Message = "Game removed from the wishlist." });
+                    return Ok(new { Message = "Game removed from the wishlist successfully." });
                 }
-                return NotFound(new { Message = "Game not found in wishlist." });
+
+                return NotFound(new { Message = "Game not found in the wishlist." });
             }
             catch (CustomExceptions ex)
             {
                 return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An unexpected error occurred.", Error = ex.Message });
             }
         }
 
@@ -82,13 +100,18 @@ namespace Final.Api.Controllers
                 var result = await _wishlistService.ClearWishlist(userId);
                 if (result)
                 {
-                    return Ok(new { Message = "Wishlist cleared." });
+                    return Ok(new { Message = "Wishlist cleared successfully." });
                 }
+
                 return NotFound(new { Message = "Wishlist not found." });
             }
             catch (CustomExceptions ex)
             {
                 return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An unexpected error occurred.", Error = ex.Message });
             }
         }
     }

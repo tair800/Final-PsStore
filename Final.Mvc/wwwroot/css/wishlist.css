@@ -1,0 +1,81 @@
+﻿/* Wishlist Container */
+.wishlist-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Wishlist Item */
+.wishlist-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+    .wishlist-item:hover {
+        background-color: #f0f0f0;
+    }
+
+/* Game Details */
+.wishlist-item-details {
+    flex-grow: 1;
+}
+
+    /* Game Title */
+    .wishlist-item-details h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Game Price */
+    .wishlist-item-details p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: #666;
+    }
+
+/* Remove Button */
+.remove-from-wishlist-btn {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+    .remove-from-wishlist-btn:hover {
+        background-color: #c0392b;
+    }
+
+/* Total Price Section */
+.total-price {
+    text-align: right;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid #ddd;
+}
+
+    .total-price strong {
+        font-size: 18px;
+        color: #333;
+    }
+
+    .total-price p {
+        font-size: 20px;
+        font-weight: bold;
+        color: #d9534f;
+    }

@@ -1,6 +1,7 @@
 ﻿using Final.Mvc.ViewModels.BasketVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 
 namespace Final.Mvc.Controllers
@@ -16,82 +17,112 @@ namespace Final.Mvc.Controllers
 
         public async Task<IActionResult> GetBasket()
         {
+            // Get the user ID (you can fetch it from the claims if needed)
+            //var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            //if (string.IsNullOrEmpty(userId))
+            //{
+            //    return Unauthorized(); // Handle unauthenticated case
+            //}
+
             var token = Request.Cookies["token"];
             if (string.IsNullOrEmpty(token))
             {
-                Console.WriteLine("No token found in cookies.");
-
-                return PartialView("_BasketPartial", null);
+                return PartialView("_BasketPartial", new UserBasketVM { BasketGames = new() });
             }
 
-            using HttpClient client = new();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            string userId = null;
 
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Basket/get/{userId}");
+            // Decode the JWT token
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            // Extract claims
+            var claims = jwtToken.Claims.ToList();
+            userId = claims.FirstOrDefault(c => c.Type == "nameid")?.Value; // Assuming userId is in the "sub" claim
+
+            // Set the Authorization header with the token
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            // Make the API call to fetch the basket using the userId
+            HttpResponseMessage response = await _client.GetAsync($"https://localhost:7047/api/Basket/{userId}");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                var basket = JsonConvert.DeserializeObject<List<BasketItemVM>>(data); // Ensure this deserialization step is correct
-                return PartialView("_BasketPartial", basket); // Ensure you're passing the correct data to the view
+                var basketDto = JsonConvert.DeserializeObject<UserBasketVM>(data); // Deserialize into UserBasketVM
+
+                if (basketDto == null || basketDto.BasketGames == null)
+                {
+                    basketDto = new UserBasketVM { BasketGames = new List<BasketGameVM>() };
+                }
+
+                // Return the basket partial view with the populated UserBasketVM model
+                return PartialView("_BasketPartial", basketDto);
             }
             else
             {
-                // Log for debugging
                 var error = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Error fetching basket: {error}");
 
-                return PartialView("_BasketPartial", null);
+                // Return an empty basket partial view in case of failure
+                return PartialView("_BasketPartial", new UserBasketVM { BasketGames = new List<BasketGameVM>() });
             }
         }
         [HttpPost]
         public async Task<IActionResult> AddToBasket(int gameId, int quantity)
         {
-            // Check if the user is logged in
-            var email = Request.Cookies["userEmail"];
             var token = Request.Cookies["token"];
-
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
             {
-                // If the user is not logged in, redirect to the login page
-                return RedirectToAction("Login", "User");
+                return Unauthorized(); // Handle unauthenticated case
             }
 
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var userId = GetUserIdFromToken(token); // Assume this method extracts userId from the JWT token
 
-            var response = await _client.PostAsync($"https://localhost:7047/api/Basket/add?email={email}&gameId={gameId}&quantity={quantity}", null);
+            // Call your API to add the game to the basket
+            var response = await _client.PostAsync($"https://localhost:7047/api/Basket/add?userId={userId}&gameId={gameId}&quantity={quantity}", null);
 
             if (response.IsSuccessStatusCode)
             {
                 return Ok();
             }
 
-            return BadRequest();
+            return BadRequest("Failed to add game to basket.");
         }
+
+        // Helper function to extract userId from the token
+        private string GetUserIdFromToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            return jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> RemoveFromBasket(int gameId)
         {
-            // Check if the user is logged in
-            var email = Request.Cookies["userEmail"];
             var token = Request.Cookies["token"];
-
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
             {
-                // If the user is not logged in, redirect to the login page
-                return RedirectToAction("Login", "User");
+                return Unauthorized(); // Handle unauthenticated case
             }
 
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var userId = GetUserIdFromToken(token); // Extract the userId from the JWT token
 
-            var response = await _client.DeleteAsync($"https://localhost:7047/api/Basket/remove?email={email}&gameId={gameId}");
+            // Call your API to remove the game from the basket
+            var response = await _client.DeleteAsync($"https://localhost:7047/api/Basket/remove?userId={userId}&gameId={gameId}");
 
             if (response.IsSuccessStatusCode)
             {
                 return Ok();
             }
 
-            return BadRequest();
+            var error = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Error removing game from basket: {error}");
+            return BadRequest("Failed to remove game from basket.");
         }
+
     }
 }
