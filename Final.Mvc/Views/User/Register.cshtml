@@ -1,43 +1,65 @@
-﻿@model RegisterVM
+﻿@{
+    ViewBag.Title = "Register";
+}
+@model RegisterVM
 
 @section Links {
-    <link href="/css/register.css" rel="stylesheet" />
+    <link href="/css/login.css" rel="stylesheet" />
 }
 
-
-<form asp-action="Register" method="post">
-    <div class="register-container">
-        <h2 class="text-center"><i class="fa-brands fa-playstation"></i></h2>
-        <div class="mb-3">
-            <label for="fullName" class="form-label visually-hidden">Full Name</label>
-            <input asp-for="FullName" class="form-control" id="fullName" placeholder="Full Name" required />
-            <span asp-validation-for="FullName" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label for="username" class="form-label visually-hidden">Username</label>
-            <input asp-for="UserName" class="form-control" id="username" placeholder="Username" required />
-            <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label visually-hidden">Email Address</label>
-            <input asp-for="Email" class="form-control" id="email" placeholder="Email Address" required />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label visually-hidden">Password</label>
-            <input asp-for="Password" class="form-control" id="password" placeholder="Password" type="password" required />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label for="rePassword" class="form-label visually-hidden">Confirm Password</label>
-            <input asp-for="RePassword" class="form-control" id="rePassword" placeholder="Confirm Password" type="password" required />
-            <span asp-validation-for="RePassword" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-light mb-3 w-100">Create Account</button>
-        <a asp-action="login" class="btn btn-outline-light">Back to Sign In</a>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
     </div>
-</form>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
 }
+
+<!-- Register View with Background Wrapper -->
+<div class="content-area">
+    <div class="login">
+        <form asp-action="Register" method="post">
+            <div class="login-container">
+                <h2><i class="fa-brands fa-playstation"></i></h2>
+
+                <!-- Validation Summary -->
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label for="FullName" class="form-label visually-hidden">Full Name</label>
+                    <input asp-for="FullName" class="form-control" id="FullName" placeholder="Full Name">
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="UserName" class="form-label visually-hidden">Username</label>
+                    <input asp-for="UserName" class="form-control" id="UserName" placeholder="Username">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Email" class="form-label visually-hidden">Email Address</label>
+                    <input asp-for="Email" type="email" class="form-control" id="Email" placeholder="Email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Password" class="form-label visually-hidden">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" id="Password" placeholder="Password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="ConfirmPassword" class="form-label visually-hidden">Confirm Password</label>
+                    <input asp-for="RePassword" type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm Password">
+                    <span asp-validation-for="RePassword" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn-next">Register</button>
+
+                <div class="links">
+                    <a asp-controller="user" asp-action="Login">Already have an account? Log in</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

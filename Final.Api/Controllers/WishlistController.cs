@@ -16,28 +16,16 @@ namespace Final.Api.Controllers
             _wishlistService = wishlistService;
         }
 
-        // GET: api/Wishlist/{userId}
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetWishlist(string userId)
         {
-            try
+            var wishlist = await _wishlistService.GetWishlistByUser(userId);
+            if (wishlist == null || wishlist.WishlistGames == null || !wishlist.WishlistGames.Any())
             {
-                var wishlist = await _wishlistService.GetWishlistByUser(userId);
-                if (wishlist == null || wishlist.WishlistGames == null || !wishlist.WishlistGames.Any())
-                {
-                    return NotFound(new { Message = "No items found in the wishlist." });
-                }
+                return NotFound(new { Message = "No items found in the wishlist." });
+            }
 
-                return Ok(new { Message = "Wishlist retrieved successfully.", Data = wishlist });
-            }
-            catch (CustomExceptions ex)
-            {
-                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = "An unexpected error occurred.", Error = ex.Message });
-            }
+            return Ok(new { Message = "Wishlist retrieved successfully.", Data = wishlist });
         }
 
         // POST: api/Wishlist/add

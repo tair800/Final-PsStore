@@ -1,0 +1,194 @@
+﻿@model UpdateUserVM
+
+@{
+    ViewData["Title"] = "Update User Profile";
+}
+
+<h2 class="update-title">Update User Profile</h2>
+
+<form asp-action="Update" method="post" class="update-form">
+    <div class="form-container">
+        <!-- Left Side: Email, Username, FullName, and Roles -->
+        <div class="form-left">
+            <input type="hidden" asp-for="UserId" />
+
+            <div class="form-group">
+                <label asp-for="UserName" class="form-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" readonly disabled />
+            </div>
+
+            <div class="form-group">
+                <label>Current Roles</label>
+                <input type="text" class="form-control" value="@string.Join(", ", Model.UserRoles)" readonly disabled />
+            </div>
+        </div>
+
+        <!-- Right Side: Password Fields -->
+        <div class="form-right">
+            <div class="form-group position-relative">
+                <label asp-for="NewPassword" class="form-label"></label>
+                <input asp-for="NewPassword" type="password" class="form-control" id="newPassword" />
+                <i class="bi bi-eye-slash-fill toggle-password" data-target="#newPassword"></i>
+                <span asp-validation-for="NewPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group position-relative">
+                <label asp-for="VerifyNewPassword" class="form-label"></label>
+                <input asp-for="VerifyNewPassword" type="password" class="form-control" id="verifyNewPassword" />
+                <i class="bi bi-eye-slash-fill toggle-password" data-target="#verifyNewPassword"></i>
+                <span asp-validation-for="VerifyNewPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group position-relative">
+                <label asp-for="CurrentPassword" class="form-label"></label>
+                <input asp-for="CurrentPassword" type="password" class="form-control" id="currentPassword" required />
+                <i class="bi bi-eye-slash-fill toggle-password" data-target="#currentPassword"></i>
+                <i class="bi bi-info-circle-fill info-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="The current password is required to verify your identity before making changes."></i>
+                <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Update</button>
+</form>
+
+<div class="back-link mt-3">
+    <a asp-controller="home" asp-action="index" class="btn btn-secondary">Back to Home</a>
+</div>
+
+@section Scripts {
+    <script>
+        // Enable Bootstrap tooltips
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+
+        // Toggle password visibility
+        document.querySelectorAll('.toggle-password').forEach(item => {
+            item.addEventListener('click', function () {
+                const target = document.querySelector(this.getAttribute('data-target'));
+                if (target.type === 'password') {
+                    target.type = 'text';
+                    this.classList.remove('bi-eye-slash-fill');
+                    this.classList.add('bi-eye-fill');
+                } else {
+                    target.type = 'password';
+                    this.classList.remove('bi-eye-fill');
+                    this.classList.add('bi-eye-slash-fill');
+                }
+            });
+        });
+
+                 document.querySelector('.update-form').addEventListener('submit', function (e) {
+                    const newPassword = document.getElementById('newPassword').value;
+                    const verifyNewPassword = document.getElementById('verifyNewPassword').value;
+
+                    // Remove any previous validation message
+                    const verifyPasswordValidationSpan = document.querySelector('[data-valmsg-for="VerifyNewPassword"]');
+                    if (verifyPasswordValidationSpan) {
+                        verifyPasswordValidationSpan.innerHTML = '';
+                    }
+
+                    if (newPassword && verifyNewPassword && newPassword !== verifyNewPassword) {
+                        // Prevent form submission
+                        e.preventDefault();
+
+                        // Add validation error message to VerifyNewPassword
+                        if (verifyPasswordValidationSpan) {
+                            verifyPasswordValidationSpan.innerHTML = 'New password and verify password do not match.';
+                        }
+                    }
+                });
+    </script>
+}
+
+<style>
+    /* Form Styling */
+    .update-title {
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .update-form {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    .form-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .form-left, .form-right {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .back-link {
+        text-align: center;
+    }
+
+    /* Tooltip Styling */
+    .info-icon {
+        position: absolute;
+        top: 19%;
+        left: 133px;
+        transform: translateY(-50%);
+        font-size: 1.3rem;
+        color: silver;
+        cursor: pointer;
+    }
+
+        .info-icon:hover {
+            color: #0056b3;
+        }
+
+    /* Eye Icon Styling */
+    .toggle-password {
+        position: absolute;
+        top: 69%;
+        right: 10px;
+        transform: translateY(-50%);
+        font-size: 1.2rem;
+        color: #6c757d;
+        cursor: pointer;
+    }
+
+        .toggle-password:hover {
+            color: #343a40;
+        }
+</style>

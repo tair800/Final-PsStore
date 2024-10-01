@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Final.Application.Dtos.UserDtos;
+using Final.Application.Exceptions;
 using Final.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +22,11 @@ namespace Final.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
-            var user = await _userService.Register(registerDto, Request.Scheme, Request.Host.ToString());
-            return StatusCode(201, user);
+            var userReturnDto = await _userService.Register(registerDto, Request.Scheme, Request.Host.ToString());
+            var userViewModel = _mapper.Map<UserReturnDto>(userReturnDto);
+            return StatusCode(201, userViewModel);
         }
+
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
@@ -39,12 +42,17 @@ namespace Final.Api.Controllers
             return Ok(users);
         }
 
-        [HttpGet("profile/{id}")]
-        public async Task<IActionResult> GetOne(string id)
+        [HttpGet("profile/{userId}")]
+        public async Task<IActionResult> GetOne(string userId)
         {
-            var user = await _userService.GetUserById(id);
+            var user = await _userService.GetUserById(userId);
+            if (user == null)
+            {
+                return NotFound(new { Message = "User not found." });
+            }
             return Ok(user);
         }
+
 
         [HttpPost("changeStatus/{id}")]
         public async Task<IActionResult> ChangeStatus(string id)
@@ -63,7 +71,7 @@ namespace Final.Api.Controllers
         [HttpGet("roles")]
         public async Task<IActionResult> GetAllRoles()
         {
-            var roles = await _userService.CreateRoles();
+            var roles = await _userService.GetAllRoles();
             return Ok(roles);
         }
 
@@ -83,22 +91,32 @@ namespace Final.Api.Controllers
 
 
         [HttpPost("forgotPassword")]
-        public async Task<IActionResult> ForgotPassword(string email)
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
         {
-            var message = await _userService.ForgotPassword(email, Request.Scheme, Request.Host.ToString());
-            return Ok(new { message });
+            var result = await _userService.ForgotPassword(forgotPasswordDto);
+            return Ok(new { message = result });
         }
 
-        [HttpPost("resetPassword")]
-        public async Task<IActionResult> ResetPassword(string email, string token, [FromBody] ResetPasswordDto resetPasswordDto)
-        {
-            if (resetPasswordDto.NewPassword != resetPasswordDto.ConfirmPassword)
-            {
-                return BadRequest("Passwords do not match.");
-            }
 
-            var result = await _userService.ResetPassword(email, token, resetPasswordDto);
-            return result ? Ok("Password has been reset successfully.") : BadRequest("Password reset failed.");
+        [HttpPost("resetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            var result = await _userService.ResetPassword(resetPasswordDto);
+            return result ? Ok("Password has been reset successfully.") : BadRequest("Failed to reset password.");
+        }
+
+        [HttpPost("confirmEmail")]
+        public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailDto model)
+        {
+            try
+            {
+                await _userService.ConfirmEmail(model.Email, model.Token);
+                return Ok(new { Message = "Email confirmed successfully." });
+            }
+            catch (CustomExceptions ex)
+            {
+                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+            }
         }
 
     }

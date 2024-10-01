@@ -1,4 +1,5 @@
 ﻿@model UserBasketVM
+
 <style>
     /* Basket Container */
     .basket-container {
@@ -27,18 +28,25 @@
             background-color: #f0f0f0;
         }
 
-        /* Game Image */
-        .basket-item img {
-            width: 80px;
-            height: 80px;
-            margin-right: 20px;
-            border-radius: 5px;
-            object-fit: cover;
-        }
+    /* Fade-out Animation */
+    .fade-out {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+    }
+
+    /* Game Image */
+    .basket-item img {
+        width: 80px;
+        height: 80px;
+        margin-right: 20px;
+        border-radius: 5px;
+        object-fit: cover;
+    }
 
     /* Game Details */
     .basket-item-details {
         flex-grow: 1;
+        cursor: pointer; /* Make it look clickable */
     }
 
         /* Game Title */
@@ -91,21 +99,42 @@
             color: #d9534f;
         }
 
+    a {
+        text-decoration: none;
+        color: inherit; /* Ensures link color matches surrounding text */
+    }
+
+    button {
+        font-size: 10px;
+        background: none;
+        border: 0;
+    }
+
+    .fa-solid {
+        font-weight: 900;
+        margin-right: 20px;
+        font-size: 25px;
+    }
+
 </style>
 
 <div class="basket-container">
-
     @foreach (var item in Model.BasketGames)
     {
         <div class="basket-item">
             <div class="basket-item-details">
                 <img src="https://localhost:7047/uploads/images/@item.GameImgUrl" class="game-image" />
-                <h4>@(item.GameTitle ?? "No Title")</h4>
+
+                <!-- Link to Game Detail Page -->
+                <a asp-action="Detail" asp-controller="Game" asp-route-id="@item.GameId">
+                    <h4>@(item.GameTitle ?? "No Title")</h4>
+                </a>
+
                 <p>Price: $@(item.Price > 0 ? item.Price.ToString("F2") : "N/A")</p>
                 <p>Quantity: @(item.Quantity > 0 ? item.Quantity : 0)</p>
                 <p>Total: $@(item.Price > 0 && item.Quantity > 0 ? (item.Price * item.Quantity).ToString("F2") : "N/A")</p>
             </div>
-            <button class="remove-from-cart-btn" gameId="@item.GameId">Remove</button>
+            <button class="remove" data-game-id="@item.GameId"><i class="fa-solid fa-trash"></i></button>
         </div>
     }
 
@@ -114,40 +143,5 @@
         <p>$@(Model.TotalPrice.ToString("F2"))</p>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </div>
-
-@section Scripts {
-    <script>
-        $(document).on("click", ".remove-from-cart-btn", function () {
-            console.log("Attempting to remove from basket...");
-
-            const token = getJwtTokenFromCookie();
-            if (!token) {
-                alert("Please log in to remove games from the basket.");
-                return;
-            }
-
-            const gameId = $(this).attr("gameId");
-            console.log(`Removing game with ID: ${gameId}`);
-
-            // Send the AJAX request to remove the game from the basket
-            $.ajax({
-                url: `/Basket/RemoveFromBasket?gameId=${gameId}`,  // Call the correct MVC action
-                type: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`  // Include the JWT token in the request headers
-                },
-                success: function (response) {
-                    alert('Game removed from basket!');
-                    location.reload();  // Reload the page to reflect the changes in the basket
-                },
-                error: function (xhr, status, error) {
-                    console.log('Error:', xhr.responseText || error);
-                    alert('Failed to remove game from basket.');
-                }
-            });
-        });
-
-
-    </script>
-}

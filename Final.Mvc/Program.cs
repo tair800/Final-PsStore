@@ -16,6 +16,7 @@ builder.Services.AddHttpClient(); // This registers IHttpClientFactory
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<IBasketService, BasketService>();

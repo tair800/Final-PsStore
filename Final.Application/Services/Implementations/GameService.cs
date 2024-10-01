@@ -12,42 +12,35 @@ namespace Final.Application.Services.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IEmailService _emailService;
 
-        public GameService(IUnitOfWork unitOfWork, IMapper mapper, IEmailService emailService)
+        public GameService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _emailService = emailService;
         }
 
+        // Create a new game
         public async Task<int> Create(GameCreateDto createDto)
         {
+            // Check if a game with the same title already exists
             if (await _unitOfWork.gameRepository.isExists(g => g.Title.ToLower() == createDto.Title.ToLower()))
-                throw new CustomExceptions(400, "Name", "Dublicate is not permitted");
+                throw new CustomExceptions(400, "Name", "Duplicate is not permitted");
 
             var game = _mapper.Map<Game>(createDto);
             await _unitOfWork.gameRepository.Create(game);
-
-
-
             _unitOfWork.Commit();
-
-
-            List<string> emails = new() { "tahir.aslanlee@gmail.com" };
-            string body = $"<a href='http://localhost:7296/game/detail/{game.Id}'>Go to Game post</a>";
-            _emailService.SendEmail(emails, body, "New Game Post", "View game post");
-
 
             return game.Id;
         }
 
+        // Get all games
         public async Task<List<GameReturnDto>> GetAll()
         {
             var games = await _unitOfWork.gameRepository.GetAll(null, "Dlcs", "Category");
             return _mapper.Map<List<GameReturnDto>>(games);
         }
 
+        // Get a single game by ID
         public async Task<GameReturnDto> GetOne(int id)
         {
             // Fetch game with related DLCs and Category
@@ -64,8 +57,7 @@ namespace Final.Application.Services.Implementations
             return gameReturnDto;
         }
 
-
-
+        // Delete a game by ID
         public async Task Delete(int id)
         {
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id);
@@ -76,6 +68,7 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
         }
 
+        // Update a game by ID
         public async Task Update(int id, GameUpdateDto updateDto)
         {
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id);
@@ -84,29 +77,31 @@ namespace Final.Application.Services.Implementations
 
             if (updateDto.File != null)
             {
+                // Delete old image if it exists
                 if (!string.IsNullOrEmpty(game.ImgUrl))
                 {
                     FileExtension.DeleteImage(game.ImgUrl);
                 }
 
+                // Save the new image
                 var newFileName = updateDto.File.Save(Directory.GetCurrentDirectory(), "uploads/images/");
                 game.ImgUrl = newFileName;
             }
 
             game.UpdatedDate = DateTime.Now;
 
+            // Update other fields using AutoMapper
             _mapper.Map(updateDto, game);
 
             await _unitOfWork.gameRepository.Update(game);
             _unitOfWork.Commit();
         }
 
+        // Search games by title
         public async Task<List<GameReturnDto>> SearchGames(string title)
         {
             var games = await _unitOfWork.gameRepository.Search(g => g.Title.Contains(title));
             return _mapper.Map<List<GameReturnDto>>(games);
         }
-
-
     }
 }

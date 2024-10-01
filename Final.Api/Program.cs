@@ -57,8 +57,24 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
-
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost7296",
+        builder =>
+        {
+            builder.WithOrigins("https://localhost:7296")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials();
+        });
+});
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        builder => builder.WithOrigins("https://localhost:7296")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -241,6 +257,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowLocalhost7296");
 
 
 app.UseStaticFiles();

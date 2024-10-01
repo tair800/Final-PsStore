@@ -13,11 +13,10 @@ namespace Final.Application.Services.Interfaces
         Task<bool> CreateRoles();
         Task<UserReturnDto> UpdateUser(string id, UpdateUserDto updateUserDto);
         Task<bool> VerifyEmail(string email, string token);
-        Task<UserReturnDto> Profile();
-
-
-        Task<string> ForgotPassword(string email, string urlScheme, string host);
-        Task<bool> ResetPassword(string email, string token, ResetPasswordDto resetPasswordDto);
+        Task<ForgotPasswordDto> ForgotPassword(ForgotPasswordDto forgotPasswordDto);
+        Task<bool> ResetPassword(ResetPasswordDto resetPasswordDto);
+        Task<List<string>> GetAllRoles();
+        Task<bool> ConfirmEmail(string email, string token);
     }
 
 }

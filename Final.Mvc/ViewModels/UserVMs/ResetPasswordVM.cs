@@ -9,11 +9,11 @@ namespace Final.Mvc.ViewModels.UserVMs
 
         [Required]
         [DataType(DataType.Password)]
-        public string NewPassword { get; set; }
+        public string Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
-        public string ConfirmPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }

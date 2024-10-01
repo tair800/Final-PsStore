@@ -8,5 +8,7 @@
         public string Email { get; set; }
         public bool IsBlocked { get; set; }
         public List<string> UserRoles { get; set; } = new List<string>();
+        public string EmailConfirmationToken { get; set; } // New property
+
     }
 }

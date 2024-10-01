@@ -514,6 +514,22 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "ConfirmEmail",
+    "RelativePath": "api/User/confirmEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Final.Application.Dtos.UserDtos.ConfirmEmailDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "EditRole",
     "RelativePath": "api/User/editRole",
     "HttpMethod": "POST",
@@ -537,9 +553,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "forgotPasswordDto",
+        "Type": "Final.Application.Dtos.UserDtos.ForgotPasswordDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -563,13 +579,13 @@
   {
     "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "GetOne",
-    "RelativePath": "api/User/profile/{id}",
+    "RelativePath": "api/User/profile/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "userId",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -611,18 +627,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "token",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "resetPasswordDto",
-        "Type": "ResetPasswordDto",
+        "Type": "Final.Application.Dtos.UserDtos.ResetPasswordDto",
         "IsRequired": true
       }
     ],

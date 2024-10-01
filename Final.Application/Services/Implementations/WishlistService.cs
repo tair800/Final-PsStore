@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Final.Application.Dtos.WishlistDtos;
 using Final.Application.Exceptions;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;

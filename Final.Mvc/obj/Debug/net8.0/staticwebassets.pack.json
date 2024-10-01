@@ -497,8 +497,20 @@
       "PackagePath": "staticwebassets\\img\\gta.jpg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\js\\basket.js",
+      "PackagePath": "staticwebassets\\js\\basket.js"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\js\\script.js",
       "PackagePath": "staticwebassets\\js\\script.js"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\templates\\emailTemplate\\emailConfirm.html",
+      "PackagePath": "staticwebassets\\templates\\emailTemplate\\emailConfirm.html"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\templates\\passwordTemplate\\forgotPassword.html",
+      "PackagePath": "staticwebassets\\templates\\passwordTemplate\\forgotPassword.html"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Final.Mvc.Microsoft.AspNetCore.StaticWebAssets.props",

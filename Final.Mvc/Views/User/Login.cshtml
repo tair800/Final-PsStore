@@ -1,10 +1,7 @@
 ﻿@{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml"; // This assumes you have a layout file here
-
 }
 @model LoginVM
-
 
 @section Links {
     <link href="/css/login.css" rel="stylesheet" />
@@ -18,33 +15,39 @@
 }
 
 <!-- Fixes: No need for nested form, and proper binding for inputs -->
-<form asp-action="Login" method="post">
-    <div class="login-container">
-        <h2><i class="fa-brands fa-playstation"></i></h2>
+<div class="content-area">
+    <!-- Added content-area wrapper -->
+    <div class="login">
+        <form asp-action="Login" method="post">
+            <div class="login-container">
+                <h2><i class="fa-brands fa-playstation"></i></h2>
+                
+                <div asp-validation-summary="All" class="text-danger"></div>
 
-        <div class="mb-3">
-            <label for="UserName" class="form-label visually-hidden">Sign-In ID (Username)</label>
-            <input asp-for="UserName" class="form-control" id="UserName" placeholder="Username" required>
-            <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
+                <div class="mb-3">
+                    <label for="UserName" class="form-label visually-hidden">Sign-In ID (Username)</label>
+                    <input asp-for="UserName" class="form-control" id="UserName" placeholder="Username" required>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
 
-        <div class="mb-3">
-            <label for="Password" class="form-label visually-hidden">Password</label>
-            <input asp-for="Password" type="password" class="form-control" id="Password" placeholder="Password" required>
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
+                <div class="mb-3">
+                    <label for="Password" class="form-label visually-hidden">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" id="Password" placeholder="Password" required>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
 
-        <button type="submit" class="btn-next">Login</button>
+                <button type="submit" class="btn-next">Login</button>
 
-        <div class="links">
-            <a asp-controller="user" asp-action="ForgotPassword">Forgot password?</a>
-        </div>
+                <div class="links">
+                    <a asp-controller="user" asp-action="ForgotPassword">Forgot password?</a>
+                </div>
 
-        <button class="btn-create-account">
-            <a asp-action="register">
-                Create an Account
-
-            </a>
-        </button>
+                <button class="btn-create-account">
+                    <a asp-action="register">
+                        Create an Account
+                    </a>
+                </button>
+            </div>
+        </form>
     </div>
-</form>
+</div>

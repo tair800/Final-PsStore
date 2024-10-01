@@ -7,8 +7,7 @@
 <div class="wishlist-container">
     <h1>Your Wishlist</h1>
 
-    @if (Model?.WishlistGames != null && Model.WishlistGames.Any())
-    {
+ 
         @foreach (var item in Model.WishlistGames)
         {
             <div class="wishlist-item">
@@ -20,15 +19,8 @@
             </div>
         }
 
-        <div class="total-price">
-            <strong>Total Price:</strong>
-            <p>$@(Model.TotalPrice.ToString("F2"))</p>
-        </div>
-    }
-    else
-    {
-        <p>Your wishlist is empty. Start adding some games!</p>
-    }
+     
+
 </div>
 
 @section Scripts {

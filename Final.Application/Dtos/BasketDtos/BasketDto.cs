@@ -8,5 +8,6 @@
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public string GameImgUrl { get; set; }
+        public double SalePrice { get; set; }
     }
 }

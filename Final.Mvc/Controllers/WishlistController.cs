@@ -3,16 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
-using System.Text;
 
 public class WishlistController : Controller
 {
-    private readonly HttpClient _client;
 
-    public WishlistController(HttpClient client)
-    {
-        _client = client;
-    }
 
     // Index action to display user's wishlist
     public async Task<IActionResult> Index()
@@ -20,16 +14,21 @@ public class WishlistController : Controller
         var token = Request.Cookies["token"];
         if (string.IsNullOrEmpty(token))
         {
-            return RedirectToAction("Login", "User"); // Redirect to login if no token found
+            return RedirectToAction("Login");
         }
 
-        string userId = GetUserIdFromToken(token); // Get the encoded userId
+        // Extract UserId from the token
+        var userId = GetUserIdFromToken(token);
+        if (string.IsNullOrEmpty(userId))
+        {
+            return RedirectToAction("Login");
+        }
 
-        // Set the Authorization header with the token
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        using HttpClient client = new();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        // Make the API call to fetch the wishlist using the encoded userId
-        HttpResponseMessage response = await _client.GetAsync($"https://localhost:7047/api/Wishlist/{userId}");
+        // Make the API call to fetch the wishlist using the userId
+        HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/wishlist/{userId}");
 
         if (response.IsSuccessStatusCode)
         {
@@ -58,14 +57,6 @@ public class WishlistController : Controller
     {
         var handler = new JwtSecurityTokenHandler();
         var jwtToken = handler.ReadJwtToken(token);
-        var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
-
-        if (string.IsNullOrEmpty(userId))
-        {
-            throw new Exception("User ID not found in token");
-        }
-
-        var encodedUserId = Convert.ToBase64String(Encoding.UTF8.GetBytes(userId));
-        return encodedUserId;
+        return jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
     }
 }

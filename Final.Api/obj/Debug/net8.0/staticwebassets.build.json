@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "732/gw562ARlROS8PktgflZe5Rk636Axxg0/QSUw/Ic=",
+  "Hash": "okobcHoEhm72aIuk1eE99jCVug2MU9HVEh7CgAXc0jg=",
   "Source": "Final.Api",
   "BasePath": "_content/Final.Api",
   "Mode": "Default",
@@ -74,6 +74,25 @@
       "OriginalItemSpec": "wwwroot\\uploads\\images\\29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },
     {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg",
+      "SourceId": "Final.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\",
+      "BasePath": "_content/Final.Api",
+      "RelativePath": "uploads/images/87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\images\\87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg"
+    },
+    {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
       "SourceId": "Final.Api",
       "SourceType": "Discovered",
@@ -91,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\images\\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "SourceId": "Final.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\",
+      "BasePath": "_content/Final.Api",
+      "RelativePath": "uploads/images/d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\images\\d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },
     {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\horizon-zero-dawn-key-art.jpg",

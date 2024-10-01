@@ -157,5 +157,34 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
             return true;
         }
+        //public async Task<Basketdr> UpdateGameQuantity(string userId, string gameId, int change)
+        //{
+        //    var userBasket = await _unitOfWork.Baskets.GetBasketByUserIdAsync(userId);
+        //    if (userBasket == null)
+        //    {
+        //        throw new CustomExceptions(404, "Basket not found for the given user.");
+        //    }
+
+        //    var basketGame = userBasket.BasketGames.FirstOrDefault(g => g.GameId == gameId);
+        //    if (basketGame == null)
+        //    {
+        //        throw new CustomExceptions(404, "Game not found in the basket.");
+        //    }
+
+        //    // Update the quantity of the game
+        //    basketGame.Quantity += change;
+
+        //    // If quantity is less than or equal to 0, remove the game from the basket
+        //    if (basketGame.Quantity <= 0)
+        //    {
+        //        userBasket.BasketGames.Remove(basketGame);
+        //    }
+
+        //    // Save changes to the database
+        //    await _unitOfWork.CompleteAsync();
+
+        //    // Use AutoMapper to map the updated basket entity to a BasketDto
+        //    return _mapper.Map<BasketDto>(userBasket);
+        ////}
     }
 }

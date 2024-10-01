@@ -1,4 +1,5 @@
-﻿using Final.Core.Entities;
+﻿using Final.Application.Dtos.WishlistDtos;
+using Final.Core.Entities;
 
 namespace Final.Application.Services.Interfaces
 {

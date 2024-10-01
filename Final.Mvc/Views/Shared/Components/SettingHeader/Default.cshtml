@@ -1,5 +1,4 @@
-﻿
-<header>
+﻿<header>
     <!-- Primary Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
@@ -34,16 +33,20 @@
                 <ul class="navbar-nav ms-auto d-none d-lg-flex">
                     @if (!string.IsNullOrEmpty(Model.FullName))
                     {
-                        <li class="nav-item">
-                            <span class="nav-link">Welcome, @Model.FullName!</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Setting" asp-action="Index">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <form asp-controller="User" asp-action="Logout" method="post">
-                                <button type="submit" class="btn btn-link nav-link">Logout</button>
-                            </form>
+                        <!-- Dropdown for User Account -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Welcome, @Model.FullName!
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" asp-controller="User" asp-action="Update">Detail</a></li>
+                                <li><a class="dropdown-item" href="#">My Card</a></li>
+                                <li>
+                                    <form asp-controller="User" asp-action="Logout" method="post">
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </li>
                     }
                     else
@@ -59,12 +62,12 @@
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#basketModal">
-                            <i class="bi bi-basket" ></i>
+                            <i class="bi bi-basket"></i>
                         </a>
                     </li>
                     <!-- Wishlist Icon -->
                     <li class="nav-item me-3">
-                        <a class="nav-link" asp-controller="wishlist" asp-action="index">
+                        <a class="nav-link" asp-controller="Wishlist" asp-action="Index">
                             <i class="bi bi-heart"></i> <!-- Heart icon for wishlist -->
                         </a>
                     </li>
@@ -78,8 +81,8 @@
                             <span class="nav-link">Welcome, @Model.FullName!</span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Setting" asp-action="Index">Settings</a>
-                        </li>
+                        <a class="dropdown-item" asp-controller="User" asp-action="Update">Detail</a></li>
+                       
                         <li class="nav-item">
                             <form asp-controller="User" asp-action="Logout" method="post">
                                 <button type="submit" class="btn btn-link nav-link">Logout</button>
@@ -134,8 +137,6 @@
         </div>
     </div>
 
-
-
     <!-- Basket Modal -->
     <div class="modal fade" id="basketModal" tabindex="-1" aria-labelledby="basketModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -153,6 +154,7 @@
         </div>
     </div>
 </header>
+
 
 <style>
     #searchResults {
@@ -186,6 +188,7 @@
         .search-result-item p {
             margin: 5px 0;
         }
+
 
 </style>
 

@@ -3,7 +3,9 @@
 
 @section Links {
     <link href="~/css/game.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
+
 
 <div class="page-container">
     <h1 class="mb-4">All Games</h1>
@@ -127,6 +129,7 @@
     </div>
 </div>
 
+
 @section Scripts {
     <script>
 
@@ -192,70 +195,51 @@
                     setFilterValues();
                 };
 
-                // const addBasket = document.querySelectorAll(".add-to-cart-btn");
 
-                // addToBasket.forEach((btn) => {
-                //     btn.addEventListener("click", function() {
-                //         console.log("ggg")
-                //         const token = getJwtTokenFromCookie();
-                //     console.log(token)
-                //     if (!token) {
-                //         alert("Please log in to add games to the basket.");
-                //         return;
-                //     }
-                //     const gameId = this.getAttribute("gameId");
+$(document).on("click", ".add-to-cart-btn", function () {
+    console.log("ggg");
 
-                //     // Send the AJAX request to add the game to the basket
-                //     $.ajax({
-                //         url: '/Basket/AddToBasket',  // Assuming you have this action in BasketController
-                //         type: 'POST',
-                //         headers: {
-                //             'Authorization': `Bearer ${token}`  // Include the JWT token in the request headers
-                //         },
-                //         contentType: 'application/json',
-                //         data: {
-                //             gameId: gameId,
-                //             quantity: 1  // Default quantity is 1
-                //         },
-                //         success: function (response) {
-                //             alert('Game added to basket!');
-                //         }
-                //     });
-                //     })
-                // });
-
-
-                $('.add-to-cart-btn').each(function() {
-    $(this).on("click", function() {
-        console.log("ggg");
-
-        const token = getJwtTokenFromCookie();
-        console.log(token);
-        if (!token) {
-            alert("Please log in to add games to the basket.");
-            return;
-        }
-
-        const gameId = $(this).attr("gameId");
-
-        // Send the AJAX request to add the game to the basket
-        $.ajax({
-            url: `/Basket/AddToBasket?userId=null&gameId=${gameId}&quantity=1`,  // Assuming you have this action in BasketController
-            type: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`  // Include the JWT token in the request headers
-            },
-            contentType: 'application/json',
-            success: function(response) {
-                alert('Game added to basket!');
-            },
-            error: function(xhr, status, error) {
-                console.log('Error:', xhr.responseText || error);
-                alert('Failed to add game to basket.');
-            }
+    const token = getJwtTokenFromCookie();
+    console.log(token);
+    if (!token) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Please log in',
+            text: 'You need to log in to add games to the basket.',
         });
+        return;
+    }
+
+    const gameId = $(this).attr("gameId");
+
+    // Send the AJAX request to add the game to the basket
+    $.ajax({
+        url: `/Basket/AddToBasket?userId=null&gameId=${gameId}&quantity=1`,  // Assuming you have this action in BasketController
+        type: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`  // Include the JWT token in the request headers
+        },
+        contentType: 'application/json',
+        success: function (response) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Game added to basket!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        error: function (xhr, status, error) {
+            console.log('Error:', xhr.responseText || error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed to add game to basket',
+                text: 'There was an error adding the game to your basket. Please try again.',
+            });
+        }
     });
 });
+
 
 
 

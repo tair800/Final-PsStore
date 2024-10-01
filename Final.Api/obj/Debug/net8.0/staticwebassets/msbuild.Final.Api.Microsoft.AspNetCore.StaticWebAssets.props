@@ -48,6 +48,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Final.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Final.Api</BasePath>
+      <RelativePath>uploads/images/87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
@@ -63,6 +79,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Final.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Final.Api</BasePath>
+      <RelativePath>uploads/images/d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\horizon-zero-dawn-key-art.jpg))">
       <SourceType>Package</SourceType>

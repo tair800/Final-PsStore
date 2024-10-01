@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System.Security.Claims;
 
 
 namespace Final.Application.Services.Implementations
@@ -37,28 +36,44 @@ namespace Final.Application.Services.Implementations
             _jwtSettings = jwtSettings.Value;
             _contextAccessor = contextAccessor;
         }
-
         public async Task<UserReturnDto> Register(RegisterDto registerDto, string urlScheme, string host)
         {
             var existUser = await _userManager.FindByNameAsync(registerDto.UserName);
             if (existUser != null)
-                throw new Exception("Username already exists.");
+                throw new CustomExceptions(400, "Username already exists.");
 
             var user = _mapper.Map<User>(registerDto);
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded)
-                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+                throw new CustomExceptions(400, string.Join(", ", result.Errors.Select(e => e.Description)));
 
             await _userManager.AddToRoleAsync(user, "member");
 
-            string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            string link = $"{urlScheme}://{host}/user/verifyEmail?email={user.Email}&token={token}";
+            string token;
+            try
+            {
+                token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomExceptions(500, "Failed to generate email confirmation token.");
+            }
 
-            string body = await File.ReadAllTextAsync("wwwroot/templates/emailTemplate/emailConfirm.html");
-            body = body.Replace("{{link}}", link).Replace("{{UserName}}", user.FullName);
+            string link = $"{urlScheme}://{host}/user/verifyEmail?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
 
-            _emailService.SendEmail(new() { user.Email }, body, "Email verification", "Verify email");
+            string body;
+            try
+            {
+                body = await File.ReadAllTextAsync("wwwroot/templates/emailTemplate/emailConfirm.html");
+                body = body.Replace("{{link}}", link).Replace("{{UserName}}", user.FullName);
+            }
+            catch (Exception ex)
+            {
+                throw new CustomExceptions(500, "Failed to read or replace email template.");
+            }
+
+            _emailService.SendEmailOld(new() { user.Email }, body, "Email verification", "Verify email");
 
             return _mapper.Map<UserReturnDto>(user);
         }
@@ -85,7 +100,9 @@ namespace Final.Application.Services.Implementations
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)
-                throw new Exception("User not found.");
+            {
+                throw new CustomExceptions(404, "User not found.");
+            }
 
             var roles = await _userManager.GetRolesAsync(user);
             var userDto = _mapper.Map<UserReturnDto>(user);
@@ -93,6 +110,7 @@ namespace Final.Application.Services.Implementations
 
             return userDto;
         }
+
 
         public async Task<string> Login(LoginDto loginDto)
         {
@@ -193,60 +211,70 @@ namespace Final.Application.Services.Implementations
             return result.Succeeded;
         }
 
-        public async Task<UserReturnDto> Profile()
+
+
+
+
+
+
+
+
+        public async Task<ForgotPasswordDto> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
         {
+            if (string.IsNullOrEmpty(forgotPasswordDto.Email)) throw new CustomExceptions(400, "cant be null");
 
-            var userId = _contextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new CustomExceptions(400, "Id", "User ID cannot be null");
-            }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user is null) throw new CustomExceptions(403, "this user doesnt exist");
-            var UserMapped = _mapper.Map<UserReturnDto>(user);
-            return UserMapped;
-
-        }
-
-
-
-        public async Task<string> ForgotPassword(string email, string urlScheme, string host)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
             if (user == null)
-            {
-                throw new CustomExceptions(404, "UserNotFound", "User not found.");
-            }
+                throw new Exception("User not found.");
 
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            string link = $"{urlScheme}://{host}/user/resetPassword?email={user.Email}&token={token}";
 
-            string body = await File.ReadAllTextAsync("wwwroot/templates/passwordTemplate/forgotPassword.html");
-            body = body.Replace("{{link}}", link).Replace("{{UserName}}", user.FullName);
+            forgotPasswordDto.Token = token;
 
-            _emailService.SendEmail(new() { user.Email }, body, "Password Reset", "Reset Your Password");
-
-            return "Password reset link sent to your email.";
+            return forgotPasswordDto;
         }
 
-        public async Task<bool> ResetPassword(string email, string token, ResetPasswordDto resetPasswordDto)
+        public async Task<bool> ResetPassword(ResetPasswordDto resetPasswordDto)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
             if (user == null)
-            {
-                throw new CustomExceptions(404, "UserNotFound", "User not found.");
-            }
+                throw new Exception("User not found.");
 
-            var result = await _userManager.ResetPasswordAsync(user, token, resetPasswordDto.NewPassword);
-
+            var result = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.NewPassword);
             if (!result.Succeeded)
-            {
-                throw new CustomExceptions(400, "InvalidToken", "Password reset failed. Invalid token or password.");
-            }
+                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
 
             return true;
         }
 
+
+        public async Task<List<string>> GetAllRoles()
+        {
+            var roles = await _roleManager.Roles.Select(r => r.Name).ToListAsync();
+            return roles;
+        }
+
+
+
+
+        public async Task<bool> ConfirmEmail(string email, string token)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
+            {
+                throw new CustomExceptions(400, "Email and token are required.");
+            }
+
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                throw new CustomExceptions(404, "User not found.");
+            }
+
+            string result = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+            token = result;
+            return true;
+        }
 
 
 
