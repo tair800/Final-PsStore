@@ -22,7 +22,6 @@ namespace Final.Application.Services.Implementations
         // Create a new game
         public async Task<int> Create(GameCreateDto createDto)
         {
-            // Check if a game with the same title already exists
             if (await _unitOfWork.gameRepository.isExists(g => g.Title.ToLower() == createDto.Title.ToLower()))
                 throw new CustomExceptions(400, "Name", "Duplicate is not permitted");
 

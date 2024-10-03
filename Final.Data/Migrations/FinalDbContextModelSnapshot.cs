@@ -115,6 +115,43 @@ namespace Final.Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Dlc", b =>
                 {
                     b.Property<int>("Id")
@@ -525,6 +562,25 @@ namespace Final.Data.Migrations
                     b.Navigation("Game");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.Comment", b =>
+                {
+                    b.HasOne("Final.Core.Entities.Game", "Game")
+                        .WithMany("Comments")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Final.Core.Entities.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Dlc", b =>
                 {
                     b.HasOne("Final.Core.Entities.Game", "Game")
@@ -642,6 +698,8 @@ namespace Final.Data.Migrations
                 {
                     b.Navigation("BasketGames");
 
+                    b.Navigation("Comments");
+
                     b.Navigation("Dlcs");
 
                     b.Navigation("WishlistGames");
@@ -651,6 +709,8 @@ namespace Final.Data.Migrations
                 {
                     b.Navigation("Basket")
                         .IsRequired();
+
+                    b.Navigation("Comments");
 
                     b.Navigation("Wishlist")
                         .IsRequired();

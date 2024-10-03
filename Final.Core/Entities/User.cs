@@ -9,5 +9,8 @@ namespace Final.Core.Entities
 
         public Basket Basket { get; set; }
         public Wishlist Wishlist { get; set; }
+
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using Final.Application.Dtos.DlcDtos;
-using Final.Core.Entities;
+﻿using Final.Core.Entities;
 
 namespace Final.Application.Dtos.GameDtos
 {

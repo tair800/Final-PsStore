@@ -33,15 +33,18 @@ public class WishlistController : Controller
         if (response.IsSuccessStatusCode)
         {
             var data = await response.Content.ReadAsStringAsync();
-            var wishlistDto = JsonConvert.DeserializeObject<UserWishlistVM>(data); // Deserialize into UserWishlistVM
+            var userWishListDto = JsonConvert.DeserializeObject<UserWishlistVM>(data); // Deserialize into UserWishlistVM
 
-            if (wishlistDto == null || wishlistDto.WishlistGames == null)
+
+            UserWishlistVM userWishlistVM = new UserWishlistVM()
             {
-                wishlistDto = new UserWishlistVM { WishlistGames = new List<WishlistGameVM>() };
-            }
+                UserId = userId,
+                WishlistGames = userWishListDto.WishlistGames,
+            };
+
 
             // Return the wishlist view with the populated UserWishlistVM model
-            return View(wishlistDto);
+            return View(userWishlistVM);
         }
         else
         {

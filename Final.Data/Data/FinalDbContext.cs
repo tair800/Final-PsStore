@@ -14,6 +14,7 @@ namespace Final.Data.Data
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<WishlistGame> WishlistGames { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public FinalDbContext(DbContextOptions<FinalDbContext> options) : base(options)
         {

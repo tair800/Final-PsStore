@@ -26,11 +26,7 @@
         public string ImgUrl { get; set; }
     }
 
-    //public class CategoryGame
-    //{
-    //    public string Name { get; set; }
-    //    public int GamesCount { get; set; }
-    //}
+
 
     public enum Platform
     {

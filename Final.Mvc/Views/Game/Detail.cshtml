@@ -2,25 +2,81 @@
     <link href="~/css/detail.css" rel="stylesheet" />
 }
 
-@model GameDetailVM
+@model GameDetailWithCommentsVM
 
 <style>
     .game-banner {
-        background-image: url(@Model.ImgUrl)
+        background-image: url('@Model.GameDetail.ImgUrl');
+        background-size: cover;
+        background-position: center;
+        height: 400px;
+    }
+
+    .comment-section {
+        background-color: blue;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .comment-item {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    .comment-item:last-child {
+        border-bottom: none;
+    }
+
+    .comment-user {
+        font-weight: bold;
+    }
+
+    .comment-content {
+        margin-top: 5px;
+    }
+
+    .add-comment-form {
+        margin-top: 30px;
+    }
+
+    .add-comment-textarea {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+    }
+
+    .add-comment-btn {
+        display: inline-block;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .add-comment-btn:hover {
+        background-color: #218838;
     }
 </style>
+
 <!-- Game Banner -->
 <div class="game-banner d-flex align-items-end">
     <div class="container">
         <div class="game-info text-white p-4 mb-4">
-            <h1 class="fw-bold">@Model.Title</h1>
+            <h1 class="fw-bold">@Model.GameDetail.Title</h1>
             <div class="d-flex align-items-center mb-3">
-                <span class="badge bg-secondary me-2">@Model.Platform</span>
+                <span class="badge bg-secondary me-2">@Model.GameDetail.Platform</span>
                 <span class="me-2">4.35</span>
                 <span class="me-2 rating-star">⭐</span>
                 <span>67K ratings</span>
             </div>
-            <p class="game-price">$@Model.Price</p>
+            <p class="game-price">$@Model.GameDetail.Price</p>
             <div class="d-flex align-items-center">
                 <button class="btn btn-warning text-dark cart-btn">Add to Cart</button>
                 <button class="btn btn-link text-white ms-3">
@@ -32,17 +88,55 @@
 </div>
 
 <!-- Add-Ons Section -->
- <div class="container py-5">
-     <h2 class="text-center mb-5">Add-Ons</h2>
-     <div class="d-flex justify-content-center">
-          @foreach (var dlc in Model.DlcNames)
-         {
-             <div class="addon-item text-center">
-                 <img class="addon-img rounded" src="@dlc.ImgUrl" alt="@dlc.Name"
-                      alt="e Edition Upgrade">
-                 <h3 class="fs-5 mt-2">@dlc.Price</h3>
-                 <p class="fs-5 fw-bold">$@dlc.Name</p>
-             </div>
-         }
-     </div>
- </div>
+<div class="container py-5">
+    <h2 class="text-center mb-5">Add-Ons</h2>
+    <div class="d-flex justify-content-center">
+        @foreach (var dlc in Model.GameDetail.DlcNames)
+        {
+            <div class="addon-item text-center me-4">
+                <img class="addon-img rounded" src="@dlc.ImgUrl" alt="@dlc.Name" />
+                <p class="fs-5 fw-bold mt-2">@dlc.Name</p>
+                <h3 class="fs-5 mt-1">$@dlc.Price</h3>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Comments Section -->
+<div class="container comment-section">
+    <h3>Comments</h3>
+    @if (Model.Contents != null && Model.Contents.Any())
+    {
+        @foreach (var comment in Model.Contents)
+        {
+            <div class="comment-item">
+                <span class="comment-user">@comment.UserId:</span>
+                <span class="text-muted float-end">@comment.CreateDate.ToShortDateString()</span>
+                <p class="comment-content">@comment.Content</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No comments available for this game. Be the first to comment!</p>
+    }
+</div>
+
+<!-- Add a New Comment Section -->
+@if (ViewBag.IsAuthenticated)
+{
+    <div class="container add-comment-form">
+        <h4>Add a Comment</h4>
+        <form asp-action="AddComment" method="post">
+            <input type="hidden" asp-for="ContentNew.GameId" value="@Model.GameDetail.Id" />
+            <textarea asp-for="ContentNew.Content" class="add-comment-textarea" placeholder="Write your comment here..." required></textarea>
+            <button type="submit" class="add-comment-btn">Add Comment</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="container add-comment-form mt-4">
+        <p>Please <a href="@Url.Action("Login", "User")">log in</a> to add a comment.</p>
+    </div>
+}
