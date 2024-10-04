@@ -4,66 +4,7 @@
 
 @model GameDetailWithCommentsVM
 
-<style>
-    .game-banner {
-        background-image: url('@Model.GameDetail.ImgUrl');
-        background-size: cover;
-        background-position: center;
-        height: 400px;
-    }
 
-    .comment-section {
-        background-color: blue;
-        border-radius: 8px;
-        padding: 20px;
-        margin-top: 50px;
-    }
-
-    .comment-item {
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 15px;
-        margin-bottom: 15px;
-    }
-
-    .comment-item:last-child {
-        border-bottom: none;
-    }
-
-    .comment-user {
-        font-weight: bold;
-    }
-
-    .comment-content {
-        margin-top: 5px;
-    }
-
-    .add-comment-form {
-        margin-top: 30px;
-    }
-
-    .add-comment-textarea {
-        width: 100%;
-        height: 100px;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        margin-bottom: 15px;
-    }
-
-    .add-comment-btn {
-        display: inline-block;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .add-comment-btn:hover {
-        background-color: #218838;
-    }
-</style>
 
 <!-- Game Banner -->
 <div class="game-banner d-flex align-items-end">
@@ -103,40 +44,207 @@
 </div>
 
 <!-- Comments Section -->
-<div class="container comment-section">
-    <h3>Comments</h3>
-    @if (Model.Contents != null && Model.Contents.Any())
-    {
-        @foreach (var comment in Model.Contents)
+<div class="container mt-5">
+    <div class="comment-section p-4">
+        <h3 class="mb-4">Comments</h3>
+        @if (Model.Contents != null && Model.Contents.Any())
         {
-            <div class="comment-item">
-                <span class="comment-user">@comment.UserId:</span>
-                <span class="text-muted float-end">@comment.CreateDate.ToShortDateString()</span>
-                <p class="comment-content">@comment.Content</p>
+            <div class="comments-list">
+                @foreach (var comment in Model.Contents)
+                {
+                    <div class="comment-item p-4 mb-4 rounded" id="comment-@comment.Id">
+                        <div class="comment-header d-flex justify-content-between align-items-center mb-2">
+                            <span class="comment-user">@comment.UserId</span>
+                            <span class="text-muted fs-6">@comment.CreateDate.ToString("MMM dd, yyyy")</span>
+                        </div>
+                        <div class="comment-content mb-3" id="content-@comment.Id">
+                            <p>@comment.Content</p>
+                            @if (comment.Modified)
+                            {
+                                <small class="text-google">Modified</small>
+                            }
+                        </div>
+                        @if (comment.CanDelete) // Check if the user can delete the comment
+                        {
+                            <div class="comment-actions d-flex">
+                                <button class="delete-comment-btn btn btn-danger me-2" onclick="deleteComment(@comment.Id)"><i class="fa-solid fa-trash"></i></button>
+                                <button class="edit-comment-btn btn btn-primary" onclick="editComment(@comment.Id)"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        }
+                    </div>
+                }
             </div>
         }
-    }
-    else
-    {
-        <p>No comments available for this game. Be the first to comment!</p>
-    }
+        else
+        {
+            <p>No comments available for this game. Be the first to comment!</p>
+        }
+    </div>
 </div>
 
 <!-- Add a New Comment Section -->
 @if (ViewBag.IsAuthenticated)
 {
-    <div class="container add-comment-form">
-        <h4>Add a Comment</h4>
-        <form asp-action="AddComment" method="post">
-            <input type="hidden" asp-for="ContentNew.GameId" value="@Model.GameDetail.Id" />
-            <textarea asp-for="ContentNew.Content" class="add-comment-textarea" placeholder="Write your comment here..." required></textarea>
-            <button type="submit" class="add-comment-btn">Add Comment</button>
+    <div class="container add-comment-form mt-5 p-4 rounded">
+        <h4 class="mb-4">Add a Comment</h4>
+        <form id="addCommentForm">
+            <input type="hidden" id="gameId" value="@Model.GameDetail.Id" />
+            <div class="form-group mb-3">
+                <textarea id="commentContent" class="add-comment-textarea form-control" placeholder="Write your comment here..." required></textarea>
+            </div>
+            <button type="button" onclick="addComment()" class="add-comment-btn btn btn-success">Add Comment</button>
         </form>
     </div>
 }
 else
 {
-    <div class="container add-comment-form mt-4">
+    <div class="container add-comment-form mt-4 text-center">
         <p>Please <a href="@Url.Action("Login", "User")">log in</a> to add a comment.</p>
     </div>
 }
+
+
+<script>
+    function addComment() {
+        const gameId = $("#gameId").val();
+        const content = $("#commentContent").val();
+
+        if (!content.trim()) {
+            Swal.fire('Error', 'Comment content cannot be empty.', 'error');
+            return;
+        }
+
+        $.ajax({
+            url: '@Url.Action("AddComment", "Game")',
+            type: 'POST',
+            data: {
+                ContentNew: {
+                    Content: content,
+                    GameId: gameId
+                }
+            },
+            success: function (response) {
+                if (response.success) {
+                    $(".comments-list").append(`
+                                <div class="comment-item p-3 mb-4" id="comment-${response.comment.id}">
+                                    <div class="comment-header d-flex justify-content-between align-items-center">
+                                        <span class="comment-user">${response.comment.userId}</span>
+                                        <span class="text-muted">${new Date(response.comment.createdDate).toLocaleDateString()}</span>
+                                    </div>
+                                    <div class="comment-content mt-2" id="content-${response.comment.id}">
+                                        <p>${response.comment.content}</p>
+                                    </div>
+                                    <button class="delete-comment-btn btn btn-danger mt-2" onclick="deleteComment(${response.comment.id})">Delete</button>
+                                    <button class="edit-comment-btn btn btn-primary mt-2" onclick="editComment(${response.comment.id})">Edit</button>
+                                </div>
+                            `);
+                    // Clear the textarea after successful submission
+                    $("#commentContent").val('');
+                } else {
+                    Swal.fire('Error', response.message, 'error');
+                }
+            },
+            error: function () {
+                Swal.fire('Error', 'An error occurred while trying to add the comment.', 'error');
+            }
+        });
+    }
+
+    function editComment(commentId) {
+        const currentContent = $(`#content-${commentId} p`).text();
+
+        Swal.fire({
+            title: 'Edit your comment',
+            input: 'textarea',
+            inputValue: currentContent,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            cancelButtonText: 'Cancel',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Comment content cannot be empty!';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const newContent = result.value;
+
+                $.ajax({
+                    url: '@Url.Action("EditComment", "Game")',
+                    type: 'POST',
+                    data: {
+                        commentId: commentId,
+                        content: newContent 
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire('Updated!', response.message, 'success');
+                            $(`#content-${commentId} p`).text(newContent);
+
+                            const modifiedDate = new Date().toLocaleString(); 
+                            $(`#content-${commentId}`).append(`<small class="text-muted">Modified on ${modifiedDate}</small>`);
+                        } else {
+                            Swal.fire('Error', response.message, 'error');
+                        }
+                    },
+                    
+                    error: function () {
+                        Swal.fire('Error', 'An error occurred while trying to edit the comment.', 'error');
+                    }
+                });
+            }
+        });
+    }
+
+    function deleteComment(commentId) {
+        // SweetAlert2 confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // AJAX request to delete the comment
+                $.ajax({
+                    url: '@Url.Action("DeleteComment", "Game")',
+                    type: 'POST',
+                    data: { commentId: commentId },
+                    success: function (response) {
+                        if (response.success) {
+                            // Show success message
+                            Swal.fire(
+                                'Deleted!',
+                                response.message,
+                                'success'
+                            );
+                            // Remove the comment from the DOM
+                            $("#comment-" + commentId).remove();
+                        } else {
+                            // Show error message
+                            Swal.fire(
+                                'Error!',
+                                response.message,
+                                'error'
+                            );
+                        }
+                    },
+                    error: function () {
+                        // Show error message
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred while trying to delete the comment.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+</script>
+
+
+

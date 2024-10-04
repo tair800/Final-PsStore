@@ -7,6 +7,10 @@ namespace Final.Mvc.ViewModels.CommentVMs
         public int Id { get; set; }
         public string Content { get; set; }
         public string UserId { get; set; }
+        public bool CanDelete { get; set; } // Add this property
+        public string Username { get; set; } // New property for username
+
+        public bool Modified { get; set; }
         public DateTime CreateDate { get; set; }
 
     }

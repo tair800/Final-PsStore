@@ -75,11 +75,16 @@ namespace Final.Mvc.Controllers
             using HttpClient client = new();
             var token = Request.Cookies["token"];
 
+            string userId = null;
+
             // Check if the user is authenticated
             if (!string.IsNullOrEmpty(token))
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 ViewBag.IsAuthenticated = true;
+
+                // Extract user ID from the token
+                userId = GetUserIdFromToken(token);
             }
             else
             {
@@ -104,7 +109,15 @@ namespace Final.Mvc.Controllers
             {
                 var commentData = await commentResponse.Content.ReadAsStringAsync();
                 comments = JsonConvert.DeserializeObject<List<CommentListItemVM>>(commentData);
+
+                // Set CanDelete property for each comment
+                foreach (var comment in comments)
+                {
+                    comment.CanDelete = comment.UserId == userId;
+                    comment.CreateDate = DateTime.UtcNow;
+                }
             }
+
             var viewModel = new GameDetailWithCommentsVM
             {
                 GameDetail = gameResult,
@@ -123,7 +136,7 @@ namespace Final.Mvc.Controllers
 
             if (string.IsNullOrEmpty(token))
             {
-                return RedirectToAction("Login", "User");
+                return Json(new { success = false, message = "User is not authenticated." });
             }
 
             var userId = GetUserIdFromToken(token);
@@ -132,14 +145,13 @@ namespace Final.Mvc.Controllers
             {
                 Content = gameDetailWithCommentsVM.ContentNew.Content,
                 GameId = gameDetailWithCommentsVM.ContentNew.GameId,
-                UserId = userId, // Assuming you're setting the user ID here
-                CreatedDate = DateTime.Now
+                UserId = userId,
+                CreatedDate = DateTime.UtcNow,
             };
 
             if (string.IsNullOrEmpty(newComment.Content) || newComment.GameId == 0 || string.IsNullOrEmpty(newComment.UserId))
             {
-                TempData["Error"] = "Invalid comment data.";
-                return RedirectToAction("Detail", new { id = newComment.GameId });
+                return Json(new { success = false, message = "Invalid comment data." });
             }
 
             using HttpClient client = new();
@@ -152,12 +164,69 @@ namespace Final.Mvc.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Detail", new { id = newComment.GameId });
+                return Json(new { success = true, message = "Comment added successfully.", comment = newComment });
             }
 
-            TempData["Error"] = "Failed to add comment.";
-            return RedirectToAction("Detail", new { id = newComment.GameId });
+            return Json(new { success = false, message = "Failed to add comment." });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment(int commentId)
+        {
+            var token = Request.Cookies["token"];
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return Json(new { success = false, message = "User is not authenticated." });
+            }
+
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7047/api/Comment/{commentId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Json(new { success = true, message = "Comment deleted successfully." });
+            }
+
+            return Json(new { success = false, message = "Failed to delete the comment." });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditComment(int commentId, string content)
+        {
+            var token = Request.Cookies["token"];
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return Json(new { success = false, message = "User is not authenticated." });
+            }
+
+            using HttpClient client = new();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var editedComment = new
+            {
+                Content = content,
+                CommentId = commentId,
+                Modified = true // Mark this comment as modified
+            };
+
+            var jsonContent = JsonConvert.SerializeObject(editedComment);
+            StringContent contentToSend = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync($"https://localhost:7047/api/Comment/{commentId}", contentToSend);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Json(new { success = true, message = "Comment edited successfully.", newContent = content, modified = true });
+            }
+
+            return Json(new { success = false, message = "Failed to edit the comment." });
+        }
+
+
 
         private string GetUserIdFromToken(string token)
         {
