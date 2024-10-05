@@ -15,5 +15,6 @@ namespace Final.Data.Implementations
         public IWishlistRepository wishlistRepository { get; }
         public IWishlistGameRepository wishlistGameRepository { get; }
         public ICommentRepository commentRepository { get; }
+        public IPromoRepository promoRepository { get; }
     }
 }

@@ -1,0 +1,67 @@
+﻿@model PromoListItemVM
+
+
+<!-- Promotional Section -->
+<section class="promo-section">
+    <img id="promoImage" width="100%" height="auto" alt="Promo Image"> <!-- No default src -->
+</section>
+
+
+
+<!-- Squares Section -->
+<div class="container">
+    <div class="image-row">
+        <div class="image-square">
+            <img src="./img/gta.jpg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/vrising.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+        <div class="image-square">
+            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
+        </div>
+    </div>
+</div>
+
+<script>
+    //promo
+
+    const promoImage = document.getElementById("promoImage");
+
+    const squareImages = document.querySelectorAll(".square-img");
+
+    squareImages.forEach(img => {
+        img.addEventListener("click", function () {
+            promoImage.src = this.src;
+        });
+    });
+
+
+    if (squareImages.length > 0) {
+        promoImage.src = squareImages[0].src;
+    }
+
+
+    squareImages.forEach(img => {
+        img.addEventListener("click", function () {
+            promoImage.src = this.src;
+        });
+    });
+
+
+</script>

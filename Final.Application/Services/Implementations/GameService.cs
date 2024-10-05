@@ -19,7 +19,6 @@ namespace Final.Application.Services.Implementations
             _mapper = mapper;
         }
 
-        // Create a new game
         public async Task<int> Create(GameCreateDto createDto)
         {
             if (await _unitOfWork.gameRepository.isExists(g => g.Title.ToLower() == createDto.Title.ToLower()))
@@ -32,7 +31,6 @@ namespace Final.Application.Services.Implementations
             return game.Id;
         }
 
-        // Get all games
         public async Task<List<GameReturnDto>> GetAll()
         {
             var games = await _unitOfWork.gameRepository.GetAll(null, "Dlcs", "Category");

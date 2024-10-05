@@ -2,6 +2,7 @@ using Final.Application.Profiles;
 using Final.Application.Services.Implementations;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;
+using Final.Core.Repositories;
 using Final.Data.Data;
 using Final.Data.Implementations;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +21,8 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddScoped<IPromoService, PromoService>();
+builder.Services.AddScoped<IPromoRepository, PromoRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddDbContext<FinalDbContext>(opt =>

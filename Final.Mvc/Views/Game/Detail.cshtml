@@ -64,7 +64,7 @@
                                 <small class="text-google">Modified</small>
                             }
                         </div>
-                        @if (comment.CanDelete) // Check if the user can delete the comment
+                        @if (comment.CanDelete) 
                         {
                             <div class="comment-actions d-flex">
                                 <button class="delete-comment-btn btn btn-danger me-2" onclick="deleteComment(@comment.Id)"><i class="fa-solid fa-trash"></i></button>
@@ -174,20 +174,25 @@ else
                     type: 'POST',
                     data: {
                         commentId: commentId,
-                        content: newContent 
+                        content: newContent
                     },
                     success: function (response) {
                         if (response.success) {
                             Swal.fire('Updated!', response.message, 'success');
                             $(`#content-${commentId} p`).text(newContent);
 
-                            const modifiedDate = new Date().toLocaleString(); 
-                            $(`#content-${commentId}`).append(`<small class="text-muted">Modified on ${modifiedDate}</small>`);
+                            // Check if the "Modified" text already exists, and add it only if it doesn't
+                            const modifiedDate = new Date().toLocaleString();
+                            if ($(`#content-${commentId} .modified-text`).length === 0) {
+                                $(`#content-${commentId}`).append(`<small class="modified-text text-muted">Modified on ${modifiedDate}</small>`);
+                            } else {
+                                // Update the existing modified date
+                                $(`#content-${commentId} .modified-text`).text(`Modified on ${modifiedDate}`);
+                            }
                         } else {
                             Swal.fire('Error', response.message, 'error');
                         }
                     },
-                    
                     error: function () {
                         Swal.fire('Error', 'An error occurred while trying to edit the comment.', 'error');
                     }
