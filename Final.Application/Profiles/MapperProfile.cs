@@ -106,15 +106,28 @@ namespace Final.Application.Profiles
             CreateMap<WishlistGame, WishlistGameDto>()
                 .ForMember(dest => dest.GameId, opt => opt.MapFrom(src => src.Game.Id))
                 .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title))
-                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Game.Price));
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Game.Price))
+                .ForMember(dest => dest.SalePrice, opt => opt.MapFrom(src => src.Game.SalePrice));
 
 
             //comment
-            CreateMap<Comment, CommentReturnDto>();
 
+
+
+            // Mapping from CommentCreateDto to Comment entity
             CreateMap<CommentCreateDto, Comment>();
 
-            CreateMap<CommentUpdateDto, Comment>();
+            // Mapping from CommentUpdateDto to Comment entity
+            CreateMap<CommentUpdateDto, Comment>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore()) // Ensure Id is not overwritten when updating
+                .ForMember(dest => dest.UserId, opt => opt.Ignore()) // UserId shouldn't be changed during update
+                .ForMember(dest => dest.GameId, opt => opt.Ignore()) // GameId shouldn't be changed during update
+                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore()) // Ignore CreatedDate
+                .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(src => DateTime.UtcNow)); // Set UpdatedDate to current UTC time
+
+            CreateMap<Comment, CommentReturnDto>();
+            //.ForMember(dest => dest.CommentHistories, opt => opt.MapFrom(src => src.CommentHistories));
+            //CreateMap<CommentHistory, CommentHistoryDto>();
 
         }
     }

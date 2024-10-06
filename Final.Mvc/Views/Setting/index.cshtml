@@ -43,25 +43,41 @@
             <h2>LEAVE A MESSAGE</h2>
             <p>I must explain to you how all this a mistaken idea of ncing great explorer of the truth...</p>
 
-            <form action="" class="form-container">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
-                </div>
-                <div class="mb-3">
-                    <label for="subject" class="form-label">Subject</label>
-                    <input type="text" class="form-control" id="subject" placeholder="Enter subject">
-                </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="4" placeholder="Enter your message"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            }
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">@TempData["Success"]</div>
+            }
+
+            @if ((bool)ViewBag.IsAuthenticated)
+            {
+                <form asp-action="SendSupportEmail" method="post" class="form-container">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">UserName</label>
+                        <input type="text" class="form-control" id="name" name="name" value="@ViewBag.UserName" readonly required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="@ViewBag.UserEmail" readonly required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-warning">Please <a href="@Url.Action("Login", "User")">log in</a> to send a message.</div>
+            }
         </div>
     </div>
 </div>

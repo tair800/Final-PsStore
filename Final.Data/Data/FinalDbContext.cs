@@ -15,6 +15,7 @@ namespace Final.Data.Data
         public DbSet<WishlistGame> WishlistGames { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<CommentHistory> CommentHistories { get; set; }
 
         public FinalDbContext(DbContextOptions<FinalDbContext> options) : base(options)
         {
@@ -25,5 +26,6 @@ namespace Final.Data.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(FinalDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

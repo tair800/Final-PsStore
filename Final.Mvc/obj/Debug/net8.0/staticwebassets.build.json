@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+R/FtTSHrh3d9Q4yOZshAGD9J9KswjmHpx/8yanvqE8=",
+  "Hash": "zXIB70WOqfpbO85sMD99/03jqrOy1Gx8qyJtcAMPMaw=",
   "Source": "Final.Mvc",
   "BasePath": "_content/Final.Mvc",
   "Mode": "Default",
@@ -2447,6 +2447,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\templates\\emailTemplate\\emailConfirm.html"
+    },
+    {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\templates\\emailTemplate\\supportEmail.html",
+      "SourceId": "Final.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\",
+      "BasePath": "_content/Final.Mvc",
+      "RelativePath": "templates/emailTemplate/supportEmail.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\templates\\emailTemplate\\supportEmail.html"
     },
     {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\templates\\passwordTemplate\\forgotPassword.html",

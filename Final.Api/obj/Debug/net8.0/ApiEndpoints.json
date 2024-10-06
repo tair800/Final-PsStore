@@ -201,6 +201,16 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.CommentController",
+    "Method": "GetAll",
+    "RelativePath": "api/Comment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.CommentController",
     "Method": "Get",
     "RelativePath": "api/Comment/{id}",
     "HttpMethod": "GET",

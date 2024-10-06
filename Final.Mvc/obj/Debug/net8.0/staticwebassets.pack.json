@@ -509,6 +509,10 @@
       "PackagePath": "staticwebassets\\templates\\emailTemplate\\emailConfirm.html"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\templates\\emailTemplate\\supportEmail.html",
+      "PackagePath": "staticwebassets\\templates\\emailTemplate\\supportEmail.html"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\templates\\passwordTemplate\\forgotPassword.html",
       "PackagePath": "staticwebassets\\templates\\passwordTemplate\\forgotPassword.html"
     },

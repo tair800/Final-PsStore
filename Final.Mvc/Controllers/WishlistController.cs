@@ -52,7 +52,7 @@ public class WishlistController : Controller
             Console.WriteLine($"Error fetching wishlist: {error}");
 
             // Return an empty wishlist view in case of failure
-            return View(new UserWishlistVM { WishlistGames = new List<WishlistGameVM>() });
+            return View(new UserWishlistVM { WishlistGames = new List<WishlistGamesVM>() });
         }
     }
 
