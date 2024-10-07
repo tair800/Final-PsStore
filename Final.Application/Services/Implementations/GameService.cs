@@ -54,7 +54,6 @@ namespace Final.Application.Services.Implementations
             return gameReturnDto;
         }
 
-        // Delete a game by ID
         public async Task Delete(int id)
         {
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id);
@@ -65,7 +64,6 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
         }
 
-        // Update a game by ID
         public async Task Update(int id, GameUpdateDto updateDto)
         {
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id);

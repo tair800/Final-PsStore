@@ -73,7 +73,12 @@ namespace Final.Application.Profiles
             //dlc
             CreateMap<DlcCreateDto, Dlc>();
             CreateMap<Dlc, DlcReturnDto>();
-            CreateMap<DlcUpdateDto, Dlc>();
+
+            CreateMap<DlcUpdateDto, Dlc>()
+                .ForMember(dest => dest.Image, opt => opt.Ignore()) // Ignore Image since it is handled separately
+                .ForMember(dest => dest.Price, opt => opt.Ignore()); // Ignore Price
+
+
 
             //basket
 

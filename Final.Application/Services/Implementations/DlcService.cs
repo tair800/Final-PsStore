@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Final.Application.Dtos.DlcDtos;
 using Final.Application.Exceptions;
+using Final.Application.Extensions;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;
 using Final.Data.Implementations;
@@ -27,14 +28,36 @@ namespace Final.Application.Services.Implementations
                 throw new CustomExceptions(404, "Game", "Game not found.");
             }
 
+            // Handle image upload
+            string imagePath = null;
+            if (dlcCreateDto.Image != null && dlcCreateDto.Image.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/images");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var uniqueFileName = $"{Guid.NewGuid()}_{dlcCreateDto.Image.FileName}";
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await dlcCreateDto.Image.CopyToAsync(stream);
+                }
+
+                imagePath = uniqueFileName;
+            }
+
             var dlc = _mapper.Map<Dlc>(dlcCreateDto);
             dlc.Game = game;
+            dlc.Image = imagePath;
 
             await _unitOfWork.dlcRepository.Create(dlc);
             _unitOfWork.Commit();
 
             return dlc.Id;
         }
+
 
         public async Task Delete(int id)
         {
@@ -65,22 +88,31 @@ namespace Final.Application.Services.Implementations
 
         public async Task Update(int id, DlcUpdateDto dlcUpdateDto)
         {
-            var dlc = await _unitOfWork.dlcRepository.GetEntity(d => d.Id == id);
+            var dlc = await _unitOfWork.dlcRepository.GetEntity(g => g.Id == id);
 
-            if (dlc is null)
-                throw new CustomExceptions(404, "Dlc", "Dlc not found.");
+            if (dlc == null) throw new CustomExceptions(404, "Dlc", "Dlc not found.");
 
-            var gameExists = await _unitOfWork.gameRepository.isExists(g => g.Id == dlcUpdateDto.GameId);
-            if (!gameExists)
-                throw new CustomExceptions(404, "Game", "The provided GameId does not exist.");
+            if (dlcUpdateDto.File != null)
+            {
+                // Delete old image if it exists
+                if (!string.IsNullOrEmpty(dlc.Image))
+                {
+                    FileExtension.DeleteImage(dlc.Image);
+                }
+
+                // Save the new image
+                var newFileName = dlcUpdateDto.File.Save(Directory.GetCurrentDirectory(), "uploads/images/");
+                dlc.Image = newFileName;
+            }
 
             dlc.UpdatedDate = DateTime.Now;
 
+            // Update other fields using AutoMapper
             _mapper.Map(dlcUpdateDto, dlc);
 
-            if (!string.IsNullOrEmpty(dlcUpdateDto.Image))
+            if (dlcUpdateDto.Price > 0)
             {
-                dlc.Image = dlcUpdateDto.Image;
+                dlc.Price = (int)dlcUpdateDto.Price;
             }
 
             await _unitOfWork.dlcRepository.Update(dlc);

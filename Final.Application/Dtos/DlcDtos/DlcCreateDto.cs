@@ -1,13 +1,14 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 
 namespace Final.Application.Dtos.DlcDtos
 {
     public class DlcCreateDto
     {
         public string Name { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public int GameId { get; set; }
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
     }
     public class DlcCreateDtoValidator : AbstractValidator<DlcCreateDto>
     {
@@ -22,6 +23,11 @@ namespace Final.Application.Dtos.DlcDtos
 
             RuleFor(x => x.GameId)
                 .GreaterThan(0).WithMessage("Must be a valid Game ID.");
+
+            RuleFor(x => x.Image)
+                .NotNull().WithMessage("Image is required.")
+                .Must(file => file.Length > 0).WithMessage("Uploaded file is empty.")
+                .Must(file => file.ContentType.StartsWith("image/")).WithMessage("Only image files are allowed.");
         }
     }
 }

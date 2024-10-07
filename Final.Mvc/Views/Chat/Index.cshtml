@@ -19,9 +19,9 @@
         margin-bottom: 10px;
         padding: 5px;
         border-radius: 5px;
+        position: relative;
     }
 
-       
     .username {
         color: #007bff;
         font-weight: bold;
@@ -36,6 +36,23 @@
         color: #666;
         margin-left: 10px;
     }
+
+    .delete-button {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        background-color: #ff4d4d;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        padding: 2px 5px;
+        cursor: pointer;
+        font-size: 0.8em;
+    }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
 
     .message-input {
         width: 75%;
@@ -65,8 +82,12 @@
     <div id="messagesList" class="messages-container">
         @foreach (var message in Model.Messages)
         {
-            <div class="message-item">
+            <div class="message-item" data-message-id="@message.Id">
                 <strong class="username">@message.User:</strong> <span class="message-text">@message.Message</span> <small class="timestamp">@message.Date</small>
+                @if (Model.IsAuthenticated && message.User == Model.UserName)
+                {
+                    <button class="delete-button" onclick="deleteMessage('@message.Id')">Delete</button>
+                }
             </div>
         }
     </div>
@@ -83,8 +104,6 @@
     }
 </div>
 
-
-
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
     <script>
@@ -98,20 +117,38 @@
             messages.forEach(function (msg) {
                 const div = document.createElement("div");
                 div.className = "message-item";
+                div.setAttribute("data-message-id", msg.id);
                 div.innerHTML = `<strong class="username">${msg.user}:</strong> <span class="message-text">${msg.message}</span> <small class="timestamp">${msg.timestamp}</small>`;
+
+                if (msg.user === document.getElementById("userName").value) {
+                    div.innerHTML += `<button class="delete-button" onclick="deleteMessage('${msg.id}')">Delete</button>`;
+                }
+
                 messagesList.appendChild(div);
             });
 
             messagesList.scrollTop = messagesList.scrollHeight;
         });
 
-        connection.on("ReceiveMessage", function (user, message, timestamp) {
+        connection.on("ReceiveMessage", function (id, user, message, timestamp) {
             const msg = document.createElement("div");
             msg.className = "message-item";
+            msg.setAttribute("data-message-id", id);
             msg.innerHTML = `<strong class="username">${user}:</strong> <span class="message-text">${message}</span> <small class="timestamp">${timestamp}</small>`;
-            document.getElementById("messagesList").appendChild(msg);
 
+            if (user === document.getElementById("userName").value) {
+                msg.innerHTML += `<button class="delete-button" onclick="deleteMessage('${id}')">Delete</button>`;
+            }
+
+            document.getElementById("messagesList").appendChild(msg);
             document.getElementById("messagesList").scrollTop = document.getElementById("messagesList").scrollHeight;
+        });
+
+        connection.on("DeleteMessage", function (messageId) {
+            const messageElement = document.querySelector(`.message-item[data-message-id="${messageId}"]`);
+            if (messageElement) {
+                messageElement.remove();
+            }
         });
 
         connection.start().catch(function (err) {
@@ -127,6 +164,12 @@
             });
 
             document.getElementById("messageInput").value = '';
+        }
+
+        function deleteMessage(messageId) {
+            connection.invoke("DeleteMessage", messageId).catch(function (err) {
+                return console.error(err.toString());
+            });
         }
     </script>
 }

@@ -8,6 +8,7 @@ namespace Final.Core.Entities
         public string Image { get; set; }
         public double Price { get; set; }
         public int GameId { get; set; }
+
         public Game Game { get; set; }
 
     }

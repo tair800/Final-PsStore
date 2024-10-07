@@ -6,6 +6,7 @@ public class ChatHub : Hub
 
     public class ChatMessage
     {
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string User { get; set; }
         public string Message { get; set; }
         public string Timestamp { get; set; }
@@ -23,7 +24,17 @@ public class ChatHub : Hub
 
         _messages.Add(chatMessage);
 
-        await Clients.All.SendAsync("ReceiveMessage", user, message, timestamp);
+        await Clients.All.SendAsync("ReceiveMessage", chatMessage.Id, user, message, timestamp);
+    }
+
+    public async Task DeleteMessage(string messageId)
+    {
+        var message = _messages.FirstOrDefault(m => m.Id == messageId);
+        if (message != null)
+        {
+            _messages.Remove(message);
+            await Clients.All.SendAsync("DeleteMessage", messageId);
+        }
     }
 
     public async Task GetAllMessages()
