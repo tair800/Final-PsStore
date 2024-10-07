@@ -41,7 +41,6 @@
         <!-- Contact Form Section -->
         <div class="col-md-8">
             <h2>LEAVE A MESSAGE</h2>
-            <p>I must explain to you how all this a mistaken idea of ncing great explorer of the truth...</p>
 
             @if (TempData["Error"] != null)
             {
@@ -57,11 +56,11 @@
                 <form asp-action="SendSupportEmail" method="post" class="form-container">
                     <div class="mb-3">
                         <label for="name" class="form-label">UserName</label>
-                        <input type="text" class="form-control" id="name" name="name" value="@ViewBag.UserName" readonly required>
+                        <input type="text" class="form-control" id="name" name="name" value="@ViewBag.UserName" readonly disabled>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="@ViewBag.UserEmail" readonly required>
+                        <input type="email" class="form-control" id="email" name="email" value="@ViewBag.UserEmail" readonly disabled>
                     </div>
                     <div class="mb-3">
                         <label for="subject" class="form-label">Subject</label>
@@ -80,4 +79,4 @@
             }
         </div>
     </div>
-</div>
+</div>  
