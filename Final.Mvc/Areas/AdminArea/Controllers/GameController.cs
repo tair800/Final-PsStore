@@ -1,4 +1,5 @@
-﻿using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs;
+﻿using Final.Application.ViewModels;
+using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;

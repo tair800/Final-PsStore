@@ -36,9 +36,12 @@ namespace Final.Application.Profiles
                 .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs.Select(dlc => new DlcReturnDto
                 {
                     Id = dlc.Id,
+                    GameTitle = dlc.Game.Title,
+                    GameId = dlc.GameId,
                     Name = dlc.Name,
                     Price = (int)dlc.Price,
-                    Image = dlc.Image
+                    Image = dlc.Image,
+                    CreatedDate = dlc.CreatedDate,
                 }).ToList()))
                 .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));
 
