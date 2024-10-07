@@ -7,6 +7,7 @@ namespace Final.Application.Dtos.DlcDtos
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int GameId { get; set; }
+        public string Image { get; set; }
     }
     public class DlcCreateDtoValidator : AbstractValidator<DlcCreateDto>
     {

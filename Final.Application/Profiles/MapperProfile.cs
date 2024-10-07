@@ -38,9 +38,9 @@ namespace Final.Application.Profiles
                     Id = dlc.Id,
                     Name = dlc.Name,
                     Price = (int)dlc.Price,
-                    ImgUrl = dlc.Image  // Ensure proper mapping from Dlc.Image to DlcReturnDto.ImgUrl
+                    Image = dlc.Image
                 }).ToList()))
-                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));  // Correctly map the main game image
+                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));
 
 
 
@@ -79,14 +79,14 @@ namespace Final.Application.Profiles
 
             // Mapping BasketGame to BasketGameDto
             CreateMap<Basket, UserBasketDto>()
-       .ForMember(dest => dest.BasketGames, opt => opt.MapFrom(src => src.BasketGames));
+            .ForMember(dest => dest.BasketGames, opt => opt.MapFrom(src => src.BasketGames));
 
 
             CreateMap<BasketGame, BasketGameDto>()
-      .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title))
-      .ForMember(dest => dest.GameId, opt => opt.MapFrom(src => src.GameId))
-      .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Game.Price))
-      .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity));
+            .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title))
+            .ForMember(dest => dest.GameId, opt => opt.MapFrom(src => src.GameId))
+            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Game.Price))
+            .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity));
 
 
 

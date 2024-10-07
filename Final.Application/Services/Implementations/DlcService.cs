@@ -17,6 +17,7 @@ namespace Final.Application.Services.Implementations
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public async Task<int> Create(DlcCreateDto dlcCreateDto)
         {
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == dlcCreateDto.GameId);
@@ -25,9 +26,6 @@ namespace Final.Application.Services.Implementations
             {
                 throw new CustomExceptions(404, "Game", "Game not found.");
             }
-
-            //if (await _unitOfWork.dlcRepository.isExists(d => d.Name.ToLower() == dlcCreateDto.Name.ToLower()))
-            //    throw new CustomExceptions(400, "Name", "Dublicate not permitted");
 
             var dlc = _mapper.Map<Dlc>(dlcCreateDto);
             dlc.Game = game;
@@ -48,14 +46,11 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
         }
 
-
         public async Task<List<DlcReturnDto>> GetAll()
         {
             var dlcs = await _unitOfWork.dlcRepository.GetAll(null, "Game");
             return _mapper.Map<List<DlcReturnDto>>(dlcs);
-
         }
-
 
         public async Task<DlcReturnDto> GetOne(int id)
         {
@@ -79,14 +74,17 @@ namespace Final.Application.Services.Implementations
             if (!gameExists)
                 throw new CustomExceptions(404, "Game", "The provided GameId does not exist.");
 
-
             dlc.UpdatedDate = DateTime.Now;
 
             _mapper.Map(dlcUpdateDto, dlc);
 
+            if (!string.IsNullOrEmpty(dlcUpdateDto.Image))
+            {
+                dlc.Image = dlcUpdateDto.Image;
+            }
+
             await _unitOfWork.dlcRepository.Update(dlc);
             _unitOfWork.Commit();
-
         }
     }
 }
