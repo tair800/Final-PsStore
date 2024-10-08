@@ -276,6 +276,18 @@ namespace Final.Application.Services.Implementations
             return true;
         }
 
+        public async Task<List<UserReturnDto>> GetVerifiedUsersAsync()
+        {
+            var verifiedUsers = await _userManager.Users
+                                                  .Where(u => u.EmailConfirmed)
+                                                  .ToListAsync();
+
+            if (verifiedUsers == null || !verifiedUsers.Any())
+                throw new Exception("No verified users found.");
+
+            var userDtos = _mapper.Map<List<UserReturnDto>>(verifiedUsers);
+            return userDtos;
+        }
 
 
     }

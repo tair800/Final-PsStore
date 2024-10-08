@@ -1,5 +1,7 @@
-﻿using Final.Application.ViewModels;
+﻿using Final.Application.Services.Interfaces;
+using Final.Application.ViewModels;
 using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs;
+using Final.Mvc.Areas.AdminArea.ViewModels.UserVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -10,10 +12,12 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
     public class GameController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IEmailService emailService;
 
-        public GameController(IHttpClientFactory httpClientFactory)
+        public GameController(IHttpClientFactory httpClientFactory, IEmailService emailService)
         {
             _httpClientFactory = httpClientFactory;
+            this.emailService = emailService;
         }
 
         public async Task<IActionResult> Index()
@@ -113,7 +117,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            // Prepare the form data for the PUT request
             var formContent = new MultipartFormDataContent
     {
         { new StringContent(model.Title ?? ""), "Title" },
@@ -182,14 +185,14 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
             var formContent = new MultipartFormDataContent
-    {
-        { new StringContent(model.Title ?? ""), "Title" },
-        { new StringContent(model.Description ?? ""), "Description" },
-        { new StringContent(model.Price.ToString()), "Price" },
-        { new StringContent(model.SalePrice?.ToString() ?? "0"), "SalePrice" },
-        { new StringContent(model.CategoryId.ToString()), "CategoryId" },
-        { new StringContent(model.Platform.ToString()), "Platform" }
-    };
+{
+    { new StringContent(model.Title ?? ""), "Title" },
+    { new StringContent(model.Description ?? ""), "Description" },
+    { new StringContent(model.Price.ToString()), "Price" },
+    { new StringContent(model.SalePrice?.ToString() ?? "0"), "SalePrice" },
+    { new StringContent(model.CategoryId.ToString()), "CategoryId" },
+    { new StringContent(model.Platform.ToString()), "Platform" }
+};
 
             if (model.ImgUrl != null)
             {
@@ -197,7 +200,8 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                 formContent.Add(fileContent, "ImgUrl", model.ImgUrl.FileName);
             }
 
-            var response = await client.PostAsync("https://localhost:7047/api/Game", formContent);
+            // Send request to create the game
+            var response = await client.PostAsync("https://localhost:7047/api/Game/create", formContent);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -206,8 +210,49 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                 return View(model);
             }
 
+            // Fetch the list of verified users
+            HttpResponseMessage userResponse = await client.GetAsync("https://localhost:7047/api/user/verified");
+            if (userResponse.IsSuccessStatusCode)
+            {
+                var userContent = await userResponse.Content.ReadAsStringAsync();
+                var verifiedUsers = JsonConvert.DeserializeObject<List<VerifiedUserVM>>(userContent);
+
+                // Iterate over the verified users and send the email notifications
+                foreach (var user in verifiedUsers)
+                {
+                    // Prepare the email body from the template
+                    string body;
+                    using (StreamReader sr = new StreamReader("wwwroot/templates/gameTemplate/newGameNotification.html"))
+                    {
+                        body = sr.ReadToEnd();
+                    }
+
+                    body = body.Replace("{{UserName}}", user.Email).Replace("{{GameTitle}}", model.Title);
+
+                    // Send email to the verified user
+                    emailService.SendEmail(
+                        from: "tahiraa@code.edu.az",
+                        to: user.Email,
+                        subject: "New Game Created: " + model.Title,
+                        body: body,
+                        smtpHost: "smtp.gmail.com",
+                        smtpPort: 587,
+                        enableSsl: true,
+                        smtpUser: "tahiraa@code.edu.az",
+                        smtpPass: "blcf yubd mxnb gcyb"
+                    );
+                }
+            }
+
+            // Redirect to Index after successful creation and email notifications
+            TempData["SuccessMessage"] = "Game created successfully and notifications sent to verified users.";
             return RedirectToAction("Index");
         }
+
+
+
+
+
 
 
 

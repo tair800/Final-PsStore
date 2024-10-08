@@ -34,9 +34,7 @@ namespace Final.Application.Dtos.GameDtos
                 .NotEmpty().WithMessage("Category is required.")
                 .GreaterThan(0).WithMessage("Category ID must be greater than zero.");
 
-            RuleFor(g => g.Platform)
-                .NotEmpty().WithMessage("At least one platform must be selected.")
-                .WithMessage("You must select at least one platform.");
+
         }
     }
 }

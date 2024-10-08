@@ -82,6 +82,8 @@ namespace Final.Api.Controllers
             return Ok(updatedUser);
         }
 
+
+
         [HttpGet("verifyEmail")]
         public async Task<IActionResult> VerifyEmail(string email, string token)
         {
@@ -116,6 +118,21 @@ namespace Final.Api.Controllers
             catch (CustomExceptions ex)
             {
                 return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+            }
+        }
+
+
+        [HttpGet("verified")]
+        public async Task<IActionResult> GetVerifiedUsers()
+        {
+            try
+            {
+                var verifiedUsers = await _userService.GetVerifiedUsersAsync();
+                return Ok(verifiedUsers);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
 

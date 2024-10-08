@@ -56,6 +56,14 @@
                             </div>
                         </div>
 
+                        <!-- Platform Row -->
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <h4>Platform</h4>
+                                <h5 class="text-muted">@Model.Platform</h5>
+                            </div>
+                        </div>
+
                         <h4>DLCs</h4>
                         <div class="dlc-list">
                             @foreach (var dlc in Model.DlcNames)
@@ -68,7 +76,6 @@
                                         <div class="col-md-8">
                                             <h5 class="text-secondary">@dlc.Name (@dlc.Price.ToString("C"))</h5>
                                             <p class="small text-muted">Created On: @dlc.CreatedDate.ToString("dd-MM-yyyy")</p>
-                                            @* <p class="small text-muted">Last Updated: @dlc.UpdatedDate.ToString("dd-MM-yyyy")</p> *@
                                         </div>
                                     </div>
                                 </div>

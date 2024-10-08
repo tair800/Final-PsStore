@@ -17,6 +17,8 @@ namespace Final.Application.Services.Interfaces
         Task<bool> ResetPassword(ResetPasswordDto resetPasswordDto);
         Task<List<string>> GetAllRoles();
         Task<bool> ConfirmEmail(string email, string token);
+        Task<List<UserReturnDto>> GetVerifiedUsersAsync();
+
     }
 
 }

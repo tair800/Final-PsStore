@@ -876,6 +876,16 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "GetVerifiedUsers",
+    "RelativePath": "api/User/verified",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "VerifyEmail",
     "RelativePath": "api/User/verifyEmail",
     "HttpMethod": "GET",

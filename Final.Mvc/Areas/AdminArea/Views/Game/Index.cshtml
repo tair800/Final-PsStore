@@ -1,6 +1,4 @@
-﻿
-@using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
-
+﻿@using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
 
 @model List<GameListVM>
 <div class="col-lg-12 grid-margin stretch-card">
@@ -10,7 +8,7 @@
             <a asp-action="Create" class="btn btn-success mb-3">Create New Game</a>
 
             <div class="table-responsive">
-                <table class="table table-bordered ">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th> Id</th>
@@ -26,7 +24,7 @@
                     <tbody>
                         @foreach (var game in Model)
                         {
-                            <tr>
+                            <tr data-id="@game.Id">
                                 <td> @game.Id </td>
                                 <td> @game.Title </td>
                                 <td> @game.Price </td>
@@ -55,21 +53,15 @@
                                     }
                                 </td>
                                 <td>
-                                <td>
-
-                                    <form asp-action="Delete" method="post" asp-route-id="@game.Id" style="display:inline;">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                    </form>
                                     <a asp-action="Detail" asp-route-id="@game.Id" class="btn btn-success btn-sm">
                                         <i class="fa-solid fa-id-card"></i>
                                     </a>
                                     <a asp-action="Update" asp-route-id="@game.Id" class="btn btn-warning btn-sm">
                                         <i class="fa-solid fa-gear"></i>
                                     </a>
-
-
+                                    <button type="button" class="btn btn-danger btn-sm delete-button" data-id="@game.Id">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         }
@@ -79,23 +71,59 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).on('click', '.delete-button', function() {
-        var gameId = $(this).data('id');
-        var row = $(this).closest('tr');
 
-        if (confirm('Are you sure you want to delete this game?')) {
-            $.ajax({
-                url: '/AdminArea/Game/Delete',
-                type: 'POST',
-                data: { id: gameId }, 
-                success: function () {
-                   
-                },
-                error: function () {
-                    alert('Error deleting the game.');
+@section Scripts {
+    <!-- Include jQuery from a CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRaWf5F5r5aYF1w7z1kV9ROh8ORj1et7GQ4lq5K7G" crossorigin="anonymous"></script>
+
+    <!-- Include SweetAlert2 from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Your custom script -->
+    <script>
+        $(document).on('click', '.delete-button', function () {
+            var gameId = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Make AJAX request to delete the game
+                    $.ajax({
+                        url: '/AdminArea/Game/Delete',
+                        type: 'POST',
+                        data: { id: gameId },
+                        success: function (response) {
+                            Swal.fire(
+                                'Deleted!',
+                                'The game has been deleted.',
+                                'success'
+                            );
+
+                            // Remove the row from the table
+                            row.fadeOut(400, function () {
+                                $(this).remove();
+                            });
+                        },
+                        error: function () {
+                            Swal.fire(
+                                'Error!',
+                                'There was an error deleting the game.',
+                                'error'
+                            );
+                        }
+                    });
                 }
             });
-        }
-    });
-</script>
+        });
+    </script>
+}
+
