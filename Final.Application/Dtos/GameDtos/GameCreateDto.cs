@@ -12,7 +12,7 @@ namespace Final.Application.Dtos.GameDtos
         public decimal? SalePrice { get; set; }
         public int CategoryId { get; set; }
         public IFormFile ImgUrl { get; set; }
-        public Platform Platform { get; set; }
+        public Platform Platform { get; set; } = Platform.PS4;
 
     }
     public class GameCreateDtoValidator : AbstractValidator<GameCreateDto>
@@ -33,6 +33,10 @@ namespace Final.Application.Dtos.GameDtos
             RuleFor(g => g.CategoryId)
                 .NotEmpty().WithMessage("Category is required.")
                 .GreaterThan(0).WithMessage("Category ID must be greater than zero.");
+
+            RuleFor(g => g.SalePrice)
+          .LessThanOrEqualTo(g => g.Price).When(g => g.SalePrice.HasValue)
+          .WithMessage("Sale price cannot be greater than the regular price.");
 
 
         }

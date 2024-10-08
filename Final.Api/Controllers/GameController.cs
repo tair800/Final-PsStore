@@ -17,7 +17,7 @@ namespace Final.Api.Controllers
             _gameService = gameService;
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> Create(GameCreateDto gameCreateDto)
         {
             if (gameCreateDto == null)

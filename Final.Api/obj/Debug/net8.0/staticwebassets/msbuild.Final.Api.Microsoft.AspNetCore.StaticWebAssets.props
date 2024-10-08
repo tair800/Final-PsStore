@@ -32,12 +32,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\templates\passwordTemplate\forgotPassword.html))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\07be24dd-f090-429f-8b13-15e85321705d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\13c85ed9-9a5b-457c-9765-6cd7f90a0499475b2915-3a5e-4edd-8919-12f8def0b1f3564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/07be24dd-f090-429f-8b13-15e85321705d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
+      <RelativePath>uploads/images/13c85ed9-9a5b-457c-9765-6cd7f90a0499475b2915-3a5e-4edd-8919-12f8def0b1f3564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -46,55 +46,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\07be24dd-f090-429f-8b13-15e85321705d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\0b9c9b69-e40d-4a7f-a2bf-7673d24c30dfb7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/0b9c9b69-e40d-4a7f-a2bf-7673d24c30dfb7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\0b9c9b69-e40d-4a7f-a2bf-7673d24c30dfb7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\113e4a3c-2e24-4ab9-bf7e-c6cd8b33e27c69363179-1662-460b-b3a2-6e2a2beab95540ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/113e4a3c-2e24-4ab9-bf7e-c6cd8b33e27c69363179-1662-460b-b3a2-6e2a2beab95540ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\113e4a3c-2e24-4ab9-bf7e-c6cd8b33e27c69363179-1662-460b-b3a2-6e2a2beab95540ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\1861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/1861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\1861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\13c85ed9-9a5b-457c-9765-6cd7f90a0499475b2915-3a5e-4edd-8919-12f8def0b1f3564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\24578df1-4806-4a18-91a9-439ea20c67a987ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
       <SourceType>Package</SourceType>
@@ -112,22 +64,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\24578df1-4806-4a18-91a9-439ea20c67a987ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\26fcc52d-f94a-4000-ae37-54a013e76a318917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/26fcc52d-f94a-4000-ae37-54a013e76a318917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\26fcc52d-f94a-4000-ae37-54a013e76a318917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
@@ -144,12 +80,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\475b2915-3a5e-4edd-8919-12f8def0b1f3564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
+      <RelativePath>uploads/images/475b2915-3a5e-4edd-8919-12f8def0b1f3564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -158,23 +94,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\40ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/40ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\40ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\475b2915-3a5e-4edd-8919-12f8def0b1f3564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\484258f4-dd32-4e20-8fa4-4b9d3bd2e89b648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
       <SourceType>Package</SourceType>
@@ -192,12 +112,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\484258f4-dd32-4e20-8fa4-4b9d3bd2e89b648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\4dd51130-6413-4ed4-91f9-27fd6d9db1a21861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\76a30071-e995-4bba-845a-62c36741101ed60cd404-813c-4895-9115-39498f1c922dhorizon-zero-dawn-key-art.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/4dd51130-6413-4ed4-91f9-27fd6d9db1a21861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
+      <RelativePath>uploads/images/76a30071-e995-4bba-845a-62c36741101ed60cd404-813c-4895-9115-39498f1c922dhorizon-zero-dawn-key-art.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -206,14 +126,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\4dd51130-6413-4ed4-91f9-27fd6d9db1a21861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\76a30071-e995-4bba-845a-62c36741101ed60cd404-813c-4895-9115-39498f1c922dhorizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\526a1a7e-e800-4747-abe7-d3d0cba8b38f_horizon-zero-dawn-key-art.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\8b563bcf-4abd-40e1-8572-e2a8bae36af1277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/526a1a7e-e800-4747-abe7-d3d0cba8b38f_horizon-zero-dawn-key-art.jpg</RelativePath>
+      <RelativePath>uploads/images/8b563bcf-4abd-40e1-8572-e2a8bae36af1277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -222,151 +142,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\526a1a7e-e800-4747-abe7-d3d0cba8b38f_horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\564c59ed-86c9-4039-9ba5-131913ec29b38917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\5c7cf467-4510-40c1-af64-d081d99fabc3d60cd404-813c-4895-9115-39498f1c922dhorizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/5c7cf467-4510-40c1-af64-d081d99fabc3d60cd404-813c-4895-9115-39498f1c922dhorizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\5c7cf467-4510-40c1-af64-d081d99fabc3d60cd404-813c-4895-9115-39498f1c922dhorizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\69363179-1662-460b-b3a2-6e2a2beab95540ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/69363179-1662-460b-b3a2-6e2a2beab95540ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\69363179-1662-460b-b3a2-6e2a2beab95540ab1bc5-8684-4f22-b6a2-396be36a992187ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\6b959fd1-bc59-4408-b8ca-5fe40a7ab176648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/6b959fd1-bc59-4408-b8ca-5fe40a7ab176648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\6b959fd1-bc59-4408-b8ca-5fe40a7ab176648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\79080462-c811-462a-8325-f5de2414b853648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/79080462-c811-462a-8325-f5de2414b853648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\79080462-c811-462a-8325-f5de2414b853648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\84fa339c-d683-44be-afd2-9c4b38dab673b7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/84fa339c-d683-44be-afd2-9c4b38dab673b7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\84fa339c-d683-44be-afd2-9c4b38dab673b7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\8917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/8917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\8917cfe9-0d5c-4b97-b904-d59fd7ebcd73_horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\8b563bcf-4abd-40e1-8572-e2a8bae36af1277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
       <SourceType>Package</SourceType>
@@ -384,12 +160,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\b7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\a34f6fb4-8b39-406d-a344-372ac637aded484258f4-dd32-4e20-8fa4-4b9d3bd2e89b648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/b7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
+      <RelativePath>uploads/images/a34f6fb4-8b39-406d-a344-372ac637aded484258f4-dd32-4e20-8fa4-4b9d3bd2e89b648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -398,14 +174,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\b7b0de61-9ecf-4ed8-a4fa-554dbc4c668fd4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\a34f6fb4-8b39-406d-a344-372ac637aded484258f4-dd32-4e20-8fa4-4b9d3bd2e89b648b0eb5-dada-4ca3-b69c-474159614e9d8ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\c665a81c-ed1a-448a-9b9e-e285adc134c824578df1-4806-4a18-91a9-439ea20c67a987ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg</RelativePath>
+      <RelativePath>uploads/images/c665a81c-ed1a-448a-9b9e-e285adc134c824578df1-4806-4a18-91a9-439ea20c67a987ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -414,7 +190,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\d4c2cfc8-2234-4c4f-b4d9-32b87211be2a29f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\c665a81c-ed1a-448a-9b9e-e285adc134c824578df1-4806-4a18-91a9-439ea20c67a987ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\d60cd404-813c-4895-9115-39498f1c922dhorizon-zero-dawn-key-art.jpg))">
       <SourceType>Package</SourceType>
@@ -432,12 +208,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\d60cd404-813c-4895-9115-39498f1c922dhorizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\e920e389-bb9a-4464-9750-aeca6124479d1861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
+      <RelativePath>uploads/images/e920e389-bb9a-4464-9750-aeca6124479d1861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -446,39 +222,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\fbf4078e-dc2d-49c9-a83a-7b5c95bad319526a1a7e-e800-4747-abe7-d3d0cba8b38f_horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/fbf4078e-dc2d-49c9-a83a-7b5c95bad319526a1a7e-e800-4747-abe7-d3d0cba8b38f_horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\fbf4078e-dc2d-49c9-a83a-7b5c95bad319526a1a7e-e800-4747-abe7-d3d0cba8b38f_horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\horizon-zero-dawn-key-art.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Final.Api</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Final.Api</BasePath>
-      <RelativePath>uploads/images/horizon-zero-dawn-key-art.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\e920e389-bb9a-4464-9750-aeca6124479d1861fa6a-0240-4ac4-8a0b-0d95c2fe19d9f8c333f4-b7e0-4510-a9c3-41abfe2dcd7d87ea3a57-c1d9-4ae7-b484-c43ef1ec3016horizon-zero-dawn-key-art.jpg))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

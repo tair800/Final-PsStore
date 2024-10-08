@@ -13,7 +13,8 @@
           "Microsoft.AspNetCore.SignalR.Common": "8.0.0",
           "Microsoft.EntityFrameworkCore.Design": "8.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.4",
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.3",
+          "System.Text.Json": "8.0.4"
         },
         "runtime": {
           "Final.Mvc.dll": {}

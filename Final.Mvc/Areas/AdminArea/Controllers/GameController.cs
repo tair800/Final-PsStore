@@ -201,7 +201,7 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             }
 
             // Send request to create the game
-            var response = await client.PostAsync("https://localhost:7047/api/Game/create", formContent);
+            var response = await client.PostAsync("https://localhost:7047/api/Game", formContent);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -217,17 +217,18 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                 var userContent = await userResponse.Content.ReadAsStringAsync();
                 var verifiedUsers = JsonConvert.DeserializeObject<List<VerifiedUserVM>>(userContent);
 
-                // Iterate over the verified users and send the email notifications
                 foreach (var user in verifiedUsers)
                 {
-                    // Prepare the email body from the template
                     string body;
                     using (StreamReader sr = new StreamReader("wwwroot/templates/gameTemplate/newGameNotification.html"))
                     {
                         body = sr.ReadToEnd();
                     }
 
-                    body = body.Replace("{{UserName}}", user.Email).Replace("{{GameTitle}}", model.Title);
+                    body = body
+                        .Replace("{{UserName}}", user.Email)
+                        .Replace("{{GameTitle}}", model.Title)
+                        .Replace("{{GameDescription}}", model.Description);
 
                     // Send email to the verified user
                     emailService.SendEmail(
