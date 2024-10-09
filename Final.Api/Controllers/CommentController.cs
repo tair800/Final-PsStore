@@ -16,7 +16,7 @@ namespace Final.Api.Controllers
             _commentService = commentService;
         }
 
-        [HttpPost("")]
+        [HttpPost("addComment")]
         public async Task<IActionResult> Create(CommentCreateDto commentCreateDto)
         {
             var commentId = await _commentService.Create(commentCreateDto);

@@ -59,10 +59,10 @@
                         </div>
                         <div class="comment-content mb-3" id="content-@comment.Id">
                             <p>@comment.Content</p>
-                            @if (comment.Modified)
+                          @*   @if (comment.Modified)
                             {
                                 <small class="text-github">Modified</small>
-                            }
+                            } *@
                         </div>
                         @if (comment.CanDelete) 
                         {
@@ -126,20 +126,26 @@ else
             success: function (response) {
                 if (response.success) {
                     $(".comments-list").append(`
-                                <div class="comment-item p-3 mb-4" id="comment-${response.comment.id}">
-                                    <div class="comment-header d-flex justify-content-between align-items-center">
-                                        <span class="comment-user">${response.comment.userId}</span>
-                                        <span class="text-google">${new Date(response.comment.createdDate).toLocaleDateString()}</span>
-                                    </div>
-                                    <div class="comment-content mt-2" id="content-${response.comment.id}">
-                                        <p>${response.comment.content}</p>
-                                    </div>
-                                    <button class="delete-comment-btn btn btn-danger mt-2" onclick="deleteComment(${response.comment.id})">Delete</button>
-                                    <button class="edit-comment-btn btn btn-primary mt-2" onclick="editComment(${response.comment.id})">Edit</button>
+                            <div class="comment-item p-3 mb-4" id="comment-${response.comment.id}">
+                                <div class="comment-header d-flex justify-content-between align-items-center">
+                                    <span class="comment-user">${response.comment.userId}</span>
+                                    <span class="text-google">${new Date(response.comment.createdDate).toLocaleDateString()}</span>
                                 </div>
-                            `);
+                                <div class="comment-content mt-2" id="content-${response.comment.id}">
+                                    <p>${response.comment.content}</p>
+                                </div>
+                                <button class="delete-comment-btn btn btn-danger mt-2" onclick="deleteComment(${response.comment.id})"><i class="fa-solid fa-trash"></i> Delete</button>
+                                <button class="edit-comment-btn btn btn-primary mt-2" onclick="editComment(${response.comment.id})"><i class="fa-solid fa-pen"></i> Edit</button>
+                            </div>
+                        `);
+
+                    // Re-render the FontAwesome icons
+                    if (typeof FontAwesome !== 'undefined') {
+                        FontAwesome.dom.i2svg(); // This ensures newly added icons are displayed correctly
+                    }
+
                     // Clear the textarea after successful submission
-                    $("#commentContent").val('');
+                    $("#addCommentForm").trigger("reset");
                 } else {
                     Swal.fire('Error', response.message, 'error');
                 }
@@ -189,6 +195,11 @@ else
                                 // Update the existing modified date
                                 $(`#content-${commentId} .modified-text`).text(`Modified on ${modifiedDate}`);
                             }
+
+                            // Re-render the FontAwesome icons
+                            if (typeof FontAwesome !== 'undefined') {
+                                FontAwesome.dom.i2svg();
+                            }
                         } else {
                             Swal.fire('Error', response.message, 'error');
                         }
@@ -202,7 +213,6 @@ else
     }
 
     function deleteComment(commentId) {
-        // SweetAlert2 confirmation dialog
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -213,42 +223,30 @@ else
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // AJAX request to delete the comment
                 $.ajax({
                     url: '@Url.Action("DeleteComment", "Game")',
                     type: 'POST',
                     data: { commentId: commentId },
                     success: function (response) {
                         if (response.success) {
-                            // Show success message
-                            Swal.fire(
-                                'Deleted!',
-                                response.message,
-                                'success'
-                            );
-                            // Remove the comment from the DOM
-                            $("#comment-" + commentId).remove();
+                            Swal.fire('Deleted!', response.message, 'success');
+
+                            // Smoothly remove the comment from the DOM
+                            $(`#comment-${commentId}`).fadeOut(400, function () {
+                                $(this).remove();
+                            });
                         } else {
-                            // Show error message
-                            Swal.fire(
-                                'Error!',
-                                response.message,
-                                'error'
-                            );
+                            Swal.fire('Error', response.message, 'error');
                         }
                     },
                     error: function () {
-                        // Show error message
-                        Swal.fire(
-                            'Error!',
-                            'An error occurred while trying to delete the comment.',
-                            'error'
-                        );
+                        Swal.fire('Error', 'An error occurred while trying to delete the comment.', 'error');
                     }
                 });
             }
         });
     }
+
 </script>
 
 

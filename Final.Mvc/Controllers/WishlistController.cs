@@ -33,28 +33,28 @@ public class WishlistController : Controller
         if (response.IsSuccessStatusCode)
         {
             var data = await response.Content.ReadAsStringAsync();
-            var userWishListDto = JsonConvert.DeserializeObject<UserWishlistVM>(data); // Deserialize into UserWishlistVM
 
+            // Deserialize the entire response, including the "data" field
+            var apiResponse = JsonConvert.DeserializeObject<dynamic>(data);
+            var userWishlistData = apiResponse.data.ToString();  // Extract "data" from the response
+
+            // Deserialize the "data" part to UserWishlistVM
+            var userWishListDto = JsonConvert.DeserializeObject<UserWishlistVM>(userWishlistData);
 
             UserWishlistVM userWishlistVM = new UserWishlistVM()
             {
-                UserId = userId,
+                UserId = userWishListDto.UserId,
                 WishlistGames = userWishListDto.WishlistGames,
             };
-
 
             // Return the wishlist view with the populated UserWishlistVM model
             return View(userWishlistVM);
         }
-        else
-        {
-            var error = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"Error fetching wishlist: {error}");
 
-            // Return an empty wishlist view in case of failure
-            return View(new UserWishlistVM { WishlistGames = new List<WishlistGamesVM>() });
-        }
+        // If the API call fails, handle appropriately (e.g., show an error message or redirect)
+        return RedirectToAction("Error");
     }
+
 
     private string GetUserIdFromToken(string token)
     {

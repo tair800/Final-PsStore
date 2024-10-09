@@ -11,11 +11,13 @@ namespace Final.Mvc.Controllers
     public class UserController : Controller
     {
         private readonly IEmailService emailService;
+        private readonly HttpClient _httpClient;
 
 
-        public UserController(IEmailService emailService)
+        public UserController(IEmailService emailService, HttpClient httpClient)
         {
             this.emailService = emailService;
+            _httpClient = httpClient;
         }
 
         public IActionResult Login()
@@ -68,56 +70,25 @@ namespace Final.Mvc.Controllers
                 return View(registerVM);
             }
 
-            using HttpClient client = new();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(registerVM), Encoding.UTF8, "application/json");
+            // Create the request body
+            var jsonContent = JsonConvert.SerializeObject(registerVM);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7047/api/user/register", content);
+            // Send the request to the API
+            var response = await _httpClient.PostAsync("https://localhost:7047/api/user/register", content);
 
             if (response.IsSuccessStatusCode)
             {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var apiResponse = JsonConvert.DeserializeObject<RegisterResponseVM>(responseContent);
-
-                var email = apiResponse.Email;
-                var token = apiResponse.Token;
-
-                var confirmLink = Url.Action(
-                    "ConfirmEmail",
-                    "User",
-                    new { email = email, token = token },
-                    protocol: HttpContext.Request.Scheme);
-
-                string body;
-                using (StreamReader sr = new StreamReader("wwwroot/templates/emailTemplate/emailConfirm.html"))
-                {
-                    body = sr.ReadToEnd();
-                }
-
-                body = body.Replace("{{link}}", confirmLink).Replace("{{UserName}}", email);
-
-                // Send confirmation email
-                emailService.SendEmail(
-                    from: "tahiraa@code.edu.az",
-                    to: email,
-                    subject: "Confirm Your Registration",
-                    body: body,
-                    smtpHost: "smtp.gmail.com",
-                    smtpPort: 587,
-                    enableSsl: true,
-                    smtpUser: "tahiraa@code.edu.az",
-                    smtpPass: "blcf yubd mxnb gcyb"
-                );
-
-                TempData["RegistrationSuccess"] = "Registration successful. Please check your email to confirm your account.";
-                return RedirectToAction("Login");
+                // Handle success (e.g., redirect to a success page or show a success message)
+                return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                ModelState.AddModelError("", $"Registration failed: {errorContent}");
-                return View(registerVM);
-            }
+
+            // Handle error (e.g., return the error messages to the view)
+            var errorResponse = await response.Content.ReadAsStringAsync();
+            ModelState.AddModelError("", errorResponse);
+            return View(registerVM);
         }
+
 
         public IActionResult Logout()
         {
@@ -241,6 +212,7 @@ namespace Final.Mvc.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> ConfirmEmail(string email, string token)
         {
             using HttpClient client = new();

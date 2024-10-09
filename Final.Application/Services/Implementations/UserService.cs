@@ -8,6 +8,7 @@ using Final.Core.Entities;
 using Final.Data.Implementations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -21,6 +22,8 @@ namespace Final.Application.Services.Implementations
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<User> _signInManager;
+
         private readonly ITokenService _tokenService;
         private readonly IEmailService _emailService;
         private readonly IHttpContextAccessor _contextAccessor;
@@ -36,47 +39,38 @@ namespace Final.Application.Services.Implementations
             _jwtSettings = jwtSettings.Value;
             _contextAccessor = contextAccessor;
         }
-        public async Task<UserReturnDto> Register(RegisterDto registerDto, string urlScheme, string host)
+        public async Task<IdentityResult> RegisterUserAsync(RegisterDto registerDto, string requestScheme, string requestHost)
         {
-            var existUser = await _userManager.FindByNameAsync(registerDto.UserName);
-            if (existUser != null)
-                throw new CustomExceptions(400, "Username already exists.");
+            User user = new()
+            {
+                UserName = registerDto.UserName,
+                FullName = registerDto.FullName,
+                Email = registerDto.Email,
+            };
 
-            var user = _mapper.Map<User>(registerDto);
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if (!result.Succeeded)
-                throw new CustomExceptions(400, string.Join(", ", result.Errors.Select(e => e.Description)));
-
-            await _userManager.AddToRoleAsync(user, "member");
-
-            string token;
-            try
+            if (result.Succeeded)
             {
-                token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            }
-            catch (Exception ex)
-            {
-                throw new CustomExceptions(500, "Failed to generate email confirmation token.");
-            }
+                // Send verification email
+                string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                string link = $"{requestScheme}://{requestHost}/api/user/verifyemail?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
 
-            string link = $"{urlScheme}://{host}/user/verifyEmail?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
+                string body;
+                using (StreamReader reader = new StreamReader("wwwroot/templates/emailTemplate/emailConfirm.html"))
+                {
+                    body = reader.ReadToEnd();
+                }
+                body = body.Replace("{{link}}", link);
+                body = body.Replace("{{username}}", user.FullName);
+                _emailService.SendEmailOld(new List<string> { user.Email }, body, "Email verification", "Verify email");
 
-            string body;
-            try
-            {
-                body = await File.ReadAllTextAsync("wwwroot/templates/emailTemplate/emailConfirm.html");
-                body = body.Replace("{{link}}", link).Replace("{{UserName}}", user.FullName);
-            }
-            catch (Exception ex)
-            {
-                throw new CustomExceptions(500, "Failed to read or replace email template.");
+                await _userManager.AddToRoleAsync(user, ("member"));
             }
 
-            _emailService.SendEmailOld(new() { user.Email }, body, "Email verification", "Verify email");
-
-            return _mapper.Map<UserReturnDto>(user);
+            return result;
         }
+
 
         public async Task<List<UserReturnDto>> GetAllUsers()
         {
@@ -201,17 +195,17 @@ namespace Final.Application.Services.Implementations
             return _mapper.Map<UserReturnDto>(user);
         }
 
-        public async Task<bool> VerifyEmail(string email, string token)
+        public async Task<IActionResult> VerifyEmailAsync(string email, string token)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null)
-                throw new Exception("Invalid email.");
+            User appUser = await _userManager.FindByEmailAsync(email);
+            if (appUser == null) return new NotFoundResult();
 
-            var result = await _userManager.ConfirmEmailAsync(user, token);
-            return result.Succeeded;
+            var result = await _userManager.ConfirmEmailAsync(appUser, token);
+            if (!result.Succeeded) return new BadRequestObjectResult("Invalid token.");
+
+            await _signInManager.SignInAsync(appUser, isPersistent: true);
+            return new OkObjectResult(new { message = "Email verified successfully." });
         }
-
-
 
 
 

@@ -18,7 +18,7 @@ namespace Final.Mvc.Controllers
                 var handler = new JwtSecurityTokenHandler();
                 var jwtToken = handler.ReadJwtToken(token);
 
-                userName = jwtToken.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+                userName = jwtToken.Claims.FirstOrDefault(c => c.Type == "unique_name")?.Value;
                 userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
             }
 

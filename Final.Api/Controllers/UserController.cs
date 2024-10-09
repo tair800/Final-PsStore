@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Final.Application.Dtos.UserDtos;
-using Final.Application.Exceptions;
 using Final.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,12 +19,29 @@ namespace Final.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
-            var userReturnDto = await _userService.Register(registerDto, Request.Scheme, Request.Host.ToString());
-            var userViewModel = _mapper.Map<UserReturnDto>(userReturnDto);
-            return StatusCode(201, userViewModel);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string requestScheme = HttpContext.Request.Scheme; // Get the scheme (http/https)
+            string requestHost = HttpContext.Request.Host.ToString(); // Get the host (e.g., localhost:5000)
+
+            var result = await _userService.RegisterUserAsync(registerDto, requestScheme, requestHost);
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return BadRequest(ModelState);
+            }
+
+            return Ok(new { message = "Registration successful, please verify your email." });
         }
+
 
 
         [HttpPost("Login")]
@@ -83,12 +99,11 @@ namespace Final.Api.Controllers
         }
 
 
-
-        [HttpGet("verifyEmail")]
+        [HttpGet("verifyemail")]
         public async Task<IActionResult> VerifyEmail(string email, string token)
         {
-            var result = await _userService.VerifyEmail(email, token);
-            return result ? Redirect("https://localhost:7296/user/login") : BadRequest("Invalid token or confirmation failed.");
+            var result = await _userService.VerifyEmailAsync(email, token);
+            return result; // This will return the appropriate IActionResult
         }
 
 
@@ -107,19 +122,19 @@ namespace Final.Api.Controllers
             return result ? Ok("Password has been reset successfully.") : BadRequest("Failed to reset password.");
         }
 
-        [HttpPost("confirmEmail")]
-        public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailDto model)
-        {
-            try
-            {
-                await _userService.ConfirmEmail(model.Email, model.Token);
-                return Ok(new { Message = "Email confirmed successfully." });
-            }
-            catch (CustomExceptions ex)
-            {
-                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
-            }
-        }
+        //[HttpPost("confirmEmail")]
+        //public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailDto model)
+        //{
+        //    try
+        //    {
+        //        await _userService.ConfirmEmail(model.Email, model.Token);
+        //        return Ok(new { Message = "Email confirmed successfully." });
+        //    }
+        //    catch (CustomExceptions ex)
+        //    {
+        //        return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+        //    }
+        //}
 
 
         [HttpGet("verified")]

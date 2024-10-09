@@ -185,22 +185,6 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.CommentController",
-    "Method": "Create",
-    "RelativePath": "api/Comment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "commentCreateDto",
-        "Type": "Final.Application.Dtos.CommentDtos.CommentCreateDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.CommentController",
     "Method": "GetAll",
     "RelativePath": "api/Comment",
     "HttpMethod": "GET",
@@ -257,6 +241,22 @@
       {
         "Name": "commentUpdateDto",
         "Type": "Final.Application.Dtos.CommentDtos.CommentUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.CommentController",
+    "Method": "Create",
+    "RelativePath": "api/Comment/addComment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "commentCreateDto",
+        "Type": "Final.Application.Dtos.CommentDtos.CommentCreateDto",
         "IsRequired": true
       }
     ],
@@ -723,22 +723,6 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
-    "Method": "ConfirmEmail",
-    "RelativePath": "api/User/confirmEmail",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "Final.Application.Dtos.UserDtos.ConfirmEmailDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "EditRole",
     "RelativePath": "api/User/editRole",
     "HttpMethod": "POST",
@@ -887,7 +871,7 @@
   {
     "ContainingType": "Final.Api.Controllers.UserController",
     "Method": "VerifyEmail",
-    "RelativePath": "api/User/verifyEmail",
+    "RelativePath": "api/User/verifyemail",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
