@@ -1,5 +1,4 @@
-﻿using Final.Core.Entities;
-using Final.Mvc.ViewModels.CommentVMs;
+﻿using Final.Mvc.ViewModels.CommentVMs;
 using Final.Mvc.ViewModels.GameVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -10,6 +9,14 @@ namespace Final.Mvc.Controllers
 {
     public class GameController : Controller
     {
+
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public GameController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+
         public async Task<IActionResult> Index(int? category = null, int? platform = null, string sortByPrice = null, string sortByDate = null)
         {
             using HttpClient client = new();
@@ -21,6 +28,8 @@ namespace Final.Mvc.Controllers
             {
                 var data = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(data);
+
+
 
                 var distinctCategories = result
                     .Select(g => new { g.CategoryId, g.CategoryName })
@@ -110,11 +119,14 @@ namespace Final.Mvc.Controllers
                 var commentData = await commentResponse.Content.ReadAsStringAsync();
                 comments = JsonConvert.DeserializeObject<List<CommentListItemVM>>(commentData);
 
-                // Set CanDelete property for each comment
+                // Set CanDelete property for each comment and use correct dates
                 foreach (var comment in comments)
                 {
                     comment.CanDelete = comment.UserId == userId;
-                    comment.CreateDate = DateTime.UtcNow;
+                    if (comment.UpdatedDate.HasValue)
+                    {
+                        comment.UpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(comment.UpdatedDate.Value, TimeZoneInfo.FindSystemTimeZoneById("Azerbaijan Standard Time")); // Or any other time zone that represents UTC+4
+                    }
                 }
             }
 
@@ -129,102 +141,74 @@ namespace Final.Mvc.Controllers
         }
 
 
+
+
+
         [HttpPost]
-        public async Task<IActionResult> AddComment(GameDetailWithCommentsVM gameDetailWithCommentsVM)
+        public async Task<IActionResult> AddComment([FromBody] CommentCreateVM model)
         {
+            using var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            // Extract UserId from JWT token (if token contains this claim)
             var token = Request.Cookies["token"];
-
-            if (string.IsNullOrEmpty(token))
+            if (token != null)
             {
-                return Json(new { success = false, message = "User is not authenticated." });
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(token);
+                var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
+
+                // Ensure UserId is set in the model
+                model.UserId = userId;
             }
 
-            var userId = GetUserIdFromToken(token);
-
-            var newComment = new Comment
-            {
-                Content = gameDetailWithCommentsVM.ContentNew.Content,
-                GameId = gameDetailWithCommentsVM.ContentNew.GameId,
-                UserId = userId,
-                CreatedDate = DateTime.UtcNow,
-            };
-
-            if (string.IsNullOrEmpty(newComment.Content) || newComment.GameId == 0 || string.IsNullOrEmpty(newComment.UserId))
-            {
-                return Json(new { success = false, message = "Invalid comment data." });
-            }
-
-            using HttpClient client = new();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            var jsonContent = JsonConvert.SerializeObject(newComment);
-            StringContent content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7047/api/Comment", content);
+            var content = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:7047/api/Comment/addComment", content);
 
             if (response.IsSuccessStatusCode)
             {
-                return Json(new { success = true, message = "Comment added successfully.", comment = newComment });
+                return Ok();
             }
 
-            return Json(new { success = false, message = "Failed to add comment." });
+            // Log response content for further debugging
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to add comment: {errorMessage}");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteComment(int commentId)
+
+        // Update a comment
+        [HttpPut]
+        public async Task<IActionResult> UpdateComment(int id, [FromBody] CommentUpdateVM model)
         {
-            var token = Request.Cookies["token"];
+            using var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            if (string.IsNullOrEmpty(token))
-            {
-                return Json(new { success = false, message = "User is not authenticated." });
-            }
-
-            using HttpClient client = new();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7047/api/Comment/{commentId}");
+            var content = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PutAsync($"https://localhost:7047/api/Comment/{id}", content);
 
             if (response.IsSuccessStatusCode)
             {
-                return Json(new { success = true, message = "Comment deleted successfully." });
+                return Ok();
             }
-
-            return Json(new { success = false, message = "Failed to delete the comment." });
+            return BadRequest("Failed to update comment.");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EditComment(int commentId, string content)
+        // Delete a comment
+        [HttpDelete]
+        public async Task<IActionResult> DeleteComment(int id)
         {
-            var token = Request.Cookies["token"];
+            using var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            if (string.IsNullOrEmpty(token))
-            {
-                return Json(new { success = false, message = "User is not authenticated." });
-            }
-
-            using HttpClient client = new();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            var editedComment = new
-            {
-                Content = content,
-                CommentId = commentId,
-                Modified = true // Mark this comment as modified
-            };
-
-            var jsonContent = JsonConvert.SerializeObject(editedComment);
-            StringContent contentToSend = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PutAsync($"https://localhost:7047/api/Comment/{commentId}", contentToSend);
+            var response = await client.DeleteAsync($"https://localhost:7047/api/Comment/{id}");
 
             if (response.IsSuccessStatusCode)
             {
-                return Json(new { success = true, message = "Comment edited successfully.", newContent = content, modified = true });
+                return Ok();
             }
-
-            return Json(new { success = false, message = "Failed to edit the comment." });
+            return BadRequest("Failed to delete comment.");
         }
+
 
 
 

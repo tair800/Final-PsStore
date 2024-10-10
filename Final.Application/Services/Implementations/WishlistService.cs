@@ -34,21 +34,16 @@ namespace Final.Application.Services.Implementations
             return userWishlistDto;
         }
 
-        // Add game to wishlist by userId
         public async Task<Wishlist> Add(string userId, int gameId)
         {
-            // Check if user exists
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) throw new CustomExceptions(404, "UserNotFound", "User not found.");
 
-            // Check if game exists
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == gameId);
             if (game == null) throw new CustomExceptions(404, "GameNotFound", "Game not found.");
 
-            // Check if wishlist exists for the user
             var wishlist = await _unitOfWork.wishlistRepository.GetEntity(w => w.UserId == user.Id, "WishlistGames.Game");
 
-            // If wishlist does not exist, create a new one
             if (wishlist == null)
             {
                 wishlist = new Wishlist
@@ -57,37 +52,30 @@ namespace Final.Application.Services.Implementations
                     WishlistGames = new List<WishlistGame>()
                 };
 
-                // Create a new wishlist in the database
                 await _unitOfWork.wishlistRepository.Create(wishlist);
-                _unitOfWork.Commit();  // Ensure the wishlist is saved before adding games
+                _unitOfWork.Commit();
             }
 
-            // Check if the game already exists in the user's wishlist
             var wishlistGame = wishlist.WishlistGames.FirstOrDefault(wg => wg.GameId == gameId);
 
-            // If the game is already in the wishlist, throw an error
             if (wishlistGame != null)
             {
                 throw new CustomExceptions(400, "GameAlreadyInWishlist", "Game is already in the wishlist.");
             }
             else
             {
-                // Add the game to the wishlist if it's not already there
                 var newWishlistGame = new WishlistGame
                 {
                     WishlistId = wishlist.Id,
                     GameId = gameId
                 };
 
-                // Add the new game to the wishlist
                 wishlist.WishlistGames.Add(newWishlistGame);
                 await _unitOfWork.wishlistGameRepository.Create(newWishlistGame);
             }
 
-            // Commit the transaction to the database
             _unitOfWork.Commit();
 
-            // Return the updated wishlist
             return wishlist;
         }
 

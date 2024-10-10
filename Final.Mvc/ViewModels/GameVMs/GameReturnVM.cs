@@ -26,6 +26,7 @@ namespace Final.Mvc.ViewModels.GameVMs
         public int CategoryId { get; set; }
         public int DlcId { get; set; }
         public List<DlcDetailVM> DlcNames { get; set; }
+        public bool IsInWishlist { get; set; }
     }
 
     public class CategoryInGame

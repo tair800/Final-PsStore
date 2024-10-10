@@ -103,7 +103,7 @@ namespace Final.Api.Controllers
         public async Task<IActionResult> VerifyEmail(string email, string token)
         {
             var result = await _userService.VerifyEmailAsync(email, token);
-            return result; // This will return the appropriate IActionResult
+            return Redirect("https://localhost7296/user/login"); // This will return the appropriate IActionResult
         }
 
 

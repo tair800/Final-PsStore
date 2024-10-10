@@ -16,6 +16,7 @@ namespace Final.Api.Controllers
             _wishlistService = wishlistService;
         }
 
+        // Get Wishlist by User ID
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetWishlist(string userId)
         {
@@ -28,20 +29,25 @@ namespace Final.Api.Controllers
             return Ok(new { Message = "Wishlist retrieved successfully.", Data = wishlist });
         }
 
-        // POST: api/Wishlist/add
-        //[Authorize]
+        // Add Game to Wishlist
         [HttpPost("add")]
-        public async Task<IActionResult> AddToWishlist([FromBody] AddWishlistDto request)
+        public async Task<IActionResult> AddToWishlist([FromBody] AddWishlistDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                // Return structured validation error messages
+                return BadRequest(new { Message = "Invalid data.", Errors = ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)) });
+            }
+
             try
             {
-                var wishlist = await _wishlistService.Add(request.UserId, request.GameId);
-                if (wishlist == null)
+                var result = await _wishlistService.Add(dto.UserId, dto.GameId);
+                if (result != null)
                 {
-                    return BadRequest(new { Message = "Failed to add the game to the wishlist." });
+                    return Ok(new { Message = "Game added to wishlist successfully." });
                 }
 
-                return Ok(new { Message = "Game added to wishlist successfully.", Data = wishlist });
+                return BadRequest(new { Message = "Failed to add game to wishlist." });
             }
             catch (CustomExceptions ex)
             {
@@ -53,14 +59,13 @@ namespace Final.Api.Controllers
             }
         }
 
-        // DELETE: api/Wishlist/remove
-        //[Authorize]
-        [HttpDelete("remove")]
-        public async Task<IActionResult> RemoveFromWishlist([FromBody] RemoveWishlistDto request)
+        // Remove Game from Wishlist
+        [HttpDelete("remove/{userId}/{gameId}")]
+        public async Task<IActionResult> RemoveFromWishlist(string userId, int gameId)
         {
             try
             {
-                var result = await _wishlistService.Delete(request.UserId, request.GameId);
+                var result = await _wishlistService.Delete(userId, gameId);
                 if (result)
                 {
                     return Ok(new { Message = "Game removed from the wishlist successfully." });
@@ -78,8 +83,7 @@ namespace Final.Api.Controllers
             }
         }
 
-        // DELETE: api/Wishlist/clear/{userId}
-        //[Authorize]
+        // Clear User's Wishlist
         [HttpDelete("clear/{userId}")]
         public async Task<IActionResult> ClearWishlist(string userId)
         {

@@ -9,6 +9,7 @@
         public string Username { get; set; } // New property for username
         public string GameTitle { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         //public List<CommentHistoryDto> CommentHistories { get; set; } // Add CommentHistories here
 
     }

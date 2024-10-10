@@ -27,7 +27,6 @@ public class WishlistController : Controller
         using HttpClient client = new();
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        // Make the API call to fetch the wishlist using the userId
         HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/wishlist/{userId}");
 
         if (response.IsSuccessStatusCode)
@@ -54,7 +53,35 @@ public class WishlistController : Controller
         // If the API call fails, handle appropriately (e.g., show an error message or redirect)
         return RedirectToAction("Error");
     }
+    public async Task<IActionResult> RemoveFromWishlist(string gameId)
+    {
+        var token = Request.Cookies["token"];
+        if (string.IsNullOrEmpty(token))
+        {
+            return Json(new { success = false, message = "Please log in to remove games from the wishlist." });
+        }
 
+        // Extract UserId from the token
+        var userId = GetUserIdFromToken(token);
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Json(new { success = false, message = "Invalid user." });
+        }
+
+        using HttpClient client = new();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        // Send the request to the API with parameters in the URL
+        HttpResponseMessage response = await client.DeleteAsync($"https://localhost:7047/api/wishlist/remove/{userId}/{gameId}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            return Json(new { success = true, message = "Game removed from wishlist successfully." });
+        }
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        return Json(new { success = false, message = errorResponse });
+    }
 
     private string GetUserIdFromToken(string token)
     {

@@ -7,56 +7,47 @@
 <div class="wishlist-container">
     <h1>Your Wishlist</h1>
 
- 
-        @foreach (var item in Model.WishlistGames)
-        {
-            <div class="wishlist-item">
-                <div class="wishlist-item-details">
-                    <h4>@item.GameTitle</h4>
-                    <p>Price: $@(item.Price > 0 ? item.Price.ToString("F2") : "N/A")</p>
-                </div>
-                <button class="remove-from-wishlist-btn" data-game-id="@item.GameId">Remove</button>
+    @foreach (var item in Model.WishlistGames)
+    {
+        <div class="wishlist-item" id="wishlist-item-@item.GameId">
+            <div class="wishlist-item-details">
+                <img src="@item.GameImgUrl" alt="@item.GameTitle" class="game-img" />
+                <h4>@item.GameTitle</h4>
+                <p>Price: $@(item.Price > 0 ? item.Price.ToString("F2") : "N/A")</p>
+                <a href="/Game/Detail/@item.GameId" class="game-detail-link">View Details</a>
             </div>
-        }
-
-     
-
+            <button class="remove-from-wishlist-btn" data-game-id="@item.GameId">Remove</button>
+        </div>
+    }
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $('.remove-from-wishlist-btn').each(function () {
-                $(this).on("click", function () {
-                    console.log("Attempting to remove from wishlist...");
+            $('.remove-from-wishlist-btn').on("click", function () {
+                const token = getJwtTokenFromCookie();
+                if (!token) {
+                    alert("Please log in to remove games from the wishlist.");
+                    return;
+                }
 
-                    const token = getJwtTokenFromCookie();
-                    if (!token) {
-                        alert("Please log in to remove games from the wishlist.");
-                        return;
-                    }
+                const gameId = $(this).attr("data-game-id");
 
-                    const gameId = $(this).attr("data-game-id");
-
-                    // Send the AJAX request to remove the game from the wishlist
-                    $.ajax({
-                        url: `/Wishlist/RemoveFromWishlist`,
-                        type: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        },
-                        data: {
-                            gameId: gameId
-                        },
-                        success: function (response) {
-                            alert('Game removed from wishlist!');
-                            location.reload(); // Reload the page to reflect the changes in the wishlist
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error:', xhr.responseText || error);
-                            alert('Failed to remove game from wishlist.');
+                $.ajax({
+                    url: `/Wishlist/RemoveFromWishlist`,
+                    type: 'POST',
+                    data: { gameId: gameId },
+                    success: function (response) {
+                        if (response.success) {
+                            $(`#wishlist-item-${gameId}`).remove();
+                        } else {
+                            alert(response.message);
                         }
-                    });
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', xhr.responseText || error);
+                        alert('Failed to remove game from wishlist.');
+                    }
                 });
             });
         });

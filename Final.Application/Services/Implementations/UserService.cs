@@ -62,7 +62,7 @@ namespace Final.Application.Services.Implementations
                     body = reader.ReadToEnd();
                 }
                 body = body.Replace("{{link}}", link);
-                body = body.Replace("{{username}}", user.FullName);
+                body = body.Replace("{{username}}", user.UserName);
                 _emailService.SendEmailOld(new List<string> { user.Email }, body, "Email verification", "Verify email");
 
                 await _userManager.AddToRoleAsync(user, ("member"));
@@ -75,6 +75,7 @@ namespace Final.Application.Services.Implementations
         public async Task<List<UserReturnDto>> GetAllUsers()
         {
             var users = _userManager.Users.ToList();
+
             if (users == null || !users.Any())
                 throw new Exception("No users found.");
 
@@ -93,6 +94,7 @@ namespace Final.Application.Services.Implementations
         public async Task<UserReturnDto> GetUserById(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
+
             if (user == null)
             {
                 throw new CustomExceptions(404, "User not found.");

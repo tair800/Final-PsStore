@@ -914,7 +914,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
+        "Name": "dto",
         "Type": "Final.Application.Dtos.WishlistDtos.AddWishlistDto",
         "IsRequired": true
       }
@@ -940,14 +940,19 @@
   {
     "ContainingType": "Final.Api.Controllers.WishlistController",
     "Method": "RemoveFromWishlist",
-    "RelativePath": "api/Wishlist/remove",
+    "RelativePath": "api/Wishlist/remove/{userId}/{gameId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "Final.Application.Dtos.WishlistDtos.RemoveWishlistDto",
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

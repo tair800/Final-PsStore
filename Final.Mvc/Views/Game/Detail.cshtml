@@ -4,8 +4,6 @@
 
 @model GameDetailWithCommentsVM
 
-
-
 <!-- Game Banner -->
 <div class="game-banner d-flex align-items-end">
     <div class="container">
@@ -52,25 +50,31 @@
             <div class="comments-list">
                 @foreach (var comment in Model.Contents)
                 {
-                    <div class="comment-item p-4 mb-4 rounded" id="comment-@comment.UserId">
+                    <div class="comment-item p-4 mb-4 rounded" id="comment-@comment.Id">
                         <div class="comment-header d-flex justify-content-between align-items-center mb-2">
                             <span class="comment-user">@comment.UserId</span>
-                            <span class="text-github fs-6 ps-3">@comment.CreateDate.ToString("MMM dd, yyyy")</span>
+                            <span class="text-github fs-6 ps-3">@comment.CreatedDate.ToString("MMM dd, yyyy")</span>
                         </div>
                         <div class="comment-content mb-3" id="content-@comment.Id">
                             <p>@comment.Content</p>
-                          @*   @if (comment.Modified)
+                            <!-- Check if the comment has been modified -->
+                            @if (comment.UpdatedDate.HasValue && comment.UpdatedDate.Value != comment.CreatedDate)
                             {
-                                <small class="text-github">Modified</small>
-                            } *@
+<small class="text-github">Modified @comment.UpdatedDate?.AddHours(-4).ToString("MMM dd, yyyy  HH:mm")</small>
+                            }
                         </div>
-                        @if (comment.CanDelete) 
+                        @if (comment.CanDelete)
                         {
                             <div class="comment-actions d-flex">
                                 <button class="delete-comment-btn btn btn-danger me-2" onclick="deleteComment(@comment.Id)"><i class="fa-solid fa-trash"></i></button>
                                 <button class="edit-comment-btn btn btn-primary" onclick="editComment(@comment.Id)"><i class="fa-solid fa-pen"></i></button>
                             </div>
                         }
+                        <div class="edit-comment-form mt-3 d-none" id="edit-form-@comment.Id">
+                            <textarea class="form-control mb-2" id="edit-content-@comment.Id">@comment.Content</textarea>
+                            <button class="btn btn-success" onclick="saveComment(@comment.Id)">Save</button>
+                            <button class="btn btn-secondary" onclick="cancelEdit(@comment.Id)">Cancel</button>
+                        </div>
                     </div>
                 }
             </div>
@@ -81,6 +85,7 @@
         }
     </div>
 </div>
+
 
 <!-- Add a New Comment Section -->
 @if (ViewBag.IsAuthenticated)
@@ -103,151 +108,70 @@ else
     </div>
 }
 
-
 <script>
-    function addComment() {
-        const gameId = $("#gameId").val();
-        const content = $("#commentContent").val();
+    // Add comment
+    async function addComment() {
+        const gameId = document.getElementById("gameId").value;
+        const content = document.getElementById("commentContent").value;
 
-        if (!content.trim()) {
-            Swal.fire('Error', 'Comment content cannot be empty.', 'error');
-            return;
+        const response = await fetch('/Game/AddComment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ GameId: gameId, Content: content })
+        });
+
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            alert('Failed to add comment');
         }
+    }
 
-        $.ajax({
-            url: '@Url.Action("AddComment", "Game")',
-            type: 'POST',
-            data: {
-                ContentNew: {
-                    Content: content,
-                    GameId: gameId
-                }
+    // Delete comment
+    async function deleteComment(id) {
+        if (confirm("Are you sure you want to delete this comment?")) {
+            const response = await fetch(`/Game/DeleteComment/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                document.getElementById(`comment-${id}`).remove();
+            } else {
+                alert('Failed to delete comment');
+            }
+        }
+    }
+
+    // Edit comment
+    function editComment(id) {
+        document.getElementById(`edit-form-${id}`).classList.remove('d-none');
+        document.getElementById(`content-${id}`).style.display = 'none';
+    }
+
+    // Cancel editing
+    function cancelEdit(id) {
+        document.getElementById(`edit-form-${id}`).classList.add('d-none');
+        document.getElementById(`content-${id}`).style.display = 'block';
+    }
+
+   async function saveComment(id) {
+        const content = document.getElementById(`edit-content-${id}`).value;
+
+        const response = await fetch(`/Game/UpdateComment/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            success: function (response) {
-                if (response.success) {
-                    $(".comments-list").append(`
-                            <div class="comment-item p-3 mb-4" id="comment-${response.comment.id}">
-                                <div class="comment-header d-flex justify-content-between align-items-center">
-                                    <span class="comment-user">${response.comment.userId}</span>
-                                    <span class="text-google">${new Date(response.comment.createdDate).toLocaleDateString()}</span>
-                                </div>
-                                <div class="comment-content mt-2" id="content-${response.comment.id}">
-                                    <p>${response.comment.content}</p>
-                                </div>
-                                <button class="delete-comment-btn btn btn-danger mt-2" onclick="deleteComment(${response.comment.id})"><i class="fa-solid fa-trash"></i> Delete</button>
-                                <button class="edit-comment-btn btn btn-primary mt-2" onclick="editComment(${response.comment.id})"><i class="fa-solid fa-pen"></i> Edit</button>
-                            </div>
-                        `);
-
-                    // Re-render the FontAwesome icons
-                    if (typeof FontAwesome !== 'undefined') {
-                        FontAwesome.dom.i2svg(); // This ensures newly added icons are displayed correctly
-                    }
-
-                    // Clear the textarea after successful submission
-                    $("#addCommentForm").trigger("reset");
-                } else {
-                    Swal.fire('Error', response.message, 'error');
-                }
-            },
-            error: function () {
-                Swal.fire('Error', 'An error occurred while trying to add the comment.', 'error');
-            }
+            body: JSON.stringify({ Content: content })
         });
+
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            alert('Failed to save comment');
+        }
     }
-
-    function editComment(commentId) {
-        const currentContent = $(`#content-${commentId} p`).text();
-
-        Swal.fire({
-            title: 'Edit your comment',
-            input: 'textarea',
-            inputValue: currentContent,
-            showCancelButton: true,
-            confirmButtonText: 'Save',
-            cancelButtonText: 'Cancel',
-            inputValidator: (value) => {
-                if (!value) {
-                    return 'Comment content cannot be empty!';
-                }
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const newContent = result.value;
-
-                $.ajax({
-                    url: '@Url.Action("EditComment", "Game")',
-                    type: 'POST',
-                    data: {
-                        commentId: commentId,
-                        content: newContent
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            Swal.fire('Updated!', response.message, 'success');
-                            $(`#content-${commentId} p`).text(newContent);
-
-                            // Check if the "Modified" text already exists, and add it only if it doesn't
-                            const modifiedDate = new Date().toLocaleString();
-                            if ($(`#content-${commentId} .modified-text`).length === 0) {
-                                $(`#content-${commentId}`).append(`<small class="modified-text text-github">Modified on ${modifiedDate}</small>`);
-                            } else {
-                                // Update the existing modified date
-                                $(`#content-${commentId} .modified-text`).text(`Modified on ${modifiedDate}`);
-                            }
-
-                            // Re-render the FontAwesome icons
-                            if (typeof FontAwesome !== 'undefined') {
-                                FontAwesome.dom.i2svg();
-                            }
-                        } else {
-                            Swal.fire('Error', response.message, 'error');
-                        }
-                    },
-                    error: function () {
-                        Swal.fire('Error', 'An error occurred while trying to edit the comment.', 'error');
-                    }
-                });
-            }
-        });
-    }
-
-    function deleteComment(commentId) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '@Url.Action("DeleteComment", "Game")',
-                    type: 'POST',
-                    data: { commentId: commentId },
-                    success: function (response) {
-                        if (response.success) {
-                            Swal.fire('Deleted!', response.message, 'success');
-
-                            // Smoothly remove the comment from the DOM
-                            $(`#comment-${commentId}`).fadeOut(400, function () {
-                                $(this).remove();
-                            });
-                        } else {
-                            Swal.fire('Error', response.message, 'error');
-                        }
-                    },
-                    error: function () {
-                        Swal.fire('Error', 'An error occurred while trying to delete the comment.', 'error');
-                    }
-                });
-            }
-        });
-    }
-
 </script>
-
-
 
