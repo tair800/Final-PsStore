@@ -20,21 +20,29 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             this.emailService = emailService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm = null)
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
             var response = await client.GetAsync("https://localhost:7047/api/Game");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
                 var games = JsonConvert.DeserializeObject<List<GameListVM>>(data);
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    games = games.Where(g => g.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+                }
+
                 return View(games);
             }
 
             return View(new List<GameListVM>());
         }
+
 
         public async Task<IActionResult> Detail(int id)
         {

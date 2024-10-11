@@ -154,3 +154,7 @@ a{
             color: red;
             transition: color 0.3s ease;
         }*/
+
+.wishlist-added {
+    color: red;
+}

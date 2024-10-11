@@ -75,9 +75,10 @@
                         <div class="col-12 col-sm-6 col-lg-4 game-card-container mb-4">
                             <div class="game-card">
                                 <img src="@game.ImgUrl" alt="@game.Title" class="game-image" />
-                                <button class="favorite-btn">
+                                <button class="favorite-btn" data-game-id="@game.Id" data-in-wishlist="false">
                                     <i class="fas fa-heart"></i>
                                 </button>
+
 
                                 <!-- Platform Labels -->
                                 <div class="platform-labels">
@@ -240,7 +241,106 @@ $(document).on("click", ".add-to-cart-btn", function () {
     });
 });
 
+        $(document).on("click", ".favorite-btn", function () {
+            const gameId = $(this).data("game-id");
+            const isInWishlist = $(this).data("in-wishlist");
+            const token = getJwtTokenFromCookie();
 
+            if (!token) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Please log in',
+                    text: 'You need to log in to manage your wishlist.',
+                });
+                return;
+            }
+
+            if (isInWishlist === false) {
+                // Add to wishlist
+                $.ajax({
+                    url: `/Game/AddToWishlist?gameId=${gameId}`,
+                    type: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    contentType: 'application/json',
+                    success: function (response) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Game added to wishlist!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // Toggle the wishlist status
+                        $(`[data-game-id='${gameId}']`).data("in-wishlist", true);
+                        $(`[data-game-id='${gameId}'] i`).addClass("wishlist-added");
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed to add to wishlist',
+                            text: 'There was an error. Please try again.',
+                        });
+                    }
+                });
+            } else {
+                // Remove from wishlist
+                $.ajax({
+                    url: `/Game/RemoveFromWishlist?gameId=${gameId}`,
+                    type: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    contentType: 'application/json',
+                    success: function (response) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Game removed from wishlist!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        // Toggle the wishlist status
+                        $(`[data-game-id='${gameId}']`).data("in-wishlist", false);
+                        $(`[data-game-id='${gameId}'] i`).removeClass("wishlist-added");
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed to remove from wishlist',
+                            text: 'There was an error. Please try again.',
+                        });
+                    }
+                });
+            }
+        });
+
+        $(document).ready(function () {
+            const token = getJwtTokenFromCookie();
+            if (token) {
+                $.ajax({
+                    url: '/api/Wishlist/{userId}', // Replace with actual API endpoint
+                    type: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    success: function (response) {
+                        const wishlistGames = response.Data.WishlistGames;
+
+                        wishlistGames.forEach(function (game) {
+                            $(`[data-game-id='${game.Id}']`).data("in-wishlist", true);
+                            $(`[data-game-id='${game.Id}'] i`).addClass("wishlist-added");
+                        });
+                    },
+                    error: function () {
+                        console.log('Failed to load wishlist');
+                    }
+                });
+            }
+        });
 
 
                 // Other existing functions like setFilterValues, etc.

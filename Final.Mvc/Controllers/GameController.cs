@@ -211,6 +211,53 @@ namespace Final.Mvc.Controllers
 
 
 
+        [HttpPost]
+        public async Task<IActionResult> AddToWishlist(string gameId)
+        {
+            using var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            // Extract UserId from JWT token
+            var token = Request.Cookies["token"];
+            var userId = GetUserIdFromToken(token);
+
+            var dto = new { UserId = userId, GameId = gameId };
+            var content = new StringContent(JsonConvert.SerializeObject(dto), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("https://localhost:7047/api/Wishlist/add", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok("Game added to wishlist.");
+            }
+
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to add game to wishlist: {errorMessage}");
+        }
+
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveFromWishlist(string gameId)
+        {
+            using var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            // Extract UserId from JWT token
+            var token = Request.Cookies["token"];
+            var userId = GetUserIdFromToken(token);
+
+            var response = await client.DeleteAsync($"https://localhost:7047/api/Wishlist/remove/{userId}/{gameId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok("Game removed from wishlist.");
+            }
+
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to remove game from wishlist: {errorMessage}");
+        }
+
+
 
         private string GetUserIdFromToken(string token)
         {
