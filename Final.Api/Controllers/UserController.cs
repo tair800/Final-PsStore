@@ -151,5 +151,18 @@ namespace Final.Api.Controllers
             }
         }
 
+        [HttpPost("adminPasswordChange/{userId}")]
+        public async Task<IActionResult> AdminPasswordChange(string userId, [FromBody] AdminPasswordChangeDto adminPasswordChangeDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.AdminPasswordChange(userId, adminPasswordChangeDto.NewPassword);
+            if (!result)
+                return BadRequest("Failed to change password.");
+
+            return Ok("Password changed successfully.");
+        }
+
     }
 }

@@ -49,7 +49,6 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
         }
 
-        // Get all comments, optionally filtered by gameId
         public async Task<List<CommentReturnDto>> GetAll(int? gameId = null)
         {
             IEnumerable<Comment> comments;
@@ -58,31 +57,33 @@ namespace Final.Application.Services.Implementations
             {
                 comments = await _unitOfWork.commentRepository.GetAll(
                     c => c.GameId == gameId,
-                    "Game");
+                    "Game", "User");  // Include the User entity
             }
             else
             {
                 comments = await _unitOfWork.commentRepository.GetAll(
-                    null, "Game");
+                    null, "Game", "User");  // Include the User entity
             }
 
+            // Use AutoMapper to map the comments to CommentReturnDto
             return _mapper.Map<List<CommentReturnDto>>(comments);
         }
-
 
         public async Task<CommentReturnDto> GetOne(int id)
         {
             var comment = await _unitOfWork.commentRepository.GetEntity(
                 c => c.Id == id,
-                "Game");
+                "Game", "User");  // Include the User entity
 
             if (comment == null)
             {
                 throw new CustomExceptions(404, "Comment", "Comment not found.");
             }
 
+            // Use AutoMapper to map the comment to CommentReturnDto
             return _mapper.Map<CommentReturnDto>(comment);
         }
+
 
         public async Task Update(int id, CommentUpdateDto updateDto)
         {

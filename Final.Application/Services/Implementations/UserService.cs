@@ -285,6 +285,21 @@ namespace Final.Application.Services.Implementations
             return userDtos;
         }
 
+        public async Task<bool> AdminPasswordChange(string userId, string newPassword)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                throw new Exception("User not found.");
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+            if (!result.Succeeded)
+                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+
+            return true;
+        }
+
 
     }
 }

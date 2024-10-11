@@ -137,6 +137,10 @@ namespace Final.Application.Profiles
             //.ForMember(dest => dest.CommentHistories, opt => opt.MapFrom(src => src.CommentHistories));
             //CreateMap<CommentHistory, CommentHistoryDto>();
 
+
+            CreateMap<Comment, CommentReturnDto>()
+          .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.User.UserName))  // Map the Username
+          .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title));   // Map the GameTitle
         }
     }
 }

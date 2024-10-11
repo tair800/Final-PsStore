@@ -707,15 +707,20 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.UserController",
-    "Method": "ResetPassword",
-    "RelativePath": "api/User/adminResetPassword",
+    "Method": "AdminPasswordChange",
+    "RelativePath": "api/User/adminPasswordChange/{userId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "resetPasswordDto",
-        "Type": "Final.Application.Dtos.UserDtos.AdminResetPasswordDto",
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "adminPasswordChangeDto",
+        "Type": "Final.Application.Dtos.UserDtos.AdminPasswordChangeDto",
         "IsRequired": true
       }
     ],

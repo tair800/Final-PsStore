@@ -20,7 +20,7 @@ namespace Final.Application.Services.Interfaces
         Task<List<string>> GetAllRoles();
         Task<bool> ConfirmEmail(string email, string token);
         Task<List<UserReturnDto>> GetVerifiedUsersAsync();
-
+        Task<bool> AdminPasswordChange(string userId, string newPassword);
     }
 
 }
