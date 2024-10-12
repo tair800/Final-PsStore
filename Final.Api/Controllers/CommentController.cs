@@ -74,5 +74,27 @@ namespace Final.Api.Controllers
 
             throw new CustomExceptions(404, "Id", "Given id is invalid.");
         }
+
+        [HttpGet("{id}/history")]
+        public async Task<IActionResult> GetCommentWithHistory(int id)
+        {
+            var comment = await _commentService.GetOne(id);
+
+            if (comment == null)
+            {
+                throw new CustomExceptions(404, "Comment", "Given comment does not exist.");
+            }
+
+            var commentHistory = await _commentService.GetCommentHistory(id); // Method to fetch history
+
+            var result = new
+            {
+                Comment = comment,
+                History = commentHistory
+            };
+
+            return Ok(result);
+        }
+
     }
 }

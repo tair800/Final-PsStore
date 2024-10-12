@@ -41,9 +41,10 @@
     </div>
 </div>
 
-<!-- Comments Section -->
-<div class="container mt-5">
-    <div class="comment-section p-4">
+<!-- Comments and Add Comment Section -->
+<div class="container mt-5 d-flex justify-content-between">
+    <!-- Comments Section -->
+    <div class="comment-section p-4 w-100">
         <h3 class="mb-4">Comments</h3>
         @if (Model.Contents != null && Model.Contents.Any())
         {
@@ -60,7 +61,7 @@
                             <!-- Check if the comment has been modified -->
                             @if (comment.UpdatedDate.HasValue && comment.UpdatedDate.Value != comment.CreatedDate)
                             {
-<small class="text-github">Modified @comment.UpdatedDate?.AddHours(-4).ToString("MMM dd, yyyy  HH:mm")</small>
+                                <small class="text-github">Modified @comment.UpdatedDate?.AddHours(-4).ToString("MMM dd, yyyy  HH:mm")</small>
                             }
                         </div>
                         @if (comment.CanDelete)
@@ -84,29 +85,29 @@
             <p>No comments available for this game. Be the first to comment!</p>
         }
     </div>
+
+    <!-- Add a New Comment Section -->
+    @if (ViewBag.IsAuthenticated)
+    {
+        <div class="add-comment-form p-4 rounded  ">
+            <h4 class="mb-4">Add a Comment</h4>
+            <form id="addCommentForm">
+                <input type="hidden" id="gameId" value="@Model.GameDetail.Id" />
+                <div class="form-group mb-3">
+                    <textarea id="commentContent" class="add-comment-textarea form-control" placeholder="Write your comment here..." required></textarea>
+                </div>
+                <button type="button" onclick="addComment()" class="add-comment-btn btn btn-success">Add Comment</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="add-comment-form text-center w-25 ms-4">
+            <p>Please <a href="@Url.Action("Login", "User")">log in</a> to add a comment.</p>
+        </div>
+    }
 </div>
 
-
-<!-- Add a New Comment Section -->
-@if (ViewBag.IsAuthenticated)
-{
-    <div class="container add-comment-form mt-5 p-4 rounded">
-        <h4 class="mb-4">Add a Comment</h4>
-        <form id="addCommentForm">
-            <input type="hidden" id="gameId" value="@Model.GameDetail.Id" />
-            <div class="form-group mb-3">
-                <textarea id="commentContent" class="add-comment-textarea form-control" placeholder="Write your comment here..." required></textarea>
-            </div>
-            <button type="button" onclick="addComment()" class="add-comment-btn btn btn-success">Add Comment</button>
-        </form>
-    </div>
-}
-else
-{
-    <div class="container add-comment-form mt-4 text-center">
-        <p>Please <a href="@Url.Action("Login", "User")">log in</a> to add a comment.</p>
-    </div>
-}
 
 <script>
     // Add comment

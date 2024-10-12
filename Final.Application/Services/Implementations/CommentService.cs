@@ -92,12 +92,28 @@ namespace Final.Application.Services.Implementations
             if (comment == null)
                 throw new CustomExceptions(404, "Comment", "Comment not found.");
 
-            _mapper.Map(updateDto, comment);
+            // Store current comment in history before updating
+            var history = new CommentHistory
+            {
+                CommentId = comment.Id,
+                PreviousContent = comment.Content,
+                UpdatedDate = DateTime.UtcNow
+            };
+            await _unitOfWork.commentHistoryRepository.Create(history);
 
+            // Update the comment
+            _mapper.Map(updateDto, comment);
             comment.UpdatedDate = DateTime.UtcNow;
 
             await _unitOfWork.commentRepository.Update(comment);
             _unitOfWork.Commit();
+        }
+
+
+        public async Task<List<CommentHistoryDto>> GetCommentHistory(int commentId)
+        {
+            var history = await _unitOfWork.commentHistoryRepository.GetAll(h => h.CommentId == commentId);
+            return _mapper.Map<List<CommentHistoryDto>>(history);
         }
     }
 }

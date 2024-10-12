@@ -108,6 +108,7 @@ builder.Services.AddScoped<IWishlistService, WishlistService>();
 builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
 builder.Services.AddScoped<IWishlistGameRepository, WishlistGameRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ICommentHistoryRepository, CommentHistoryRepository>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IPromoRepository, PromoRepository>();
 builder.Services.AddScoped<IPromoService, PromoService>();

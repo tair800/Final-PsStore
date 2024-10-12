@@ -1,8 +1,6 @@
-﻿namespace Final.Application.Dtos.CommentDtos
+﻿public class CommentHistoryDto
 {
-    public class CommentHistoryDto
-    {
-        public string PreviousContent { get; set; }
-        public DateTime CreatedDate { get; set; }
-    }
+    public int Id { get; set; }
+    public string Content { get; set; }
+    public DateTime UpdatedDate { get; set; }
 }

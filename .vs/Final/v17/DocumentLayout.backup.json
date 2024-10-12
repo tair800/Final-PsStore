@@ -3,8 +3,72 @@
   "WorkspaceRootPath": "C:\\Users\\taira\\source\\repos\\Final\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\wwwroot\\css\\detail.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\wwwroot\\css\\detail.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\views\\comment\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\views\\comment\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3E7486D-68E4-459F-88D0-C9F6CC712908}|Final.Api\\Final.Api.csproj|c:\\users\\taira\\source\\repos\\final\\final.api\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3E7486D-68E4-459F-88D0-C9F6CC712908}|Final.Api\\Final.Api.csproj|solutionrelative:final.api\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\profiles\\mapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\profiles\\mapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\dtos\\commentdtos\\commenthistorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\dtos\\commentdtos\\commenthistorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\dtos\\commentdtos\\commentreturndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\dtos\\commentdtos\\commentreturndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\viewmodels\\commnetvms\\admincommentdetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\viewmodels\\commnetvms\\admincommentdetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\services\\implementations\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\services\\implementations\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|c:\\users\\taira\\source\\repos\\final\\final.data\\implementations\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|solutionrelative:final.data\\implementations\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3E7486D-68E4-459F-88D0-C9F6CC712908}|Final.Api\\Final.Api.csproj|c:\\users\\taira\\source\\repos\\final\\final.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3E7486D-68E4-459F-88D0-C9F6CC712908}|Final.Api\\Final.Api.csproj|solutionrelative:final.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|c:\\users\\taira\\source\\repos\\final\\final.core\\entities\\commenthistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|solutionrelative:final.core\\entities\\commenthistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|c:\\users\\taira\\source\\repos\\final\\final.core\\entities\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|solutionrelative:final.core\\entities\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\services\\interfaces\\icommentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\services\\interfaces\\icommentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|c:\\users\\taira\\source\\repos\\final\\final.data\\implementations\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|solutionrelative:final.data\\implementations\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|c:\\users\\taira\\source\\repos\\final\\final.data\\implementations\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|solutionrelative:final.data\\implementations\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|c:\\users\\taira\\source\\repos\\final\\final.data\\implementations\\commenthistoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|solutionrelative:final.data\\implementations\\commenthistoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|c:\\users\\taira\\source\\repos\\final\\final.core\\repositories\\icommenthistoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|solutionrelative:final.core\\repositories\\icommenthistoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\views\\game\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -13,22 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\profiles\\mapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\profiles\\mapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\services\\implementations\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\services\\implementations\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E3E7486D-68E4-459F-88D0-C9F6CC712908}|Final.Api\\Final.Api.csproj|c:\\users\\taira\\source\\repos\\final\\final.api\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E3E7486D-68E4-459F-88D0-C9F6CC712908}|Final.Api\\Final.Api.csproj|solutionrelative:final.api\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\dtos\\commentdtos\\commentreturndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\dtos\\commentdtos\\commentreturndto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -70,60 +118,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 576,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 10,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "detail.css",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\detail.css",
-              "RelativeDocumentMoniker": "Final.Mvc\\wwwroot\\css\\detail.css",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\detail.css",
-              "RelativeToolTip": "Final.Mvc\\wwwroot\\css\\detail.css",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowBgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-10-11T20:43:45.186Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Detail.cshtml",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Game\\Detail.cshtml",
-              "RelativeDocumentMoniker": "Final.Mvc\\Views\\Game\\Detail.cshtml",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Game\\Detail.cshtml",
-              "RelativeToolTip": "Final.Mvc\\Views\\Game\\Detail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-11T20:42:13.877Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MapperProfile.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Profiles\\MapperProfile.cs",
-              "RelativeDocumentMoniker": "Final.Application\\Profiles\\MapperProfile.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Profiles\\MapperProfile.cs",
-              "RelativeToolTip": "Final.Application\\Profiles\\MapperProfile.cs",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAQwI0AAABXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T20:41:07.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CommentReturnDto.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\CommentDtos\\CommentReturnDto.cs",
-              "RelativeDocumentMoniker": "Final.Application\\Dtos\\CommentDtos\\CommentReturnDto.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\CommentDtos\\CommentReturnDto.cs",
-              "RelativeToolTip": "Final.Application\\Dtos\\CommentDtos\\CommentReturnDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T20:36:58.41Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -146,20 +142,241 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "Final.Api\\Controllers\\CommentController.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "Final.Api\\Controllers\\CommentController.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAswEkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T20:18:28.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CommentReturnDto.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\CommentDtos\\CommentReturnDto.cs",
+              "RelativeDocumentMoniker": "Final.Application\\Dtos\\CommentDtos\\CommentReturnDto.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\CommentDtos\\CommentReturnDto.cs",
+              "RelativeToolTip": "Final.Application\\Dtos\\CommentDtos\\CommentReturnDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T20:36:58.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "CommentHistoryDto.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\CommentDtos\\CommentHistoryDto.cs",
+              "RelativeDocumentMoniker": "Final.Application\\Dtos\\CommentDtos\\CommentHistoryDto.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\CommentDtos\\CommentHistoryDto.cs",
+              "RelativeToolTip": "Final.Application\\Dtos\\CommentDtos\\CommentHistoryDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:06:40Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MapperProfile.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Profiles\\MapperProfile.cs",
+              "RelativeDocumentMoniker": "Final.Application\\Profiles\\MapperProfile.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Profiles\\MapperProfile.cs",
+              "RelativeToolTip": "Final.Application\\Profiles\\MapperProfile.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAQwJAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T20:41:07.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Controllers\\CommentController.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Controllers\\CommentController.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAtwDYAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:34:48.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Detail.cshtml",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Comment\\Detail.cshtml",
+              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Views\\Comment\\Detail.cshtml",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Comment\\Detail.cshtml",
+              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Views\\Comment\\Detail.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-12T09:34:59.035Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdminCommentDetailVM.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\CommnetVMs\\AdminCommentDetailVM.cs",
+              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\CommnetVMs\\AdminCommentDetailVM.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\CommnetVMs\\AdminCommentDetailVM.cs",
+              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\CommnetVMs\\AdminCommentDetailVM.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:07:01.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "CommentService.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Implementations\\CommentService.cs",
               "RelativeDocumentMoniker": "Final.Application\\Services\\Implementations\\CommentService.cs",
               "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Implementations\\CommentService.cs",
               "RelativeToolTip": "Final.Application\\Services\\Implementations\\CommentService.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAUwEQAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAEAAAAAAAAAAAAApwFQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-11T20:18:28.095Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
+              "Title": "CommentHistory.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Entities\\CommentHistory.cs",
+              "RelativeDocumentMoniker": "Final.Core\\Entities\\CommentHistory.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Entities\\CommentHistory.cs",
+              "RelativeToolTip": "Final.Core\\Entities\\CommentHistory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:11:09.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Implementations\\Repository.cs",
+              "RelativeDocumentMoniker": "Final.Data\\Implementations\\Repository.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Implementations\\Repository.cs",
+              "RelativeToolTip": "Final.Data\\Implementations\\Repository.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAtwGEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:37:42.888Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Final.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\Program.cs",
+              "RelativeToolTip": "Final.Api\\Program.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAHYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:36:21.418Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Entities\\Comment.cs",
+              "RelativeDocumentMoniker": "Final.Core\\Entities\\Comment.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Entities\\Comment.cs",
+              "RelativeToolTip": "Final.Core\\Entities\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:30:25.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ICommentService.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Interfaces\\ICommentService.cs",
+              "RelativeDocumentMoniker": "Final.Application\\Services\\Interfaces\\ICommentService.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Interfaces\\ICommentService.cs",
+              "RelativeToolTip": "Final.Application\\Services\\Interfaces\\ICommentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:29:34.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Implementations\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "Final.Data\\Implementations\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Implementations\\IUnitOfWork.cs",
+              "RelativeToolTip": "Final.Data\\Implementations\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:28:44.037Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Implementations\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Final.Data\\Implementations\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Implementations\\UnitOfWork.cs",
+              "RelativeToolTip": "Final.Data\\Implementations\\UnitOfWork.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAuwDQAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:19:17.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CommentHistoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Implementations\\CommentHistoryRepository.cs",
+              "RelativeDocumentMoniker": "Final.Data\\Implementations\\CommentHistoryRepository.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Implementations\\CommentHistoryRepository.cs",
+              "RelativeToolTip": "Final.Data\\Implementations\\CommentHistoryRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAABhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:18:13.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ICommentHistoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Repositories\\ICommentHistoryRepository.cs",
+              "RelativeDocumentMoniker": "Final.Core\\Repositories\\ICommentHistoryRepository.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Repositories\\ICommentHistoryRepository.cs",
+              "RelativeToolTip": "Final.Core\\Repositories\\ICommentHistoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T09:09:15.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Detail.cshtml",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Game\\Detail.cshtml",
+              "RelativeDocumentMoniker": "Final.Mvc\\Views\\Game\\Detail.cshtml",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Game\\Detail.cshtml",
+              "RelativeToolTip": "Final.Mvc\\Views\\Game\\Detail.cshtml",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAUwFkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T20:42:13.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "ChatController.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Controllers\\ChatController.cs",
               "RelativeDocumentMoniker": "Final.Mvc\\Controllers\\ChatController.cs",
@@ -172,20 +389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CommentController.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\Controllers\\CommentController.cs",
-              "RelativeDocumentMoniker": "Final.Api\\Controllers\\CommentController.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\Controllers\\CommentController.cs",
-              "RelativeToolTip": "Final.Api\\Controllers\\CommentController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAADwvy8AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T20:18:28.144Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 18,
               "Title": "GameController.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Controllers\\GameController.cs",
               "RelativeDocumentMoniker": "Final.Mvc\\Controllers\\GameController.cs",
@@ -198,7 +402,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 21,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\User\\Index.cshtml",
               "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Views\\User\\Index.cshtml",
@@ -206,12 +410,11 @@
               "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Views\\User\\Index.cshtml",
               "ViewState": "AgIAADAAAAAAAAAAAAAUwEMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-11T20:22:17.355Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-11T20:22:17.355Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 26,
               "Title": "Update.cshtml",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\User\\Update.cshtml",
               "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Views\\User\\Update.cshtml",
@@ -219,12 +422,11 @@
               "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Views\\User\\Update.cshtml",
               "ViewState": "AgIAAAUAAAAAAAAAAAAUwBkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-11T20:14:04.638Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-11T20:14:04.638Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 22,
               "Title": "UserUpdateVM.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\UserVMs\\UserUpdateVM.cs",
               "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\UserVMs\\UserUpdateVM.cs",
@@ -232,12 +434,11 @@
               "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\UserVMs\\UserUpdateVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T20:11:31.89Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-11T20:11:31.89Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 20,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Controllers\\UserController.cs",
@@ -250,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 24,
               "Title": "IUserService.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Interfaces\\IUserService.cs",
               "RelativeDocumentMoniker": "Final.Application\\Services\\Interfaces\\IUserService.cs",
@@ -258,12 +459,11 @@
               "RelativeToolTip": "Final.Application\\Services\\Interfaces\\IUserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T19:31:14.335Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-11T19:31:14.335Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 25,
               "Title": "AdminPasswordChangeDto.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\UserDtos\\AdminPasswordChangeDto.cs",
               "RelativeDocumentMoniker": "Final.Application\\Dtos\\UserDtos\\AdminPasswordChangeDto.cs",
@@ -271,12 +471,11 @@
               "RelativeToolTip": "Final.Application\\Dtos\\UserDtos\\AdminPasswordChangeDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T19:30:13.157Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-11T19:30:13.157Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 23,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Implementations\\UserService.cs",
               "RelativeDocumentMoniker": "Final.Application\\Services\\Implementations\\UserService.cs",

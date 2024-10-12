@@ -134,13 +134,16 @@ namespace Final.Application.Profiles
                 .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(src => DateTime.UtcNow)); // Set UpdatedDate to current UTC time
 
             CreateMap<Comment, CommentReturnDto>();
-            //.ForMember(dest => dest.CommentHistories, opt => opt.MapFrom(src => src.CommentHistories));
-            //CreateMap<CommentHistory, CommentHistoryDto>();
 
 
             CreateMap<Comment, CommentReturnDto>()
           .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.User.UserName))  // Map the Username
           .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title));   // Map the GameTitle
+
+            CreateMap<CommentHistory, CommentHistoryDto>()
+          .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.PreviousContent)); // Map PreviousContent to Content
+
+
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Final.Data.Implementations
         public IWishlistGameRepository wishlistGameRepository { get; private set; }
         public ICommentRepository commentRepository { get; private set; }
         public IPromoRepository promoRepository { get; private set; }
+        public ICommentHistoryRepository commentHistoryRepository { get; private set; }
 
 
         public ICategoryRepository CategoryRepository => throw new NotImplementedException();
@@ -32,6 +33,7 @@ namespace Final.Data.Implementations
         public IWishlistGameRepository WishlistGameRepository => throw new NotImplementedException();
         public ICommentRepository CommentRepository => throw new NotImplementedException();
         public IPromoRepository PromoRepository => throw new NotImplementedException();
+        public ICommentHistoryRepository CommentHistoryRepository => throw new NotImplementedException();
 
 
         public UnitOfWork(FinalDbContext context)
@@ -48,6 +50,7 @@ namespace Final.Data.Implementations
             wishlistGameRepository = new WishlistGameRepository(_context);
             commentRepository = new CommentRepository(_context);
             promoRepository = new PromoRepository(_context);
+            commentHistoryRepository = new CommentHistoryRepository(_context);
         }
 
         public void Commit()

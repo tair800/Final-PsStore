@@ -1,20 +1,70 @@
 ﻿@model AdminCommentDetailVM
+<style>
+    .comment-details {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-<h2>Comment Details</h2>
+    .comment-history {
+        margin-top: 20px;
+    }
 
-<div>
-    <h4>Comment Content:</h4>
-    <p>@Model.Content</p>
-    <h4>Comment History:</h4>
-    <ul>
-        @foreach (var history in Model.CommentHistories)
-        {
-            <li>@history.PreviousContent - @history.CreatedDate.ToString("MMM dd, yyyy")</li>
+        .comment-history table {
+            width: 100%;
+            border-collapse: collapse;
         }
-    </ul>
-</div>
 
-<a asp-action="Index" class="btn btn-primary">Back to List</a>
-<form asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:inline">
-    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</button>
-</form>
+        .comment-history th, .comment-history td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+</style>
+<div class="container">
+    <h2>Comment Details</h2>
+
+    <div class="comment-details mt-4">
+        <h4>Comment by @Model.UserName</h4>
+        <p><strong>Posted on:</strong> @Model.CreatedDate.ToString("MMMM dd, yyyy")</p>
+        @if (Model.UpdatedDate.HasValue)
+        {
+            <p><strong>Last Modified:</strong> @Model.UpdatedDate.Value.ToString("MMMM dd, yyyy HH:mm")</p>
+        }
+        <p><strong>Content:</strong></p>
+        <p>@Model.Content</p>
+    </div>
+
+    <hr />
+
+    <h4>Comment History</h4>
+    <div class="comment-history mt-3">
+        @if (Model.History != null && Model.History.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Content</th>
+                        <th>Modified On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.History.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model.History[i].Content</td>
+                            <td>@Model.History[i].UpdatedDate.ToString("MMMM dd, yyyy HH:mm")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No modifications found.</p>
+        }
+    </div>
+</div>

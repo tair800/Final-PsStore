@@ -39,18 +39,29 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
-            var response = await client.GetAsync($"https://localhost:7047/api/Comment/{id}");
+
+            var response = await client.GetAsync($"https://localhost:7047/api/Comment/{id}/history");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                var comment = JsonConvert.DeserializeObject<AdminCommentDetailVM>(data);
-                return View(comment);
+
+                // Parse the entire API response into a dynamic object (or anonymous object)
+                var apiResult = JsonConvert.DeserializeObject<dynamic>(data);
+
+                // Deserialize the comment portion
+                var commentDetail = JsonConvert.DeserializeObject<AdminCommentDetailVM>(Convert.ToString(apiResult.comment));
+
+                // Deserialize the history portion
+                commentDetail.History = JsonConvert.DeserializeObject<List<CommentHistoryDto>>(Convert.ToString(apiResult.history));
+
+                return View(commentDetail);
             }
 
             ModelState.AddModelError("", "Error retrieving comment details.");
             return RedirectToAction("Index");
         }
+
 
         // Delete a comment
         [HttpPost]
