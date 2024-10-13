@@ -14,9 +14,11 @@ namespace Final.Application.Dtos.GameDtos
         public int CategoryId { get; set; }
         public Platform Platform { get; set; }
         //public int DlcId { get; set; }
-        public List<DlcReturnDto> DlcNames { get; set; } = new List<DlcReturnDto>(); // Use List of DlcReturnDto
+        public List<DlcReturnDto> DlcNames { get; set; } = new List<DlcReturnDto>();
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public bool IsInWishlist { get; set; }
+
     }
 
 }

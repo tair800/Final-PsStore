@@ -457,6 +457,10 @@
       "PackagePath": "staticwebassets\\admin\\vendors\\mdi\\fonts\\materialdesignicons-webfont.woff2"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\adminDlcIndexCss.css",
+      "PackagePath": "staticwebassets\\css\\adminDlcIndexCss.css"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\detail.css",
       "PackagePath": "staticwebassets\\css\\detail.css"
     },

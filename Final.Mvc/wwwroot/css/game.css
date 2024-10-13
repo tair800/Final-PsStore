@@ -137,24 +137,21 @@ a{
 }
 
 .favorite-btn {
+    background: transparent;
+    border: none;
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: transparent;
-    border: none;
-    padding: 10px;
     cursor: pointer;
+    color: #ccc;
 }
 
-    .favorite-btn i {
-        font-size: 1.5rem;
+    .favorite-btn .wishlist-added {
+        color: red;
     }
 
-     /*   .favorite-btn i:hover {
-            color: red;
-            transition: color 0.3s ease;
-        }*/
+    .favorite-btn .fa-heart {
+        font-size: 24px;
+    }
 
-.wishlist-added {
-    color: red;
-}
+

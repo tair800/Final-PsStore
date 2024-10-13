@@ -75,10 +75,11 @@
                         <div class="col-12 col-sm-6 col-lg-4 game-card-container mb-4">
                             <div class="game-card">
                                 <img src="@game.ImgUrl" alt="@game.Title" class="game-image" />
-                                <button class="favorite-btn" data-game-id="@game.Id" data-in-wishlist="false">
-                                    <i class="fas fa-heart"></i>
-                                </button>
 
+                                <!-- Wishlist Button -->
+                                <button class="favorite-btn" data-game-id="@game.Id" data-in-wishlist="@game.IsInWishlist.ToString().ToLower()">
+                                    <i class="fas fa-heart @(game.IsInWishlist ? "wishlist-added" : "")"></i>
+                                </button>
 
                                 <!-- Platform Labels -->
                                 <div class="platform-labels">
@@ -273,7 +274,7 @@ $(document).on("click", ".add-to-cart-btn", function () {
                             timer: 1500
                         });
 
-                        // Toggle the wishlist status
+                        // Update the UI
                         $(`[data-game-id='${gameId}']`).data("in-wishlist", true);
                         $(`[data-game-id='${gameId}'] i`).addClass("wishlist-added");
                     },
@@ -303,7 +304,7 @@ $(document).on("click", ".add-to-cart-btn", function () {
                             timer: 1500
                         });
 
-                        // Toggle the wishlist status
+                        // Update the UI
                         $(`[data-game-id='${gameId}']`).data("in-wishlist", false);
                         $(`[data-game-id='${gameId}'] i`).removeClass("wishlist-added");
                     },

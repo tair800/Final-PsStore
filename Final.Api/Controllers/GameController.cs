@@ -107,5 +107,24 @@ namespace Final.Api.Controllers
             return Ok(searchResults);
         }
 
+        [HttpGet("UserWishlist")]
+        public async Task<IActionResult> GetAllUserWishlist(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest("User ID cannot be null or empty.");
+            }
+
+            var wishlistGames = await _gameService.GetAllUserWishlist(userId);
+
+            if (!wishlistGames.Any())
+            {
+                return NotFound("No games found in the user's wishlist.");
+            }
+
+            return Ok(wishlistGames);
+        }
+
+
     }
 }

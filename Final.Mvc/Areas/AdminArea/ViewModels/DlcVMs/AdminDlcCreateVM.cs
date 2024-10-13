@@ -1,19 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Final.Mvc.Areas.AdminArea.ViewModels.DlcVMs
+﻿namespace Final.Mvc.Areas.AdminArea.ViewModels.DlcVMs
 {
     public class AdminDlcCreateVM
     {
-        [Required]
         public string Name { get; set; }
 
-        [Required]
         public decimal Price { get; set; }
 
-        [Required]
         public int GameId { get; set; }
 
         public List<AdminGameVM> Games { get; set; } = new List<AdminGameVM>();
+        public IFormFile Image { get; set; }
+
     }
 
     public class AdminGameVM

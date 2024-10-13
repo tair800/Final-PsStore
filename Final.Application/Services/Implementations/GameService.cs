@@ -37,6 +37,25 @@ namespace Final.Application.Services.Implementations
             return _mapper.Map<List<GameReturnDto>>(games);
         }
 
+        public async Task<List<GameReturnDto>> GetAllUserWishlist(string userId)
+        {
+            // Fetch the wishlist for the user
+            var wishlist = await _unitOfWork.wishlistRepository.GetEntity(w => w.UserId == userId, "WishlistGames.Game");
+
+            if (wishlist == null || !wishlist.WishlistGames.Any())
+            {
+                return new List<GameReturnDto>(); // Return an empty list if no wishlist exists or no games in the wishlist
+            }
+
+            // Get the games from the wishlist
+            var games = wishlist.WishlistGames.Select(wg => wg.Game).ToList();
+
+            // Map games to DTOs
+            return _mapper.Map<List<GameReturnDto>>(games);
+        }
+
+
+
         // Get a single game by ID
         public async Task<GameReturnDto> GetOne(int id)
         {

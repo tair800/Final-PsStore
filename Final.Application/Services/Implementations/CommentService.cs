@@ -31,7 +31,6 @@ namespace Final.Application.Services.Implementations
             }
             catch (DbUpdateException dbEx)
             {
-                // Log the detailed error, including inner exception
                 Console.WriteLine($"Error while adding comment: {dbEx.InnerException?.Message ?? dbEx.Message}");
                 throw new Exception("An error occurred while saving the comment. Please check the database constraints and ensure the data is valid.");
             }
@@ -57,15 +56,14 @@ namespace Final.Application.Services.Implementations
             {
                 comments = await _unitOfWork.commentRepository.GetAll(
                     c => c.GameId == gameId,
-                    "Game", "User");  // Include the User entity
+                    "Game", "User");
             }
             else
             {
                 comments = await _unitOfWork.commentRepository.GetAll(
-                    null, "Game", "User");  // Include the User entity
+                    null, "Game", "User");
             }
 
-            // Use AutoMapper to map the comments to CommentReturnDto
             return _mapper.Map<List<CommentReturnDto>>(comments);
         }
 
@@ -73,14 +71,13 @@ namespace Final.Application.Services.Implementations
         {
             var comment = await _unitOfWork.commentRepository.GetEntity(
                 c => c.Id == id,
-                "Game", "User");  // Include the User entity
+                "Game", "User");
 
             if (comment == null)
             {
                 throw new CustomExceptions(404, "Comment", "Comment not found.");
             }
 
-            // Use AutoMapper to map the comment to CommentReturnDto
             return _mapper.Map<CommentReturnDto>(comment);
         }
 
@@ -92,7 +89,6 @@ namespace Final.Application.Services.Implementations
             if (comment == null)
                 throw new CustomExceptions(404, "Comment", "Comment not found.");
 
-            // Store current comment in history before updating
             var history = new CommentHistory
             {
                 CommentId = comment.Id,
@@ -101,7 +97,6 @@ namespace Final.Application.Services.Implementations
             };
             await _unitOfWork.commentHistoryRepository.Create(history);
 
-            // Update the comment
             _mapper.Map(updateDto, comment);
             comment.UpdatedDate = DateTime.UtcNow;
 

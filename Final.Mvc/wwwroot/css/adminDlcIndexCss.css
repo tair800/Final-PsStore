@@ -1,0 +1,37 @@
+﻿/* Ensure table is responsive and no scrolling is required */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.8rem; /* Reduce font size on smaller screens */
+    }
+
+        .table td, .table th {
+            padding: 0.5rem;
+            word-wrap: break-word; /* Ensure text wraps and fits within the cell */
+        }
+
+    img {
+        width: 50px; /* Reduce image size for smaller screens */
+        height: auto;
+    }
+
+    .btn {
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .table th, .table td {
+        font-size: 0.75rem; /* Further reduce font size for very small screens */
+        white-space: normal; /* Allow text to wrap within cells */
+    }
+}
+
+/* Additional padding and styles for larger screens */
+.table {
+    font-size: 1rem;
+}
+
+.table-responsive-sm {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}

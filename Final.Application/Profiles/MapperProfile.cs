@@ -78,14 +78,13 @@ namespace Final.Application.Profiles
             CreateMap<Dlc, DlcReturnDto>();
 
             CreateMap<DlcUpdateDto, Dlc>()
-                .ForMember(dest => dest.Image, opt => opt.Ignore()) // Ignore Image since it is handled separately
-                .ForMember(dest => dest.Price, opt => opt.Ignore()); // Ignore Price
+                .ForMember(dest => dest.Image, opt => opt.Ignore())
+                .ForMember(dest => dest.Price, opt => opt.Ignore());
 
 
 
             //basket
 
-            // Mapping BasketGame to BasketGameDto
             CreateMap<Basket, UserBasketDto>()
             .ForMember(dest => dest.BasketGames, opt => opt.MapFrom(src => src.BasketGames));
 
@@ -122,26 +121,24 @@ namespace Final.Application.Profiles
 
 
 
-            // Mapping from CommentCreateDto to Comment entity
             CreateMap<CommentCreateDto, Comment>();
 
-            // Mapping from CommentUpdateDto to Comment entity
             CreateMap<CommentUpdateDto, Comment>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore()) // Ensure Id is not overwritten when updating
-                .ForMember(dest => dest.UserId, opt => opt.Ignore()) // UserId shouldn't be changed during update
-                .ForMember(dest => dest.GameId, opt => opt.Ignore()) // GameId shouldn't be changed during update
-                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore()) // Ignore CreatedDate
-                .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(src => DateTime.UtcNow)); // Set UpdatedDate to current UTC time
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.UserId, opt => opt.Ignore())
+                .ForMember(dest => dest.GameId, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
 
             CreateMap<Comment, CommentReturnDto>();
 
 
             CreateMap<Comment, CommentReturnDto>()
-          .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.User.UserName))  // Map the Username
-          .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title));   // Map the GameTitle
+          .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.User.UserName))
+          .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title));
 
             CreateMap<CommentHistory, CommentHistoryDto>()
-          .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.PreviousContent)); // Map PreviousContent to Content
+          .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.PreviousContent));
 
 
         }

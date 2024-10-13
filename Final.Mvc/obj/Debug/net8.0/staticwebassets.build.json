@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Q4a3/DsqwvudAb3oRRlIsxtbrf8iTKtLIl2XUqemYtc=",
+  "Hash": "7+88LTHaD1oZWJ5lm67xoKQEeapNuw7fuV95FGrJ//E=",
   "Source": "Final.Mvc",
   "BasePath": "_content/Final.Mvc",
   "Mode": "Default",
@@ -2200,6 +2200,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\admin\\vendors\\mdi\\fonts\\materialdesignicons-webfont.woff2"
+    },
+    {
+      "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\adminDlcIndexCss.css",
+      "SourceId": "Final.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\",
+      "BasePath": "_content/Final.Mvc",
+      "RelativePath": "css/adminDlcIndexCss.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\adminDlcIndexCss.css"
     },
     {
       "Identity": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\detail.css",

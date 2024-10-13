@@ -15,7 +15,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        // List all comments
         public async Task<IActionResult> Index()
 
         {
@@ -34,7 +33,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return View(new List<AdminCommentListVM>());
         }
 
-        // Show the details of a specific comment, including its history
         public async Task<IActionResult> Detail(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -46,13 +44,10 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             {
                 var data = await response.Content.ReadAsStringAsync();
 
-                // Parse the entire API response into a dynamic object (or anonymous object)
                 var apiResult = JsonConvert.DeserializeObject<dynamic>(data);
 
-                // Deserialize the comment portion
                 var commentDetail = JsonConvert.DeserializeObject<AdminCommentDetailVM>(Convert.ToString(apiResult.comment));
 
-                // Deserialize the history portion
                 commentDetail.History = JsonConvert.DeserializeObject<List<CommentHistoryDto>>(Convert.ToString(apiResult.history));
 
                 return View(commentDetail);
@@ -63,7 +58,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
         }
 
 
-        // Delete a comment
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

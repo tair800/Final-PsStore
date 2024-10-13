@@ -554,6 +554,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Final.Api.Controllers.GameController",
+    "Method": "GetAllUserWishlist",
+    "RelativePath": "api/Game/UserWishlist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Final.Api.Controllers.PromoController",
     "Method": "GetAll",
     "RelativePath": "api/Promo",

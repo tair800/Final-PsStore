@@ -87,7 +87,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return View(model);
         }
 
-        [HttpPost]
         public async Task<IActionResult> Create(AdminDlcCreateVM model)
         {
             if (!ModelState.IsValid)
@@ -106,14 +105,23 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            var jsonContent = JsonConvert.SerializeObject(new
-            {
-                Name = model.Name,
-                Price = model.Price,
-                GameId = model.GameId
-            });
+            // Create multipart form data content
+            var content = new MultipartFormDataContent();
 
-            var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+            // Add name, price, and GameId as string content
+            content.Add(new StringContent(model.Name), "Name");
+            content.Add(new StringContent(model.Price.ToString()), "Price");
+            content.Add(new StringContent(model.GameId.ToString()), "GameId");
+
+            // Add the image if it exists
+            if (model.Image != null && model.Image.Length > 0)
+            {
+                var fileStream = model.Image.OpenReadStream();
+                var imageContent = new StreamContent(fileStream);
+                imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(model.Image.ContentType);
+                content.Add(imageContent, "Image", model.Image.FileName);
+            }
+
             var response = await client.PostAsync("https://localhost:7047/api/Dlc", content);
 
             if (response.IsSuccessStatusCode)
@@ -124,6 +132,8 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             ModelState.AddModelError("", "There was an error creating the DLC.");
             return View(model);
         }
+
+
 
 
 

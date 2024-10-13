@@ -22,61 +22,77 @@ namespace Final.Mvc.Controllers
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7047/api/Game");
+            // Fetch all games
+            HttpResponseMessage gameResponse = await client.GetAsync("https://localhost:7047/api/Game");
 
-            if (response.IsSuccessStatusCode)
+            if (!gameResponse.IsSuccessStatusCode)
             {
-                var data = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(data);
-
-
-
-                var distinctCategories = result
-                    .Select(g => new { g.CategoryId, g.CategoryName })
-                    .Distinct()
-                    .ToList();
-
-                if (category.HasValue)
-                {
-                    result = result.Where(g => g.CategoryId == category).ToList();
-                }
-
-                if (platform.HasValue)
-                {
-                    result = result.Where(g => (int)g.Platform == platform).ToList();
-                }
-
-                switch (sortByPrice)
-                {
-                    case "price_asc":
-                        result = result.OrderBy(g => g.Price).ToList();
-                        break;
-                    case "price_desc":
-                        result = result.OrderByDescending(g => g.Price).ToList();
-                        break;
-                    default:
-                        break;
-                }
-
-                // Sort by release date
-                switch (sortByDate)
-                {
-                    case "date_asc":
-                        result = result.OrderBy(g => g.CreatedDate).ToList();
-                        break;
-                    case "date_desc":
-                        result = result.OrderByDescending(g => g.CreatedDate).ToList();
-                        break;
-                    default:
-                        break;
-                }
-
-                ViewBag.Categories = distinctCategories;
-
-                return View(result);
+                return BadRequest("Error fetching games.");
             }
 
-            return BadRequest("Error fetching games.");
+            var gameData = await gameResponse.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(gameData);
+
+            // Extract userId from the token
+            var token = Request.Cookies["token"];
+            string userId = GetUserIdFromToken(token);
+
+            // Fetch the user's wishlist
+            HttpResponseMessage wishlistResponse = await client.GetAsync($"https://localhost:7047/api/Game/UserWishlist?userId={userId}");
+
+            if (!wishlistResponse.IsSuccessStatusCode)
+            {
+                return BadRequest("Error fetching wishlist.");
+            }
+
+            var wishlistData = await wishlistResponse.Content.ReadAsStringAsync();
+            var wishlistGames = JsonConvert.DeserializeObject<List<GameListItemVM>>(wishlistData);
+
+            // Mark games that are in the user's wishlist
+            var wishlistGameIds = wishlistGames.Select(g => g.Id).ToList();
+            foreach (var game in result)
+            {
+                game.IsInWishlist = wishlistGameIds.Contains(game.Id);
+            }
+
+            // Filtering logic (category, platform, etc.)
+            if (category.HasValue)
+            {
+                result = result.Where(g => g.CategoryId == category).ToList();
+            }
+
+            if (platform.HasValue)
+            {
+                result = result.Where(g => (int)g.Platform == platform).ToList();
+            }
+
+            // Sorting logic (price, date, etc.)
+            switch (sortByPrice)
+            {
+                case "price_asc":
+                    result = result.OrderBy(g => g.Price).ToList();
+                    break;
+                case "price_desc":
+                    result = result.OrderByDescending(g => g.Price).ToList();
+                    break;
+            }
+
+            switch (sortByDate)
+            {
+                case "date_asc":
+                    result = result.OrderBy(g => g.CreatedDate).ToList();
+                    break;
+                case "date_desc":
+                    result = result.OrderByDescending(g => g.CreatedDate).ToList();
+                    break;
+            }
+
+            ViewBag.Categories = result
+                .Select(g => new { g.CategoryId, g.CategoryName })
+                .Distinct()
+                .ToList();
+
+            return View(result);
         }
 
         public async Task<IActionResult> Detail(int id)
