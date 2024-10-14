@@ -1,4 +1,5 @@
 using Final.Api.Middlewares;
+using Final.Api.Stripe;
 using Final.Application.Dtos.CategoryDtos;
 using Final.Application.Profiles;
 using Final.Application.Services.Implementations;
@@ -18,7 +19,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Stripe;
 using System.Text;
+using TokenService = Final.Application.Services.Implementations.TokenService;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -57,6 +60,9 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
+
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost7296",
@@ -90,6 +96,9 @@ builder.Services.AddFluentValidationAutoValidation()
         .AddValidatorsFromAssemblyContaining<CategoryCreateDto>()
         .AddFluentValidationRulesToSwagger();
 
+builder.Services.Configure<StripeSettings>(config.GetSection("Stripe"));
+StripeConfiguration.ApiKey = config["Stripe:SecretKey"];
+
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IGameService, GameService>();
@@ -112,6 +121,8 @@ builder.Services.AddScoped<ICommentHistoryRepository, CommentHistoryRepository>(
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IPromoRepository, PromoRepository>();
 builder.Services.AddScoped<IPromoService, PromoService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();

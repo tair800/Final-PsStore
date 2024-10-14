@@ -270,6 +270,73 @@ namespace Final.Data.Migrations
                     b.ToTable("Games");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Final.Core.Entities.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -616,7 +683,7 @@ namespace Final.Data.Migrations
             modelBuilder.Entity("Final.Core.Entities.CommentHistory", b =>
                 {
                     b.HasOne("Final.Core.Entities.Comment", "Comment")
-                        .WithMany()
+                        .WithMany("CommentHistories")
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -644,6 +711,25 @@ namespace Final.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Final.Core.Entities.OrderItem", b =>
+                {
+                    b.HasOne("Final.Core.Entities.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Final.Core.Entities.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.Wishlist", b =>
@@ -737,6 +823,11 @@ namespace Final.Data.Migrations
                     b.Navigation("Games");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.Comment", b =>
+                {
+                    b.Navigation("CommentHistories");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Game", b =>
                 {
                     b.Navigation("BasketGames");
@@ -746,6 +837,11 @@ namespace Final.Data.Migrations
                     b.Navigation("Dlcs");
 
                     b.Navigation("WishlistGames");
+                });
+
+            modelBuilder.Entity("Final.Core.Entities.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.User", b =>

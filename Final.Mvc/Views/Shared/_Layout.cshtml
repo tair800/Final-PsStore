@@ -41,6 +41,14 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/basket.js"></script>
 
+    <script>
+        $(document).ready(function () {
+            // Trigger checkout process
+            $(document).on('click', '#checkoutBtn', function () {
+                window.location.href = '@Url.Action("Checkout", "Basket")';
+            });
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

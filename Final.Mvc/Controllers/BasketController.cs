@@ -47,38 +47,27 @@ public class BasketController : Controller
         }
     }
 
-    [HttpGet]
     public async Task<IActionResult> Checkout()
     {
         var token = Request.Cookies["token"];
         if (string.IsNullOrEmpty(token))
         {
-            return RedirectToAction("Login", "Account"); // Redirect to login if not authenticated
+            return RedirectToAction("Login", "Account");
         }
 
         string userId = GetUserIdFromToken(token);
-
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        // Fetch the user's basket for checkout
+        // Fetch basket for the user
         HttpResponseMessage response = await _client.GetAsync($"https://localhost:7047/api/Basket/{userId}");
-
         if (response.IsSuccessStatusCode)
         {
             var data = await response.Content.ReadAsStringAsync();
             var basketDto = JsonConvert.DeserializeObject<UserBasketVM>(data);
-
-            if (basketDto == null || basketDto.BasketGames == null)
-            {
-                basketDto = new UserBasketVM { BasketGames = new List<BasketGameVM>() };
-            }
-
-            return View("Checkout", basketDto); // Pass the basket data to the Checkout view
+            return View("Checkout", basketDto);
         }
         else
         {
-            var error = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"Error fetching basket: {error}");
             return RedirectToAction("GetBasket");
         }
     }
@@ -89,12 +78,10 @@ public class BasketController : Controller
         var token = Request.Cookies["token"];
         if (string.IsNullOrEmpty(token))
         {
-            return Unauthorized(); // Handle unauthenticated case
+            return Unauthorized();
         }
 
-        var userId = GetUserIdFromToken(token);
-
-        // Call your API to place the order
+        string userId = GetUserIdFromToken(token);
         var response = await _client.PostAsync($"https://localhost:7047/api/Order/place?userId={userId}", null);
 
         if (response.IsSuccessStatusCode)

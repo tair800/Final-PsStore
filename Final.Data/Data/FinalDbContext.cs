@@ -16,6 +16,8 @@ namespace Final.Data.Data
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentHistory> CommentHistories { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         public FinalDbContext(DbContextOptions<FinalDbContext> options) : base(options)
         {

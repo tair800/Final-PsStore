@@ -20,6 +20,7 @@ namespace Final.Data.Implementations
         public ICommentRepository commentRepository { get; private set; }
         public IPromoRepository promoRepository { get; private set; }
         public ICommentHistoryRepository commentHistoryRepository { get; private set; }
+        public IOrderRepository orderRepository { get; private set; }
 
 
         public ICategoryRepository CategoryRepository => throw new NotImplementedException();
@@ -34,6 +35,7 @@ namespace Final.Data.Implementations
         public ICommentRepository CommentRepository => throw new NotImplementedException();
         public IPromoRepository PromoRepository => throw new NotImplementedException();
         public ICommentHistoryRepository CommentHistoryRepository => throw new NotImplementedException();
+        public IOrderRepository OrderRepository => throw new NotImplementedException();
 
 
         public UnitOfWork(FinalDbContext context)
@@ -51,6 +53,7 @@ namespace Final.Data.Implementations
             commentRepository = new CommentRepository(_context);
             promoRepository = new PromoRepository(_context);
             commentHistoryRepository = new CommentHistoryRepository(_context);
+            orderRepository = new OrderRepository(_context);
         }
 
         public void Commit()

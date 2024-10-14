@@ -4,6 +4,7 @@ using Final.Application.Dtos.CategoryDtos;
 using Final.Application.Dtos.CommentDtos;
 using Final.Application.Dtos.DlcDtos;
 using Final.Application.Dtos.GameDtos;
+using Final.Application.Dtos.OrderDtos;
 using Final.Application.Dtos.SettingsDto;
 using Final.Application.Dtos.UserDtos;
 using Final.Application.Dtos.WishlistDtos;
@@ -140,6 +141,12 @@ namespace Final.Application.Profiles
             CreateMap<CommentHistory, CommentHistoryDto>()
           .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.PreviousContent));
 
+            //order
+            CreateMap<Order, OrderDto>()
+            .ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems));
+
+            CreateMap<OrderItem, OrderItemDto>()
+           .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title));
 
         }
     }
