@@ -35,9 +35,9 @@ namespace Final.Application.Services.Implementations
                 {
                     GameId = basketGame.GameId,
                     Quantity = basketGame.Quantity,
-                    Price = (int)basketGame.Game.Price // Keep Price as decimal
+                    Price = (decimal)basketGame.Game.Price // Keep Price as decimal
                 }).ToList(),
-                TotalPrice = (int)basket.BasketGames.Sum(b => b.Game.Price * b.Quantity), // Sum prices as decimal
+                TotalPrice = (decimal)basket.BasketGames.Sum(b => b.Game.Price * b.Quantity), // Sum prices as decimal
                 CreatedDate = DateTime.UtcNow
             };
             if (order is null) throw new CustomExceptions(400, "order", "order is null");

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-
 namespace Final.Application.Services.Implementations
 {
     public class UserService : IUserService
@@ -39,6 +38,7 @@ namespace Final.Application.Services.Implementations
             _jwtSettings = jwtSettings.Value;
             _contextAccessor = contextAccessor;
         }
+
         public async Task<IdentityResult> RegisterUserAsync(RegisterDto registerDto, string requestScheme, string requestHost)
         {
             User user = new()
@@ -71,13 +71,12 @@ namespace Final.Application.Services.Implementations
             return result;
         }
 
-
         public async Task<List<UserReturnDto>> GetAllUsers()
         {
             var users = _userManager.Users.ToList();
 
             if (users == null || !users.Any())
-                throw new Exception("No users found.");
+                throw new CustomExceptions(404, "No users found.");
 
             var userDtos = new List<UserReturnDto>();
             foreach (var user in users)
@@ -107,19 +106,18 @@ namespace Final.Application.Services.Implementations
             return userDto;
         }
 
-
         public async Task<string> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
             if (user == null)
-                throw new Exception("Invalid username.");
+                throw new CustomExceptions(400, "Invalid username.");
 
             if (user.IsBlocked)
-                throw new Exception("Your account has been blocked. Please contact support.");
+                throw new CustomExceptions(403, "Your account has been blocked. Please contact support.");
 
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!result)
-                throw new Exception("Invalid password.");
+                throw new CustomExceptions(400, "Invalid password.");
 
             var roles = await _userManager.GetRolesAsync(user);
 
@@ -131,13 +129,13 @@ namespace Final.Application.Services.Implementations
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)
-                throw new Exception("User not found.");
+                throw new CustomExceptions(404, "User not found.");
 
             user.IsBlocked = !user.IsBlocked;
             var result = await _userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
-                throw new Exception("Unable to change the user's status.");
+                throw new CustomExceptions(500, "Unable to change the user's status.");
 
             return user.IsBlocked;
         }
@@ -146,17 +144,17 @@ namespace Final.Application.Services.Implementations
         {
             var user = await _userManager.FindByIdAsync(editRoleDto.UserId);
             if (user == null)
-                throw new Exception("User not found.");
+                throw new CustomExceptions(404, "User not found.");
 
             var currentRoles = await _userManager.GetRolesAsync(user);
             var result = await _userManager.RemoveFromRolesAsync(user, currentRoles);
 
             if (!result.Succeeded)
-                throw new Exception("Failed to remove old roles.");
+                throw new CustomExceptions(500, "Failed to remove old roles.");
 
             result = await _userManager.AddToRolesAsync(user, editRoleDto.Roles);
             if (!result.Succeeded)
-                throw new Exception("Failed to add new roles.");
+                throw new CustomExceptions(500, "Failed to add new roles.");
 
             return true;
         }
@@ -179,20 +177,20 @@ namespace Final.Application.Services.Implementations
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)
-                throw new Exception("User not found.");
+                throw new CustomExceptions(404, "User not found.");
 
             var passwordCheck = await _userManager.CheckPasswordAsync(user, updateUserDto.PasswordConfirmation);
             if (!passwordCheck)
-                throw new Exception("Confirm password is incorrect.");
+                throw new CustomExceptions(400, "Confirm password is incorrect.");
 
             if (await _userManager.Users.AnyAsync(u => u.UserName == updateUserDto.UserName && u.Id != user.Id))
-                throw new Exception("Username is already taken.");
+                throw new CustomExceptions(400, "Username is already taken.");
 
             _mapper.Map(updateUserDto, user);
 
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
-                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+                throw new CustomExceptions(500, string.Join(", ", result.Errors.Select(e => e.Description)));
 
             return _mapper.Map<UserReturnDto>(user);
         }
@@ -209,19 +207,13 @@ namespace Final.Application.Services.Implementations
             return new OkObjectResult(new { message = "Email verified successfully." });
         }
 
-
-
-
-
-
-
         public async Task<ForgotPasswordDto> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
         {
-            if (string.IsNullOrEmpty(forgotPasswordDto.Email)) throw new CustomExceptions(400, "cant be null");
+            if (string.IsNullOrEmpty(forgotPasswordDto.Email)) throw new CustomExceptions(400, "Email can't be null.");
 
             var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
             if (user == null)
-                throw new Exception("User not found.");
+                throw new CustomExceptions(404, "User not found.");
 
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
@@ -234,24 +226,20 @@ namespace Final.Application.Services.Implementations
         {
             var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
             if (user == null)
-                throw new Exception("User not found.");
+                throw new CustomExceptions(404, "User not found.");
 
             var result = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.NewPassword);
             if (!result.Succeeded)
-                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+                throw new CustomExceptions(500, string.Join(", ", result.Errors.Select(e => e.Description)));
 
             return true;
         }
-
 
         public async Task<List<string>> GetAllRoles()
         {
             var roles = await _roleManager.Roles.Select(r => r.Name).ToListAsync();
             return roles;
         }
-
-
-
 
         public async Task<bool> ConfirmEmail(string email, string token)
         {
@@ -279,7 +267,7 @@ namespace Final.Application.Services.Implementations
                                                   .ToListAsync();
 
             if (verifiedUsers == null || !verifiedUsers.Any())
-                throw new Exception("No verified users found.");
+                throw new CustomExceptions(404, "No verified users found.");
 
             var userDtos = _mapper.Map<List<UserReturnDto>>(verifiedUsers);
             return userDtos;
@@ -289,17 +277,15 @@ namespace Final.Application.Services.Implementations
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
-                throw new Exception("User not found.");
+                throw new CustomExceptions(404, "User not found.");
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
             if (!result.Succeeded)
-                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+                throw new CustomExceptions(500, string.Join(", ", result.Errors.Select(e => e.Description)));
 
             return true;
         }
-
-
     }
 }

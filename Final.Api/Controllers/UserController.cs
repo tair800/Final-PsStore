@@ -152,12 +152,12 @@ namespace Final.Api.Controllers
         }
 
         [HttpPost("adminPasswordChange/{userId}")]
-        public async Task<IActionResult> AdminPasswordChange(string userId, [FromBody] AdminPasswordChangeDto adminPasswordChangeDto)
+        public async Task<IActionResult> AdminPasswordChange(string userId, AdminPasswordChangeDto adminPasswordChangeDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _userService.AdminPasswordChange(userId, adminPasswordChangeDto.NewPassword);
+            var result = await _userService.AdminPasswordChange(userId, adminPasswordChangeDto.Password);
             if (!result)
                 return BadRequest("Failed to change password.");
 

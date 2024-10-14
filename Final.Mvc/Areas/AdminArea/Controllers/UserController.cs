@@ -1,5 +1,4 @@
-﻿using Final.Application.Dtos.UserDtos;
-using Final.Mvc.Areas.AdminArea.ViewModels.UserVMs;
+﻿using Final.Mvc.Areas.AdminArea.ViewModels.UserVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -169,67 +168,57 @@ namespace YourProjectNamespace.Areas.Admin.Controllers
         public async Task<IActionResult> Update(string id)
         {
             if (string.IsNullOrEmpty(id))
-                return BadRequest("Id cannot be null or empty.");
+            {
+                return BadRequest("User ID cannot be null.");
+            }
+
+            UserUpdateVM userEditVM;
 
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
+            // Fetch the user details
             HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/user/profile/{id}");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
-                var user = JsonConvert.DeserializeObject<UserUpdateVM>(data);
-
-                return View(user);
+                userEditVM = JsonConvert.DeserializeObject<UserUpdateVM>(data);
+                return View(userEditVM);
             }
-
-            TempData["ErrorMessage"] = "Unable to retrieve user data.";
-            return RedirectToAction("Index");
+            else
+            {
+                return NotFound("User not found.");
+            }
         }
 
+        // POST: Update the user's details
         [HttpPost]
-        public async Task<IActionResult> Update(string id, UserUpdateVM model)
+        public async Task<IActionResult> Update(UserUpdateVM userEditVM)
         {
-            if (string.IsNullOrEmpty(model.PasswordConfirmation))
+            if (!ModelState.IsValid)
             {
-                TempData["ErrorMessage"] = "Password confirmation is required.";
-                return View(model);
+                return View(userEditVM);
             }
-
-            var updateUserDto = new UpdateUserDto
-            {
-                UserName = model.UserName,
-                FullName = model.FullName,
-                PasswordConfirmation = model.PasswordConfirmation
-            };
 
             using HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            var content = new StringContent(JsonConvert.SerializeObject(updateUserDto), Encoding.UTF8, "application/json");
+            // Prepare the user details to be sent to the API
+            var content = new StringContent(JsonConvert.SerializeObject(userEditVM), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync($"https://localhost:7047/api/user/update/{id}", content);
+            HttpResponseMessage response = await client.PostAsync($"https://localhost:7047/api/user/adminPasswordChange/{userEditVM.Id}", content);
 
             if (response.IsSuccessStatusCode)
             {
-                TempData["SuccessMessage"] = "User information has been updated successfully.";
+                TempData["SuccessMessage"] = "User updated successfully.";
                 return RedirectToAction("Index");
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
-            {
-                TempData["ErrorMessage"] = "Username is already taken.";
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                TempData["ErrorMessage"] = "Password confirmation is incorrect.";
             }
             else
             {
-                TempData["ErrorMessage"] = "Failed to update user information.";
+                TempData["ErrorMessage"] = "Failed to update the user.";
+                return View(userEditVM);
             }
-
-            return View(model);
         }
     }
 }
