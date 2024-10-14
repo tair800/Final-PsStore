@@ -8,7 +8,6 @@ using Final.Core.Entities;
 using Final.Data.Implementations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -195,16 +194,13 @@ namespace Final.Application.Services.Implementations
             return _mapper.Map<UserReturnDto>(user);
         }
 
-        public async Task<IActionResult> VerifyEmailAsync(string email, string token)
+        public async Task VerifyEmailAsync(string email, string token)
         {
             User appUser = await _userManager.FindByEmailAsync(email);
-            if (appUser == null) return new NotFoundResult();
+            if (appUser is null)
+                throw new CustomExceptions(400, "userId", "User with this user id is not found.");
 
             var result = await _userManager.ConfirmEmailAsync(appUser, token);
-            if (!result.Succeeded) return new BadRequestObjectResult("Invalid token.");
-
-            await _signInManager.SignInAsync(appUser, isPersistent: true);
-            return new OkObjectResult(new { message = "Email verified successfully." });
         }
 
         public async Task<ForgotPasswordDto> ForgotPassword(ForgotPasswordDto forgotPasswordDto)

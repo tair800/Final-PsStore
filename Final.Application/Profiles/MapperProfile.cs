@@ -148,6 +148,11 @@ namespace Final.Application.Profiles
             CreateMap<OrderItem, OrderItemDto>()
            .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title));
 
+            CreateMap<BasketGame, OrderItem>()
+    .ForMember(dest => dest.GameId, opt => opt.MapFrom(src => src.GameId))
+    .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity))
+    .ForMember(dest => dest.Price, opt => opt.MapFrom(src => (decimal)src.Game.Price));
+
         }
     }
 }

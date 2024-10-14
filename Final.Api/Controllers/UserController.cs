@@ -102,8 +102,8 @@ namespace Final.Api.Controllers
         [HttpGet("verifyemail")]
         public async Task<IActionResult> VerifyEmail(string email, string token)
         {
-            var result = await _userService.VerifyEmailAsync(email, token);
-            return Redirect("https://localhost7296/user/login"); // This will return the appropriate IActionResult
+            await _userService.VerifyEmailAsync(email, token);
+            return Redirect("https://localhost:7296/user/login");
         }
 
 

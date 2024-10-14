@@ -27,20 +27,17 @@ namespace Final.Application.Services.Implementations
                 throw new CustomExceptions(400, "Basket", "Basket is empty or does not exist.");
             }
 
-            // Create the order entity
+            // Use AutoMapper to map BasketGames to OrderItems
             var order = new Order
             {
                 UserId = userId,
-                OrderItems = basket.BasketGames.Select(basketGame => new OrderItem
-                {
-                    GameId = basketGame.GameId,
-                    Quantity = basketGame.Quantity,
-                    Price = (decimal)basketGame.Game.Price // Keep Price as decimal
-                }).ToList(),
+                OrderItems = _mapper.Map<List<OrderItem>>(basket.BasketGames),
                 TotalPrice = (decimal)basket.BasketGames.Sum(b => b.Game.Price * b.Quantity), // Sum prices as decimal
                 CreatedDate = DateTime.UtcNow
             };
-            if (order is null) throw new CustomExceptions(400, "order", "order is null");
+
+            if (order == null) throw new CustomExceptions(400, "Order", "Order is null.");
+
             // Add the order to the database
             await _unitOfWork.orderRepository.Create(order);
 
@@ -48,6 +45,7 @@ namespace Final.Application.Services.Implementations
 
             return order.Id;
         }
+
 
         // Get order by ID
         public async Task<OrderDto> GetOrder(int orderId)

@@ -54,7 +54,6 @@ C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.VisualStu
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\NuGet.Common.dll
@@ -73,14 +72,11 @@ C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Composition.
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Composition.Runtime.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Composition.TypedParts.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Drawing.Common.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Memory.Data.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Reflection.MetadataLoadContext.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Security.Permissions.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\System.Windows.Extensions.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\af\Humanizer.resources.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\ar\Humanizer.resources.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\az\Humanizer.resources.dll
@@ -226,11 +222,7 @@ C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win-arm\na
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Application.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Core.dll
 C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Final.Data.dll
@@ -263,3 +255,4 @@ C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\refint\Final.Mvc.dl
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.pdb
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\Final.Mvc.genruntimeconfig.cache
 C:\Users\taira\source\repos\Final\Final.Mvc\obj\Debug\net8.0\ref\Final.Mvc.dll
+C:\Users\taira\source\repos\Final\Final.Mvc\bin\Debug\net8.0\Stripe.net.dll
