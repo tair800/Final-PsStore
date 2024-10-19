@@ -17,12 +17,12 @@ namespace Final.Mvc.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+
         public async Task<IActionResult> Index(int? category = null, int? platform = null, string sortByPrice = null, string sortByDate = null)
         {
             using HttpClient client = new();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            // Fetch all games
+            // Fetch all games (no need for authorization here, it's public data)
             HttpResponseMessage gameResponse = await client.GetAsync("https://localhost:7047/api/Game");
 
             if (!gameResponse.IsSuccessStatusCode)
@@ -33,26 +33,31 @@ namespace Final.Mvc.Controllers
             var gameData = await gameResponse.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(gameData);
 
-            // Extract userId from the token
+            // Check if the user is logged in by checking the token
             var token = Request.Cookies["token"];
-            string userId = GetUserIdFromToken(token);
-
-            // Fetch the user's wishlist
-            HttpResponseMessage wishlistResponse = await client.GetAsync($"https://localhost:7047/api/Game/UserWishlist?userId={userId}");
-
-            if (!wishlistResponse.IsSuccessStatusCode)
+            if (!string.IsNullOrEmpty(token))
             {
-                return BadRequest("Error fetching wishlist.");
-            }
+                // If the user is logged in, attach the Bearer token and fetch the user's wishlist
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var wishlistData = await wishlistResponse.Content.ReadAsStringAsync();
-            var wishlistGames = JsonConvert.DeserializeObject<List<GameListItemVM>>(wishlistData);
+                // Extract userId from the token
+                string userId = GetUserIdFromToken(token);
 
-            // Mark games that are in the user's wishlist
-            var wishlistGameIds = wishlistGames.Select(g => g.Id).ToList();
-            foreach (var game in result)
-            {
-                game.IsInWishlist = wishlistGameIds.Contains(game.Id);
+                // Fetch the user's wishlist
+                HttpResponseMessage wishlistResponse = await client.GetAsync($"https://localhost:7047/api/Game/UserWishlist?userId={userId}");
+
+                if (wishlistResponse.IsSuccessStatusCode)
+                {
+                    var wishlistData = await wishlistResponse.Content.ReadAsStringAsync();
+                    var wishlistGames = JsonConvert.DeserializeObject<List<GameListItemVM>>(wishlistData);
+
+                    // Mark games that are in the user's wishlist
+                    var wishlistGameIds = wishlistGames.Select(g => g.Id).ToList();
+                    foreach (var game in result)
+                    {
+                        game.IsInWishlist = wishlistGameIds.Contains(game.Id);
+                    }
+                }
             }
 
             // Filtering logic (category, platform, etc.)

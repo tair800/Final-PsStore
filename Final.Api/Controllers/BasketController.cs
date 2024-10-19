@@ -99,7 +99,37 @@ namespace Final.Api.Controllers
                 return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
             }
         }
+        [HttpPost("add-dlc")]
+        public async Task<IActionResult> AddDlcToBasket(string userId, int dlcId, int quantity)
+        {
+            try
+            {
+                await _basketService.AddDlc(userId, dlcId, quantity);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        // New endpoint for removing DLC from basket
+        [HttpDelete("remove-dlc")]
+        public async Task<IActionResult> RemoveDlcFromBasket(string userId, int dlcId)
+        {
+            try
+            {
+                var result = await _basketService.DeleteDlc(userId, dlcId);
+                if (result)
+                    return Ok(new { Message = "DLC removed from the basket." });
+                else
+                    return NotFound(new { Message = "DLC not found in basket." });
+            }
+            catch (CustomExceptions ex)
+            {
+                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+            }
+        }
 
     }
 }

@@ -10,6 +10,10 @@ namespace Final.Core.Entities
         public int GameId { get; set; }
         public Game Game { get; set; }
 
+        public int? DlcId { get; set; }
+
+        public Dlc Dlc { get; set; }
+
         public int Quantity { get; set; }
 
         public double Sum { get; set; }

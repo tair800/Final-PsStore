@@ -43,6 +43,32 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.BasketController",
+    "Method": "AddDlcToBasket",
+    "RelativePath": "api/Basket/add-dlc",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "dlcId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "quantity",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.BasketController",
     "Method": "ClearBasket",
     "RelativePath": "api/Basket/clear",
     "HttpMethod": "DELETE",
@@ -72,6 +98,27 @@
       },
       {
         "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.BasketController",
+    "Method": "RemoveDlcFromBasket",
+    "RelativePath": "api/Basket/remove-dlc",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "dlcId",
         "Type": "System.Int32",
         "IsRequired": false
       }

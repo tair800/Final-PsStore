@@ -157,6 +157,93 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
             return true;
         }
+
+        // Add DLC to basket by userId
+        public async Task<Basket> AddDlc(string userId, int dlcId, int quantity)
+        {
+            // Check if user exists
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new CustomExceptions(404, "UserNotFound", "User not found.");
+
+            // Check if DLC exists
+            var dlc = await _unitOfWork.dlcRepository.GetEntity(d => d.Id == dlcId);
+            if (dlc == null) throw new CustomExceptions(404, "DlcNotFound", "DLC not found.");
+
+            // Check if basket exists for the user
+            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames.Dlc");
+
+            // If basket does not exist, create a new one
+            if (basket == null)
+            {
+                basket = new Basket
+                {
+                    UserId = user.Id,
+                    BasketGames = new List<BasketGame>()
+                };
+
+                // Create a new basket in the database
+                await _unitOfWork.basketRepository.Create(basket);
+                _unitOfWork.Commit();  // Ensure the basket is saved before adding DLC
+            }
+
+            // Check if the DLC already exists in the user's basket
+            var basketDlc = basket.BasketGames.FirstOrDefault(bg => bg.DlcId == dlcId);
+
+            // If the DLC is already in the basket, update the quantity
+            if (basketDlc != null)
+            {
+                basketDlc.Quantity += quantity;
+                await _unitOfWork.basketGameRepository.Update(basketDlc);
+            }
+            else
+            {
+                // Add the DLC to the basket if it's not already there
+                var newBasketDlc = new BasketGame
+                {
+                    BasketId = basket.Id,
+                    DlcId = dlc.Id,  // Set the foreign key for DLC
+                    Quantity = quantity
+                };
+
+                // Add the new DLC to the basket
+                basket.BasketGames.Add(newBasketDlc);
+                await _unitOfWork.basketGameRepository.Create(newBasketDlc);
+            }
+
+            // Commit the transaction to the database
+            _unitOfWork.Commit();
+
+            // Return the updated basket
+            return basket;
+        }
+
+
+        // Delete DLC from basket by userId
+        public async Task<bool> DeleteDlc(string userId, int dlcId)
+        {
+            // Check if user exists
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new CustomExceptions(404, "UserNotFound", "User not found.");
+
+            // Check if basket exists for the user
+            var basket = await _unitOfWork.basketRepository.GetEntity(b => b.UserId == user.Id, "BasketGames.Game");
+            if (basket == null) throw new CustomExceptions(404, "BasketNotFound", "Basket not found.");
+
+            // Check if the DLC exists in the basket
+            var basketDlc = basket.BasketGames.FirstOrDefault(bg => bg.Dlc.Id == dlcId);
+            if (basketDlc != null)
+            {
+                basket.BasketGames.Remove(basketDlc);
+                await _unitOfWork.basketGameRepository.Delete(basketDlc);
+                _unitOfWork.Commit();
+                return true;
+            }
+
+            throw new CustomExceptions(404, "DlcNotFound", "DLC not found in basket.");
+        }
+
+
+
         //public async Task<Basketdr> UpdateGameQuantity(string userId, string gameId, int change)
         //{
         //    var userBasket = await _unitOfWork.Baskets.GetBasketByUserIdAsync(userId);

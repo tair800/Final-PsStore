@@ -10,5 +10,9 @@ namespace Final.Application.Services.Interfaces
         Task<Basket> Update(string userId, int gameId, int quantity);
         Task<bool> Delete(string userId, int gameId);
         Task<bool> ClearBasket(string userId);
+        Task<Basket> AddDlc(string userId, int dlcId, int quantity);
+        Task<bool> DeleteDlc(string userId, int dlcId);
+
+
     }
 }

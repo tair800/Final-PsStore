@@ -1,28 +1,48 @@
 ﻿using Final.Mvc.ViewModels.DlcVMs;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace Final.Mvc.Controllers
 {
     public class DlcController : Controller
     {
-        public IActionResult Index()
+        private readonly HttpClient _httpClient;
+
+        public DlcController(HttpClient httpClient)
         {
-            return View();
+            _httpClient = httpClient;
         }
+
+        // Index action to list all DLCs
+        public async Task<IActionResult> Index()
+        {
+            // Call your API endpoint to get all DLCs
+            var response = await _httpClient.GetAsync("https://localhost:7047/api/dlc");
+            if (!response.IsSuccessStatusCode)
+            {
+                // Handle error
+                return View(new List<DlcListVM>());
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var dlcs = JsonSerializer.Deserialize<IEnumerable<DlcListVM>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return View(dlcs);
+        }
+
+        // Detail action to show details of a specific DLC
         public async Task<IActionResult> Detail(int id)
         {
-            using HttpClient client = new();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7047/api/Dlc/{id}");
-            if (response.IsSuccessStatusCode)
+            // Call your API endpoint to get details of a specific DLC
+            var response = await _httpClient.GetAsync($"https://localhost:7047/api/dlc/{id}");
+            if (!response.IsSuccessStatusCode)
             {
-                var data = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<DlcDetailVM>(data);
-                return View(result);
+                // Handle error
+                return NotFound();
             }
-            return NotFound("Dlc not found.");
+
+            var content = await response.Content.ReadAsStringAsync();
+            var dlc = JsonSerializer.Deserialize<DlcDetailVM>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return View(dlc);
         }
     }
 }

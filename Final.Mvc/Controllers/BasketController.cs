@@ -47,6 +47,8 @@ public class BasketController : Controller
         }
     }
 
+
+
     public async Task<IActionResult> Checkout()
     {
         var token = Request.Cookies["token"];

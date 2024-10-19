@@ -10,6 +10,8 @@ namespace Final.Core.Entities
         public int GameId { get; set; }
 
         public Game Game { get; set; }
+        public ICollection<BasketGame> BasketGames { get; set; }
+
 
     }
 }

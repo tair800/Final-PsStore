@@ -65,6 +65,9 @@ namespace Final.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DlcId")
+                        .HasColumnType("int");
+
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
@@ -83,6 +86,8 @@ namespace Final.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BasketId");
+
+                    b.HasIndex("DlcId");
 
                     b.HasIndex("GameId");
 
@@ -650,6 +655,11 @@ namespace Final.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Final.Core.Entities.Dlc", "Dlc")
+                        .WithMany("BasketGames")
+                        .HasForeignKey("DlcId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Final.Core.Entities.Game", "Game")
                         .WithMany("BasketGames")
                         .HasForeignKey("GameId")
@@ -657,6 +667,8 @@ namespace Final.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Basket");
+
+                    b.Navigation("Dlc");
 
                     b.Navigation("Game");
                 });
@@ -826,6 +838,11 @@ namespace Final.Data.Migrations
             modelBuilder.Entity("Final.Core.Entities.Comment", b =>
                 {
                     b.Navigation("CommentHistories");
+                });
+
+            modelBuilder.Entity("Final.Core.Entities.Dlc", b =>
+                {
+                    b.Navigation("BasketGames");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.Game", b =>
