@@ -1,5 +1,6 @@
+using Final.Mvc.ViewModels.CategoryVMs; // Add reference to CategoryVM
 using Final.Mvc.ViewModels.GameVMs;
-using Final.Mvc.ViewModels.HomeVMs; // Add reference to HomeVM
+using Final.Mvc.ViewModels.HomeVMs;
 using Final.Mvc.ViewModels.PromoVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -30,7 +31,7 @@ namespace Final.Mvc.Controllers
                 homeVM.Games = new List<GameListItemVM>();
             }
 
-            // Fetch new games (if this is a different API endpoint, otherwise use the same list)
+            // Fetch new games
             HttpResponseMessage newGamesResponse = await client.GetAsync("https://localhost:7047/api/Game/New"); // Assuming this endpoint exists
             if (newGamesResponse.IsSuccessStatusCode)
             {
@@ -42,7 +43,7 @@ namespace Final.Mvc.Controllers
                 homeVM.NewGames = new List<GameListItemVM>();
             }
 
-            // Fetch deals (assuming there's a separate API endpoint for deals)
+            // Fetch deals
             HttpResponseMessage dealsResponse = await client.GetAsync("https://localhost:7047/api/Game/Deals"); // Assuming this endpoint exists
             if (dealsResponse.IsSuccessStatusCode)
             {
@@ -54,20 +55,7 @@ namespace Final.Mvc.Controllers
                 homeVM.Deals = new List<GameListItemVM>();
             }
 
-            //// Fetch other necessary data (e.g., categories, promos) if required
-            //// Example for categories:
-            //HttpResponseMessage categoriesResponse = await client.GetAsync("https://localhost:7047/api/Category"); // Assuming this endpoint exists
-            //if (categoriesResponse.IsSuccessStatusCode)
-            //{
-            //    var categoriesData = await categoriesResponse.Content.ReadAsStringAsync();
-            //    homeVM.Categories = JsonConvert.DeserializeObject<List<CategoryVM>>(categoriesData);
-            //}
-            //else
-            //{
-            //    homeVM.Categories = new List<CategoryVM>();
-            //}
-
-            // Assuming promos are fetched the same way
+            // Fetch promos
             HttpResponseMessage promosResponse = await client.GetAsync("https://localhost:7047/api/Promo"); // Assuming this endpoint exists
             if (promosResponse.IsSuccessStatusCode)
             {
@@ -77,6 +65,18 @@ namespace Final.Mvc.Controllers
             else
             {
                 homeVM.Promos = new List<PromoVM>();
+            }
+
+            // Fetch categories
+            HttpResponseMessage categoriesResponse = await client.GetAsync("https://localhost:7047/api/Category"); // Assuming this endpoint exists
+            if (categoriesResponse.IsSuccessStatusCode)
+            {
+                var categoriesData = await categoriesResponse.Content.ReadAsStringAsync();
+                homeVM.Categories = JsonConvert.DeserializeObject<List<CategoryFirstVM>>(categoriesData);
+            }
+            else
+            {
+                homeVM.Categories = new List<CategoryFirstVM>();
             }
 
             // Return the HomeVM to the view

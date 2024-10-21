@@ -101,7 +101,7 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                 content.Add(imageContent, "File", model.File.FileName);
             }
 
-            var response = await client.PostAsync("https://localhost:7047/api/promo", content);
+            var response = await client.PostAsync("https://localhost:7047/api/promo/create", content);
 
             if (response.IsSuccessStatusCode)
             {

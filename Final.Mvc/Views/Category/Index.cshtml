@@ -1,31 +1,64 @@
-﻿@model List<CategoryVM>
+﻿@model List<CategoryFirstVM>
+
+<div class="container-fluid mt-4"> <!-- Use container-fluid for full width -->
+    <div class="row g-3">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var category in Model)
+            {
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3"> <!-- 4 items per row on large screens -->
+                    <a href="@Url.Action("Index", "Game", new { category = category.Id })" class="category-link">
+                        <div class="category-card text-center py-4">
+                            <!-- Optional Icon Placeholder -->
+                            <h5 class="bg-white text-dark w-50 mx-auto rounded-2">@category.Name</h5>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No categories available.</p>
+        }
+    </div>
+</div>
+
+<!-- CSS for category card -->
 <style>
     /* Category card container */
     .category-card {
-        background-color: #333 !important;
+        background-color: #333; /* Card background */
         color: white;
         border-radius: 8px;
         text-align: center;
         padding: 20px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 150px;
+        height: 200px; /* Adjust the height */
         transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
-        /* Hover effect for the category card */
-        .category-card:hover {
-            transform: scale(1.05); /* Slight zoom effect */
-            background-color: #444 !important; /* Slightly lighter background on hover */
-        }
+    /* Hover effect for the category card */
+    .category-card:hover {
+        transform: scale(1.05); /* Slight zoom effect */
+        background-color: #444; /* Slightly lighter background on hover */
+    }
 
-        /* Category name styling */
-        .category-card h5 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: white;
-        }
+    /* Category name styling */
+    .category-card h5 {
+        margin: 0;
+        font-size: 1.2rem;
+        color: white;
+    }
+
+    /* Icon above the text */
+    .category-card i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: white;
+    }
 
     /* Link styling for the category links */
     .category-link {
@@ -34,27 +67,16 @@
         display: block;
     }
 
-        /* Ensure hover effect applies smoothly */
-        .category-link:hover .category-card {
-            transform: scale(1.05);
-            background-color: #444;
-        }
+    /* Ensure hover effect applies smoothly */
+    .category-link:hover .category-card {
+        transform: scale(1.05);
+        background-color: #444;
+    }
 
+    /* Responsive adjustments */
+@*     @media (max-width: 576px) {
+        .category-card {
+            height: 150px; /* Adjust height for smaller screens */
+        }
+    } *@
 </style>
-
-<div class="container">
-    <div class="row">
-        @foreach (var category in Model)
-        {
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-1">
-            <a href="@Url.Action("Index", "Game", new { category = category.Id })" class="category-link">
-                    <div class="category-card " style="background-color:#333 !important">
-                        <h5 class=" w-100 rounded-4">@category.Name</h5>
-                    </div>
-                </a>
-            </div>
-        }
-    </div>
-</div>
-
-

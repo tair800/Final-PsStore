@@ -1,0 +1,62 @@
+﻿/* Category card container */
+.category-card {
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 178px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; /* Ensures content stays inside the card */
+}
+
+    /* Hover effect for the category card */
+    .category-card:hover {
+        transform: scale(1.05); /* Slight zoom effect */
+        background-color: #444;
+    }
+
+/* Category title styling */
+.category-title {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+    text-overflow: ellipsis; /* Truncates overflowing text */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Ensures text does not overflow */
+    max-width: 100%; /* Limits the width to the card */
+}
+
+/* For the second line in the "More Categories" card */
+.category-card h6 {
+    margin: 0;
+    font-size: 1rem;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Link styling for the category links */
+.category-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+    /* Ensure hover effect applies smoothly */
+    .category-link:hover .category-card {
+        transform: scale(1.05);
+        background-color: #444;
+    }
+
+/* Responsive adjustments */
+ @media (max-width: 576px) {
+    .category-card {
+        height: 150px;
+    }
+}

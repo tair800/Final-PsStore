@@ -1,46 +1,32 @@
-﻿@model List<CategoryVM> 
-
-<div class="category-slider autoplay">
-    @foreach (var category in Model)
-    {
-        <div class="category-item">
-            <div class="category-card">
-                <h5 class="bg-white text-dark w-50 rounded-2">@category.Name</h5>
+﻿@model List<CategoryFirstVM>
+@section Links {
+<link href="~/css/categoryPartial.css" rel="stylesheet" />
+}
+<div class="container-fluid mt-4"> <!-- Use container-fluid for full width -->
+    <div class="row g-3">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var category in Model.Take(7)) 
+            {
+                <div class="col-6 col-md-4 col-lg-3"> <!-- 4 items per row on large screens -->
+                    <a style="text-decoration:none;"href="@Url.Action("Index", "Game", new { category = category.Id })" class="category-link">
+                        <div class="category-card text-center py-4">
+                            <h5 class="category-title">@category.Name</h5>
+                        </div>
+                    </a>
+                </div>
+            }
+            <!-- "More Categories" card as the last item -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <a style="text-decoration:none;" href="@Url.Action("Index", "Category")" class="category-link">
+                    <div class="category-card text-center py-4">
+                        <i class="fa-solid fa-layer-group fs-1 mb-2"></i>
+                        <h6>View All Categories</h6>
+                    </div>
+                </a>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('.category-slider').slick({
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                autoplay: true,  // Enable autoplay for the slider
-                infinite: true,  // Enable infinite scrolling
-                arrows: true,  // Show next/prev arrows
-                responsive: [
-                    {
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 3
-                        }
-                    },
-                    {
-                        breakpoint: 992,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-        });
-    </script>
-}
+

@@ -465,6 +465,10 @@
       "PackagePath": "staticwebassets\\css\\category.css"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\categoryPartial.css",
+      "PackagePath": "staticwebassets\\css\\categoryPartial.css"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\detail.css",
       "PackagePath": "staticwebassets\\css\\detail.css"
     },
