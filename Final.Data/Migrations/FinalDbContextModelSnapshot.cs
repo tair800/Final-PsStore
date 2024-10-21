@@ -342,6 +342,36 @@ namespace Final.Data.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.Promo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Promos");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -655,10 +685,9 @@ namespace Final.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Final.Core.Entities.Dlc", "Dlc")
+                    b.HasOne("Final.Core.Entities.Dlc", null)
                         .WithMany("BasketGames")
-                        .HasForeignKey("DlcId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("DlcId");
 
                     b.HasOne("Final.Core.Entities.Game", "Game")
                         .WithMany("BasketGames")
@@ -667,8 +696,6 @@ namespace Final.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Basket");
-
-                    b.Navigation("Dlc");
 
                     b.Navigation("Game");
                 });

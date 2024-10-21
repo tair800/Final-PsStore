@@ -18,40 +18,37 @@ namespace Final.Mvc.Controllers
         }
 
 
-        public async Task<IActionResult> Index(int? category = null, int? platform = null, string sortByPrice = null, string sortByDate = null)
+        public async Task<IActionResult> Index(int? category = null, int? platform = null, string sortByPrice = null, string sortByDate = null, int pageNumber = 1, int pageSize = 10)
         {
-            using HttpClient client = new();
+            var client = _httpClientFactory.CreateClient();
+            var token = Request.Cookies["token"];
 
-            // Fetch all games (no need for authorization here, it's public data)
-            HttpResponseMessage gameResponse = await client.GetAsync("https://localhost:7047/api/Game");
+            // Set Authorization header if token is available
+            if (!string.IsNullOrEmpty(token))
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
 
+            // Fetch paged games
+            HttpResponseMessage gameResponse = await client.GetAsync($"https://localhost:7047/api/Game/Paged?pageNumber={pageNumber}&pageSize={pageSize}");
             if (!gameResponse.IsSuccessStatusCode)
             {
                 return BadRequest("Error fetching games.");
             }
 
             var gameData = await gameResponse.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(gameData);
+            var paginatedResult = JsonConvert.DeserializeObject<PaginationVM<GameListItemVM>>(gameData);
+            var result = paginatedResult.Data;
 
-            // Check if the user is logged in by checking the token
-            var token = Request.Cookies["token"];
+            // Fetch the user's wishlist if they are logged in
             if (!string.IsNullOrEmpty(token))
             {
-                // If the user is logged in, attach the Bearer token and fetch the user's wishlist
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-                // Extract userId from the token
                 string userId = GetUserIdFromToken(token);
-
-                // Fetch the user's wishlist
                 HttpResponseMessage wishlistResponse = await client.GetAsync($"https://localhost:7047/api/Game/UserWishlist?userId={userId}");
-
                 if (wishlistResponse.IsSuccessStatusCode)
                 {
                     var wishlistData = await wishlistResponse.Content.ReadAsStringAsync();
                     var wishlistGames = JsonConvert.DeserializeObject<List<GameListItemVM>>(wishlistData);
-
-                    // Mark games that are in the user's wishlist
                     var wishlistGameIds = wishlistGames.Select(g => g.Id).ToList();
                     foreach (var game in result)
                     {
@@ -59,7 +56,6 @@ namespace Final.Mvc.Controllers
                     }
                 }
             }
-
             // Filtering logic (category, platform, etc.)
             if (category.HasValue)
             {
@@ -96,6 +92,10 @@ namespace Final.Mvc.Controllers
                 .Select(g => new { g.CategoryId, g.CategoryName })
                 .Distinct()
                 .ToList();
+
+            ViewBag.CurrentPage = paginatedResult.CurrentPage;
+            ViewBag.TotalPages = paginatedResult.TotalPages;
+            ViewBag.PageSize = paginatedResult.PageSize;
 
             return View(result);
         }

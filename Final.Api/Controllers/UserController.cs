@@ -163,6 +163,17 @@ namespace Final.Api.Controllers
 
             return Ok("Password changed successfully.");
         }
+        [HttpPost("createRole")]
+        public async Task<IActionResult> CreateRole()
+        {
+            var result = await _userService.CreateRoles();
+            if (result)
+            {
+                return Ok(new { message = "Roles created successfully." });
+            }
+
+            return BadRequest("Failed to create roles.");
+        }
 
     }
 }

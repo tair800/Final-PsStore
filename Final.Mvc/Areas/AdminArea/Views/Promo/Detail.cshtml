@@ -1,0 +1,21 @@
+﻿@using Final.Mvc.Areas.AdminArea.ViewModels.PromoVMs
+@model AdminPromoDetailVM
+
+<h1>Promo Details</h1>
+
+<div class="form-group">
+    <label for="Id">Promo Id</label>
+    <input type="text" class="form-control" id="Id" value="@Model.Id" readonly />
+</div>
+<div class="form-group">
+    <label for="Name">Promo Name</label>
+    <input type="text" class="form-control" id="Name" value="@Model.Name" readonly />
+</div>
+
+<div class="form-group">
+    <label for="Image">Promo Image</label><br />
+    <img src="@Model.ImageUrl" alt="@Model.Name" width="300" />
+</div>
+
+<a href="@Url.Action("Index", "Promo")" class="btn btn-secondary">Back to List</a>
+<a href="@Url.Action("Update", "Promo", new { id = Model.Id })" class="btn btn-warning">Edit Promo</a>

@@ -1,66 +1,23 @@
-﻿@model List<GameListItemVM>
+﻿@using Final.Mvc.ViewModels.HomeVMs
+@model HomeVM
 
 @section Links {
     <link href="~/css/home.css" rel="stylesheet" />
 }
 
-<!-- Promotional Section -->
-<section class="promo-section">
-    <img id="promoImage" width="100%" height="auto" alt="Promo Image"> <!-- No default src -->
-</section>
-
-
-
-<!-- Squares Section -->
-<div class="container">
-    <div class="image-row">
-        <div class="image-square">
-            <img src="./img/gta.jpg" alt="Astro Bot" class="square-img">
-        </div>
-        <div class="image-square">
-            <img src="img/vrising.jpeg" alt="Astro Bot" class="square-img">
-        </div>
-        <div class="image-square">
-            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-        </div>
-        <div class="image-square">
-            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-        </div>
-        <div class="image-square">
-            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-        </div>
-        <div class="image-square">
-            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-        </div>
-        <div class="image-square">
-            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-        </div>
-        <div class="image-square">
-            <img src="img/rainbow.jpeg" alt="Astro Bot" class="square-img">
-        </div>
-    </div>
-</div>
-
+<!-- Load Promo Section -->
+@Html.Partial("_PromoPartial", Model.Promos)
 
 <div class="game-list pb-3">
-    <h1 class="pb-2"> All Deals</h1>
-    @await Component.InvokeAsync("Game")
+    <h1 class="pb-2">New Games</h1>
+    @Html.Partial("_NewGamesPartial", Model.NewGames)
 
-    <h1 class="pb-2"> All Deals</h1>
-    @await Component.InvokeAsync("Game")
+    <h1 class="pb-2">All Games</h1>
+    @Html.Partial("_AllGamesPartial", Model.Games)
 
-    <h1 class="pb-2"> All Deals</h1>
-    @await Component.InvokeAsync("Game")
+    <h1 class="pb-2">Deals</h1>
+    @Html.Partial("_AllDealsPartial", Model.Deals)
 
-    <!-- Special Card: Redirect to Latest Created Games -->
-    <div class="card latest-games-redirect-card">
-        <a href="@Url.Action("Index", "Game", new { sortByDate = "date_desc" })">
-            <img src="~/img/new-games.jpg" alt="View Latest Games" class="special-img">
-            <div class="sale-banner-text">
-                <h3>View Latest Games</h3>
-            </div>
-        </a>
-    </div>
 </div>
 
 
@@ -131,67 +88,6 @@
 
 
 
-    $(document).ready(function () {
-        console.log('Initializing Slick Carousel...');
-
-        if ($('.autoplay').length) {
-            const $slider = $('.autoplay');
-
-            $slider.slick({
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                autoplay: false,  // Disable autoplay for manual sliding
-                infinite: false,  // Disable infinite scrolling
-                rtl: false,
-                arrows: true,
-                responsive: [
-                    {
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 4
-                        }
-                    },
-                    {
-                        breakpoint: 992,
-                        settings: {
-                            slidesToShow: 3
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 576,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            });
-
-            function updateNavigation() {
-                var currentSlide = $slider.slick('slickCurrentSlide');
-                var totalSlides = $slider.slick('getSlick').slideCount - $slider.slick('slickGetOption', 'slidesToShow');
-
-                if (currentSlide >= totalSlides - 3) {
-                    $('.slick-next').addClass('slick-disabled'); // Disable next button
-                } else {
-                    $('.slick-next').removeClass('slick-disabled'); // Enable next button
-                }
-            }
-
-            $slider.on('afterChange', function (event, slick, currentSlide) {
-                updateNavigation();
-            });
-
-            updateNavigation();
-        } else {
-            console.log('Slick Carousel container not found.');
-        }
-    });
 
 
 

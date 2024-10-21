@@ -1,0 +1,22 @@
+﻿@using Final.Mvc.Areas.AdminArea.ViewModels.PromoVMs
+@model AdminPromoUpdateVM
+
+<h1>Edit Promo</h1>
+
+<form asp-action="Update" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="Name">Promo Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="File">Promo Image (optional)</label>
+        <input type="file" class="form-control" id="File" name="File" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+<a href="@Url.Action("Index", "Promo")" class="btn btn-secondary">Back to List</a>

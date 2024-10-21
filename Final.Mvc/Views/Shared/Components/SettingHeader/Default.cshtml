@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand me-3" href="/home">
-                    @Html.Raw(Model.Settings["Logo"]) <!-- Displaying the logo from the settings dictionary -->
+                @* @Html.Raw(Model.Settings["Logo"]) <!-- Displaying the logo from the settings dictionary --> *@
 
             </a>
 
@@ -22,7 +22,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/chat">Chat</a>
                     </li>
-                   
+
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Setting" asp-action="Index">Support</a>
                     </li>
@@ -80,8 +80,9 @@
                             <span class="nav-link">Welcome, @Model.FullName!</span>
                         </li>
                         <li class="nav-item">
-                        <a class="dropdown-item" asp-controller="User" asp-action="Update">Detail</a></li>
-                       
+                            <a class="dropdown-item" asp-controller="User" asp-action="Update">Detail</a>
+                        </li>
+
                         <li class="nav-item">
                             <form asp-controller="User" asp-action="Logout" method="post">
                                 <button type="submit" class="btn btn-link nav-link">Logout</button>
@@ -188,7 +189,6 @@
             margin: 5px 0;
         }
 
-
 </style>
 
 
@@ -211,7 +211,7 @@
         return null; // Return null if the cookie is not found
     }
 
-    
+
     // Function to check for token in cookies
     function checkForToken() {
         const token = getCookie('token'); // Get token from cookies
@@ -225,7 +225,7 @@
     }
 
     // Call the function on page load
-    basket.onclick = function() {
+    basket.onclick = function () {
         checkForToken();
     };
 
@@ -235,14 +235,14 @@
         fetch('/Basket/GetBasket')
             .then(response => response.text())
             .then(data => {
-                basketContent.innerHTML = data; 
+                basketContent.innerHTML = data;
             })
             .catch(error => {
                 basketContent.innerHTML = `<div class="alert alert-danger">Failed to load basket. Please try again later.</div>`;
             });
 
 
-      
-     
+
+
     });
 </script>

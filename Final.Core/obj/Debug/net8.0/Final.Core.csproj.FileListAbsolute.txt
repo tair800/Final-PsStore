@@ -11,3 +11,16 @@ C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.dll
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\refint\Final.Core.dll
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\Final.Core.pdb
 C:\Users\taira\source\repos\Final\Final.Core\obj\Debug\net8.0\ref\Final.Core.dll
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\bin\Debug\net8.0\Final.Core.deps.json
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\bin\Debug\net8.0\Final.Core.dll
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\bin\Debug\net8.0\Final.Core.pdb
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\Final.Core.csproj.AssemblyReference.cache
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\Final.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\Final.Core.AssemblyInfoInputs.cache
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\Final.Core.AssemblyInfo.cs
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\Final.Core.csproj.CoreCompileInputs.cache
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\Final.Core.sourcelink.json
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\Final.Core.dll
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\refint\Final.Core.dll
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\Final.Core.pdb
+C:\Users\taira\OneDrive\Desktop\finalCLone\Final-PsStore\Final.Core\obj\Debug\net8.0\ref\Final.Core.dll

@@ -1,0 +1,35 @@
+﻿@model List<PromoVM>
+
+<!-- Promotional Section -->
+<section class="promo-section">
+    <img id="promoImage"  width="100%" height="auto" alt="Promo Image"> <!-- No default src -->
+</section>
+
+<!-- Squares Section -->
+<div class="container-fluid">
+    <div class="image-row">
+        @foreach (var promo in Model.Take(9))
+        {
+            <div class="image-square">
+                <img src="@promo.Image" alt="@promo.Name" class="square-img">
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    // Promo image handling
+    const promoImage = document.getElementById("promoImage");
+    const squareImages = document.querySelectorAll(".square-img");
+
+    if (squareImages.length > 0) {
+        // Set initial promo image to the first square's image
+        promoImage.src = squareImages[0].src;
+    }
+
+    squareImages.forEach(img => {
+        img.addEventListener("click", function () {
+            promoImage.src = this.src;
+        });
+    });
+</script>

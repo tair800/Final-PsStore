@@ -1,0 +1,43 @@
+﻿/*.category-card {
+    padding: 10px !important;
+    margin: 15px !important;
+    width: 89% !important;
+    height: 149px !important
+}
+
+    .category-card h5 {
+        font-size: 2.2rem !important;
+    }
+
+.category-slider .slick-prev {
+    left: -48px !important;
+    top: 50%;
+}
+
+.category-slider .slick-next {
+    right: -48px !important;
+    top: 50%;
+}
+@media (max-width: 1200px) {
+    .category-card h5 {
+        font-size: 2rem !important;*/ /* Slightly smaller font for medium screens */
+    /*}
+}
+
+@media (max-width: 992px) {
+    .category-card h5 {
+        font-size: 1.8rem !important;*/ /* Smaller font for tablets */
+    /*}
+}
+
+@media (max-width: 768px) {
+    .category-card h5 {
+        font-size: 1.6rem !important;*/ /* Smaller font for small screens */
+    /*}
+}
+
+@media (max-width: 576px) {
+    .category-card h5 {
+        font-size: 1.4rem !important;*/ /* Smallest font for mobile screens */
+    /*}
+}*/

@@ -43,32 +43,6 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.BasketController",
-    "Method": "AddDlcToBasket",
-    "RelativePath": "api/Basket/add-dlc",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "dlcId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "quantity",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.BasketController",
     "Method": "ClearBasket",
     "RelativePath": "api/Basket/clear",
     "HttpMethod": "DELETE",
@@ -98,27 +72,6 @@
       },
       {
         "Name": "gameId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Final.Api.Controllers.BasketController",
-    "Method": "RemoveDlcFromBasket",
-    "RelativePath": "api/Basket/remove-dlc",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "dlcId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -586,6 +539,27 @@
   },
   {
     "ContainingType": "Final.Api.Controllers.GameController",
+    "Method": "GetPaged",
+    "RelativePath": "api/Game/Paged",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.GameController",
     "Method": "Search",
     "RelativePath": "api/Game/Search",
     "HttpMethod": "GET",
@@ -867,6 +841,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "CreateRole",
+    "RelativePath": "api/User/createRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

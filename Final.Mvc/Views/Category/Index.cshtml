@@ -1,0 +1,60 @@
+﻿@model List<CategoryVM>
+<style>
+    /* Category card container */
+    .category-card {
+        background-color: #333 !important;
+        color: white;
+        border-radius: 8px;
+        text-align: center;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+        /* Hover effect for the category card */
+        .category-card:hover {
+            transform: scale(1.05); /* Slight zoom effect */
+            background-color: #444 !important; /* Slightly lighter background on hover */
+        }
+
+        /* Category name styling */
+        .category-card h5 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+    /* Link styling for the category links */
+    .category-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+        /* Ensure hover effect applies smoothly */
+        .category-link:hover .category-card {
+            transform: scale(1.05);
+            background-color: #444;
+        }
+
+</style>
+
+<div class="container">
+    <div class="row">
+        @foreach (var category in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-1">
+            <a href="@Url.Action("Index", "Game", new { category = category.Id })" class="category-link">
+                    <div class="category-card " style="background-color:#333 !important">
+                        <h5 class=" w-100 rounded-4">@category.Name</h5>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+

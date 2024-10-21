@@ -1,0 +1,46 @@
+﻿@model List<CategoryVM> 
+
+<div class="category-slider autoplay">
+    @foreach (var category in Model)
+    {
+        <div class="category-item">
+            <div class="category-card">
+                <h5 class="bg-white text-dark w-50 rounded-2">@category.Name</h5>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.category-slider').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay: true,  // Enable autoplay for the slider
+                infinite: true,  // Enable infinite scrolling
+                arrows: true,  // Show next/prev arrows
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+}

@@ -99,6 +99,33 @@ public class BasketController : Controller
         return View();
     }
 
+    [HttpPost]
+    public async Task<IActionResult> AddToBasket(int gameId, int quantity = 1)
+    {
+        var token = Request.Cookies["token"];
+        if (string.IsNullOrEmpty(token))
+        {
+            return Unauthorized();
+        }
+
+        string userId = GetUserIdFromToken(token);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        // Make the API call to add the game to the basket
+        HttpResponseMessage response = await _client.PostAsync($"https://localhost:7047/api/Basket/add?userId={userId}&gameId={gameId}&quantity={quantity}", null);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return Ok("Game added to basket.");
+        }
+        else
+        {
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to add game to basket: {errorMessage}");
+        }
+    }
+
+
     private string GetUserIdFromToken(string token)
     {
         var handler = new JwtSecurityTokenHandler();

@@ -9,8 +9,28 @@
       "PackagePath": "staticwebassets\\templates\\passwordTemplate\\forgotPassword.html"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\23ff7ede-d7ab-46cc-a684-c3d3f7080992277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\23ff7ede-d7ab-46cc-a684-c3d3f7080992277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\70c6e2b1-dd81-4dbe-8e6c-cd3626f44beb277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\70c6e2b1-dd81-4dbe-8e6c-cd3626f44beb277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\af1379b3-8c8f-4b41-92f0-c6a9ee8eda2a_277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\af1379b3-8c8f-4b41-92f0-c6a9ee8eda2a_277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\ba23fbf2-6d26-45f7-be5a-6731bfa1dc98277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\ba23fbf2-6d26-45f7-be5a-6731bfa1dc98277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\f1f40225-28d4-40a8-8e2f-9e6763910b09277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\f1f40225-28d4-40a8-8e2f-9e6763910b09277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Final.Api.Microsoft.AspNetCore.StaticWebAssets.props",

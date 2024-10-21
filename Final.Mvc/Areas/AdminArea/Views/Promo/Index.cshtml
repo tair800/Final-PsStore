@@ -1,0 +1,37 @@
+﻿@using Final.Mvc.Areas.AdminArea.ViewModels.PromoVMs
+@model List<AdminPromoListVM>
+
+<h1>Promo List</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+
+            <th>Name</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var promo in Model)
+        {
+            <tr>
+                <td>@promo.Id</td>
+
+                <td>@promo.Name</td>
+                <td><img src="@promo.ImageUrl" alt="@promo.Name" width="100" height="50" /></td>
+                <td>
+                    <a href="@Url.Action("Detail", "Promo", new { id = promo.Id })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("Update", "Promo", new { id = promo.Id })" class="btn btn-warning">Edit</a>
+                    <form asp-action="Delete" asp-controller="Promo" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@promo.Id" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this promo?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create", "Promo")" class="btn btn-primary">Add New Promo</a>

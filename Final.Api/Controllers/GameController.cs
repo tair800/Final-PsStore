@@ -124,6 +124,31 @@ namespace Final.Api.Controllers
 
             return Ok(wishlistGames);
         }
+        [HttpGet("Paged")]
+        public async Task<IActionResult> GetPaged([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var games = await _gameService.GetAll();
+
+            // Apply pagination
+            var paginatedGames = games
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            if (!paginatedGames.Any())
+            {
+                return NotFound("No games found for the given page.");
+            }
+
+            return Ok(new
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalItems = games.Count(),
+                TotalPages = (int)Math.Ceiling(games.Count() / (double)pageSize),
+                Data = paginatedGames
+            });
+        }
 
 
     }
