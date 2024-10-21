@@ -2,34 +2,37 @@
 
 <!-- Promotional Section -->
 <section class="promo-section">
-    <img id="promoImage"  width="100%" height="auto" alt="Promo Image"> <!-- No default src -->
+    <img id="promoImage" src="@Model.FirstOrDefault()?.Image" alt="Promo Image" width="100%" height="auto"> <!-- Default to first promo image -->
 </section>
 
 <!-- Squares Section -->
 <div class="container-fluid">
     <div class="image-row">
-        @foreach (var promo in Model.Take(9))
+        @if (Model != null && Model.Any())
         {
-            <div class="image-square">
-                <img src="@promo.Image" alt="@promo.Name" class="square-img">
-            </div>
+            @foreach (var promo in Model.Take(9))
+            {
+                <div class="image-square">
+                    <img src="@promo.Image" alt="@promo.Name" class="square-img" data-promo-img="@promo.Image">
+                </div>
+            }
         }
+        else
+        {
+            <p>No promotions available</p>
+        }
+
     </div>
 </div>
 
-<script>
-    // Promo image handling
-    const promoImage = document.getElementById("promoImage");
-    const squareImages = document.querySelectorAll(".square-img");
-
-    if (squareImages.length > 0) {
-        // Set initial promo image to the first square's image
-        promoImage.src = squareImages[0].src;
-    }
-
-    squareImages.forEach(img => {
-        img.addEventListener("click", function () {
-            promoImage.src = this.src;
+@section Scripts {
+    <script>
+        document.querySelectorAll('.square-img').forEach(square => {
+            square.addEventListener('click', function () {
+                const promoImage = document.getElementById('promoImage');
+                const newSrc = this.getAttribute('data-promo-img');
+                promoImage.setAttribute('src', newSrc);
+            });
         });
-    });
-</script>
+    </script>
+}
