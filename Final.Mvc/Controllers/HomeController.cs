@@ -1,4 +1,4 @@
-using Final.Mvc.ViewModels.CategoryVMs; // Add reference to CategoryVM
+using Final.Mvc.ViewModels.CategoryVMs;
 using Final.Mvc.ViewModels.GameVMs;
 using Final.Mvc.ViewModels.HomeVMs;
 using Final.Mvc.ViewModels.PromoVMs;
@@ -18,45 +18,32 @@ namespace Final.Mvc.Controllers
             // Create a new instance of HomeVM to store the fetched data
             var homeVM = new HomeVM();
 
-            // Fetch all games
+            // Fetch all games in one API call
             HttpResponseMessage allGamesResponse = await client.GetAsync("https://localhost:7047/api/Game");
             if (allGamesResponse.IsSuccessStatusCode)
             {
                 var allGamesData = await allGamesResponse.Content.ReadAsStringAsync();
-                homeVM.Games = JsonConvert.DeserializeObject<List<GameListItemVM>>(allGamesData);
+                var allGames = JsonConvert.DeserializeObject<List<GameListItemVM>>(allGamesData);
+
+                homeVM.Games = allGames;
+
+                homeVM.NewGames = allGames
+                    .Where(g => g.CreatedDate >= DateTime.Now.AddMonths(-1))
+                    .ToList();
+
+                homeVM.Deals = allGames
+                    .Where(g => g.SalePrice.HasValue)
+                    .ToList();
             }
             else
             {
-                // Handle error or assign empty list if there's an error
                 homeVM.Games = new List<GameListItemVM>();
-            }
-
-            // Fetch new games
-            HttpResponseMessage newGamesResponse = await client.GetAsync("https://localhost:7047/api/Game/New"); // Assuming this endpoint exists
-            if (newGamesResponse.IsSuccessStatusCode)
-            {
-                var newGamesData = await newGamesResponse.Content.ReadAsStringAsync();
-                homeVM.NewGames = JsonConvert.DeserializeObject<List<GameListItemVM>>(newGamesData);
-            }
-            else
-            {
                 homeVM.NewGames = new List<GameListItemVM>();
-            }
-
-            // Fetch deals
-            HttpResponseMessage dealsResponse = await client.GetAsync("https://localhost:7047/api/Game/Deals"); // Assuming this endpoint exists
-            if (dealsResponse.IsSuccessStatusCode)
-            {
-                var dealsData = await dealsResponse.Content.ReadAsStringAsync();
-                homeVM.Deals = JsonConvert.DeserializeObject<List<GameListItemVM>>(dealsData);
-            }
-            else
-            {
                 homeVM.Deals = new List<GameListItemVM>();
             }
 
             // Fetch promos
-            HttpResponseMessage promosResponse = await client.GetAsync("https://localhost:7047/api/Promo"); // Assuming this endpoint exists
+            HttpResponseMessage promosResponse = await client.GetAsync("https://localhost:7047/api/Promo");
             if (promosResponse.IsSuccessStatusCode)
             {
                 var promosData = await promosResponse.Content.ReadAsStringAsync();
@@ -68,7 +55,7 @@ namespace Final.Mvc.Controllers
             }
 
             // Fetch categories
-            HttpResponseMessage categoriesResponse = await client.GetAsync("https://localhost:7047/api/Category"); // Assuming this endpoint exists
+            HttpResponseMessage categoriesResponse = await client.GetAsync("https://localhost:7047/api/Category");
             if (categoriesResponse.IsSuccessStatusCode)
             {
                 var categoriesData = await categoriesResponse.Content.ReadAsStringAsync();

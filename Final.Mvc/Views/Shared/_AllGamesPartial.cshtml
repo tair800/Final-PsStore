@@ -46,8 +46,7 @@
 
     <div class="card sale-redirect-card redirect-card">
         <a href="@Url.Action("Index", "Game", new { sale = true, sortByPrice = "price_asc" })">
-            <img src="~/img/sales.jpg" alt="View All Sales" class="game-image">
-            <div class="sale-banner-text">
+            <div class="redirect-content">
                 <h3>View All Deals</h3>
             </div>
         </a>
@@ -76,7 +75,7 @@
 
         function updateNavigation() {
             const currentSlide = $slider.slick('slickCurrentSlide');
-            const remainingSlides = totalSlides - 6
+            const remainingSlides = totalSlides - 5
 
 
             if (currentSlide >= remainingSlides) {

@@ -46,52 +46,47 @@
 
     <div class="card sale-redirect-card redirect-card">
         <a href="@Url.Action("Index", "Game", new { sale = true, sortByPrice = "price_asc" })">
-            <img src="~/img/sales.jpg" alt="View All Sales" class="game-image">
-            <div class="sale-banner-text">
+            <div class="redirect-content">
                 <h3>View All Deals</h3>
             </div>
         </a>
     </div>
 </div>
 
-    <script>
-        $(document).ready(function () {
-            const $slider = $('#all-deals-slider'); // Target only the all-deals-slider
+<script>
+    $(document).ready(function () {
+        const $slider = $('#all-deals-slider');
 
-            const totalSlides = $slider.find('.card').not('.redirect-card').length; // Exclude the redirect card
+        const totalSlides = $slider.find('.card').not('.redirect-card').length;
 
-            $slider.slick({
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                autoplay: false,
-                infinite: false,
-                arrows: true,
-                responsive: [
-                    { breakpoint: 1200, settings: { slidesToShow: 4 } },
-                    { breakpoint: 992, settings: { slidesToShow: 3 } },
-                    { breakpoint: 768, settings: { slidesToShow: 2 } },
-                    { breakpoint: 576, settings: { slidesToShow: 1 } }
-                ]
-            });
+        $slider.slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: false,
+            infinite: false,
+            arrows: true,
+            responsive: [
+                { breakpoint: 1200, settings: { slidesToShow: 4 } },
+                { breakpoint: 992, settings: { slidesToShow: 3 } },
+                { breakpoint: 768, settings: { slidesToShow: 2 } },
+                { breakpoint: 576, settings: { slidesToShow: 1 } }
+            ]
+        });
 
         function updateNavigation() {
             const currentSlide = $slider.slick('slickCurrentSlide');
-            const remainingSlides = totalSlides - 6
-
+            const remainingSlides = totalSlides - 5
 
             if (currentSlide >= remainingSlides) {
-                // Disable only the "next" button when the slider reaches the last visible slide
-                $slider.slick('slickSetOption', 'arrows', true, true); // Ensure arrows are enabled
-                $slider.find('.slick-next').addClass('slick-disabled'); // Disable next button visually
-                $slider.find('.slick-prev').removeClass('slick-disabled'); // Ensure prev button is enabled
+                $slider.slick('slickSetOption', 'arrows', true, true);
+                $slider.find('.slick-next').addClass('slick-disabled');
+                $slider.find('.slick-prev').removeClass('slick-disabled');
             } else {
-                // Enable both buttons when not at the end
-                $slider.slick('slickSetOption', 'arrows', true, true); // Keep arrows enabled
-                $slider.find('.slick-next').removeClass('slick-disabled'); // Enable next button
-                $slider.find('.slick-prev').removeClass('slick-disabled'); // Ensure prev button is enabled
+                $slider.slick('slickSetOption', 'arrows', true, true);
+                $slider.find('.slick-next').removeClass('slick-disabled');
+                $slider.find('.slick-prev').removeClass('slick-disabled');
             }
         }
-
 
         $slider.on('afterChange', function (event, slick, currentSlide) {
             updateNavigation();
@@ -99,4 +94,4 @@
 
         updateNavigation();
     });
-    </script>
+</script>
