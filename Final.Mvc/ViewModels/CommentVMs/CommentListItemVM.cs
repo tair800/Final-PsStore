@@ -7,18 +7,22 @@ namespace Final.Mvc.ViewModels.CommentVMs
         public int Id { get; set; }
         public string Content { get; set; }
         public string UserId { get; set; }
-        public string Username { get; set; } // For displaying the username
+        public string Username { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool CanDelete { get; set; }  // To
+        public bool CanDelete { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
     }
 
     public class GameDetailWithCommentsVM
     {
-        public GameDetailVM GameDetail { get; set; }  // Represents game-specific information
-        public List<CommentListItemVM> Contents { get; set; }  // List of comments
-        public CommentCreateVM ContentNew { get; set; }  // Model for adding new comment
+        public GameDetailVM GameDetail { get; set; }
+        public List<CommentListItemVM> Contents { get; set; }
+        public CommentCreateVM ContentNew { get; set; }
+        public double AverageRating { get; set; }
+        public int RatingCount { get; set; }
+
+
     }
 }
 

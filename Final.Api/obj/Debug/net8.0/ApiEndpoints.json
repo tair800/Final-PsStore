@@ -738,6 +738,59 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Final.Api.Controllers.RatingController",
+    "Method": "RateGame",
+    "RelativePath": "api/Rating",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ratingDto",
+        "Type": "Final.Application.Dtos.RatingDtos.RatingCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.RatingController",
+    "Method": "GetAverageRating",
+    "RelativePath": "api/Rating/game/{gameId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.RatingController",
+    "Method": "GetUserRating",
+    "RelativePath": "api/Rating/user/{userId}/game/{gameId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "gameId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Final.Api.Controllers.SettingController",
     "Method": "GetAllSettings",
     "RelativePath": "api/Setting",

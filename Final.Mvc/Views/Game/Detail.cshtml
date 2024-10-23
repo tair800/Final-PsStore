@@ -22,6 +22,26 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         width:100% !important
     }
+
+    .rating-submit {
+        margin-top: 30px;
+    }
+
+    .stars {
+        display: flex;
+        align-items: center;
+    }
+
+    .star {
+        font-size: 30px;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+        .star.selected, .star.hovered {
+            color: #FFD700; /* Gold color for selected or hovered stars */
+        }
 </style>
 
 <!-- Game Banner -->
@@ -31,9 +51,9 @@
             <h1 class="fw-bold">@Model.GameDetail.Title</h1>
             <div class="d-flex align-items-center mb-3">
                 <span class="badge bg-secondary me-2">@Model.GameDetail.Platform</span>
-                <span class="me-2">4.35</span>
                 <span class="me-2 rating-star">⭐</span>
-                <span>67K ratings</span>
+                <span class="me-2">@Model.AverageRating</span> <!-- Display average rating -->
+                <span>@Model.RatingCount ratings</span>
             </div>
 
             <!-- Display Sale Price if it exists, otherwise show the regular price -->
@@ -60,6 +80,31 @@
         </div>
     </div>
 </div>
+
+@if (ViewBag.IsAuthenticated)
+{
+    <!-- Rating Section for Authenticated Users -->
+    <div class="container mt-5 rating-submit">
+        <h4>Rate this Game</h4>
+        <div class="stars">
+            @for (int i = 1; i <= 5; i++)
+            {
+                <span class="star" data-value="@i">&#9733;</span> <!-- Star symbol -->
+            }
+        </div>
+        <input type="hidden" id="userRating" />
+        <input type="hidden" id="gameId" value="@Model.GameDetail.Id" />
+        <button type="button" onclick="submitRating()" class="btn btn-primary mt-3">Submit Rating</button>
+    </div>
+}
+else
+{
+    <div class="container mt-5 rating-submit">
+        <p>Please <a href="@Url.Action("Login", "User")">log in</a> to rate this game.</p>
+    </div>
+}
+
+
 
 <!-- Add-Ons Section -->
 <div class="container py-5">
@@ -145,6 +190,85 @@
 
 
 <script>
+
+    let selectedRating = 0;
+
+    // Highlight the stars on hover
+    document.querySelectorAll('.star').forEach(star => {
+        star.addEventListener('mouseover', function () {
+            resetStars();
+            highlightStars(this.getAttribute('data-value'));
+        });
+
+        star.addEventListener('mouseout', function () {
+            resetStars();
+            if (selectedRating > 0) {
+                highlightStars(selectedRating); // Keep the selected rating highlighted
+            }
+        });
+
+        star.addEventListener('click', function () {
+            selectedRating = this.getAttribute('data-value');
+            document.getElementById('userRating').value = selectedRating; // Set the hidden field with the selected rating
+        });
+    });
+
+    // Highlight stars up to the given value
+    function highlightStars(value) {
+        document.querySelectorAll('.star').forEach(star => {
+            if (star.getAttribute('data-value') <= value) {
+                star.classList.add('selected');
+            }
+        });
+    }
+
+    // Reset all stars
+    function resetStars() {
+        document.querySelectorAll('.star').forEach(star => {
+            star.classList.remove('selected');
+            star.classList.remove('hovered');
+        });
+    }
+
+    async function submitRating() {
+        const rating = document.getElementById("userRating").value;
+        const gameId = document.getElementById("gameId").value;
+
+        if (!rating) {
+            alert("Please select a rating.");
+            return;
+        }
+
+        const token = getJwtTokenFromCookie();
+        if (!token) {
+            alert("You must be logged in to submit a rating.");
+            return;
+        }
+
+        const response = await fetch('/Game/SubmitRating', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                GameId: gameId,
+                Score: rating
+            })
+        });
+
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            alert('Failed to submit rating');
+        }
+    }
+
+    function getJwtTokenFromCookie() {
+        const cookieValue = document.cookie.split('; ').find(row => row.startsWith('token='));
+        return cookieValue ? cookieValue.split('=')[1] : null;
+    }
+
     function getJwtTokenFromCookie() {
         const cookieValue = document.cookie
             .split('; ')

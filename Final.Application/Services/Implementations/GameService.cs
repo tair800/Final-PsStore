@@ -34,7 +34,15 @@ namespace Final.Application.Services.Implementations
         public async Task<List<GameReturnDto>> GetAll()
         {
             var games = await _unitOfWork.gameRepository.GetAll(null, "Dlcs", "Category");
-            return _mapper.Map<List<GameReturnDto>>(games);
+            var gameDtos = _mapper.Map<List<GameReturnDto>>(games);
+
+            foreach (var gameDto in gameDtos)
+            {
+                var ratings = await _unitOfWork.ratingRepository.GetAll(r => r.GameId == gameDto.Id);
+                gameDto.AverageRating = ratings.Any() ? ratings.Average(r => r.Score) : 0;
+            }
+
+            return gameDtos;
         }
 
         public async Task<List<GameReturnDto>> GetAllUserWishlist(string userId)
@@ -59,19 +67,26 @@ namespace Final.Application.Services.Implementations
         // Get a single game by ID
         public async Task<GameReturnDto> GetOne(int id)
         {
-            // Fetch game with related DLCs and Category
-            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id, "Dlcs", "Category");
+            // Fetch the game and its related data
+            var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id, "Dlcs", "Category", "Ratings");
 
             if (game == null)
             {
                 throw new CustomExceptions(404, "Game", "Game not found.");
             }
 
-            // Use AutoMapper to map from Game to GameReturnDto
+            // Calculate the average rating
+            var averageRating = game.Ratings.Any() ? game.Ratings.Average(r => r.Score) : 0;
+            var ratingCount = game.Ratings.Count();
+
+            // Map to GameReturnDto
             var gameReturnDto = _mapper.Map<GameReturnDto>(game);
+            gameReturnDto.AverageRating = averageRating;
+            gameReturnDto.RatingCount = ratingCount;
 
             return gameReturnDto;
         }
+
 
         public async Task Delete(int id)
         {

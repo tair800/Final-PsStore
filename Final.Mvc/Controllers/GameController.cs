@@ -161,7 +161,9 @@ namespace Final.Mvc.Controllers
             {
                 GameDetail = gameResult,
                 Contents = comments,
-                ContentNew = new CommentCreateVM()
+                ContentNew = new CommentCreateVM(),
+                AverageRating = gameResult.AverageRating,  // Get average rating from API
+                RatingCount = gameResult.RatingCount
             };
 
             return View(viewModel);
@@ -285,6 +287,28 @@ namespace Final.Mvc.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> SubmitRating([FromBody] RatingCreateVM model)
+        {
+            using var client = _httpClientFactory.CreateClient();
+            var token = Request.Cookies["token"];
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            // Extract UserId from JWT token
+            var userId = GetUserIdFromToken(token);
+            model.UserId = userId;
+
+            var content = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:7047/api/Rating", content); // Adjust to your API's rating endpoint
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to submit rating: {errorMessage}");
+        }
 
         private string GetUserIdFromToken(string token)
         {

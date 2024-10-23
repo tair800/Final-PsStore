@@ -124,6 +124,8 @@ builder.Services.AddScoped<IPromoService, PromoService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IUserCardRepository, UserCardRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+builder.Services.AddScoped<IRatingService, RatingService>();
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();

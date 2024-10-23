@@ -372,6 +372,42 @@ namespace Final.Data.Migrations
                     b.ToTable("Promos");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -817,6 +853,25 @@ namespace Final.Data.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.Rating", b =>
+                {
+                    b.HasOne("Final.Core.Entities.Game", "Game")
+                        .WithMany("Ratings")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Final.Core.Entities.User", "User")
+                        .WithMany("Ratings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.UserCard", b =>
                 {
                     b.HasOne("Final.Core.Entities.User", "User")
@@ -937,6 +992,8 @@ namespace Final.Data.Migrations
 
                     b.Navigation("Dlcs");
 
+                    b.Navigation("Ratings");
+
                     b.Navigation("WishlistGames");
                 });
 
@@ -951,6 +1008,8 @@ namespace Final.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Comments");
+
+                    b.Navigation("Ratings");
 
                     b.Navigation("Wishlist")
                         .IsRequired();

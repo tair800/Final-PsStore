@@ -6,6 +6,7 @@ using Final.Application.Dtos.DlcDtos;
 using Final.Application.Dtos.GameDtos;
 using Final.Application.Dtos.OrderDtos;
 using Final.Application.Dtos.PromoDtos;
+using Final.Application.Dtos.RatingDtos;
 using Final.Application.Dtos.SettingsDto;
 using Final.Application.Dtos.UserDtos;
 using Final.Application.Dtos.WishlistDtos;
@@ -164,6 +165,11 @@ namespace Final.Application.Profiles
             CreateMap<Promo, PromoReturnDto>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom(src => url + "uploads/promos/" + src.Image))
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+
+            //map
+            CreateMap<RatingCreateDto, Rating>();
+            CreateMap<Rating, RatingReturnDto>();
 
         }
     }

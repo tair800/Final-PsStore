@@ -11,6 +11,7 @@ namespace Final.Core.Entities
         public Wishlist Wishlist { get; set; }
 
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Rating> Ratings { get; set; }
 
     }
 }

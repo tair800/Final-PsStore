@@ -18,7 +18,9 @@ namespace Final.Application.Dtos.GameDtos
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool IsInWishlist { get; set; }
+        public double AverageRating { get; set; }
 
+        public double RatingCount { get; set; }
     }
 
 }

@@ -16,6 +16,8 @@
         public string DlcImage { get; set; }
         public List<DlcDetail> DlcNames { get; set; }
         public Platform Platform { get; set; }
+        public double AverageRating { get; set; }
+        public int RatingCount { get; set; }
     }
 
     public class DlcDetail

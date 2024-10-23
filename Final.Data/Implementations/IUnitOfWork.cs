@@ -19,5 +19,6 @@ namespace Final.Data.Implementations
         public ICommentHistoryRepository commentHistoryRepository { get; }
         public IOrderRepository orderRepository { get; }
         public IUserCardRepository userCardRepository { get; }
+        public IRatingRepository ratingRepository { get; }
     }
 }
