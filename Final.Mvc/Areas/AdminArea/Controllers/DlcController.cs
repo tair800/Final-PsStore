@@ -168,45 +168,47 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Update(AdminDlcUpdateVM model)
+        public async Task<IActionResult> Update(AdminDlcUpdateVM model) //bura beakpoint at go isled
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid) //File Propertysini null gelir deye Modelstate valid olmur ne? ac mene o file olan hisseni
             {
-                var clients = _httpClientFactory.CreateClient();
-                var gameResponse = await clients.GetAsync("https://localhost:7047/api/Game");
-                if (gameResponse.IsSuccessStatusCode)
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+                // Create multipart form data content
+                var content = new MultipartFormDataContent();
+                content.Add(new StringContent(model.Name), "Name");
+                content.Add(new StringContent(model.Price.ToString()), "Price");
+                content.Add(new StringContent(model.GameId.ToString()), "GameId");
+
+                if (model.File != null && model.File.Length > 0)
                 {
-                    var gameData = await gameResponse.Content.ReadAsStringAsync();
-                    model.Games = JsonConvert.DeserializeObject<List<AdminGameVM>>(gameData);
+                    // Generate a new filename with GUID
+                    var fileName = $"{Guid.NewGuid()}_{model.File.FileName}";
+
+                    // Set the destination folder path
+                    var destinationPath = Path.Combine("C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images", fileName);
+
+                    // Save the file to the destination folder
+                    using (var fileStream = new FileStream(destinationPath, FileMode.Create))
+                    {
+                        await model.File.CopyToAsync(fileStream);
+                    }
+
+                    // Create stream content for image upload
+                    var imageContent = new StreamContent(model.File.OpenReadStream());
+                    imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(model.File.ContentType);
+                    content.Add(new StringContent(fileName), "Image");
                 }
 
-                return View(model);
+
+                var response = await client.PutAsync($"https://localhost:7047/api/Dlc/{model.Id}", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-
-            var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
-
-            // Create multipart form data content
-            var content = new MultipartFormDataContent();
-            content.Add(new StringContent(model.Name), "Name");
-            content.Add(new StringContent(model.Price.ToString()), "Price");
-            content.Add(new StringContent(model.GameId.ToString()), "GameId");
-
-            if (model.File != null && model.File.Length > 0)
-            {
-                var fileStream = model.File.OpenReadStream();
-                var imageContent = new StreamContent(fileStream);
-                imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(model.File.ContentType);
-                content.Add(imageContent, "Image", model.File.FileName);
-            }
-
-            var response = await client.PutAsync($"https://localhost:7047/api/Dlc/{model.Id}", content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index");
-            }
-
             ModelState.AddModelError("", "There was an error updating the DLC.");
             return View(model);
         }

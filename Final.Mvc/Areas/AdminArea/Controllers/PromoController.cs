@@ -32,7 +32,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return View(new List<AdminPromoListVM>());
         }
 
-        // View Promo Details
         public async Task<IActionResult> Detail(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -49,7 +48,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return RedirectToAction("Index");
         }
 
-        // Delete Promo
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -66,7 +64,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return RedirectToAction("Index");
         }
 
-        // Display Create Promo Form
         [HttpGet]
         public IActionResult Create()
         {
@@ -74,7 +71,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return View(model);
         }
 
-        // Handle Create Promo Form Submission
         [HttpPost]
         public async Task<IActionResult> Create(AdminPromoCreateVM model)
         {
@@ -112,7 +108,6 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             return View(model);
         }
 
-        // Display Update Promo Form
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {

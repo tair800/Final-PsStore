@@ -21,16 +21,16 @@
 
     <div class="form-group">
         <label asp-for="GameId">Game</label>
-        <select asp-for="GameId" class="form-control" asp-items="@(new SelectList(Model.Games, "Id", "Name"))"></select>
+        <select asp-for="GameId" class="form-control" asp-items="@(new SelectList(Model.Games, "Id", "Title"))"></select>
         <span asp-validation-for="GameId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label>Current Image</label>
-        @if (!string.IsNullOrEmpty(Model.ImgUrl))
+        @if (!string.IsNullOrEmpty(Model.Image))
         {
             <div>
-                <img src="/uploads/images/@Model.ImgUrl" alt="Current Image" width="200" />
+                <img src="https://localhost:7047/uploads/images/@Model.Image" alt="Current Image" width="200" />
             </div>
         }
     </div>

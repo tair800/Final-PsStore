@@ -21,6 +21,8 @@ namespace Final.Data.Data
         public DbSet<Promo> Promos { get; set; }
         public DbSet<UserCard> UserCards { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<ChatRoom> ChatRooms { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
         public FinalDbContext(DbContextOptions<FinalDbContext> options) : base(options)
         {

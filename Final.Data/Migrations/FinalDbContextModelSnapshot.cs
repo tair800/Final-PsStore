@@ -120,6 +120,67 @@ namespace Final.Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.ChatMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChatRoomId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatRoomId");
+
+                    b.ToTable("ChatMessages");
+                });
+
+            modelBuilder.Entity("Final.Core.Entities.ChatRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChatRooms");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -782,6 +843,17 @@ namespace Final.Data.Migrations
                     b.Navigation("Game");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.ChatMessage", b =>
+                {
+                    b.HasOne("Final.Core.Entities.ChatRoom", "ChatRoom")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChatRoom");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Comment", b =>
                 {
                     b.HasOne("Final.Core.Entities.Game", "Game")
@@ -875,7 +947,7 @@ namespace Final.Data.Migrations
             modelBuilder.Entity("Final.Core.Entities.UserCard", b =>
                 {
                     b.HasOne("Final.Core.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("UserCards")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -974,6 +1046,11 @@ namespace Final.Data.Migrations
                     b.Navigation("Games");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.ChatRoom", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Comment", b =>
                 {
                     b.Navigation("CommentHistories");
@@ -1010,6 +1087,8 @@ namespace Final.Data.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Ratings");
+
+                    b.Navigation("UserCards");
 
                     b.Navigation("Wishlist")
                         .IsRequired();

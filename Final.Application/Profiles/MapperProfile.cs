@@ -170,7 +170,7 @@ namespace Final.Application.Profiles
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Promo, PromoReturnDto>()
-                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => url + "uploads/promos/" + src.Image))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => url + "uploads/images/" + src.Image))
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
 

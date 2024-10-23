@@ -10,9 +10,9 @@ public class AdminDlcUpdateVM
 
     public int GameId { get; set; }
 
-    public IFormFile? File { get; set; }  // For uploading a new image
+    public IFormFile? File { get; set; }//duzdu axi
 
-    public string? ImgUrl { get; set; }  // For displaying the existing image
+    public string? Image { get; set; }
 
-    public List<AdminGameVM> Games { get; set; }  // Dropdown of available games
+    public List<AdminGameVM>? Games { get; set; }
 }

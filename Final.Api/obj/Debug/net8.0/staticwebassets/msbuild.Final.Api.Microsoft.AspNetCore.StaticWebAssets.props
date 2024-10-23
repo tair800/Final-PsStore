@@ -32,6 +32,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\templates\passwordTemplate\forgotPassword.html))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\115bab65-c567-4e85-b4f7-9bd460daadberde.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>Final.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Final.Api</BasePath>
+      <RelativePath>uploads/images/115bab65-c567-4e85-b4f7-9bd460daadberde.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\115bab65-c567-4e85-b4f7-9bd460daadberde.webp))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\1265b615-c56e-4592-b495-1c43017485f6civilization.jpeg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
@@ -207,6 +223,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\4d6150b5-d691-4726-808c-f5a8ce83f544witcher.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\5605ad73-1705-44f1-9e6a-85e9b386e05fnba.jpeg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Final.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Final.Api</BasePath>
+      <RelativePath>uploads/images/5605ad73-1705-44f1-9e6a-85e9b386e05fnba.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\5605ad73-1705-44f1-9e6a-85e9b386e05fnba.jpeg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\577c865c-9dfe-4d8b-a459-47c19cb6caaeGrand Theft Auto V - Criminal Enterprise Starter Pack.jpeg))">
       <SourceType>Package</SourceType>
@@ -576,6 +608,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\ba7a11b1-f5c8-47a2-839d-f3b285d4dc07oddysey.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\bb6513d6-890d-4ed9-a2e6-1e33225251e8Red Dead Redemption 2 - Outlaw Pass.jpeg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Final.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Final.Api</BasePath>
+      <RelativePath>uploads/images/bb6513d6-890d-4ed9-a2e6-1e33225251e8Red Dead Redemption 2 - Outlaw Pass.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\bb6513d6-890d-4ed9-a2e6-1e33225251e8Red Dead Redemption 2 - Outlaw Pass.jpeg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\bd8ed01a-0b48-4c48-8974-30fb375f99e670c6e2b1-dd81-4dbe-8e6c-cd3626f44beb277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Final.Api</SourceId>
@@ -671,6 +719,38 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\d61e966d-e0e9-40f4-b993-ab4dbe0aa3ccforza.jpeg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\da58f6a9-c933-4079-a10b-5e7543cb7f0dUncharted 4 A Thiefs End - Survival Mode.jpeg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Final.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Final.Api</BasePath>
+      <RelativePath>uploads/images/da58f6a9-c933-4079-a10b-5e7543cb7f0dUncharted 4 A Thiefs End - Survival Mode.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\da58f6a9-c933-4079-a10b-5e7543cb7f0dUncharted 4 A Thiefs End - Survival Mode.jpeg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\ea35819f-69cb-4434-bb78-47bf2aff94caPortal 2.jpeg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Final.Api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Final.Api</BasePath>
+      <RelativePath>uploads/images/ea35819f-69cb-4434-bb78-47bf2aff94caPortal 2.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\ea35819f-69cb-4434-bb78-47bf2aff94caPortal 2.jpeg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\images\f1f40225-28d4-40a8-8e2f-9e6763910b09277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg))">
       <SourceType>Package</SourceType>
