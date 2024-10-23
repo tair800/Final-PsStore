@@ -23,6 +23,7 @@ namespace Final.Application.Services.Interfaces
         Task<bool> AdminPasswordChange(string userId, string newPassword);
         Task<bool> SaveCard(string userId, SaveCardDto cardDto);
         Task<List<UserCard>> GetUserCards(string userId);
+        Task<bool> DeleteCard(string userId, int cardId);
     }
 
 }

@@ -40,4 +40,19 @@ public class OrderController : ControllerBase
             return StatusCode(ex.Code, new { Message = ex.Message });
         }
     }
+
+    [HttpPost("checkout")]
+    public async Task<IActionResult> Checkout(string userId)
+    {
+        try
+        {
+            var order = await _orderService.Checkout(userId);
+            return Ok(order);  // This will return the OrderReturnDto
+        }
+        catch (CustomExceptions ex)
+        {
+            return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+        }
+    }
+
 }

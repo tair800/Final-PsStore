@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Final.Application.Dtos.UserDtos;
+using Final.Application.Exceptions;
 using Final.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -202,6 +203,36 @@ namespace Final.Api.Controllers
 
             return BadRequest("Failed to save card.");
         }
+
+        [HttpDelete("{userId}/cards/{cardId}")]
+        public async Task<IActionResult> DeleteCard(string userId, int cardId)
+        {
+            try
+            {
+                // Call service method to delete the card
+                var result = await _userService.DeleteCard(userId, cardId);
+                if (result)
+                {
+                    // Return success response with a custom message
+                    return Ok(new { Message = "Card deleted successfully." });
+                }
+                else
+                {
+                    return BadRequest(new { Message = "Failed to delete card." });
+                }
+            }
+            catch (CustomExceptions ex)
+            {
+                // Return an error response in case of a custom exception
+                return StatusCode(ex.Code, new { Message = ex.Message, Errors = ex.Errors });
+            }
+            catch (Exception ex)
+            {
+                // Return a generic error response for unhandled exceptions
+                return StatusCode(500, new { Message = "An error occurred while deleting the card.", Details = ex.Message });
+            }
+        }
+
 
     }
 }

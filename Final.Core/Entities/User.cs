@@ -12,6 +12,7 @@ namespace Final.Core.Entities
 
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         public ICollection<Rating> Ratings { get; set; }
+        public ICollection<UserCard> UserCards { get; set; }  // Collection of saved cards for the user
 
     }
 }

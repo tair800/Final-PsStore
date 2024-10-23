@@ -347,6 +347,33 @@ namespace Final.Application.Services.Implementations
         {
             return await _unitOfWork.userCardRepository.GetAll(c => c.UserId == userId);
         }
+
+        public async Task<bool> DeleteCard(string userId, int cardId)
+        {
+            // Fetch the user from the database
+            var user = await _unitOfWork.userRepository.GetEntity(u => u.Id == userId, "UserCards");
+            if (user == null)
+            {
+                throw new CustomExceptions(404, "User not found");
+            }
+
+            // Find the card to delete by integer Id
+            var card = user.UserCards.FirstOrDefault(c => c.Id == cardId);
+            if (card == null)
+            {
+                throw new CustomExceptions(404, "Card not found");
+            }
+
+            // Remove the card from the user's saved cards
+            user.UserCards.Remove(card);  // Ensure that 'UserCards' is a collection type in the User entity
+
+            // Save changes to the database
+            await _unitOfWork.userRepository.Update(user);
+            _unitOfWork.Commit();
+
+            return true;  // Return true to indicate the card was deleted successfully
+        }
+
     }
 }
 

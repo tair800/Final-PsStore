@@ -618,6 +618,22 @@
   },
   {
     "ContainingType": "OrderController",
+    "Method": "Checkout",
+    "RelativePath": "api/Order/checkout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OrderController",
     "Method": "PlaceOrder",
     "RelativePath": "api/Order/place",
     "HttpMethod": "POST",
@@ -901,6 +917,27 @@
       {
         "Name": "cardDto",
         "Type": "Final.Application.Dtos.UserDtos.SaveCardDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "DeleteCard",
+    "RelativePath": "api/User/{userId}/cards/{cardId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "cardId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

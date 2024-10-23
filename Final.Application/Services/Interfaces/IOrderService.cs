@@ -6,5 +6,6 @@ namespace Final.Application.Services.Interfaces
     {
         Task<int> CreateOrder(string userId);
         Task<OrderDto> GetOrder(int orderId);
+        Task<OrderReturnDto> Checkout(string userId);
     }
 }

@@ -145,15 +145,22 @@ namespace Final.Application.Profiles
 
             //order
             CreateMap<Order, OrderDto>()
-            .ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems));
+           .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+           .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+           .ForMember(dest => dest.TotalPrice, opt => opt.MapFrom(src => src.TotalPrice))
+           .ForMember(dest => dest.OrderDate, opt => opt.MapFrom(src => src.CreatedDate))
+           .ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems));
 
+            // Map OrderItem -> OrderItemDto
             CreateMap<OrderItem, OrderItemDto>()
-           .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title));
+                .ForMember(dest => dest.GameId, opt => opt.MapFrom(src => src.GameId))
+                .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
+                .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity));
 
-            CreateMap<BasketGame, OrderItem>()
-    .ForMember(dest => dest.GameId, opt => opt.MapFrom(src => src.GameId))
-    .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity))
-    .ForMember(dest => dest.Price, opt => opt.MapFrom(src => (decimal)src.Game.Price));
+            // Map OrderDto -> OrderReturnDto
+            CreateMap<OrderDto, OrderReturnDto>()
+                .ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems)); // Ensure nested mapping is done correctly
 
 
             //promo

@@ -2,6 +2,7 @@
 {
     public class UserBasketVM
     {
+
         public string UserId { get; set; }
         public List<BasketGameVM> BasketGames { get; set; }
         public decimal TotalPrice => BasketGames?.Sum(bg => bg.Price * bg.Quantity) ?? 0;

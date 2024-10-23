@@ -2,12 +2,11 @@
 {
     public class OrderDto
     {
-        public int Id { get; set; }
-        public string UserId { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public decimal TotalPrice { get; set; }
-
-        public List<OrderItemDto> OrderItems { get; set; }
+        public int Id { get; set; }  // Order ID
+        public string UserId { get; set; }  // User ID
+        public decimal TotalPrice { get; set; }  // Total Price of the Order
+        public DateTime OrderDate { get; set; }  // Date of the Order
+        public List<OrderItemDto> OrderItems { get; set; }  // Lis
     }
 
 }

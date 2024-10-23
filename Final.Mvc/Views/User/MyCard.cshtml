@@ -1,72 +1,41 @@
 ﻿@model UserCardsVM
 
-<h2>My Cards</h2>
+<h2>Enter Card Details</h2>
 
-@if (Model.SavedCards.Any())
-{
-    <form method="post" action="@Url.Action("Checkout", "Basket")" class="center-form">
-        <h3>Select a Card</h3>
-        @foreach (var card in Model.SavedCards)
-        {
-            <div class="form-check card-option">
-                <input class="form-check-input" type="radio" name="selectedCardId" value="@card.Id" id="card_@card.Id" />
-                <label class="form-check-label" for="card_@card.Id">
-                    **** **** **** @card.Last4Digits (Expires: @card.ExpiryMonth/@card.ExpiryYear)
-                </label>
-            </div>
-        }
-
-        <hr />
-
-        <h3>Add a New Card</h3>
-        <div class="form-group">
-            <label for="cardNumber">Card Number</label>
-            <input type="text" class="form-control" id="cardNumber" name="CardNumber" placeholder="1234 5678 9123 4567" required />
-        </div>
-        <div class="form-group">
-            <label for="expiryMonth">Expiry Month</label>
-            <input type="text" class="form-control" id="expiryMonth" name="ExpiryMonth" placeholder="MM" required />
-        </div>
-        <div class="form-group">
-            <label for="expiryYear">Expiry Year</label>
-            <input type="text" class="form-control" id="expiryYear" name="ExpiryYear" placeholder="YY" required />
-        </div>
-        <div class="form-group">
-            <label for="cvc">CVC</label>
-            <input type="text" class="form-control" id="cvc" name="CVC" placeholder="123" required />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Checkout</button>
-    </form>
-}
-else
-{
-    <div class="alert alert-warning center-form">
-        You don't have any saved cards. Please add a card to continue.
+<form method="post" action="@Url.Action("Checkout", "Basket")" class="center-form" id="checkoutForm">
+    <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="1234 5678 9123 4567" required />
+    </div>
+    <div class="form-group">
+        <label for="expiryMonth">Expiry Month</label>
+        <input type="text" class="form-control" id="expiryMonth" name="expiryMonth" placeholder="MM" required />
+    </div>
+    <div class="form-group">
+        <label for="expiryYear">Expiry Year</label>
+        <input type="text" class="form-control" id="expiryYear" name="expiryYear" placeholder="YY" required />
+    </div>
+    <div class="form-group">
+        <label for="cvc">CVC</label>
+        <input type="text" class="form-control" id="cvc" name="cvc" placeholder="123" required />
     </div>
 
-    <form method="post" action="@Url.Action("Checkout", "Basket")" class="center-form">
-        <h3>Add a New Card</h3>
-        <div class="form-group">
-            <label for="cardNumber">Card Number</label>
-            <input type="text" class="form-control" id="cardNumber" name="CardNumber" placeholder="1234 5678 9123 4567" required />
-        </div>
-        <div class="form-group">
-            <label for="expiryMonth">Expiry Month</label>
-            <input type="text" class="form-control" id="expiryMonth" name="ExpiryMonth" placeholder="MM" required />
-        </div>
-        <div class="form-group">
-            <label for="expiryYear">Expiry Year</label>
-            <input type="text" class="form-control" id="expiryYear" name="ExpiryYear" placeholder="YY" required />
-        </div>
-        <div class="form-group">
-            <label for="cvc">CVC</label>
-            <input type="text" class="form-control" id="cvc" name="CVC" placeholder="123" required />
-        </div>
+    <button type="submit" class="btn btn-primary">Checkout</button>
+</form>
 
-        <button type="submit" class="btn btn-primary">Checkout</button>
-    </form>
-}
+<script>
+    document.getElementById("checkoutForm").addEventListener("submit", function (event) {
+        const cardNumber = document.getElementById("cardNumber").value;
+        const expiryMonth = document.getElementById("expiryMonth").value;
+        const expiryYear = document.getElementById("expiryYear").value;
+        const cvc = document.getElementById("cvc").value;
+
+        if (!cardNumber || !expiryMonth || !expiryYear || !cvc) {
+            event.preventDefault();
+            alert("Please fill out all the card details.");
+        }
+    });
+</script>
 
 <style>
     .center-form {
@@ -79,19 +48,10 @@ else
         background-color: #fff;
     }
 
-    h2, h3 {
+    h2 {
         text-align: center;
         color: #333;
         font-weight: 600;
-    }
-
-    .form-check {
-        margin-bottom: 15px;
-    }
-
-    .card-option label {
-        font-weight: 500;
-        color: #555;
     }
 
     .form-group label {
@@ -106,10 +66,6 @@ else
         border: 1px solid #ccc;
         border-radius: 4px;
         font-size: 16px;
-    }
-
-    .form-check-input {
-        margin-right: 10px;
     }
 
     .btn-primary {
@@ -127,34 +83,4 @@ else
         .btn-primary:hover {
             background-color: #2b72c4;
         }
-
-    .btn-secondary {
-        width: 100%;
-        padding: 12px;
-        background-color: #e0e0e0;
-        color: #333;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-        .btn-secondary:hover {
-            background-color: #c7c7c7;
-        }
-
-    .alert-warning {
-        background-color: #fdfd96;
-        color: #666;
-        padding: 20px;
-        text-align: center;
-        border-radius: 8px;
-    }
-
-    input[type="text"]::placeholder {
-        color: #999;
-        font-size: 14px;
-    }
-
 </style>

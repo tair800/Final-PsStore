@@ -382,6 +382,28 @@ namespace Final.Mvc.Controllers
         }
 
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCard(string cardId)
+        {
+            var token = Request.Cookies["token"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return Unauthorized();
+            }
+
+            string userId = GetUserIdFromToken(token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"https://localhost:7047/api/User/{userId}/cards/{cardId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok(new { Message = "Card deleted successfully." });
+            }
+
+            var errorContent = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to delete card: {errorContent}");
+        }
 
 
         private List<string> GetAvailableRoles()

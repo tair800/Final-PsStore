@@ -79,7 +79,7 @@ public class BasketController : Controller
     }
     // Method for checkout
     [HttpPost]
-    public async Task<IActionResult> Checkout(string selectedCardId, string cardNumber, string expiryMonth, string expiryYear, string cvc)
+    public async Task<IActionResult> Checkout(string cardNumber, string expiryMonth, string expiryYear, string? cvc)
     {
         var token = Request.Cookies["token"];
         if (string.IsNullOrEmpty(token))
@@ -92,34 +92,41 @@ public class BasketController : Controller
 
         // Fetch basket games
         HttpResponseMessage basketResponse = await _client.GetAsync($"https://localhost:7047/api/Basket/{userId}");
-        if (!basketResponse.IsSuccessStatusCode || !basketResponse.Content.ReadAsStringAsync().Result.Contains("BasketGames"))
+        if (!basketResponse.IsSuccessStatusCode)
+        {
+            return BadRequest("Failed to retrieve the basket.");
+        }
+
+        // Deserialize the basket response
+        var basketData = await basketResponse.Content.ReadAsStringAsync();
+        var basket = JsonConvert.DeserializeObject<BasketVM>(basketData);  // Assuming you have a BasketViewModel
+
+        // Check if the basket is empty
+        if (basket == null || basket.BasketGames == null || !basket.BasketGames.Any())
         {
             return BadRequest("You cannot proceed to checkout with an empty basket.");
         }
 
-        if (string.IsNullOrEmpty(selectedCardId))
+        // Process new card details
+        var cardData = new
         {
-            // If no card was selected, save a new card
-            var cardData = new
-            {
-                CardNumber = cardNumber,
-                ExpiryMonth = expiryMonth,
-                ExpiryYear = expiryYear,
-                CVC = cvc
-            };
+            CardNumber = cardNumber,
+            ExpiryMonth = expiryMonth,
+            ExpiryYear = expiryYear,
+            CVC = cvc
+        };
 
-            var content = new StringContent(JsonConvert.SerializeObject(cardData), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"https://localhost:7047/api/User/{userId}/cards", content);
+        var content = new StringContent(JsonConvert.SerializeObject(cardData), Encoding.UTF8, "application/json");
+        var response = await _client.PostAsync($"https://localhost:7047/api/User/{userId}/cards", content);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                var error = await response.Content.ReadAsStringAsync();
-                return BadRequest($"Failed to save card: {error}");
-            }
+        if (!response.IsSuccessStatusCode)
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to save card: {error}");
         }
 
         // Proceed with checkout logic
-        HttpResponseMessage checkoutResponse = await _client.PostAsync($"https://localhost:7047/api/Orders/checkout?userId={userId}", null);
+        HttpResponseMessage checkoutResponse = await _client.PostAsync($"https://localhost:7047/api/Order/checkout?userId={userId}", null);
 
         if (!checkoutResponse.IsSuccessStatusCode)
         {
@@ -129,13 +136,10 @@ public class BasketController : Controller
 
         // Clear the basket after a successful checkout
         var clearResponse = await _client.DeleteAsync($"https://localhost:7047/api/Basket/clear?userId={userId}");
-        if (!clearResponse.IsSuccessStatusCode)
-        {
-            return BadRequest("Checkout completed, but failed to clear basket.");
-        }
 
-        return Ok("Checkout successful.");
+        return RedirectToAction("Success", "Basket");
     }
+
 
     [HttpGet]
     public async Task<IActionResult> CheckoutRedirect()
@@ -180,4 +184,10 @@ public class BasketController : Controller
         var jwtToken = handler.ReadJwtToken(token);
         return jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
     }
+
+    public IActionResult Success()
+    {
+        return View();
+    }
+
 }
