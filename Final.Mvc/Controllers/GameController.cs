@@ -1,4 +1,5 @@
-﻿using Final.Mvc.ViewModels.CommentVMs;
+﻿using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs;
+using Final.Mvc.ViewModels.CommentVMs;
 using Final.Mvc.ViewModels.GameVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ namespace Final.Mvc.Controllers
         }
 
 
-        public async Task<IActionResult> Index(int? category = null, int? platform = null, string sortByPrice = null, string sortByDate = null, int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(int? category = null, int? platform = null, string sortByPrice = null, string sortByDate = null)
         {
             var client = _httpClientFactory.CreateClient();
             var token = Request.Cookies["token"];
@@ -29,16 +30,27 @@ namespace Final.Mvc.Controllers
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
 
-            // Fetch paged games
-            HttpResponseMessage gameResponse = await client.GetAsync($"https://localhost:7047/api/Game/Paged?pageNumber={pageNumber}&pageSize={pageSize}");
+            // Fetch all games (without paging)
+            HttpResponseMessage gameResponse = await client.GetAsync($"https://localhost:7047/api/Game");
             if (!gameResponse.IsSuccessStatusCode)
             {
                 return BadRequest("Error fetching games.");
             }
 
             var gameData = await gameResponse.Content.ReadAsStringAsync();
-            var paginatedResult = JsonConvert.DeserializeObject<PaginationVM<GameListItemVM>>(gameData);
-            var result = paginatedResult.Data;
+            var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(gameData); // Fetch all games
+
+            // Fetch all categories
+            HttpResponseMessage categoryResponse = await client.GetAsync("https://localhost:7047/api/Category");  // Adjust the endpoint to fetch all categories
+            if (!categoryResponse.IsSuccessStatusCode)
+            {
+                return BadRequest("Error fetching categories.");
+            }
+
+            var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+            var allCategories = JsonConvert.DeserializeObject<List<CategoryVM>>(categoryData);  // Deserialize categories to a list
+
+            ViewBag.Categories = allCategories; // Set all categories in ViewBag
 
             // Fetch the user's wishlist if they are logged in
             if (!string.IsNullOrEmpty(token))
@@ -56,6 +68,7 @@ namespace Final.Mvc.Controllers
                     }
                 }
             }
+
             // Filtering logic (category, platform, etc.)
             if (category.HasValue)
             {
@@ -88,16 +101,9 @@ namespace Final.Mvc.Controllers
                     break;
             }
 
-            ViewBag.Categories = result
-                .Select(g => new { g.CategoryId, g.CategoryName })
-                .Distinct()
-                .ToList();
+            ViewBag.SelectedCategory = category; // Keep track of the selected category
 
-            ViewBag.CurrentPage = paginatedResult.CurrentPage;
-            ViewBag.TotalPages = paginatedResult.TotalPages;
-            ViewBag.PageSize = paginatedResult.PageSize;
-
-            return View(result);
+            return View(result); // Return filtered games
         }
 
         public async Task<IActionResult> Detail(int id)

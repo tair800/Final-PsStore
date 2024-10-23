@@ -12,10 +12,15 @@
         public string? CategoryName { get; set; }
         public string? ImgUrl { get; set; }
         public Platforms? Platform { get; set; }
-
+        public List<int> DlcIds { get; set; } = new List<int>(); // New property to handle selected DLCs
+        public List<DlcVM> AvailableDlcs { get; set; } = new List<DlcVM>(); // List of available DLCs to display in the view
         public List<CategoryVM> Categories { get; set; } = new();
     }
-
+    public class DlcVM
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
     public class CategoryVM
     {
         public int Id { get; set; }

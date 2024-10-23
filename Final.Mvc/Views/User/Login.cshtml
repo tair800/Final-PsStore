@@ -9,31 +9,30 @@
 
 @if (ViewBag.ErrorMessage != null)
 {
-    <div class="alert alert-danger">
-        @ViewBag.ErrorMessage
+    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+        <i class="fa fa-exclamation-circle me-2" aria-hidden="true"></i>
+        <span>@ViewBag.ErrorMessage</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
 
-<!-- Fixes: No need for nested form, and proper binding for inputs -->
 <div class="content-area">
-    <!-- Added content-area wrapper -->
     <div class="login">
         <form asp-action="Login" method="post">
             <div class="login-container">
                 <h2><i class="fa-brands fa-playstation"></i></h2>
-                
-                <div asp-validation-summary="All" class="text-danger"></div>
+
 
                 <div class="mb-3">
                     <label for="UserName" class="form-label visually-hidden">Sign-In ID (Username)</label>
                     <input asp-for="UserName" class="form-control" id="UserName" placeholder="Username" required>
-                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <span asp-validation-for="UserName" class="text-danger"></span> <!-- Show field-specific error here -->
                 </div>
 
                 <div class="mb-3">
                     <label for="Password" class="form-label visually-hidden">Password</label>
                     <input asp-for="Password" type="password" class="form-control" id="Password" placeholder="Password" required>
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <span asp-validation-for="Password" class="text-danger"></span> <!-- Show field-specific error here -->
                 </div>
 
                 <button type="submit" class="btn-next">Login</button>

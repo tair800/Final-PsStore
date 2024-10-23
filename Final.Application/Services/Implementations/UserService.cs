@@ -8,6 +8,7 @@ using Final.Core.Entities;
 using Final.Data.Implementations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -114,6 +115,10 @@ namespace Final.Application.Services.Implementations
             if (user.IsBlocked)
                 throw new CustomExceptions(403, "Your account has been blocked. Please contact support.");
 
+            if (!user.EmailConfirmed)
+                throw new CustomExceptions(400, "Your email address is not verified. Please check your inbox for a verification link.");
+
+
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!result)
                 throw new CustomExceptions(400, "Invalid password.");
@@ -218,18 +223,22 @@ namespace Final.Application.Services.Implementations
             return forgotPasswordDto;
         }
 
-        public async Task<bool> ResetPassword(ResetPasswordDto resetPasswordDto)
+        public async Task<bool> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
         {
             var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
             if (user == null)
                 throw new CustomExceptions(404, "User not found.");
 
-            var result = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.NewPassword);
+            // URL-decode the token before using it
+            string decodedToken = Uri.UnescapeDataString(resetPasswordDto.Token);
+
+            var result = await _userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDto.NewPassword);
             if (!result.Succeeded)
                 throw new CustomExceptions(500, string.Join(", ", result.Errors.Select(e => e.Description)));
 
             return true;
         }
+
 
         public async Task<List<string>> GetAllRoles()
         {
@@ -283,5 +292,61 @@ namespace Final.Application.Services.Implementations
 
             return true;
         }
+
+        // SaveCard method to store the card details
+        public async Task<bool> SaveCard(string userId, SaveCardDto cardDto)
+        {
+            // Validate the card details
+            if (string.IsNullOrEmpty(cardDto.CardNumber) || cardDto.CardNumber.Length < 16)
+            {
+                throw new CustomExceptions(400, "InvalidCardNumber", "Card number must be 16 digits.");
+            }
+
+            if (cardDto.ExpiryMonth < 1 || cardDto.ExpiryMonth > 12)
+            {
+                throw new CustomExceptions(400, "InvalidExpiryMonth", "Invalid expiry month.");
+            }
+
+            if (cardDto.ExpiryYear < DateTime.UtcNow.Year)
+            {
+                throw new CustomExceptions(400, "InvalidExpiryYear", "Invalid expiry year.");
+            }
+
+            if (string.IsNullOrEmpty(cardDto.CVC) || cardDto.CVC.Length != 3)
+            {
+                throw new CustomExceptions(400, "InvalidCVC", "CVC must be 3 digits.");
+            }
+
+            // Map the card details to the Card entity
+            var card = new UserCard
+            {
+                UserId = userId,
+                CardNumber = MaskCardNumber(cardDto.CardNumber),
+                Last4Digits = cardDto.CardNumber.Substring(cardDto.CardNumber.Length - 4),
+                ExpiryMonth = cardDto.ExpiryMonth,
+                ExpiryYear = cardDto.ExpiryYear,
+                CVC = cardDto.CVC, // You can decide whether to store this or not for security reasons
+                CreatedDate = DateTime.UtcNow
+            };
+
+            // Save the card to the database
+            await _unitOfWork.userCardRepository.Create(card);
+            _unitOfWork.Commit();
+
+            return true;
+        }
+
+        // Mask the card number for security purposes (only store last 4 digits)
+        private string MaskCardNumber(string cardNumber)
+        {
+            return new string('*', cardNumber.Length - 4) + cardNumber.Substring(cardNumber.Length - 4);
+        }
+
+        // GetUserCards method to fetch user's saved cards
+        public async Task<List<UserCard>> GetUserCards(string userId)
+        {
+            return await _unitOfWork.userCardRepository.GetAll(c => c.UserId == userId);
+        }
     }
 }
+

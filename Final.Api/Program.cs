@@ -123,6 +123,7 @@ builder.Services.AddScoped<IPromoRepository, PromoRepository>();
 builder.Services.AddScoped<IPromoService, PromoService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IUserCardRepository, UserCardRepository>();
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();

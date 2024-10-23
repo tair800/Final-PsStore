@@ -39,7 +39,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" asp-controller="User" asp-action="Update">Detail</a></li>
-                                <li><a class="dropdown-item" href="#">My Card</a></li>
+                                <li><a class="dropdown-item" asp-controller="User" asp-action="mycard">My Card</a></li>
                                 <li>
                                     <form asp-controller="User" asp-action="Logout" method="post">
                                         <button type="submit" class="dropdown-item">Logout</button>

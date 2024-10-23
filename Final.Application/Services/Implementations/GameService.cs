@@ -83,6 +83,7 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
         }
 
+
         public async Task Update(int id, GameUpdateDto updateDto)
         {
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id);
@@ -110,6 +111,7 @@ namespace Final.Application.Services.Implementations
             await _unitOfWork.gameRepository.Update(game);
             _unitOfWork.Commit();
         }
+
 
         // Search games by title
         public async Task<List<GameReturnDto>> SearchGames(string title)

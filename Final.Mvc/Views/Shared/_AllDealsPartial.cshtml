@@ -47,10 +47,13 @@
     <div class="card sale-redirect-card redirect-card">
         <a href="@Url.Action("Index", "Game", new { sale = true, sortByPrice = "price_asc" })">
             <div class="redirect-content">
-                <h3>View All Deals</h3>
+                <img src="https://s3.amazonaws.com/images.ecwid.com/images/27221162/1398437303.jpg" alt="View All New Games">
+
+                <h3>View All Games</h3>
             </div>
         </a>
     </div>
+
 </div>
 
 <script>
@@ -75,7 +78,7 @@
 
         function updateNavigation() {
             const currentSlide = $slider.slick('slickCurrentSlide');
-            const remainingSlides = totalSlides - 5
+            const remainingSlides = totalSlides - 6
 
             if (currentSlide >= remainingSlides) {
                 $slider.slick('slickSetOption', 'arrows', true, true);

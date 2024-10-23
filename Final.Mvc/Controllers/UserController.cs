@@ -4,6 +4,7 @@ using Final.Mvc.ViewModels.UserVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Final.Mvc.Controllers
@@ -41,10 +42,10 @@ namespace Final.Mvc.Controllers
                 // Store the token securely
                 Response.Cookies.Append("token", result.Token, new CookieOptions
                 {
-                    HttpOnly = false, // Ensure the token is only accessible via HTTP(S)
-                    Secure = true,   // Secure the cookie (HTTPS)
-                    SameSite = SameSiteMode.Strict, // Ensure the token is sent with same-site requests only
-                    Expires = DateTimeOffset.Now.AddHours(1) // Optional: set an expiration time
+                    HttpOnly = false,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTimeOffset.Now.AddHours(1)
                 });
 
                 return RedirectToAction("Index", "Home");
@@ -52,11 +53,42 @@ namespace Final.Mvc.Controllers
             else
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
-                ViewBag.ErrorMessage = $"Login failed: {errorContent}";
-            }
 
-            return View();
+                // Safely parse the error content to extract only the message and validation errors
+                try
+                {
+                    // Deserialize error content into a structured object
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+
+                    // General error message
+                    if (!string.IsNullOrEmpty(errorResponse.Message))
+                    {
+                        ViewBag.ErrorMessage = errorResponse.Message;
+                    }
+
+                    // Field-specific validation errors
+                    if (errorResponse.Errors != null)
+                    {
+                        foreach (var error in errorResponse.Errors)
+                        {
+                            foreach (var errorMessage in error.Value)
+                            {
+                                ModelState.AddModelError(error.Key, errorMessage); // Add error to the specific field
+                            }
+                        }
+                    }
+                }
+                catch (JsonException ex)
+                {
+                    // If parsing fails, show a generic error
+                    Console.WriteLine($"Error parsing JSON: {ex.Message}");
+                    ViewBag.ErrorMessage = "An unexpected error occurred during login.";
+                }
+
+                return View(model); // Return the view with the error messages
+            }
         }
+
 
         public IActionResult Register()
         {
@@ -189,10 +221,7 @@ namespace Final.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+
 
             using HttpClient client = new();
             StringContent content = new(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
@@ -327,6 +356,30 @@ namespace Final.Mvc.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> MyCard()
+        {
+            var token = Request.Cookies["token"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return Unauthorized();
+            }
+
+            string userId = GetUserIdFromToken(token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:7047/api/User/{userId}/cards");
+
+            var model = new UserCardsVM();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsStringAsync();
+                model.SavedCards = JsonConvert.DeserializeObject<List<UserCardsVM.SavedCardVM>>(data);
+            }
+
+            return View(model);
+        }
 
 
 

@@ -3,6 +3,26 @@
 }
 
 @model GameDetailWithCommentsVM
+<style>
+    .game-banner {
+        background-image: url(@Model.GameDetail.ImgUrl); /* Replace with the correct path */
+        background-size: cover; /* Ensures the background covers the entire area */
+        background-position: center center; /* Centers the background image */
+        background-repeat: no-repeat; /* Prevents the background from repeating */
+        width: 100vw; /* Sets the width to the full viewport */
+        height: 100vh; /* Sets the height to the full viewport */
+        position: relative; /* Ensures the content inside the banner is positioned correctly */
+    }
+
+    .add-comment-form {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #1e1e1e;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width:100% !important
+    }
+</style>
 
 <!-- Game Banner -->
 <div class="game-banner d-flex align-items-end">
@@ -15,11 +35,26 @@
                 <span class="me-2 rating-star">⭐</span>
                 <span>67K ratings</span>
             </div>
-            <p class="game-price">$@Model.GameDetail.Price</p>
+
+            <!-- Display Sale Price if it exists, otherwise show the regular price -->
+            <div class="game-price">
+                @if (Model.GameDetail.SalePrice.HasValue)
+                {
+                    <!-- Sale Price -->
+                    <span class="sale-price">$@Model.GameDetail.SalePrice.Value</span>
+                    <!-- Original Price with Strikethrough -->
+                    <span class="original-price text-decoration-line-through ms-2">$@Model.GameDetail.Price</span>
+                }
+                else
+                {
+                    <!-- Only the regular price -->
+                    <span class="regular-price">$@Model.GameDetail.Price</span>
+                }
+            </div>
+
             <div class="d-flex align-items-center">
-                <button class="btn btn-warning text-dark cart-btn">Add to Cart</button>
+                <button class="btn btn-warning text-dark add-to-cart-btn cart-btn" gameId="@Model.GameDetail.Id">Add to Cart</button>
                 <button class="btn btn-link text-white ms-3">
-                    <i class="fa fa-heart text-3xl"></i>
                 </button>
             </div>
         </div>
@@ -110,6 +145,62 @@
 
 
 <script>
+    function getJwtTokenFromCookie() {
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('token=')); // Adjust 'token' to match the name of your JWT token cookie
+        return cookieValue ? cookieValue.split('=')[1] : null;
+    }
+
+
+    $(document).on("click", ".add-to-cart-btn", function () {
+        console.log("Attempting to add game to basket");
+
+        const token = getJwtTokenFromCookie(); // Function to get the JWT token from cookies
+        console.log("Token:", token);
+
+        if (!token) {
+            // If there's no token, the user is not logged in, so show a warning
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please log in',
+                text: 'You need to log in to add games to the basket.',
+            });
+            return;
+        }
+
+        const gameId = $(this).attr("gameId"); // Get the game ID from the button attribute
+
+        // Send the AJAX request to add the game to the basket
+        $.ajax({
+            url: `/Basket/AddToBasket?gameId=${gameId}&quantity=1`,  // Assuming your BasketController handles this endpoint
+            type: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`  // Include the JWT token in the request headers
+            },
+            contentType: 'application/json',
+            success: function (response) {
+                // Show success message when the game is added to the basket
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Game added to basket!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            },
+            error: function (xhr, status, error) {
+                // Handle errors, e.g., if the game couldn't be added
+                console.error('Error:', xhr.responseText || error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to add game to basket',
+                    text: 'There was an error adding the game to your basket. Please try again.',
+                });
+            }
+        });
+    });
+
     // Add comment
     async function addComment() {
         const gameId = document.getElementById("gameId").value;

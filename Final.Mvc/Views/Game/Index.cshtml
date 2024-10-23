@@ -15,17 +15,23 @@
             <div class="filter-container">
                 <form method="get" asp-action="Index">
                     <!-- Category Filter -->
-                    <div class="mb-3">
-                        <label for="filterCategory" class="form-label">Category</label>
-                        <select id="filterCategory" name="category" class="form-select">
-                            <option value="">All Categories</option>
-
-                            @foreach (var cat in ViewBag.Categories)
+                    <select id="filterCategory" name="category" class="form-select">
+                        <option value="">All Categories</option>
+                        @foreach (var cat in ViewBag.Categories)
+                        {
+                            if (ViewBag.SelectedCategory == cat.Id)  // Select the chosen category
                             {
-                                <option value="@cat.CategoryId">@cat.CategoryName</option>
+                                <option value="@cat.Id" selected>@cat.Name</option>
                             }
-                        </select>
-                    </div>
+                            else
+                            {
+                                <option value="@cat.Id">@cat.Name</option>
+                            }
+                        }
+                    </select>
+
+
+
 
                     <!-- Platform Filter -->
                     <div class="mb-3">
@@ -76,47 +82,50 @@
                         {
                             <div class="col-12 col-sm-6 col-lg-4 game-card-container mb-4">
                                 <div class="game-card">
-                                    <img src="@game.ImgUrl" alt="@game.Title" class="game-image" />
+                                    <!-- Wrap the entire game card with a link to the details page -->
+                                    <a href="@Url.Action("Detail", "Game", new { id = game.Id })" class="game-details-link" style="text-decoration:none; color:inherit;">
+                                        <img src="@game.ImgUrl" alt="@game.Title" class="game-image" />
 
-                                    <!-- Wishlist Button -->
-                                    <button class="favorite-btn" data-game-id="@game.Id" data-in-wishlist="@game.IsInWishlist.ToString().ToLower()">
-                                        <i class="fas fa-heart @(game.IsInWishlist ? "wishlist-added" : "")"></i>
-                                    </button>
+                                        <!-- Wishlist Button -->
+                                        <button class="favorite-btn" data-game-id="@game.Id" data-in-wishlist="@game.IsInWishlist.ToString().ToLower()">
+                                            <i class="fas fa-heart @(game.IsInWishlist ? "wishlist-added" : "")"></i>
+                                        </button>
 
-                                    <!-- Platform Labels -->
-                                    <div class="platform-labels">
-                                        @if ((int)game.Platform == 1)
-                                        {
-                                            <div class="platform-label bg-white text-dark">PS5</div>
-                                        }
-                                        else if (game.Platform == 0)
-                                        {
-                                            <div class="platform-label bg-dark text-light">PS4</div>
-                                        }
-                                        else if ((int)game.Platform == 2)
-                                        {
-                                            <div class="platform-label bg-white text-dark">PS5</div>
-                                            <div class="platform-label bg-dark text-light">PS4</div>
-                                        }
-                                    </div>
-
-                                    <!-- Game Info -->
-                                    <div class="game-info">
-                                        <div class="game-title">@game.Title</div>
-
-                                        <!-- Display discounted price if applicable -->
-                                        <div class="game-price">
-                                            @if (game.SalePrice.HasValue)
+                                        <!-- Platform Labels -->
+                                        <div class="platform-labels">
+                                            @if ((int)game.Platform == 1)
                                             {
-                                                <span class="original-price text-decoration-line-through">$@game.Price</span>
-                                                <span class="discount-price">$@game.SalePrice</span>
+                                                <div class="platform-label bg-white text-dark">PS5</div>
                                             }
-                                            else
+                                            else if (game.Platform == 0)
                                             {
-                                                <span class="regular-price">$@game.Price</span>
+                                                <div class="platform-label bg-dark text-light">PS4</div>
+                                            }
+                                            else if ((int)game.Platform == 2)
+                                            {
+                                                <div class="platform-label bg-white text-dark">PS5</div>
+                                                <div class="platform-label bg-dark text-light">PS4</div>
                                             }
                                         </div>
-                                    </div>
+
+                                        <!-- Game Info -->
+                                        <div class="game-info">
+                                            <div class="game-title">@game.Title</div>
+
+                                            <!-- Display discounted price if applicable -->
+                                            <div class="game-price">
+                                                @if (game.SalePrice.HasValue)
+                                                {
+                                                    <span class="original-price text-decoration-line-through">$@game.Price</span>
+                                                    <span class="discount-price">$@game.SalePrice</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="regular-price">$@game.Price</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </a>
 
                                     <!-- Add to Basket Button -->
                                     <button class="add-to-cart-btn" gameId="@game.Id">Add to Cart</button>
@@ -129,7 +138,10 @@
                         <p>No games found based on the selected filters.</p>
                     }
                 </div>
-                <div class="pagination-controls d-flex justify-content-center mt-4">
+            </div>
+        </div>
+
+@*                 <div class="pagination-controls d-flex justify-content-center mt-4">
                     <!-- Previous Button -->
                     @if (ViewBag.CurrentPage > 1)
                     {
@@ -159,7 +171,7 @@
                         </a>
                     }
                 </div>
-            </div>
+ *@            </div>
         </div>
     </div>
 </div>

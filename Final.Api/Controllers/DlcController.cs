@@ -48,15 +48,19 @@ namespace Final.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, DlcUpdateDto dlcUpdateDto)
+        public async Task<IActionResult> Update(int id, [FromForm] DlcUpdateDto dlcUpdateDto)
         {
-            if (id > 0)
+            if (id <= 0)
             {
-                await _dlcService.Update(id, dlcUpdateDto);
-                return Ok("Dlc updated successfully.");
+                throw new CustomExceptions(400, "Id", "Invalid DLC id.");
             }
-            return BadRequest();
+
+            // Call the service to update the DLC
+            await _dlcService.Update(id, dlcUpdateDto);
+
+            return Ok("Dlc updated successfully.");
         }
+
 
 
     }

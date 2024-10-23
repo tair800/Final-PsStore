@@ -1,4 +1,5 @@
 ﻿using Final.Application.Dtos.UserDtos;
+using Final.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace Final.Application.Services.Interfaces
@@ -20,6 +21,8 @@ namespace Final.Application.Services.Interfaces
         Task<bool> ConfirmEmail(string email, string token);
         Task<List<UserReturnDto>> GetVerifiedUsersAsync();
         Task<bool> AdminPasswordChange(string userId, string newPassword);
+        Task<bool> SaveCard(string userId, SaveCardDto cardDto);
+        Task<List<UserCard>> GetUserCards(string userId);
     }
 
 }

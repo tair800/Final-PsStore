@@ -88,35 +88,56 @@ namespace Final.Application.Services.Implementations
 
         public async Task Update(int id, DlcUpdateDto dlcUpdateDto)
         {
+            // Retrieve the existing DLC entity
             var dlc = await _unitOfWork.dlcRepository.GetEntity(g => g.Id == id);
 
-            if (dlc == null) throw new CustomExceptions(404, "Dlc", "Dlc not found.");
+            if (dlc == null)
+                throw new CustomExceptions(404, "Dlc", "Dlc not found.");
 
-            if (dlcUpdateDto.File != null)
+            // Handle new file upload (if provided)
+            if (dlcUpdateDto.File != null && dlcUpdateDto.File.Length > 0)
             {
-                // Delete old image if it exists
+                // Delete the old image if it exists
                 if (!string.IsNullOrEmpty(dlc.Image))
                 {
-                    FileExtension.DeleteImage(dlc.Image);
+                    FileExtension.DeleteImage(dlc.Image); // Utility function to delete the old image
                 }
 
                 // Save the new image
                 var newFileName = dlcUpdateDto.File.Save(Directory.GetCurrentDirectory(), "uploads/images/");
                 dlc.Image = newFileName;
             }
-
-            dlc.UpdatedDate = DateTime.Now;
-
-            // Update other fields using AutoMapper
-            _mapper.Map(dlcUpdateDto, dlc);
-
-            if (dlcUpdateDto.Price > 0)
+            else
             {
-                dlc.Price = (int)dlcUpdateDto.Price;
+                // If no new file is uploaded, keep the existing image (dlc.Image)
+                dlc.Image = dlcUpdateDto.Image ?? dlc.Image;
             }
 
+            // Update the other fields if provided
+            if (!string.IsNullOrEmpty(dlcUpdateDto.Name))
+            {
+                dlc.Name = dlcUpdateDto.Name;
+            }
+
+            if (dlcUpdateDto.Price.HasValue)
+            {
+                dlc.Price = dlcUpdateDto.Price.Value;
+            }
+
+            if (dlcUpdateDto.GameId.HasValue)
+            {
+                var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == dlcUpdateDto.GameId.Value);
+                if (game == null)
+                {
+                    throw new CustomExceptions(404, "Game", "Game not found.");
+                }
+                dlc.Game = game;
+            }
+
+            // Save the changes to the database
             await _unitOfWork.dlcRepository.Update(dlc);
             _unitOfWork.Commit();
         }
+
     }
 }

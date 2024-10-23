@@ -21,6 +21,7 @@ namespace Final.Data.Implementations
         public IPromoRepository promoRepository { get; private set; }
         public ICommentHistoryRepository commentHistoryRepository { get; private set; }
         public IOrderRepository orderRepository { get; private set; }
+        public IUserCardRepository userCardRepository { get; private set; }
 
 
         public ICategoryRepository CategoryRepository => throw new NotImplementedException();
@@ -36,6 +37,7 @@ namespace Final.Data.Implementations
         public IPromoRepository PromoRepository => throw new NotImplementedException();
         public ICommentHistoryRepository CommentHistoryRepository => throw new NotImplementedException();
         public IOrderRepository OrderRepository => throw new NotImplementedException();
+        public IUserCardRepository UserCardRepository => throw new NotImplementedException();
 
 
         public UnitOfWork(FinalDbContext context)
@@ -54,6 +56,7 @@ namespace Final.Data.Implementations
             promoRepository = new PromoRepository(_context);
             commentHistoryRepository = new CommentHistoryRepository(_context);
             orderRepository = new OrderRepository(_context);
+            userCardRepository = new UserCardRepository(_context);
         }
 
         public void Commit()

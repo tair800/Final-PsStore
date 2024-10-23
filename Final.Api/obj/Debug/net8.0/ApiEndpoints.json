@@ -391,6 +391,16 @@
         "IsRequired": false
       },
       {
+        "Name": "GameId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "File",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
@@ -801,6 +811,43 @@
       {
         "Name": "settingsUpdateDto",
         "Type": "Final.Application.Dtos.SettingsDto.SettingUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "GetUserCards",
+    "RelativePath": "api/User/{userId}/cards",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Final.Api.Controllers.UserController",
+    "Method": "SaveUserCard",
+    "RelativePath": "api/User/{userId}/cards",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "cardDto",
+        "Type": "Final.Application.Dtos.UserDtos.SaveCardDto",
         "IsRequired": true
       }
     ],

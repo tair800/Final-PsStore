@@ -18,5 +18,6 @@ namespace Final.Data.Implementations
         public IPromoRepository promoRepository { get; }
         public ICommentHistoryRepository commentHistoryRepository { get; }
         public IOrderRepository orderRepository { get; }
+        public IUserCardRepository userCardRepository { get; }
     }
 }

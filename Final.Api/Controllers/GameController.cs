@@ -30,7 +30,13 @@ namespace Final.Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var games = await _gameService.GetAll();
-
+            foreach (var game in games)
+            {
+                if (game.SalePrice == 0)
+                {
+                    game.SalePrice = null;
+                }
+            }
 
 
             //var paginatedGames = games.

@@ -175,5 +175,33 @@ namespace Final.Api.Controllers
             return BadRequest("Failed to create roles.");
         }
 
+        [HttpGet("{userId}/cards")]
+        public async Task<IActionResult> GetUserCards(string userId)
+        {
+            // Retrieve user's saved cards from the database
+            var cards = await _userService.GetUserCards(userId);
+
+            if (cards == null || !cards.Any())
+            {
+                return NotFound("No cards found.");
+            }
+
+            return Ok(cards);
+        }
+
+        [HttpPost("{userId}/cards")]
+        public async Task<IActionResult> SaveUserCard(string userId, [FromBody] SaveCardDto cardDto)
+        {
+            // Validate and save the user's card details
+            var result = await _userService.SaveCard(userId, cardDto);
+
+            if (result)
+            {
+                return Ok("Card saved successfully.");
+            }
+
+            return BadRequest("Failed to save card.");
+        }
+
     }
 }

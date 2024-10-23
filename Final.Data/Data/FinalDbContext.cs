@@ -19,6 +19,7 @@ namespace Final.Data.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Promo> Promos { get; set; }
+        public DbSet<UserCard> UserCards { get; set; }
 
         public FinalDbContext(DbContextOptions<FinalDbContext> options) : base(options)
         {

@@ -1,0 +1,160 @@
+﻿@model UserCardsVM
+
+<h2>My Cards</h2>
+
+@if (Model.SavedCards.Any())
+{
+    <form method="post" action="@Url.Action("Checkout", "Basket")" class="center-form">
+        <h3>Select a Card</h3>
+        @foreach (var card in Model.SavedCards)
+        {
+            <div class="form-check card-option">
+                <input class="form-check-input" type="radio" name="selectedCardId" value="@card.Id" id="card_@card.Id" />
+                <label class="form-check-label" for="card_@card.Id">
+                    **** **** **** @card.Last4Digits (Expires: @card.ExpiryMonth/@card.ExpiryYear)
+                </label>
+            </div>
+        }
+
+        <hr />
+
+        <h3>Add a New Card</h3>
+        <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" name="CardNumber" placeholder="1234 5678 9123 4567" required />
+        </div>
+        <div class="form-group">
+            <label for="expiryMonth">Expiry Month</label>
+            <input type="text" class="form-control" id="expiryMonth" name="ExpiryMonth" placeholder="MM" required />
+        </div>
+        <div class="form-group">
+            <label for="expiryYear">Expiry Year</label>
+            <input type="text" class="form-control" id="expiryYear" name="ExpiryYear" placeholder="YY" required />
+        </div>
+        <div class="form-group">
+            <label for="cvc">CVC</label>
+            <input type="text" class="form-control" id="cvc" name="CVC" placeholder="123" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Checkout</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-warning center-form">
+        You don't have any saved cards. Please add a card to continue.
+    </div>
+
+    <form method="post" action="@Url.Action("Checkout", "Basket")" class="center-form">
+        <h3>Add a New Card</h3>
+        <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" name="CardNumber" placeholder="1234 5678 9123 4567" required />
+        </div>
+        <div class="form-group">
+            <label for="expiryMonth">Expiry Month</label>
+            <input type="text" class="form-control" id="expiryMonth" name="ExpiryMonth" placeholder="MM" required />
+        </div>
+        <div class="form-group">
+            <label for="expiryYear">Expiry Year</label>
+            <input type="text" class="form-control" id="expiryYear" name="ExpiryYear" placeholder="YY" required />
+        </div>
+        <div class="form-group">
+            <label for="cvc">CVC</label>
+            <input type="text" class="form-control" id="cvc" name="CVC" placeholder="123" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Checkout</button>
+    </form>
+}
+
+<style>
+    .center-form {
+        width: 350px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    h2, h3 {
+        text-align: center;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .form-check {
+        margin-bottom: 15px;
+    }
+
+    .card-option label {
+        font-weight: 500;
+        color: #555;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .form-check-input {
+        margin-right: 10px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background-color: #3c89e5;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #2b72c4;
+        }
+
+    .btn-secondary {
+        width: 100%;
+        padding: 12px;
+        background-color: #e0e0e0;
+        color: #333;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        .btn-secondary:hover {
+            background-color: #c7c7c7;
+        }
+
+    .alert-warning {
+        background-color: #fdfd96;
+        color: #666;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px;
+    }
+
+    input[type="text"]::placeholder {
+        color: #999;
+        font-size: 14px;
+    }
+
+</style>
