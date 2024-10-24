@@ -9,12 +9,40 @@
       "PackagePath": "staticwebassets\\templates\\passwordTemplate\\forgotPassword.html"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\03412037-02b2-411e-8c23-4c13660420ae_Street Fighter V.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\03412037-02b2-411e-8c23-4c13660420ae_Street Fighter V.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\09cfe739-2e43-4951-ac3e-a06eb3235119_heat.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\09cfe739-2e43-4951-ac3e-a06eb3235119_heat.jpeg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\115bab65-c567-4e85-b4f7-9bd460daadberde.webp",
       "PackagePath": "staticwebassets\\uploads\\images\\115bab65-c567-4e85-b4f7-9bd460daadberde.webp"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\1265b615-c56e-4592-b495-1c43017485f6civilization.jpeg",
       "PackagePath": "staticwebassets\\uploads\\images\\1265b615-c56e-4592-b495-1c43017485f6civilization.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\14cbafb7-71bd-40cd-bcfd-e252ff371a89_Mortal Kombat 11.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\14cbafb7-71bd-40cd-bcfd-e252ff371a89_Mortal Kombat 11.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\17b5e679-2007-424e-b12a-1d5c82f5d241_oddysey.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\17b5e679-2007-424e-b12a-1d5c82f5d241_oddysey.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\1be80b7b-2845-41f1-ba85-d419f885404f_witcher.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\1be80b7b-2845-41f1-ba85-d419f885404f_witcher.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\20aae2b4-8547-47cd-bc8d-da3a42287c1f_Battle Pass.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\20aae2b4-8547-47cd-bc8d-da3a42287c1f_Battle Pass.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\2329d210-2086-4a45-a878-ba3a8a5befbbBattle Pass.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\2329d210-2086-4a45-a878-ba3a8a5befbbBattle Pass.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\23f934a3-312f-469c-88ee-48b7030d248ccyberpunk.jpeg",
@@ -33,8 +61,16 @@
       "PackagePath": "staticwebassets\\uploads\\images\\277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\2bb4d373-2a46-4e30-a73b-da65de2fdf8b_xcom.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\2bb4d373-2a46-4e30-a73b-da65de2fdf8b_xcom.jpg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\2d92970f-56d3-462b-ab9e-e01b509f4e08Outlast 2.jpeg",
       "PackagePath": "staticwebassets\\uploads\\images\\2d92970f-56d3-462b-ab9e-e01b509f4e08Outlast 2.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\31047cdb-df6d-4d68-9517-c9259e6e4f57_Portal 2.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\31047cdb-df6d-4d68-9517-c9259e6e4f57_Portal 2.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\32175623-e4f5-43a3-9f22-16e3724ed34ftheevilwithin.jpeg",
@@ -45,12 +81,12 @@
       "PackagePath": "staticwebassets\\uploads\\images\\325460a1-ed5a-43ba-9169-d37d6af3684ethewitness.jpeg"
     },
     {
-      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\3c1ecc87-f7c1-4c29-b59e-b3c29a418539civilization.jpeg",
-      "PackagePath": "staticwebassets\\uploads\\images\\3c1ecc87-f7c1-4c29-b59e-b3c29a418539civilization.jpeg"
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\380bfc3a-392b-44d8-a437-8b7778e924eb_gran.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\380bfc3a-392b-44d8-a437-8b7778e924eb_gran.jpg"
     },
     {
-      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\46b1a4de-8437-4917-b4d0-5ce848cf45eeGrand Theft Auto V - Criminal Enterprise Starter Pack.jpeg",
-      "PackagePath": "staticwebassets\\uploads\\images\\46b1a4de-8437-4917-b4d0-5ce848cf45eeGrand Theft Auto V - Criminal Enterprise Starter Pack.jpeg"
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\3c1ecc87-f7c1-4c29-b59e-b3c29a418539civilization.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\3c1ecc87-f7c1-4c29-b59e-b3c29a418539civilization.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\4d6150b5-d691-4726-808c-f5a8ce83f544witcher.jpg",
@@ -61,12 +97,20 @@
       "PackagePath": "staticwebassets\\uploads\\images\\5605ad73-1705-44f1-9e6a-85e9b386e05fnba.jpeg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\5672f87c-95b8-4e2d-a2c6-5a0ba093ee04_forza.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\5672f87c-95b8-4e2d-a2c6-5a0ba093ee04_forza.jpeg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\577c865c-9dfe-4d8b-a459-47c19cb6caaeGrand Theft Auto V - Criminal Enterprise Starter Pack.jpeg",
       "PackagePath": "staticwebassets\\uploads\\images\\577c865c-9dfe-4d8b-a459-47c19cb6caaeGrand Theft Auto V - Criminal Enterprise Starter Pack.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\58e8d1f3-b865-4365-8060-cac12c50e1d1rde.webp",
       "PackagePath": "staticwebassets\\uploads\\images\\58e8d1f3-b865-4365-8060-cac12c50e1d1rde.webp"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\5fa51ff8-a875-412c-93f3-076e507860ac_nba.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\5fa51ff8-a875-412c-93f3-076e507860ac_nba.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\65aa682a-fdda-4e2c-ae9b-d06235ada267Halo Infinite.jpeg",
@@ -83,6 +127,10 @@
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\7012c64f-dfc4-46a7-94ed-eb3805f22adcTetris Effect.jpeg",
       "PackagePath": "staticwebassets\\uploads\\images\\7012c64f-dfc4-46a7-94ed-eb3805f22adcTetris Effect.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\705612da-580a-42a4-9e4c-79e6d0c2db43_The Legend of Zelda Breath of the Wild - Expansion Pass.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\705612da-580a-42a4-9e4c-79e6d0c2db43_The Legend of Zelda Breath of the Wild - Expansion Pass.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\70c6e2b1-dd81-4dbe-8e6c-cd3626f44beb277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
@@ -109,8 +157,28 @@
       "PackagePath": "staticwebassets\\uploads\\images\\84d58226-9a81-44b3-a293-3f180b45262a23ff7ede-d7ab-46cc-a684-c3d3f7080992277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\86af2099-f215-4951-88e2-f9b386f26dd8_finalfantasy.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\86af2099-f215-4951-88e2-f9b386f26dd8_finalfantasy.jpg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\888157e2-35fc-4dca-aef3-100d55fd34cbfinalfantasy.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\888157e2-35fc-4dca-aef3-100d55fd34cbfinalfantasy.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\8acd823d-e5f6-414c-bff5-b549bcb0908e_civilization.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\8acd823d-e5f6-414c-bff5-b549bcb0908e_civilization.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\8feafd54-82f9-4fa6-acab-95d9f20cc175_oddysey.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\8feafd54-82f9-4fa6-acab-95d9f20cc175_oddysey.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\9478c28f-0904-42cd-bbed-994c4280afa9_Street Fighter V.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\9478c28f-0904-42cd-bbed-994c4280afa9_Street Fighter V.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\950731c7-d228-41bd-acac-35b5999dd00e_Outlast 2.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\950731c7-d228-41bd-acac-35b5999dd00e_Outlast 2.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\95356911-f8ff-40b7-8db0-b2cd7e8ace41Assassins Creed Odyssey - Legacy of the First Blade.jpeg.crdownload",
@@ -121,8 +189,20 @@
       "PackagePath": "staticwebassets\\uploads\\images\\96c4effe-fd4b-43a9-b328-ecf0ed880aa4heat.jpeg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\99250060-9a2a-40aa-873a-b3b290257cf2_Grand Theft Auto V - Criminal Enterprise Starter Pack.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\99250060-9a2a-40aa-873a-b3b290257cf2_Grand Theft Auto V - Criminal Enterprise Starter Pack.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\9f74868c-466c-4740-b2c4-34e1a15bf183_Halo Infinite.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\9f74868c-466c-4740-b2c4-34e1a15bf183_Halo Infinite.jpeg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\a310e88f-9302-4da7-a879-d496598b8f61The Legend of Zelda Breath of the Wild - Expansion Pass.jpeg",
       "PackagePath": "staticwebassets\\uploads\\images\\a310e88f-9302-4da7-a879-d496598b8f61The Legend of Zelda Breath of the Wild - Expansion Pass.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\a323fc5d-9c80-4db9-9430-f75c4604f5b4_thewitness.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\a323fc5d-9c80-4db9-9430-f75c4604f5b4_thewitness.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\a63ee958-b7dd-45c3-8049-8d78db0c48deTekken 7.jpeg",
@@ -133,8 +213,20 @@
       "PackagePath": "staticwebassets\\uploads\\images\\a6aa7bab-5a46-4ac0-a46f-de7e37411a79Portal 2.jpeg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\ad106a58-492b-4fa0-9b5b-ba42e8446704_Uncharted 4 A Thiefs End - Survival Mode.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\ad106a58-492b-4fa0-9b5b-ba42e8446704_Uncharted 4 A Thiefs End - Survival Mode.jpeg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\af1379b3-8c8f-4b41-92f0-c6a9ee8eda2a_277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\af1379b3-8c8f-4b41-92f0-c6a9ee8eda2a_277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\b0cef795-6770-41d7-911a-a711b354d6c7_gran.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\b0cef795-6770-41d7-911a-a711b354d6c7_gran.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\b3a0c191-e2ae-4f9a-8811-dad30f05199f_madden.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\b3a0c191-e2ae-4f9a-8811-dad30f05199f_madden.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\b3a87df6-eb32-4cf6-92b4-db536a0a1a11Mortal Kombat 11.jpeg",
@@ -157,6 +249,10 @@
       "PackagePath": "staticwebassets\\uploads\\images\\bb6513d6-890d-4ed9-a2e6-1e33225251e8Red Dead Redemption 2 - Outlaw Pass.jpeg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\bc8554fb-5b5a-44d2-bba7-bd4e6774a4e1_Overwatch.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\bc8554fb-5b5a-44d2-bba7-bd4e6774a4e1_Overwatch.jpeg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\bd8ed01a-0b48-4c48-8974-30fb375f99e670c6e2b1-dd81-4dbe-8e6c-cd3626f44beb277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
       "PackagePath": "staticwebassets\\uploads\\images\\bd8ed01a-0b48-4c48-8974-30fb375f99e670c6e2b1-dd81-4dbe-8e6c-cd3626f44beb277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg"
     },
@@ -167,6 +263,10 @@
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\c230192d-ceb3-4a77-998e-84013f2b3180madden.jpeg",
       "PackagePath": "staticwebassets\\uploads\\images\\c230192d-ceb3-4a77-998e-84013f2b3180madden.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\c7c8eb66-b1d4-447a-8999-425292246a5d_DOOM Eternal.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\c7c8eb66-b1d4-447a-8999-425292246a5d_DOOM Eternal.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\c843ca3f-37cd-48ef-9cf6-8b6ee41a3105Age of Empires IV.jpeg",
@@ -185,8 +285,24 @@
       "PackagePath": "staticwebassets\\uploads\\images\\da58f6a9-c933-4079-a10b-5e7543cb7f0dUncharted 4 A Thiefs End - Survival Mode.jpeg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\e88a6020-e122-4763-92c4-505afc44fe06_Halo Infinite.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\e88a6020-e122-4763-92c4-505afc44fe06_Halo Infinite.jpeg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\ea35819f-69cb-4434-bb78-47bf2aff94caPortal 2.jpeg",
       "PackagePath": "staticwebassets\\uploads\\images\\ea35819f-69cb-4434-bb78-47bf2aff94caPortal 2.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\ed9d116b-6129-4d78-be23-d04be7d2df79_Red Dead Redemption 2 - Outlaw Pass.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\ed9d116b-6129-4d78-be23-d04be7d2df79_Red Dead Redemption 2 - Outlaw Pass.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\edaebd37-e35b-4cbe-b023-d888fc2413b6_gran.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\edaebd37-e35b-4cbe-b023-d888fc2413b6_gran.jpg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\f13f1c73-9730-4947-81f6-709d21d55f5a_Resident Evil Village.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\f13f1c73-9730-4947-81f6-709d21d55f5a_Resident Evil Village.jpeg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\f1f40225-28d4-40a8-8e2f-9e6763910b09277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",
@@ -201,8 +317,20 @@
       "PackagePath": "staticwebassets\\uploads\\images\\f794a72b-6103-4cf1-812d-aa4590a7ad0dOverwatch.jpeg"
     },
     {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\f9ecfd45-9ac7-4e10-a525-89c326ec332e_madden.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\f9ecfd45-9ac7-4e10-a525-89c326ec332e_madden.jpeg"
+    },
+    {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\fa0500dc-6ad6-4080-b9b7-d937787f68beResident Evil Village.jpeg",
       "PackagePath": "staticwebassets\\uploads\\images\\fa0500dc-6ad6-4080-b9b7-d937787f68beResident Evil Village.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\fe1f4dd5-0765-42bb-a195-3b9dd8398cec_theevilwithin.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\images\\fe1f4dd5-0765-42bb-a195-3b9dd8398cec_theevilwithin.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\images\\ffcfb4cc-2dc5-4b7c-b9e7-564672b3300bgran.jpg",
+      "PackagePath": "staticwebassets\\uploads\\images\\ffcfb4cc-2dc5-4b7c-b9e7-564672b3300bgran.jpg"
     },
     {
       "Id": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\wwwroot\\uploads\\promos\\23ff7ede-d7ab-46cc-a684-c3d3f7080992277f91b3-89f0-4932-96ac-23f8000eab9729f8efa6-5853-4688-8293-1b85681e93808ce179ef-2493-4b1a-b3e6-8500fd704164gta.jpg",

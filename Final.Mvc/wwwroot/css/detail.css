@@ -208,3 +208,26 @@ body {
         width: 100%
     }
 }
+
+.dlcs-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Ensures the items wrap to the next line if needed */
+    gap: 20px; /* Adds space between items */
+}
+
+.addon-item {
+    width: 200px; /* Adjust width as needed */
+    margin: 0 auto;
+}
+
+.addon-img {
+    max-width: 100%; /* Ensures the image doesn't overflow */
+    height: auto;
+}
+
+.addon-item p, .addon-item h3 {
+    margin: 0;
+}
+

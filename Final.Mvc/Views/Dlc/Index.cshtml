@@ -5,114 +5,90 @@
 }
 
 <style>
-    .card:hover {
-        transform: scale(1.05);
-        transition: transform 0.3s ease;
+    .card-container {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 20px;
     }
 
     .card {
-        cursor: pointer;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
     }
 
-        .card a {
-            text-decoration: none;
-            color: inherit;
-        }
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card img {
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        text-align: center;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .go-to-detail-btn {
+        width: 100%;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+    .go-to-detail-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Ensure uniform button placement */
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
 </style>
 
-<h1>DLC List</h1>
+<h1 class="text-center">DLC List</h1>
 <div class="container">
-    <div class="row">
+    <div class="card-container">
         @foreach (var dlc in Model)
         {
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="card h-100" style="border: none;">
-                    <img src="./img/gta.jpg" class="card-img-top" alt="@dlc.Name" style="height: 200px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@dlc.Name</h5>
-                        <p class="card-text">@dlc.Price.ToString("C")</p>
+            <div class="card">
+                <img src="https://localhost:7047/uploads/images/@dlc.Image" alt="@dlc.Name" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">@dlc.Name</h5>
+                    <p class="card-text">@dlc.Price.ToString("C")</p>
 
-                        <!-- Add to Basket Button -->
-                        <button class="btn btn-primary add-to-basket-btn" data-dlc-id="@dlc.Id">
-                            Add to Basket
-                        </button>
-                    </div>
+                    <!-- Go to Detail Button -->
+                    <a asp-action="Detail" asp-route-id="@dlc.Id" class="btn go-to-detail-btn">
+                        Go to Detail
+                    </a>
                 </div>
             </div>
         }
-        <!-- Loader for showing when an item is being added -->
-        <div class="col-12 text-center" id="basket-loader" style="display: none;">
-            <img src="/path/to/loader.gif" alt="Loading" />
-        </div>
-        
     </div>
 </div>
-
-<!-- Add AJAX script for real-time "Add to Basket" functionality -->
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            // Handle Add to Basket button click
-            $('.add-to-basket-btn').on('click', function (e) {
-                e.preventDefault();
-
-                // Retrieve the JWT token from cookies
-                const token = getCookie('token');
-                if (!token) {
-                    alert('You need to be logged in to add items to the basket.');
-                    return;
-                }
-
-                // Decode the JWT token to get the user ID
-                const decodedToken = jwt_decode(token);
-                const userId = decodedToken.nameid;  // Assuming the user ID is stored in the 'nameid' claim
-
-                if (!userId) {
-                    alert('Failed to retrieve user information. Please log in.');
-                    return;
-                }
-
-                const dlcId = $(this).data('dlc-id');
-
-                // Show loader
-                $('#basket-loader').show();
-
-                // Send AJAX request to add the DLC to the basket
-                $.ajax({
-                    url: '/Basket/AddToBasket',  // Replace with your actual route for adding to basket
-                    type: 'POST',
-                    data: {
-                        userId: userId,
-                        gameId: dlcId,
-                        quantity: 1  // Assuming you want to add one item at a time
-                    },
-                    success: function (response) {
-                        alert('DLC added to basket successfully!');
-                        $('#basket-loader').hide();
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                        alert('Failed to add DLC to the basket.');
-                        $('#basket-loader').hide();
-                    }
-                });
-            });
-        });
-
-        // Function to get the cookie by name
-        function getCookie(name) {
-            let cookieArr = document.cookie.split(";");
-
-            for (let i = 0; i < cookieArr.length; i++) {
-                let cookiePair = cookieArr[i].split("=");
-
-                if (name == cookiePair[0].trim()) {
-                    return decodeURIComponent(cookiePair[1]);
-                }
-            }
-
-            return null;
-        }
-
-    </script>
-}

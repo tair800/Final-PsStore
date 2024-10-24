@@ -42,6 +42,11 @@
         .star.selected, .star.hovered {
             color: #FFD700; /* Gold color for selected or hovered stars */
         }
+
+        a{
+            text-decoration:none;
+            color:white
+        }
 </style>
 
 <!-- Game Banner -->
@@ -110,16 +115,20 @@ else
 <div class="container py-5">
     <h2 class="text-center mb-5">Add-Ons</h2>
     <div class="d-flex justify-content-center">
-        @foreach (var dlc in Model.GameDetail.DlcNames)
+        @foreach (var dlc in Model.GameDetail.DlcNames.Take(3))
         {
             <div class="addon-item text-center me-4">
-                <img class="addon-img rounded" src="@dlc.ImgUrl" alt="@dlc.Name" />
-                <p class="fs-5 fw-bold mt-2">@dlc.Name</p>
-                <h3 class="fs-5 mt-1">$@dlc.Price</h3>
+                <!-- DLC Detail Link -->
+                <a asp-controller="Dlc" asp-action="Detail" asp-route-id="@dlc.Id">
+                    <img class="addon-img rounded" src="https://localhost:7047/uploads/images/@dlc.Image" alt="@dlc.Name" />
+                    <p class="fs-5 fw-bold mt-2">@dlc.Name</p>
+                    <h3 class="fs-5 mt-1">$@dlc.Price</h3>
+                </a>
             </div>
         }
     </div>
 </div>
+
 
 <!-- Comments and Add Comment Section -->
 <div class="container mt-5 d-flex justify-content-between">

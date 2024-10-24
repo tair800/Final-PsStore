@@ -24,7 +24,6 @@ namespace Final.Mvc.ViewModels.GameVMs
         public string CategoryName { get; set; }
         public string CategoryIcon { get; set; }
         public int CategoryId { get; set; }
-        public int DlcId { get; set; }
         public List<DlcDetailVM> DlcNames { get; set; }
         public bool IsInWishlist { get; set; }
     }

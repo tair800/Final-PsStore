@@ -36,17 +36,9 @@ namespace Final.Application.Profiles
                 .ForMember(s => s.ImgUrl, map => map.MapFrom(d => d.ImgUrl.Save(Directory.GetCurrentDirectory(), "uploads/images/")));
 
             CreateMap<Game, GameReturnDto>()
-                .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs.Select(dlc => new DlcReturnDto
-                {
-                    Id = dlc.Id,
-                    GameTitle = dlc.Game.Title,
-                    GameId = dlc.GameId,
-                    Name = dlc.Name,
-                    Price = (int)dlc.Price,
-                    Image = dlc.Image,
-                    CreatedDate = dlc.CreatedDate,
-                }).ToList()))
-                .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));
+           .ForMember(dest => dest.DlcNames, opt => opt.MapFrom(src => src.Dlcs))  // AutoMapper will automatically map the Dlcs collection
+           .ForMember(dest => dest.ImgUrl, opt => opt.MapFrom(src => url + "uploads/images/" + src.ImgUrl));
+
 
 
 
@@ -174,7 +166,7 @@ namespace Final.Application.Profiles
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
 
-            //map
+            //rating
             CreateMap<RatingCreateDto, Rating>();
             CreateMap<Rating, RatingReturnDto>();
 

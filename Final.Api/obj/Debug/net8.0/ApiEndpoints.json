@@ -409,6 +409,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Final.Api.Controllers.DlcController",
+    "Method": "GetAll",
+    "RelativePath": "api/Dlc/page",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Final.Api.Controllers.GameController",
     "Method": "Create",
     "RelativePath": "api/Game",

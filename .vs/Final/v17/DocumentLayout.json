@@ -3,84 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\taira\\source\\repos\\Final\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\controllers\\dlccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\controllers\\dlccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\views\\shared\\components\\settingheader\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\views\\shared\\components\\settingheader\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\viewmodels\\dlcvms\\admindlcupdatevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\viewmodels\\dlcvms\\admindlcupdatevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\services\\implementations\\dlcservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\services\\implementations\\dlcservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\views\\dlc\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\views\\dlc\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\services\\interfaces\\idlcservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\services\\interfaces\\idlcservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\views\\dlc\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\views\\dlc\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\controllers\\dlccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\controllers\\dlccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3E7486D-68E4-459F-88D0-C9F6CC712908}|Final.Api\\Final.Api.csproj|c:\\users\\taira\\source\\repos\\final\\final.api\\controllers\\dlccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3E7486D-68E4-459F-88D0-C9F6CC712908}|Final.Api\\Final.Api.csproj|solutionrelative:final.api\\controllers\\dlccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\views\\dlc\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\views\\dlc\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\views\\game\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\views\\game\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\wwwroot\\css\\detail.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\wwwroot\\css\\detail.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\viewmodels\\gamevms\\gamedetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\viewmodels\\gamevms\\gamedetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\views\\promo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\views\\promo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\views\\dlc\\update.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\views\\dlc\\update.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\controllers\\promocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\controllers\\promocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|c:\\users\\taira\\source\\repos\\final\\final.application\\dtos\\dlcdtos\\dlcupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00257DEE-7710-4BA0-80D1-479AB966E21C}|Final.Application\\Final.Application.csproj|solutionrelative:final.application\\dtos\\dlcdtos\\dlcupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\viewmodels\\chatvms\\chatmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\viewmodels\\chatvms\\chatmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|c:\\users\\taira\\source\\repos\\final\\final.core\\entities\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|solutionrelative:final.core\\entities\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|c:\\users\\taira\\source\\repos\\final\\final.data\\data\\finaldbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B951EC1-B813-473A-9691-396F3B001ED8}|Final.Data\\Final.Data.csproj|solutionrelative:final.data\\data\\finaldbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|c:\\users\\taira\\source\\repos\\final\\final.core\\entities\\chatroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06BC2087-CEC7-41CB-B2BF-A99310AB0283}|Final.Core\\Final.Core.csproj|solutionrelative:final.core\\entities\\chatroom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\views\\promo\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\views\\promo\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\viewmodels\\promovms\\adminpromodetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\viewmodels\\promovms\\adminpromodetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|c:\\users\\taira\\source\\repos\\final\\final.mvc\\areas\\adminarea\\viewmodels\\promovms\\adminpromolistvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2ECA946-B660-4CAC-AF46-CB2F4E75D7E2}|Final.Mvc\\Final.Mvc.csproj|solutionrelative:final.mvc\\areas\\adminarea\\viewmodels\\promovms\\adminpromolistvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -90,8 +54,138 @@
       "DocumentGroups": [
         {
           "DockedWidth": 545,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Default.cshtml",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Shared\\Components\\SettingHeader\\Default.cshtml",
+              "RelativeDocumentMoniker": "Final.Mvc\\Views\\Shared\\Components\\SettingHeader\\Default.cshtml",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Shared\\Components\\SettingHeader\\Default.cshtml",
+              "RelativeToolTip": "Final.Mvc\\Views\\Shared\\Components\\SettingHeader\\Default.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-24T14:57:00.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DlcController.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Controllers\\DlcController.cs",
+              "RelativeDocumentMoniker": "Final.Mvc\\Controllers\\DlcController.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Controllers\\DlcController.cs",
+              "RelativeToolTip": "Final.Mvc\\Controllers\\DlcController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T14:42:34.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IDlcService.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Interfaces\\IDlcService.cs",
+              "RelativeDocumentMoniker": "Final.Application\\Services\\Interfaces\\IDlcService.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Interfaces\\IDlcService.cs",
+              "RelativeToolTip": "Final.Application\\Services\\Interfaces\\IDlcService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T14:42:07.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DlcController.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\Controllers\\DlcController.cs",
+              "RelativeDocumentMoniker": "Final.Api\\Controllers\\DlcController.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Api\\Controllers\\DlcController.cs",
+              "RelativeToolTip": "Final.Api\\Controllers\\DlcController.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowD8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T14:41:45.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DlcService.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Implementations\\DlcService.cs",
+              "RelativeDocumentMoniker": "Final.Application\\Services\\Implementations\\DlcService.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Services\\Implementations\\DlcService.cs",
+              "RelativeToolTip": "Final.Application\\Services\\Implementations\\DlcService.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAswIsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T14:39:35.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Dlc\\Index.cshtml",
+              "RelativeDocumentMoniker": "Final.Mvc\\Views\\Dlc\\Index.cshtml",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Dlc\\Index.cshtml",
+              "RelativeToolTip": "Final.Mvc\\Views\\Dlc\\Index.cshtml",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAAwFYAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-24T14:27:48.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Detail.cshtml",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Dlc\\Detail.cshtml",
+              "RelativeDocumentMoniker": "Final.Mvc\\Views\\Dlc\\Detail.cshtml",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Dlc\\Detail.cshtml",
+              "RelativeToolTip": "Final.Mvc\\Views\\Dlc\\Detail.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADsAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-24T14:25:13.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "detail.css",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\detail.css",
+              "RelativeDocumentMoniker": "Final.Mvc\\wwwroot\\css\\detail.css",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\wwwroot\\css\\detail.css",
+              "RelativeToolTip": "Final.Mvc\\wwwroot\\css\\detail.css",
+              "ViewState": "AgIAANEAAAAAAAAAAAAAAOgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-24T14:19:36.982Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Detail.cshtml",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Game\\Detail.cshtml",
+              "RelativeDocumentMoniker": "Final.Mvc\\Views\\Game\\Detail.cshtml",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Game\\Detail.cshtml",
+              "RelativeToolTip": "Final.Mvc\\Views\\Game\\Detail.cshtml",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHUAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-24T14:09:42.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GameDetailVM.cs",
+              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\ViewModels\\GameVMs\\GameDetailVM.cs",
+              "RelativeDocumentMoniker": "Final.Mvc\\ViewModels\\GameVMs\\GameDetailVM.cs",
+              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\ViewModels\\GameVMs\\GameDetailVM.cs",
+              "RelativeToolTip": "Final.Mvc\\ViewModels\\GameVMs\\GameDetailVM.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA8wBgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T14:08:52.629Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -110,259 +204,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DlcController.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\DlcController.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Controllers\\DlcController.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\DlcController.cs",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Controllers\\DlcController.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAIAcwMoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T18:09:49.771Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GameController.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\GameController.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Controllers\\GameController.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\GameController.cs",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Controllers\\GameController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:51:06.427Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Dlc\\Index.cshtml",
-              "RelativeDocumentMoniker": "Final.Mvc\\Views\\Dlc\\Index.cshtml",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Dlc\\Index.cshtml",
-              "RelativeToolTip": "Final.Mvc\\Views\\Dlc\\Index.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB0AAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T18:09:21.921Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "FinalDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Data\\FinalDbContext.cs",
-              "RelativeDocumentMoniker": "Final.Data\\Data\\FinalDbContext.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Data\\Data\\FinalDbContext.cs",
-              "RelativeToolTip": "Final.Data\\Data\\FinalDbContext.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAgwBQAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:38:15.972Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ChatHub.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Hubs\\ChatHub.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\Hubs\\ChatHub.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Hubs\\ChatHub.cs",
-              "RelativeToolTip": "Final.Mvc\\Hubs\\ChatHub.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:37:32.486Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "PromoController.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\PromoController.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Controllers\\PromoController.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Controllers\\PromoController.cs",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Controllers\\PromoController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAASwBMAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T16:55:26.956Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AdminDlcUpdateVM.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\DlcVMs\\AdminDlcUpdateVM.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\DlcVMs\\AdminDlcUpdateVM.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\DlcVMs\\AdminDlcUpdateVM.cs",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\DlcVMs\\AdminDlcUpdateVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBAAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:52:54.864Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Dlc\\Index.cshtml",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Views\\Dlc\\Index.cshtml",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Dlc\\Index.cshtml",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Views\\Dlc\\Index.cshtml",
-              "ViewState": "AgIAAB8AAACAzczMzIwjwCEAAABiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T18:09:53.655Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Promo\\Index.cshtml",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Views\\Promo\\Index.cshtml",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Promo\\Index.cshtml",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Views\\Promo\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T16:58:29.082Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "GameController.cs",
               "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Controllers\\GameController.cs",
               "RelativeDocumentMoniker": "Final.Mvc\\Controllers\\GameController.cs",
               "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Controllers\\GameController.cs",
               "RelativeToolTip": "Final.Mvc\\Controllers\\GameController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAASwBYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAgwIkAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T16:55:52.558Z",
+              "WhenOpened": "2024-10-24T14:08:45.825Z",
               "EditorCaption": ""
-            },
+            }
+          ]
+        },
+        {
+          "DockedWidth": 583,
+          "SelectedChildIndex": -1,
+          "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Update.cshtml",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Dlc\\Update.cshtml",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Views\\Dlc\\Update.cshtml",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Dlc\\Update.cshtml",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Views\\Dlc\\Update.cshtml",
-              "ViewState": "AgIAAAAAAAAANDMzMzP7vwAAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T17:52:53.164Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ChatModel.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\ViewModels\\ChatVMs\\ChatModel.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\ViewModels\\ChatVMs\\ChatModel.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\ViewModels\\ChatVMs\\ChatModel.cs",
-              "RelativeToolTip": "Final.Mvc\\ViewModels\\ChatVMs\\ChatModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:41:02.038Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Chat\\Index.cshtml",
-              "RelativeDocumentMoniker": "Final.Mvc\\Views\\Chat\\Index.cshtml",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Views\\Chat\\Index.cshtml",
-              "RelativeToolTip": "Final.Mvc\\Views\\Chat\\Index.cshtml",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAAwHwAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T17:43:01.707Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DlcUpdateDto.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\DlcDtos\\DlcUpdateDto.cs",
-              "RelativeDocumentMoniker": "Final.Application\\Dtos\\DlcDtos\\DlcUpdateDto.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Application\\Dtos\\DlcDtos\\DlcUpdateDto.cs",
-              "RelativeToolTip": "Final.Application\\Dtos\\DlcDtos\\DlcUpdateDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:54:06.836Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "AdminPromoListVM.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\PromoVMs\\AdminPromoListVM.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\PromoVMs\\AdminPromoListVM.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\PromoVMs\\AdminPromoListVM.cs",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\PromoVMs\\AdminPromoListVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:02:09.652Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ChatMessage.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Entities\\ChatMessage.cs",
-              "RelativeDocumentMoniker": "Final.Core\\Entities\\ChatMessage.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Entities\\ChatMessage.cs",
-              "RelativeToolTip": "Final.Core\\Entities\\ChatMessage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:36:55.224Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ChatController.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Controllers\\ChatController.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\Controllers\\ChatController.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Controllers\\ChatController.cs",
-              "RelativeToolTip": "Final.Mvc\\Controllers\\ChatController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T16:55:52.507Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "AdminPromoDetailVM.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\PromoVMs\\AdminPromoDetailVM.cs",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\PromoVMs\\AdminPromoDetailVM.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\ViewModels\\PromoVMs\\AdminPromoDetailVM.cs",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\ViewModels\\PromoVMs\\AdminPromoDetailVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:03:02.586Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Detail.cshtml",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Promo\\Detail.cshtml",
-              "RelativeDocumentMoniker": "Final.Mvc\\Areas\\AdminArea\\Views\\Promo\\Detail.cshtml",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Mvc\\Areas\\AdminArea\\Views\\Promo\\Detail.cshtml",
-              "RelativeToolTip": "Final.Mvc\\Areas\\AdminArea\\Views\\Promo\\Detail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T17:03:09.64Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ChatRoom.cs",
-              "DocumentMoniker": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Entities\\ChatRoom.cs",
-              "RelativeDocumentMoniker": "Final.Core\\Entities\\ChatRoom.cs",
-              "ToolTip": "C:\\Users\\taira\\source\\repos\\Final\\Final.Core\\Entities\\ChatRoom.cs",
-              "RelativeToolTip": "Final.Core\\Entities\\ChatRoom.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T17:36:27.226Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             }
           ]
         }
