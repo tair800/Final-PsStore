@@ -54,6 +54,7 @@
     padding: 0.5rem 1rem;
     transition: background-color 0.3s;
 }
+   
 
     .signin-btn:hover {
         background-color: #005bb5;
@@ -268,7 +269,6 @@
     background-color: #003087;
     color: white;
     padding: 20px 0;
-    margin-top: 30px !important;
 }
 
     .footer a {

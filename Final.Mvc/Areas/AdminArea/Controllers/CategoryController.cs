@@ -1,11 +1,13 @@
 ﻿using Final.Mvc.Areas.AdminArea.ViewModels.Categories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Headers;
 
 namespace Final.Mvc.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+
     public class CategoryController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -19,13 +21,20 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
-            var response = await client.GetAsync("https://localhost:7047/api/Category");
+            var response = await client.GetAsync("https://localhost:7047/api/Category/ForAdmin");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
                 var categories = JsonConvert.DeserializeObject<List<CategoryListVM>>(data);
                 return View(categories);
+            }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return RedirectToAction("Login", "User", new { area = "" });
+            }
+            {
+
             }
 
             return View(new List<CategoryListVM>());
@@ -43,6 +52,13 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                 var categories = JsonConvert.DeserializeObject<AdminCategoryReturn>(data);
                 return View(categories);
             }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return RedirectToAction("Login", "User", new { area = "" });
+            }
+            {
+
+            }
 
             return RedirectToAction("Index");
         }
@@ -59,14 +75,36 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             {
                 return RedirectToAction("Index");
             }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return RedirectToAction("Login", "User", new { area = "" });
+            }
+            {
+
+            }
 
             ModelState.AddModelError("", "Error deleting the category.");
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            using HttpResponseMessage auth = await client.GetAsync("https://localhost:7047/api/User/CheckAdmin");
+
+            if (auth.IsSuccessStatusCode)
+            {
+                return View(new AdminCategoryCreateVM());
+
+            }
+            else if (auth.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return RedirectToAction("Login", "User", new { area = "" });
+            }
+
             return View(new AdminCategoryCreateVM());
         }
 
@@ -90,6 +128,7 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                 return RedirectToAction("Index");
             }
 
+
             ModelState.AddModelError("", "Error creating category.");
             return View(model);
         }
@@ -106,6 +145,13 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                 var data = await response.Content.ReadAsStringAsync();
                 var category = JsonConvert.DeserializeObject<AdminCategoryUpdateVM>(data);
                 return View(category);
+            }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return RedirectToAction("Login", "User", new { area = "" });
+            }
+            {
+
             }
 
             return RedirectToAction("Index");

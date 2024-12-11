@@ -2,13 +2,16 @@
 using Final.Application.ViewModels;
 using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs;
 using Final.Mvc.Areas.AdminArea.ViewModels.UserVMs;
+using Final.Mvc.ViewModels.UserVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Headers;
 
 namespace Final.Mvc.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+
     public class GameController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -20,12 +23,12 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             this.emailService = emailService;
         }
 
-        public async Task<IActionResult> Index(string searchTerm = null)
+        public async Task<IActionResult> Index(string searchTerm = null, int pageNumber = 1, int pageSize = 10)
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
 
-            var response = await client.GetAsync("https://localhost:7047/api/Game");
+            var response = await client.GetAsync("https://localhost:7047/api/Game/ForAdmin");
 
             if (response.IsSuccessStatusCode)
             {
@@ -37,11 +40,32 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                     games = games.Where(g => g.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
                 }
 
-                return View(games);
+                // Implement pagination logic
+                var totalGames = games.Count();
+                var paginatedGames = games
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                ViewBag.CurrentPage = pageNumber;
+                ViewBag.PageSize = pageSize;
+                ViewBag.TotalPages = (int)Math.Ceiling(totalGames / (double)pageSize);
+                ViewBag.SearchTerm = searchTerm;
+
+                return View(paginatedGames);
+            }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return RedirectToAction("Login", "User", new { area = "" });
+            }
+            {
+
             }
 
             return View(new List<GameListVM>());
         }
+
+
 
 
         public async Task<IActionResult> Detail(int id)
@@ -213,10 +237,46 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
 
             if (!response.IsSuccessStatusCode)
             {
+                // Handle error response
                 var errorContent = await response.Content.ReadAsStringAsync();
-                ModelState.AddModelError("", $"Error creating game: {response.StatusCode}. Response: {errorContent}");
-                return View(model);
+
+                try
+                {
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+
+                    if (errorResponse?.Errors != null)
+                    {
+                        foreach (var error in errorResponse.Errors)
+                        {
+                            foreach (var errorMessage in error.Value)
+                            {
+                                ModelState.AddModelError(error.Key, errorMessage);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = errorResponse?.Message ?? "An unexpected error occurred.";
+                    }
+                }
+                catch (JsonException ex)
+                {
+                    // Log the error and show a generic message
+                    Console.WriteLine($"Error parsing JSON: {ex.Message}");
+                    ViewBag.ErrorMessage = $"Error creating game: {response.StatusCode}. Response: {errorContent}";
+                }
+
+                // Fetch categories again to repopulate dropdown after API failure
+                var categoryResponse = await client.GetAsync("https://localhost:7047/api/Category");
+                if (categoryResponse.IsSuccessStatusCode)
+                {
+                    var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+                    model.Categories = JsonConvert.DeserializeObject<List<AdminCategoryVM>>(categoryData);
+                }
+
+                return View(model); // Return the view with the error messages
             }
+
 
             // Fetch the list of verified users
             HttpResponseMessage userResponse = await client.GetAsync("https://localhost:7047/api/user/verified");
@@ -248,7 +308,7 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
                         smtpPort: 587,
                         enableSsl: true,
                         smtpUser: "tahiraa@code.edu.az",
-                        smtpPass: "blcf yubd mxnb gcyb"
+                        smtpPass: "cark zrzn cjid cjlr"
                     );
                 }
             }

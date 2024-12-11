@@ -2,12 +2,16 @@
 using Final.Application.Dtos.UserDtos;
 using Final.Application.Exceptions;
 using Final.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final.Api.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
+
+
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -232,7 +236,18 @@ namespace Final.Api.Controllers
                 return StatusCode(500, new { Message = "An error occurred while deleting the card.", Details = ex.Message });
             }
         }
+        [HttpGet("count")]
+        public async Task<IActionResult> GetCount()
+        {
+            var count = await _userService.Count();
+            return Ok(new { Count = count });
+        }
 
-
+        [Authorize(Roles = "admin,superAdmin")]
+        [HttpGet("CheckAdmin")]
+        public async Task<IActionResult> Check()
+        {
+            return Ok();
+        }
     }
 }

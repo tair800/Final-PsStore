@@ -5,6 +5,7 @@ using Final.Application.Extensions;
 using Final.Application.Services.Interfaces;
 using Final.Core.Entities;
 using Final.Data.Implementations;
+using Newtonsoft.Json;
 
 namespace Final.Application.Services.Implementations
 {
@@ -12,11 +13,13 @@ namespace Final.Application.Services.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IActivityService _activityService;
 
-        public GameService(IUnitOfWork unitOfWork, IMapper mapper)
+        public GameService(IUnitOfWork unitOfWork, IMapper mapper, IActivityService activityService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _activityService = activityService;
         }
 
         public async Task<int> Create(GameCreateDto createDto)
@@ -27,6 +30,15 @@ namespace Final.Application.Services.Implementations
             var game = _mapper.Map<Game>(createDto);
             await _unitOfWork.gameRepository.Create(game);
             _unitOfWork.Commit();
+
+            await _activityService.LogActivity(new Activ
+            {
+                ActionType = "Create",
+                EntityName = "Game",
+                Details = $"Game '{game.Title}' was created.",
+                PerformedBy = "System",
+                EntityId = game.Id
+            });
 
             return game.Id;
         }
@@ -47,27 +59,22 @@ namespace Final.Application.Services.Implementations
 
         public async Task<List<GameReturnDto>> GetAllUserWishlist(string userId)
         {
-            // Fetch the wishlist for the user
             var wishlist = await _unitOfWork.wishlistRepository.GetEntity(w => w.UserId == userId, "WishlistGames.Game");
 
             if (wishlist == null || !wishlist.WishlistGames.Any())
             {
-                return new List<GameReturnDto>(); // Return an empty list if no wishlist exists or no games in the wishlist
+                return new List<GameReturnDto>();
             }
 
-            // Get the games from the wishlist
             var games = wishlist.WishlistGames.Select(wg => wg.Game).ToList();
 
-            // Map games to DTOs
             return _mapper.Map<List<GameReturnDto>>(games);
         }
 
 
 
-        // Get a single game by ID
         public async Task<GameReturnDto> GetOne(int id)
         {
-            // Fetch the game and its related data
             var game = await _unitOfWork.gameRepository.GetEntity(g => g.Id == id, "Dlcs", "Category", "Ratings");
 
             if (game == null)
@@ -75,11 +82,9 @@ namespace Final.Application.Services.Implementations
                 throw new CustomExceptions(404, "Game", "Game not found.");
             }
 
-            // Calculate the average rating
             var averageRating = game.Ratings.Any() ? game.Ratings.Average(r => r.Score) : 0;
             var ratingCount = game.Ratings.Count();
 
-            // Map to GameReturnDto
             var gameReturnDto = _mapper.Map<GameReturnDto>(game);
             gameReturnDto.AverageRating = averageRating;
             gameReturnDto.RatingCount = ratingCount;
@@ -96,6 +101,17 @@ namespace Final.Application.Services.Implementations
 
             await _unitOfWork.gameRepository.Delete(game);
             _unitOfWork.Commit();
+
+
+            await _activityService.LogActivity(new Activ
+            {
+                ActionType = "Delete",
+                EntityName = "Game",
+                Details = $"Game '{game.Title}' with ID {id} was deleted.",
+                PerformedBy = "System"
+            });
+
+
         }
 
 
@@ -105,27 +121,70 @@ namespace Final.Application.Services.Implementations
             if (game == null)
                 throw new CustomExceptions(404, "Game", "Game not found.");
 
+            var jsonSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                DateFormatString = "yyyy-MM-dd HH:mm:ss"
+            };
+
+            var oldData = JsonConvert.SerializeObject(game, jsonSettings);
+            var oldDataDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(oldData);
+            var propertiesToExclude = new HashSet<string> { "WishlistGames", "Comments", "BasketGames", "Dlcs", "Ratings" };
+
             if (updateDto.File != null)
             {
-                // Delete old image if it exists
                 if (!string.IsNullOrEmpty(game.ImgUrl))
                 {
                     FileExtension.DeleteImage(game.ImgUrl);
                 }
 
-                // Save the new image
                 var newFileName = updateDto.File.Save(Directory.GetCurrentDirectory(), "uploads/images/");
                 game.ImgUrl = newFileName;
             }
 
             game.UpdatedDate = DateTime.Now;
-
-            // Update other fields using AutoMapper
             _mapper.Map(updateDto, game);
+
+            var newData = JsonConvert.SerializeObject(game, jsonSettings);
+            var newDataDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(newData);
+
+            var changedProperties = new Dictionary<string, (object oldValue, object newValue)>();
+            foreach (var key in oldDataDict.Keys)
+            {
+                if (propertiesToExclude.Contains(key))
+                    continue;
+
+                if (newDataDict.ContainsKey(key) && !Equals(oldDataDict[key], newDataDict[key]))
+                {
+                    changedProperties[key] = (oldDataDict[key], newDataDict[key]);
+                }
+            }
+
+            var formattedOldData = JsonConvert.SerializeObject(
+                changedProperties.ToDictionary(k => k.Key, v => v.Value.oldValue),
+                jsonSettings
+            );
+
+            var formattedNewData = JsonConvert.SerializeObject(
+                changedProperties.ToDictionary(k => k.Key, v => v.Value.newValue),
+                jsonSettings
+            );
 
             await _unitOfWork.gameRepository.Update(game);
             _unitOfWork.Commit();
+
+            await _activityService.LogActivity(new Activ
+            {
+                ActionType = "Update",
+                EntityName = "Game",
+                Details = $"Game '{game.Title}' with ID {id} was updated.",
+                OldData = formattedOldData,
+                NewData = formattedNewData,
+                PerformedBy = "System",
+                EntityId = game.Id
+            });
         }
+
 
 
         // Search games by title
@@ -133,6 +192,11 @@ namespace Final.Application.Services.Implementations
         {
             var games = await _unitOfWork.gameRepository.Search(g => g.Title.Contains(title));
             return _mapper.Map<List<GameReturnDto>>(games);
+        }
+        public async Task<int> Count()
+        {
+            var count = (await _unitOfWork.gameRepository.GetAll()).Count();
+            return count;
         }
     }
 }

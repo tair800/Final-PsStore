@@ -56,11 +56,11 @@
                 <form asp-action="SendSupportEmail" method="post" class="form-container">
                     <div class="mb-3">
                         <label for="name" class="form-label">UserName</label>
-                        <input type="text" class="form-control" id="name" name="name" value="@ViewBag.UserName" readonly disabled>
+                        <input type="text" class="form-control" id="name" name="name" value="@ViewBag.UserName" readonly >
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="@ViewBag.UserEmail" readonly disabled>
+                        <input type="email" class="form-control" id="email" name="email" value="@ViewBag.UserEmail" readonly >
                     </div>
                     <div class="mb-3">
                         <label for="subject" class="form-label">Subject</label>

@@ -23,6 +23,12 @@ namespace Final.Mvc.Controllers
 
         public IActionResult Login()
         {
+
+            var token = Request.Cookies["token"];
+            if (!string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Update", "User");
+            }
             return View();
         }
 
@@ -117,8 +123,39 @@ namespace Final.Mvc.Controllers
 
             // Handle error (e.g., return the error messages to the view)
             var errorResponse = await response.Content.ReadAsStringAsync();
-            ModelState.AddModelError("", errorResponse);
-            return View(registerVM);
+
+            // Safely parse the error content to extract only the message and validation errors
+            try
+            {
+                // Deserialize error content into a structured object
+                var error = JsonConvert.DeserializeObject<ErrorResponse>(errorResponse);
+
+                // General error message
+                if (!string.IsNullOrEmpty(error.Message))
+                {
+                    ViewBag.ErrorMessage = error.Message;
+                }
+
+                // Field-specific validation errors
+                if (error.Errors != null)
+                {
+                    foreach (var err in error.Errors)
+                    {
+                        foreach (var errorMessage in err.Value)
+                        {
+                            ModelState.AddModelError(err.Key, errorMessage); // Add error to the specific field
+                        }
+                    }
+                }
+            }
+            catch (JsonException ex)
+            {
+                // If parsing fails, show a generic error
+                Console.WriteLine($"Error parsing JSON: {ex.Message}");
+                ViewBag.ErrorMessage = "An unexpected error occurred during registration.";
+            }
+
+            return View(registerVM); // Return the view with the error messages
         }
 
 
@@ -177,13 +214,13 @@ namespace Final.Mvc.Controllers
                 emailService.SendEmail(
                 from: "tahiraa@code.edu.az",
                 to: email,
-                subject: "Verify Email",
+                subject: "ResetPassword",
                 body: body,
                 smtpHost: "smtp.gmail.com",
                 smtpPort: 587,
                 enableSsl: true,
                 smtpUser: "tahiraa@code.edu.az",
-                smtpPass: "blcf yubd mxnb gcyb"
+                smtpPass: "cark zrzn cjid cjlr"
             );
 
                 TempData["EmailSendingSuccess"] = "An email with instructions has been sent to the provided address.";
@@ -221,8 +258,6 @@ namespace Final.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
         {
-
-
             using HttpClient client = new();
             StringContent content = new(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
@@ -230,15 +265,28 @@ namespace Final.Mvc.Controllers
 
             if (response.IsSuccessStatusCode)
             {
+                TempData["SuccessMessage"] = "Your password has been reset successfully.";
                 return RedirectToAction("Login");
             }
             else
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
-                ModelState.AddModelError("", $"Failed to reset password: {errorContent}");
-            }
 
-            return View();
+                try
+                {
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+                    if (!string.IsNullOrEmpty(errorResponse?.Message))
+                    {
+                        ViewBag.ErrorMessage = errorResponse.Message;
+                    }
+                }
+                catch (JsonException)
+                {
+                    ViewBag.ErrorMessage = "An unexpected error occurred while resetting the password.";
+                }
+
+                return View(model);
+            }
         }
 
         [HttpPost]

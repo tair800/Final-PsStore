@@ -56,12 +56,12 @@ namespace Final.Application.Services.Implementations
             {
                 comments = await _unitOfWork.commentRepository.GetAll(
                     c => c.GameId == gameId,
-                    "Game", "User");
+                    "Game", "User", "CommentReactions");
             }
             else
             {
                 comments = await _unitOfWork.commentRepository.GetAll(
-                    null, "Game", "User");
+                    null, "Game", "User", "CommentReactions");
             }
 
             return _mapper.Map<List<CommentReturnDto>>(comments);
@@ -71,7 +71,7 @@ namespace Final.Application.Services.Implementations
         {
             var comment = await _unitOfWork.commentRepository.GetEntity(
                 c => c.Id == id,
-                "Game", "User");
+                "Game", "User", "CommentReactions");
 
             if (comment == null)
             {
@@ -110,5 +110,58 @@ namespace Final.Application.Services.Implementations
             var history = await _unitOfWork.commentHistoryRepository.GetAll(h => h.CommentId == commentId);
             return _mapper.Map<List<CommentHistoryDto>>(history);
         }
+
+        public async Task LikeOrDislikeComment(CommentLikeDto reactionDto)
+        {
+            var comment = await _unitOfWork.commentRepository.GetEntity(c => c.Id == reactionDto.CommentId);
+            if (comment == null)
+                throw new CustomExceptions(404, "Comment", "Comment not found.");
+
+            var existingReaction = await _unitOfWork.commentReactionRepository.GetEntity(r =>
+                r.CommentId == reactionDto.CommentId && r.UserId == reactionDto.UserId);
+
+            if (existingReaction != null)
+            {
+                if (reactionDto.IsLike == existingReaction.IsLike)
+                {
+                    await _unitOfWork.commentReactionRepository.Delete(existingReaction);
+                }
+                else
+                {
+                    existingReaction.IsLike = reactionDto.IsLike;
+                    await _unitOfWork.commentReactionRepository.Update(existingReaction);
+                }
+            }
+            else
+            {
+                var newReaction = new CommentReaction
+                {
+                    CommentId = reactionDto.CommentId,
+                    UserId = reactionDto.UserId,
+                    IsLike = reactionDto.IsLike,
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow
+                };
+                await _unitOfWork.commentReactionRepository.Create(newReaction);
+            }
+
+            _unitOfWork.Commit();
+        }
+
+        public async Task<List<CommentReactionDto>> GetCommentReactions(int commentId)
+        {
+            var reactions = await _unitOfWork.commentReactionRepository.GetAll(
+                r => r.CommentId == commentId, "User");
+
+            if (reactions == null || !reactions.Any())
+            {
+                throw new CustomExceptions(404, "Reactions", "No reactions found for comment.");
+            }
+
+            return _mapper.Map<List<CommentReactionDto>>(reactions);
+        }
+
+
+
     }
 }

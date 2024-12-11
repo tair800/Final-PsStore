@@ -23,7 +23,7 @@ namespace Final.Application.Services.Implementations
                 Host = "smtp.gmail.com",
                 Port = 587,
                 EnableSsl = true,
-                Credentials = new NetworkCredential("tahiraa@code.edu.az", "blcf yubd mxnb gcyb"),
+                Credentials = new NetworkCredential("tahiraa@code.edu.az", "cark zrzn cjid cjlr"),
             };
             smtpClient.Send(mail);
         }

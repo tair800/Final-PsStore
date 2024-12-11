@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 namespace Final.Mvc.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+
     public class PromoController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

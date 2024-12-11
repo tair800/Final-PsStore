@@ -1,6 +1,7 @@
 ﻿using Final.Application.Dtos.CommentDtos;
 using Final.Application.Exceptions;
 using Final.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final.Api.Controllers
@@ -26,6 +27,10 @@ namespace Final.Api.Controllers
         [HttpGet("")]
         public async Task<IActionResult> GetAll() => Ok(await _commentService.GetAll());
 
+        [HttpGet("forAdmin")]
+        [Authorize(Roles = "admin,superAdmin")]
+        public async Task<IActionResult> GetAllAdmin() => Ok(await _commentService.GetAll());
+
         [HttpGet("game/{gameId}")]
         public async Task<IActionResult> GetAllByGame(int gameId)
         {
@@ -36,7 +41,6 @@ namespace Final.Api.Controllers
             }
             return Ok(comments);
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
@@ -96,5 +100,34 @@ namespace Final.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost("ReactToComment")]
+        public async Task<IActionResult> ReactToComment([FromBody] CommentLikeDto reactionDto)
+        {
+            if (reactionDto.CommentId <= 0)
+            {
+                return BadRequest("Invalid CommentId.");
+            }
+
+            try
+            {
+                await _commentService.LikeOrDislikeComment(reactionDto);
+                return Ok("Reaction recorded successfully.");
+            }
+            catch (CustomExceptions ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/reactions")]
+        public async Task<IActionResult> GetCommentReactions(int id)
+        {
+            var reactions = await _commentService.GetCommentReactions(id);
+            if (reactions == null || !reactions.Any())
+            {
+                return NotFound("No reactions found for the specified comment.");
+            }
+            return Ok(reactions);
+        }
     }
 }

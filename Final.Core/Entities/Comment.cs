@@ -10,7 +10,11 @@ namespace Final.Core.Entities
         public int GameId { get; set; }
         public User User { get; set; }
         public Game Game { get; set; }
+
+        public ICollection<CommentReaction> CommentReactions { get; set; } = new List<CommentReaction>();
+
         public ICollection<CommentHistory> CommentHistories { get; set; }
+
 
     }
 }

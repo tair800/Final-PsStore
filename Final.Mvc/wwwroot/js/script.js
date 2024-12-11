@@ -1,33 +1,30 @@
-function openPage(pageName, elmnt, color) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablink");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].style.backgroundColor = "";
-    }
-    document.getElementById(pageName).style.display = "block";
-    elmnt.style.backgroundColor = color;
+// Simple debounce function to limit API calls while typing
+function debounce(func, delay) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
 }
 
-document.getElementById("defaultOpen").click();
-const promoImage = document.getElementById("promoImage");
+// Debounced search function
+const debouncedSearch = debounce(function () {
+    const query = document.getElementById('searchInput').value;
 
-const squareImages = document.querySelectorAll(".square-img");
+    if (query.length < 1) {
+        document.getElementById('searchResults').innerHTML = '<div class="text-center text-muted">Type for searching...</div>';
+        return;
+    }
 
-squareImages.forEach(img => {
-    img.addEventListener("click", function () {
-
-        promoImage.src = this.src;
-    });
-});
-
-
-
-
-
-
+    // Perform AJAX request to fetch the search results
+    fetch(`/Game/Search?title=${query}`)
+        .then(response => response.text()) // Expecting partial view HTML as response
+        .then(data => {
+            document.getElementById('searchResults').innerHTML = data; // Inject the partial view result
+        })
+        .catch(() => {
+            document.getElementById('searchResults').innerHTML = '<div class="text-center text-danger">Error while searching. Try again later.</div>';
+        });
+}, 300);
 
 

@@ -1,5 +1,7 @@
 ﻿@using Final.Mvc.Areas.AdminArea.ViewModels.GameVMs
 
+
+
 @model List<GameListVM>
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
@@ -83,6 +85,21 @@
     </div>
 </div>
 
+<div class="pagination-container mt-4">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = ViewBag.PageSize, searchTerm = ViewBag.SearchTerm })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+
+
 @section Scripts {
     <!-- Include jQuery from a CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRaWf5F5r5aYF1w7z1kV9ROh8ORj1et7GQ4lq5K7G" crossorigin="anonymous"></script>
@@ -113,11 +130,7 @@
                         type: 'POST',
                         data: { id: gameId },
                         success: function (response) {
-                            Swal.fire(
-                                'Deleted!',
-                                'The game has been deleted.',
-                                'success'
-                            );
+                        
 
                             // Remove the row from the table
                             row.fadeOut(400, function () {

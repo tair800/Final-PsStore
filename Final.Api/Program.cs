@@ -2,6 +2,7 @@ using Final.Api.Middlewares;
 using Final.Api.Stripe;
 using Final.Application.Dtos.CategoryDtos;
 using Final.Application.Profiles;
+using Final.Application.Services;
 using Final.Application.Services.Implementations;
 using Final.Application.Services.Interfaces;
 using Final.Application.Settings;
@@ -9,10 +10,10 @@ using Final.Core.Entities;
 using Final.Core.Repositories;
 using Final.Data.Data;
 using Final.Data.Implementations;
+using Final.Infrastructure.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -126,6 +127,11 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IUserCardRepository, UserCardRepository>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<IRatingService, RatingService>();
+builder.Services.AddScoped<ICommentReactionRepository, CommentReactionRepository>();
+
+builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
+builder.Services.AddScoped<IActivityService, ActivityService>();
+
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();
@@ -135,39 +141,42 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-})
-     .AddCookie(options =>
-     {
-         options.LoginPath = "/Account/Login";
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//});
+//.AddCookie(options =>
+//{
 
-         options.Events.OnRedirectToLogin = context =>
-         {
-             if (context.Request.Path.StartsWithSegments("/api"))
-             {
-                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                 return Task.CompletedTask;
-             }
-             context.Response.Redirect(context.RedirectUri);
-             return Task.CompletedTask;
-         };
+//    options.Events.OnRedirectToLogin = context =>
+//    {
+//        if (context.Request.Path.StartsWithSegments("/api"))
+//        {
+//            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+//            return Task.CompletedTask;
+//        }
+//        context.Response.Redirect(context.RedirectUri);
+//        return Task.CompletedTask;
+//    };
 
-         options.Events.OnRedirectToAccessDenied = context =>
-         {
-             if (context.Request.Path.StartsWithSegments("/api"))
-             {
-                 context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                 return Task.CompletedTask;
-             }
-             context.Response.Redirect(context.RedirectUri);
-             return Task.CompletedTask;
-         };
-     });
+//    options.Events.OnRedirectToAccessDenied = context =>
+//    {
+//        if (context.Request.Path.StartsWithSegments("/api"))
+//        {
+//            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+//            return Task.CompletedTask;
+//        }
+//        context.Response.Redirect(context.RedirectUri);
+//        return Task.CompletedTask;
+//    };
+//});
 
 builder.Services.AddSession();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 
 builder.Services.AddDbContext<FinalDbContext>(opt =>
 {
@@ -182,26 +191,53 @@ builder.Services.AddAutoMapper(opt =>
 {
     opt.AddProfile(new MapperProfile(new HttpContextAccessor()));
 });
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password = new()
+    {
+        RequiredLength = 8,
+        RequireUppercase = true,
+        RequireLowercase = true,
+        RequireDigit = true,
+        RequireNonAlphanumeric = true
+    };
+
+    options.Lockout = new()
+    {
+        MaxFailedAccessAttempts = 5,
+        AllowedForNewUsers = true,
+        DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5)
+    };
+
+    options.User = new()
+    {
+        //todo:email confirm sondurmusen
+        RequireUniqueEmail = true,
+    };
+    options.SignIn.RequireConfirmedEmail = true;
+
+}).AddDefaultTokenProviders().AddEntityFrameworkStores<FinalDbContext>();
+
 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = config["Jwt:Issuer"],
-        ValidAudience = config["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:SecretKey"])),
-        ClockSkew = TimeSpan.Zero
-    };
-});
+      .AddJwtBearer(options =>
+      {
+          options.TokenValidationParameters = new TokenValidationParameters
+          {
+              ValidateIssuer = true,
+              ValidateAudience = true,
+              ValidateLifetime = true,
+              ValidateIssuerSigningKey = true,
+              ValidIssuer = config["Jwt:Issuer"],
+              ValidAudience = config["Jwt:Audience"],
+              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:SecretKey"])),
+              ClockSkew = TimeSpan.Zero
+          };
+      });
 
 
 
@@ -237,33 +273,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-
-builder.Services.AddIdentity<User, IdentityRole>(options =>
-{
-    options.Password = new()
-    {
-        RequiredLength = 8,
-        RequireUppercase = true,
-        RequireLowercase = true,
-        RequireDigit = true,
-        RequireNonAlphanumeric = true
-    };
-
-    options.Lockout = new()
-    {
-        MaxFailedAccessAttempts = 5,
-        AllowedForNewUsers = true,
-        DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5)
-    };
-
-    options.User = new()
-    {
-        //todo:email confirm sondurmusen
-        RequireUniqueEmail = true,
-    };
-    options.SignIn.RequireConfirmedEmail = true;
-
-}).AddDefaultTokenProviders().AddEntityFrameworkStores<FinalDbContext>();
 
 
 

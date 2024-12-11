@@ -144,20 +144,26 @@ a{
     top: 10px;
     right: 10px;
     cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-    .favorite-btn i {
-        color: #ccc; /* Default color for non-wishlist heart */
-        font-size: 24px;
-        transition: color 0.3s ease, transform 0.3s ease;
-    }
+.game-card:hover .favorite-btn {
+    opacity: 1; 
+}
 
-        .favorite-btn i.wishlist-added {
-            color: red; /* Color for wishlist heart */
-        }
+.favorite-btn i {
+    color: #ccc; 
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
 
-    /* Hover effect */
-    .favorite-btn:hover i {
-        color: red; /* Change color on hover */
-        transform: scale(1.2); /* Slightly enlarge the icon on hover */
-    }
+.favorite-btn i.wishlist-added {
+    color: red;
+}
+
+.favorite-btn:hover i {
+    color: red;
+    transform: scale(1.2);
+}
+

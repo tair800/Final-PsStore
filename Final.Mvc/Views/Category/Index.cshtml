@@ -1,6 +1,6 @@
 ﻿@model List<CategoryFirstVM>
 
-<div class="container-fluid mt-4"> <!-- Use container-fluid for full width -->
+<div class="container-fluid "> 
     <div class="row g-3">
         @if (Model != null && Model.Any())
         {
@@ -23,7 +23,6 @@
     </div>
 </div>
 
-<!-- CSS for category card -->
 <style>
     /* Category card container */
     .category-card {
@@ -38,6 +37,7 @@
         align-items: center;
         height: 200px; /* Adjust the height */
         transition: transform 0.3s ease, background-color 0.3s ease;
+        margin-bottom: 7px;
     }
 
     /* Hover effect for the category card */

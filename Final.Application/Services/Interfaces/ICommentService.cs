@@ -10,5 +10,10 @@ namespace Final.Application.Services.Interfaces
         Task<CommentReturnDto> GetOne(int id);
         Task<List<CommentHistoryDto>> GetCommentHistory(int commentId);
         Task Update(int id, CommentUpdateDto updateDto);
+        Task LikeOrDislikeComment(CommentLikeDto reactionDto);
+        //Task<int> AddReply(CommentReplyDto replyDto);
+        Task<List<CommentReactionDto>> GetCommentReactions(int commentId);
+
+
     }
 }

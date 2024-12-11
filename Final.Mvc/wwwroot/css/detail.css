@@ -211,23 +211,64 @@ body {
 
 .dlcs-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Centers the items horizontally */
+    align-items: flex-start; /* Aligns items at the start of the cross-axis */
     flex-wrap: wrap; /* Ensures the items wrap to the next line if needed */
     gap: 20px; /* Adds space between items */
+    margin: 0 auto; /* Centers the container itself */
 }
 
 .addon-item {
-    width: 200px; /* Adjust width as needed */
-    margin: 0 auto;
+    width: 338px; /* Adjust width as needed */
+    margin: 0 auto; /* Centers the individual item */
+    text-align: center; /* Centers the content within the item */
 }
 
 .addon-img {
     max-width: 100%; /* Ensures the image doesn't overflow */
     height: auto;
+    border-radius: 10px; /* Adds rounded corners if desired */
+    margin-bottom: 10px; /* Adds space between the image and text */
 }
 
 .addon-item p, .addon-item h3 {
-    margin: 0;
+    margin: 5px 0; /* Adjusts spacing between text elements */
+    font-size: 1rem; /* Ensures readability */
+    color: #e0e0e0; /* Text color */
 }
 
+@media (max-width: 768px) {
+    .addon-item {
+        width: 150px; /* Adjust width for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .addon-item {
+        width: 100%; /* Makes the items full-width on mobile */
+    }
+}
+
+.comment-reactions button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: transparent;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s, transform 0.2s;
+}
+
+    .comment-reactions button:hover {
+        color: #FFD700; /* Highlight color */
+        transform: scale(1.1);
+    }
+
+.comment-reactions .badge {
+    background-color: #ddd;
+    border-radius: 5px;
+    padding: 2px 6px;
+    font-size: 0.9rem;
+}

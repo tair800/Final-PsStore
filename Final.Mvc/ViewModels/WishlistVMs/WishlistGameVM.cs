@@ -1,6 +1,6 @@
 ﻿namespace Final.Mvc.ViewModels.WishlistVMs
 {
-    public class WishlistGamesVM
+    public class WishlistGameVM
     {
         public int GameId { get; set; }
         public string GameTitle { get; set; }

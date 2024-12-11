@@ -7,7 +7,7 @@
                 <div class="col-md-4">
                     <!-- Game Image -->
                     <div class="image-container text-center mb-4">
-                        <img src="@Model.ImgUrl ?? " https: //html.com/wp-content/uploads/flamingo-fallback.jpg"" alt="Game Image" class="img-fluid rounded game-image" />
+                        <img src="@Url.Content(Model.ImgUrl)" alt="Game Image" class="img-fluid rounded game-image" />
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -71,16 +71,19 @@
                                 <div class="dlc-item mb-3 p-3 rounded shadow-sm">
                                     <div class="row">
                                         <div class="col-md-4 text-center">
-                                            <img src="@dlc.Image ?? " https: //html.com/wp-content/uploads/flamingo-fallback.jpg"" alt="@dlc.Name" class="img-fluid dlc-image" />
+                                            <img src="https://localhost:7047/uploads/images/@dlc.Image" alt="@dlc.Name" class="img-fluid dlc-image" />
                                         </div>
                                         <div class="col-md-8">
-                                            <h5 class="text-secondary">@dlc.Name (@dlc.Price.ToString("C"))</h5>
+                                            <a href="@Url.Action("Detail", "Dlc", new { area = "AdminArea", id = dlc.Id })" class="text-decoration-none">
+                                                <h5 class="text-secondary">@dlc.Name (@dlc.Price.ToString("C"))</h5>
+                                            </a>
                                             <p class="small text-muted">Created On: @dlc.CreatedDate.ToString("dd-MM-yyyy")</p>
                                         </div>
                                     </div>
                                 </div>
                             }
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -23,6 +23,7 @@ namespace Final.Data.Implementations
         public IOrderRepository orderRepository { get; private set; }
         public IUserCardRepository userCardRepository { get; private set; }
         public IRatingRepository ratingRepository { get; private set; }
+        public ICommentReactionRepository commentReactionRepository { get; private set; }
 
 
         public ICategoryRepository CategoryRepository => throw new NotImplementedException();
@@ -40,6 +41,7 @@ namespace Final.Data.Implementations
         public IOrderRepository OrderRepository => throw new NotImplementedException();
         public IUserCardRepository UserCardRepository => throw new NotImplementedException();
         public IRatingRepository RatingRepository => throw new NotImplementedException();
+        public ICommentReactionRepository CommentReactionRepository => throw new NotImplementedException();
 
 
         public UnitOfWork(FinalDbContext context)
@@ -60,6 +62,7 @@ namespace Final.Data.Implementations
             orderRepository = new OrderRepository(_context);
             userCardRepository = new UserCardRepository(_context);
             ratingRepository = new RatingRepository(_context);
+            commentReactionRepository = new CommentReactionRepository(_context);
         }
 
         public void Commit()

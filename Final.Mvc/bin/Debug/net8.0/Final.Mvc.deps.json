@@ -1949,7 +1949,8 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "Final.Data": "1.0.0",
-          "FluentValidation.AspNetCore": "11.3.0"
+          "FluentValidation.AspNetCore": "11.3.0",
+          "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "Final.Application.dll": {

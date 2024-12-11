@@ -11,6 +11,7 @@ namespace Final.Application.Services.Interfaces
         Task Update(int id, GameUpdateDto updateDto);
         Task<List<GameReturnDto>> SearchGames(string title);
         Task<List<GameReturnDto>> GetAllUserWishlist(string userId);
+        Task<int> Count();
     }
 
 }

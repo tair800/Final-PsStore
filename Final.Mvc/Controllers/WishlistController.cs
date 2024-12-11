@@ -14,14 +14,14 @@ public class WishlistController : Controller
         var token = Request.Cookies["token"];
         if (string.IsNullOrEmpty(token))
         {
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "User");
         }
 
         // Extract UserId from the token
         var userId = GetUserIdFromToken(token);
         if (string.IsNullOrEmpty(userId))
         {
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "User");
         }
 
         using HttpClient client = new();
@@ -33,12 +33,20 @@ public class WishlistController : Controller
         {
             var data = await response.Content.ReadAsStringAsync();
 
-            // Deserialize the entire response, including the "data" field
             var apiResponse = JsonConvert.DeserializeObject<dynamic>(data);
-            var userWishlistData = apiResponse.data.ToString();  // Extract "data" from the response
+            var userWishlistData = apiResponse.data.ToString();
 
-            // Deserialize the "data" part to UserWishlistVM
             var userWishListDto = JsonConvert.DeserializeObject<UserWishlistVM>(userWishlistData);
+
+            // Check if the wishlist is empty and return an empty view model if so
+            if (userWishListDto == null || userWishListDto.WishlistGames == null)
+            {
+                return View(new UserWishlistVM
+                {
+                    UserId = userId,
+                    WishlistGames = new List<WishlistGameVM>()
+                });
+            }
 
             UserWishlistVM userWishlistVM = new UserWishlistVM()
             {
@@ -46,12 +54,15 @@ public class WishlistController : Controller
                 WishlistGames = userWishListDto.WishlistGames,
             };
 
-            // Return the wishlist view with the populated UserWishlistVM model
             return View(userWishlistVM);
         }
 
-        // If the API call fails, handle appropriately (e.g., show an error message or redirect)
-        return RedirectToAction("Error");
+        // Handle other non-success status codes by showing an empty view
+        return View(new UserWishlistVM
+        {
+            UserId = userId,
+            WishlistGames = new List<WishlistGameVM>()
+        });
     }
     public async Task<IActionResult> RemoveFromWishlist(string gameId)
     {

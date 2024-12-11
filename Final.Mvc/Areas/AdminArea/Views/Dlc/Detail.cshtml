@@ -19,7 +19,9 @@
 
                 <div class="mb-3">
                     <h4>Game Name</h4>
-                    <h5 class="text-muted">@Model.GameTitle</h5>
+                    <a href="@Url.Action("Detail", "Game", new { area = "AdminArea", id = Model.GameId })" class="text-decoration-none">
+                        <h5 class="text-secondary">@Model.GameTitle</h5>
+                    </a>
 
                     <h4>Game Id</h4>
                     <h5 class="text-muted">@Model.GameId</h5>
@@ -27,10 +29,10 @@
                 </div>
                 <div class="mb-3">
                     <h4>CreateDate </h4>
-                    <h5 class="text-muted">@Model.CreateDate.ToString("dd-MM-yyyy")</h5>
+                    <h5 class="text-muted">@Model.CreatedDate.ToString("dd-MM-yyyy")</h5>
 
                     <h4>UpdateDate Id</h4>
-                    <h5 class="text-muted">@Model.UpdateDate?.ToString("dd-MM-yyyy")</h5>
+                    <h5 class="text-muted">@Model.UpdatedDate?.ToString("dd-MM-yyyy")</h5>
 
                 </div>
 

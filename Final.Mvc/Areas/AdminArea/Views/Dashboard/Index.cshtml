@@ -1,1 +1,62 @@
-﻿dash
+﻿@using Newtonsoft.Json
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+
+<div class="dashboard-container">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text">@ViewBag.TotalUsers</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Total Games</h5>
+                    <p class="card-text">@ViewBag.TotalGames</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Total DLCs</h5>
+                    <p class="card-text">@ViewBag.TotalDLCs</p>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header">Recent Activities</div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        @foreach (var activity in ViewBag.RecentActivities)
+                        {
+                            <li class="list-group-item">
+                                <a href="@Url.Action("Detail", "Dashboard", new { area = "AdminArea", id = activity.Id })">
+                                    <strong>@activity.ActionType</strong> - @activity.EntityName: @activity.Details
+                                </a>
+                                <br />
+                                <small>@activity.CreatedDate.ToLocalTime() by @activity.PerformedBy</small>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+

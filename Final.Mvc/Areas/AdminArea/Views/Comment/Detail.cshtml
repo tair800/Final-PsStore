@@ -21,6 +21,9 @@
             border: 1px solid #ccc;
         }
 
+    .comment-reactions .badge {
+        cursor: pointer;
+    }
 </style>
 <div class="container">
     <h2>Comment Details</h2>
@@ -35,6 +38,29 @@
         <p><strong>Content:</strong></p>
         <p>@Model.Content</p>
     </div>
+
+    <hr />
+
+    <h4>Comment Reactions</h4>
+    <div class="comment-reactions mt-3">
+        <button class="btn btn-light me-2">
+            👍 Like <span class="badge bg-secondary" data-bs-toggle="tooltip"
+                          title="@((Model.Reactions != null && Model.Reactions.Any(r => r.IsLike))
+                ? string.Join(", ", Model.Reactions.Where(r => r.IsLike).Select(r => r.UserName))
+                : "No likes yet")">
+                @(Model.Reactions != null ? Model.Reactions.Count(r => r.IsLike) : 0)
+            </span>
+        </button>
+        <button class="btn btn-light">
+            👎 Dislike <span class="badge bg-secondary" data-bs-toggle="tooltip"
+                             title="@((Model.Reactions != null && Model.Reactions.Any(r => !r.IsLike))
+                ? string.Join(", ", Model.Reactions.Where(r => !r.IsLike).Select(r => r.UserName))
+                : "No dislikes yet")">
+                @(Model.Reactions != null ? Model.Reactions.Count(r => !r.IsLike) : 0)
+            </span>
+        </button>
+    </div>
+
 
     <hr />
 
@@ -68,3 +94,9 @@
         }
     </div>
 </div>
+
+<script>
+    $(function () {
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
+</script>

@@ -1,11 +1,13 @@
 ﻿using Final.Mvc.Areas.AdminArea.ViewModels.DlcVMs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Headers;
 
 namespace Final.Mvc.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+
     public class DlcController : Controller
     {
 
@@ -16,21 +18,41 @@ namespace Final.Mvc.Areas.AdminArea.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10)
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
-            var response = await client.GetAsync("https://localhost:7047/api/Dlc");
+            var response = await client.GetAsync("https://localhost:7047/api/Dlc/ForAdmin");
 
             if (response.IsSuccessStatusCode)
             {
                 var data = await response.Content.ReadAsStringAsync();
                 var dlcs = JsonConvert.DeserializeObject<List<DlcListVM>>(data);
-                return View(dlcs);
+
+                // Calculate total count and apply pagination
+                var totalDlcs = dlcs.Count();
+                var paginatedDlcs = dlcs
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                ViewBag.CurrentPage = pageNumber;
+                ViewBag.PageSize = pageSize;
+                ViewBag.TotalPages = (int)Math.Ceiling(totalDlcs / (double)pageSize);
+
+                return View(paginatedDlcs);
+            }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                return RedirectToAction("Login", "User", new { area = "" });
+            }
+            {
+
             }
 
             return View(new List<DlcListVM>());
         }
+
 
         public async Task<IActionResult> Detail(int id)
         {

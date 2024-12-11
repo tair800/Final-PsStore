@@ -51,6 +51,7 @@
                             <option value="">No Price Sorting</option>
                             <option value="price_asc">Price (Low to High)</option>
                             <option value="price_desc">Price (High to Low)</option>
+                            <option value="discount">Discounted Only</option>
                         </select>
                     </div>
 
@@ -62,7 +63,6 @@
                             <option value="date_desc">Release Date (Newest to Oldest)</option>
                         </select>
                     </div>
-
 
                     <button type="submit" class="btn btn-primary">Apply Filters</button>
                     <button type="button" class="btn btn-secondary" id="resetFilters">Reset Filters</button>
@@ -86,9 +86,9 @@
                                         <img src="@game.ImgUrl" alt="@game.Title" class="game-image" />
 
                                         <!-- Wishlist Button -->
-                                        <button class="favorite-btn" data-game-id="@game.Id" data-in-wishlist="@game.IsInWishlist.ToString().ToLower()">
+                                        <a class="favorite-btn" data-game-id="@game.Id" data-in-wishlist="@game.IsInWishlist.ToString().ToLower()">
                                             <i class="fas fa-heart @(game.IsInWishlist ? "wishlist-added" : "")"></i>
-                                        </button>
+                                        </a>
 
                                         <!-- Platform Labels -->
                                         <div class="platform-labels">

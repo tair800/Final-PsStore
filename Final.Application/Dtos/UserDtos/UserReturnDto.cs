@@ -9,6 +9,7 @@
         public bool IsBlocked { get; set; }
         public List<string> UserRoles { get; set; } = new List<string>();
         public string Token { get; set; }
+        public bool IsVerified { get; set; }
 
     }
 }

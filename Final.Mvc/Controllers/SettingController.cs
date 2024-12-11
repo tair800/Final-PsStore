@@ -102,7 +102,7 @@ namespace Final.Mvc.Controllers
                     smtpPort: 587,
                     enableSsl: true,
                     smtpUser: "tahiraa@code.edu.az",
-                    smtpPass: "blcf yubd mxnb gcyb"
+                    smtpPass: "cark zrzn cjid cjlr"
                 );
 
                 TempData["Success"] = "Your message has been sent successfully. We will get back to you shortly.";

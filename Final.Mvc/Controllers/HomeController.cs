@@ -28,7 +28,7 @@ namespace Final.Mvc.Controllers
                 homeVM.Games = allGames;
 
                 homeVM.NewGames = allGames
-                    .Where(g => g.CreatedDate >= DateTime.Now.AddMonths(-1))
+                    .Where(g => g.CreatedDate >= DateTime.Now.AddDays(-5))
                     .ToList();
 
                 homeVM.Deals = allGames

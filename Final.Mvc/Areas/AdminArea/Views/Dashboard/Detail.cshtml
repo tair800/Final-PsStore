@@ -1,0 +1,39 @@
+﻿@model Activ
+
+@{
+    ViewData["Title"] = "Activity Details";
+}
+
+<div class="card">
+    <div class="card-header">
+        Activity Details - @Model.ActionType
+    </div>
+    <div class="card-body">
+        <p><strong>Entity Name:</strong> @Model.EntityName</p>
+        <p><strong>Details:</strong> @Model.Details</p>
+        <p><strong>Performed By:</strong> @Model.PerformedBy</p>
+        <p><strong>Date:</strong> @Model.CreatedDate.ToLocalTime()</p>
+
+        @if (Model.EntityId.HasValue)
+        {
+            <p>
+                <a href="~/AdminArea/Game/Detail/@Model.EntityId" class="btn btn-primary">
+                    View @Model.EntityName Details
+                </a>
+            </p>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.OldData) || !string.IsNullOrEmpty(Model.NewData))
+        {
+            <h5>Change Details:</h5>
+            <div>
+                <strong>Old Data:</strong>
+                <pre>@Html.Raw(Model.OldData)</pre>
+            </div>
+            <div>
+                <strong>New Data:</strong>
+                <pre>@Html.Raw(Model.NewData)</pre>
+            </div>
+        }
+    </div>
+</div>

@@ -9,5 +9,6 @@ namespace Final.Application.Services.Interfaces
         Task Delete(int id);
         Task<DlcReturnDto> GetOne(int id);
         Task Update(int id, DlcUpdateDto dlcUpdateDto);
+        Task<int> GetCount();
     }
 }

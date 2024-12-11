@@ -2,6 +2,7 @@
 using Final.Application.Exceptions;
 using Final.Application.Extensions;
 using Final.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final.Api.Controllers
@@ -50,6 +51,33 @@ namespace Final.Api.Controllers
 
             return Ok(games);
         }
+
+        [HttpGet("ForAdmin")]
+        [Authorize(Roles = "admin,superAdmin")]
+        public async Task<IActionResult> GetAllAdmin()
+        {
+            var games = await _gameService.GetAll();
+            foreach (var game in games)
+            {
+                if (game.SalePrice == 0)
+                {
+                    game.SalePrice = null;
+                }
+            }
+
+
+            //var paginatedGames = games.
+            //    Skip((page - 1) * 2)
+            //    .Take(2);
+
+            //if (!paginatedGames.Any())
+            //{
+            //    return NotFound("No games found for the given page.");
+            //}
+
+            return Ok(games);
+        }
+
 
 
         [HttpGet("Get/{id}")]
@@ -156,6 +184,11 @@ namespace Final.Api.Controllers
             });
         }
 
-
+        [HttpGet("count")]
+        public async Task<IActionResult> GetCount()
+        {
+            var count = await _gameService.Count();
+            return Ok(new { Count = count });
+        }
     }
 }

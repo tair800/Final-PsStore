@@ -20,5 +20,6 @@ namespace Final.Data.Implementations
         public IOrderRepository orderRepository { get; }
         public IUserCardRepository userCardRepository { get; }
         public IRatingRepository ratingRepository { get; }
+        public ICommentReactionRepository commentReactionRepository { get; }
     }
 }

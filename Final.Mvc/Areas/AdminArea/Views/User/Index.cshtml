@@ -9,7 +9,6 @@
         </a>
     </div>
 
-
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success">
@@ -30,6 +29,7 @@
                 <th>UserName</th>
                 <th>Email</th>
                 <th>Status</th>
+                <th>Verification Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -47,6 +47,16 @@
                         else
                         {
                             <span class="badge bg-success">Active</span>
+                        }
+                    </td>
+                    <td>
+                        @if (user.IsVerified)
+                        {
+                            <span class="badge bg-success">Verified</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning">Not Verified</span>
                         }
                     </td>
                     <td>

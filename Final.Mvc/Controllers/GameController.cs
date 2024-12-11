@@ -24,13 +24,11 @@ namespace Final.Mvc.Controllers
             var client = _httpClientFactory.CreateClient();
             var token = Request.Cookies["token"];
 
-            // Set Authorization header if token is available
             if (!string.IsNullOrEmpty(token))
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
 
-            // Fetch all games (without paging)
             HttpResponseMessage gameResponse = await client.GetAsync($"https://localhost:7047/api/Game");
             if (!gameResponse.IsSuccessStatusCode)
             {
@@ -38,21 +36,18 @@ namespace Final.Mvc.Controllers
             }
 
             var gameData = await gameResponse.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(gameData); // Fetch all games
+            var result = JsonConvert.DeserializeObject<List<GameListItemVM>>(gameData);
 
-            // Fetch all categories
-            HttpResponseMessage categoryResponse = await client.GetAsync("https://localhost:7047/api/Category");  // Adjust the endpoint to fetch all categories
+            HttpResponseMessage categoryResponse = await client.GetAsync("https://localhost:7047/api/Category");
             if (!categoryResponse.IsSuccessStatusCode)
             {
                 return BadRequest("Error fetching categories.");
             }
 
             var categoryData = await categoryResponse.Content.ReadAsStringAsync();
-            var allCategories = JsonConvert.DeserializeObject<List<CategoryVM>>(categoryData);  // Deserialize categories to a list
+            var allCategories = JsonConvert.DeserializeObject<List<CategoryVM>>(categoryData);
+            ViewBag.Categories = allCategories;
 
-            ViewBag.Categories = allCategories; // Set all categories in ViewBag
-
-            // Fetch the user's wishlist if they are logged in
             if (!string.IsNullOrEmpty(token))
             {
                 string userId = GetUserIdFromToken(token);
@@ -69,18 +64,19 @@ namespace Final.Mvc.Controllers
                 }
             }
 
-            // Filtering logic (category, platform, etc.)
+            // Apply category filter
             if (category.HasValue)
             {
                 result = result.Where(g => g.CategoryId == category).ToList();
             }
 
+            // Apply platform filter
             if (platform.HasValue)
             {
                 result = result.Where(g => (int)g.Platform == platform).ToList();
             }
 
-            // Sorting logic (price, date, etc.)
+            // Apply sorting
             switch (sortByPrice)
             {
                 case "price_asc":
@@ -89,8 +85,12 @@ namespace Final.Mvc.Controllers
                 case "price_desc":
                     result = result.OrderByDescending(g => g.Price).ToList();
                     break;
+                case "discount": // Filter for discounted games
+                    result = result.Where(g => g.SalePrice.HasValue).ToList();
+                    break;
             }
 
+            // Apply sorting by date
             switch (sortByDate)
             {
                 case "date_asc":
@@ -101,12 +101,13 @@ namespace Final.Mvc.Controllers
                     break;
             }
 
-            ViewBag.SelectedCategory = category; // Keep track of the selected category
+            ViewBag.SelectedCategory = category;
 
-            return View(result); // Return filtered games
+            return View(result);
         }
 
         public async Task<IActionResult> Detail(int id)
+
         {
             using HttpClient client = new();
             var token = Request.Cookies["token"];
@@ -338,8 +339,81 @@ namespace Final.Mvc.Controllers
                 return PartialView("_GameSearch", searchResults);
             }
 
-            return PartialView("_GameSearch", new List<GameListItemVM>()); // Empty list on failure
+            return PartialView("_GameSearch", new List<GameListItemVM>());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ReactToComment([FromBody] CommentLikeVM model)
+        {
+            if (model.CommentId <= 0)
+            {
+                return BadRequest("Invalid CommentId.");
+            }
+
+            // Extract the JWT token to identify the user
+            var token = Request.Cookies["token"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return Unauthorized("You must be logged in to react.");
+            }
+
+            // Extract UserId from JWT token
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("Invalid user information.");
+            }
+
+            // Set the UserId in the model
+            model.UserId = userId;
+
+            using var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var content = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:7047/api/Comment/ReactToComment", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok("Reaction recorded successfully.");
+            }
+
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to record reaction: {errorMessage}");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddReply([FromBody] CommentReplyVM model)
+        {
+            using var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Request.Cookies["token"]);
+
+            var token = Request.Cookies["token"];
+            if (token != null)
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(token);
+                var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;
+                model.UserId = userId;
+            }
+
+            var content = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:7047/api/Comment/reply", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            return BadRequest($"Failed to add reply: {errorMessage}");
+        }
+
+
 
 
     }

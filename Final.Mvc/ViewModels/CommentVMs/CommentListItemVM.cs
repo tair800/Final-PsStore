@@ -8,9 +8,14 @@ namespace Final.Mvc.ViewModels.CommentVMs
         public string Content { get; set; }
         public string UserId { get; set; }
         public string Username { get; set; }
+        public string Like { get; set; }
+        public string Dislike { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool CanDelete { get; set; }
         public DateTime? UpdatedDate { get; set; }
+
+        public int LikeCount { get; set; }
+        public int DislikeCount { get; set; }
 
     }
 

@@ -232,12 +232,21 @@ namespace Final.Application.Services.Implementations
             // URL-decode the token before using it
             string decodedToken = Uri.UnescapeDataString(resetPasswordDto.Token);
 
+            // Check if the token has already been used
+            var tokenIsValid = await _userManager.VerifyUserTokenAsync(user, TokenOptions.DefaultProvider, "ResetPassword", decodedToken);
+            if (!tokenIsValid)
+                throw new CustomExceptions(400, "This password reset token is invalid or has already been used.");
+
             var result = await _userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDto.NewPassword);
             if (!result.Succeeded)
                 throw new CustomExceptions(500, string.Join(", ", result.Errors.Select(e => e.Description)));
 
+            // Optionally invalidate all tokens for the user
+            await _userManager.UpdateSecurityStampAsync(user);
+
             return true;
         }
+
 
 
         public async Task<List<string>> GetAllRoles()
@@ -342,7 +351,6 @@ namespace Final.Application.Services.Implementations
             return new string('*', cardNumber.Length - 4) + cardNumber.Substring(cardNumber.Length - 4);
         }
 
-        // GetUserCards method to fetch user's saved cards
         public async Task<List<UserCard>> GetUserCards(string userId)
         {
             return await _unitOfWork.userCardRepository.GetAll(c => c.UserId == userId);
@@ -350,14 +358,12 @@ namespace Final.Application.Services.Implementations
 
         public async Task<bool> DeleteCard(string userId, int cardId)
         {
-            // Fetch the user from the database
             var user = await _unitOfWork.userRepository.GetEntity(u => u.Id == userId, "UserCards");
             if (user == null)
             {
                 throw new CustomExceptions(404, "User not found");
             }
 
-            // Find the card to delete by integer Id
             var card = user.UserCards.FirstOrDefault(c => c.Id == cardId);
             if (card == null)
             {
@@ -372,6 +378,12 @@ namespace Final.Application.Services.Implementations
             _unitOfWork.Commit();
 
             return true;  // Return true to indicate the card was deleted successfully
+        }
+
+        public async Task<int> Count()
+        {
+            var count = (await _unitOfWork.userRepository.GetAll()).Count();
+            return count;
         }
 
     }

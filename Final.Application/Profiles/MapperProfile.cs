@@ -62,7 +62,9 @@ namespace Final.Application.Profiles
                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             //user
-            CreateMap<User, UserReturnDto>();
+            CreateMap<User, UserReturnDto>()
+                    .ForMember(dest => dest.IsVerified, opt => opt.MapFrom(src => src.EmailConfirmed));
+
             CreateMap<RegisterDto, User>();
 
             CreateMap<UpdateUserDto, User>()
@@ -125,15 +127,18 @@ namespace Final.Application.Profiles
                 .ForMember(dest => dest.CreatedDate, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(src => DateTime.UtcNow));
 
-            CreateMap<Comment, CommentReturnDto>();
-
 
             CreateMap<Comment, CommentReturnDto>()
-          .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.User.UserName))
-          .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title));
+                      .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.User.UserName))
+                      .ForMember(dest => dest.GameTitle, opt => opt.MapFrom(src => src.Game.Title))
+                      .ForMember(dest => dest.LikeCount, opt => opt.MapFrom(src => src.CommentReactions.Count(cr => cr.IsLike)))
+                      .ForMember(dest => dest.DislikeCount, opt => opt.MapFrom(src => src.CommentReactions.Count(cr => !cr.IsLike)));
 
             CreateMap<CommentHistory, CommentHistoryDto>()
           .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.PreviousContent));
+
+            CreateMap<CommentReaction, CommentReactionDto>()
+           .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
 
             //order
             CreateMap<Order, OrderDto>()

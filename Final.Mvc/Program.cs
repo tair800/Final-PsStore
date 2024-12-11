@@ -13,15 +13,12 @@ var config = builder.Configuration;
 
 builder.Services.AddSignalR();
 
-
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient(); // This registers IHttpClientFactory
-builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
-
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IWishlistService, WishlistService>();
@@ -68,43 +65,32 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 var app = builder.Build();
 
-
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-
-
-
-
-
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-
 app.UseRouting();
 
+// Authentication and Authorization Middleware (correct order)
+app.UseAuthentication(); // Ensure this comes before UseAuthorization
+app.UseAuthorization(); // This enables role-based authorization
+
+// Map controller routes
 app.MapControllerRoute(
-           name: "areas",
-           pattern: "{area:exists}/{controller=DashBoard}/{action=Index}/{id?}"
-         );
+    name: "areas",
+    pattern: "{area:exists}/{controller=DashBoard}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// Map SignalR hub
 app.MapHub<ChatHub>("/chathub");
 
 app.Run();
-
-app.UseAuthentication(); // Ensure this comes before UseAuthorization
-app.UseAuthorization();

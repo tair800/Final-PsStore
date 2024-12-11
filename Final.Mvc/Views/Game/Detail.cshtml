@@ -1,402 +1,424 @@
-﻿@section Links {
-    <link href="~/css/detail.css" rel="stylesheet" />
-}
-
-@model GameDetailWithCommentsVM
-<style>
-    .game-banner {
-        background-image: url(@Model.GameDetail.ImgUrl); /* Replace with the correct path */
-        background-size: cover; /* Ensures the background covers the entire area */
-        background-position: center center; /* Centers the background image */
-        background-repeat: no-repeat; /* Prevents the background from repeating */
-        width: 100vw; /* Sets the width to the full viewport */
-        height: 100vh; /* Sets the height to the full viewport */
-        position: relative; /* Ensures the content inside the banner is positioned correctly */
+﻿    @section Links {
+        <link href="~/css/detail.css" rel="stylesheet" />
     }
 
-    .add-comment-form {
-        margin-top: 30px;
-        padding: 20px;
-        background-color: #1e1e1e;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        width:100% !important
-    }
-
-    .rating-submit {
-        margin-top: 30px;
-    }
-
-    .stars {
-        display: flex;
-        align-items: center;
-    }
-
-    .star {
-        font-size: 30px;
-        color: #ccc;
-        cursor: pointer;
-        transition: color 0.2s;
-    }
-
-        .star.selected, .star.hovered {
-            color: #FFD700; /* Gold color for selected or hovered stars */
+    @model GameDetailWithCommentsVM
+    <style>
+        .game-banner {
+            background-image: url(@Model.GameDetail.ImgUrl);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat; 
+            width: 100vw; 
+            height: 100vh; 
+            position: relative;
         }
 
-        a{
-            text-decoration:none;
-            color:white
+        .add-comment-form {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width:100% !important
         }
-</style>
 
-<!-- Game Banner -->
-<div class="game-banner d-flex align-items-end">
-    <div class="container">
-        <div class="game-info text-white p-4 mb-4">
-            <h1 class="fw-bold">@Model.GameDetail.Title</h1>
-            <div class="d-flex align-items-center mb-3">
-                <span class="badge bg-secondary me-2">@Model.GameDetail.Platform</span>
-                <span class="me-2 rating-star">⭐</span>
-                <span class="me-2">@Model.AverageRating</span> <!-- Display average rating -->
-                <span>@Model.RatingCount ratings</span>
-            </div>
+        .rating-submit {
+            margin-top: 30px;
+        }
 
-            <!-- Display Sale Price if it exists, otherwise show the regular price -->
-            <div class="game-price">
-                @if (Model.GameDetail.SalePrice.HasValue)
-                {
-                    <!-- Sale Price -->
-                    <span class="sale-price">$@Model.GameDetail.SalePrice.Value</span>
-                    <!-- Original Price with Strikethrough -->
-                    <span class="original-price text-decoration-line-through ms-2">$@Model.GameDetail.Price</span>
-                }
-                else
-                {
-                    <!-- Only the regular price -->
-                    <span class="regular-price">$@Model.GameDetail.Price</span>
-                }
-            </div>
+        .stars {
+            display: flex;
+            align-items: center;
+        }
 
-            <div class="d-flex align-items-center">
-                <button class="btn btn-warning text-dark add-to-cart-btn cart-btn" gameId="@Model.GameDetail.Id">Add to Cart</button>
-                <button class="btn btn-link text-white ms-3">
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+        .star {
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
 
-@if (ViewBag.IsAuthenticated)
-{
-    <!-- Rating Section for Authenticated Users -->
-    <div class="container mt-5 rating-submit">
-        <h4>Rate this Game</h4>
-        <div class="stars">
-            @for (int i = 1; i <= 5; i++)
-            {
-                <span class="star" data-value="@i">&#9733;</span> <!-- Star symbol -->
+            .star.selected, .star.hovered {
+                color: #FFD700; 
             }
+
+            a{
+                text-decoration:none;
+                color:white
+            }
+    </style>
+
+    <!-- Game Banner -->
+    <div class="game-banner d-flex align-items-end">
+        <div class="container">
+            <div class="game-info text-white p-4 mb-4">
+                <h1 class="fw-bold">@Model.GameDetail.Title</h1>
+                <div class="d-flex align-items-center mb-3">
+                    <span class="badge bg-secondary me-2">@Model.GameDetail.Platform</span>
+                    <span class="me-2 rating-star">⭐</span>
+                    <span class="me-2">@Model.AverageRating</span> 
+                    <span>@Model.RatingCount ratings</span>
+                </div>
+
+                <div class="game-price">
+                    @if (Model.GameDetail.SalePrice.HasValue)
+                    {
+                        <span class="sale-price">$@Model.GameDetail.SalePrice.Value</span>
+                        <span class="original-price text-decoration-line-through ms-2">$@Model.GameDetail.Price</span>
+                    }
+                    else
+                    {
+                        <span class="regular-price">$@Model.GameDetail.Price</span>
+                    }
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-warning text-dark add-to-cart-btn cart-btn" gameId="@Model.GameDetail.Id">Add to Cart</button>
+                    <button class="btn btn-link text-white ms-3">
+                    </button>
+                </div>
+            </div>
         </div>
-        <input type="hidden" id="userRating" />
-        <input type="hidden" id="gameId" value="@Model.GameDetail.Id" />
-        <button type="button" onclick="submitRating()" class="btn btn-primary mt-3">Submit Rating</button>
-    </div>
-}
-else
-{
-    <div class="container mt-5 rating-submit">
-        <p>Please <a href="@Url.Action("Login", "User")">log in</a> to rate this game.</p>
-    </div>
-}
-
-
-
-<!-- Add-Ons Section -->
-<div class="container py-5">
-    <h2 class="text-center mb-5">Add-Ons</h2>
-    <div class="d-flex justify-content-center">
-        @foreach (var dlc in Model.GameDetail.DlcNames.Take(3))
-        {
-            <div class="addon-item text-center me-4">
-                <!-- DLC Detail Link -->
-                <a asp-controller="Dlc" asp-action="Detail" asp-route-id="@dlc.Id">
-                    <img class="addon-img rounded" src="https://localhost:7047/uploads/images/@dlc.Image" alt="@dlc.Name" />
-                    <p class="fs-5 fw-bold mt-2">@dlc.Name</p>
-                    <h3 class="fs-5 mt-1">$@dlc.Price</h3>
-                </a>
-            </div>
-        }
-    </div>
-</div>
-
-
-<!-- Comments and Add Comment Section -->
-<div class="container mt-5 d-flex justify-content-between">
-    <!-- Comments Section -->
-    <div class="comment-section p-4 w-100">
-        <h3 class="mb-4">Comments</h3>
-        @if (Model.Contents != null && Model.Contents.Any())
-        {
-            <div class="comments-list">
-                @foreach (var comment in Model.Contents)
-                {
-                    <div class="comment-item p-4 mb-4 rounded" id="comment-@comment.Id">
-                        <div class="comment-header d-flex justify-content-between align-items-center mb-2">
-                            <span class="comment-user">@comment.Username</span>
-                            <span class="text-github fs-6 ps-3">@comment.CreatedDate.ToString("MMM dd, yyyy")</span>
-                        </div>
-                        <div class="comment-content mb-3" id="content-@comment.Id">
-                            <p>@comment.Content</p>
-                            <!-- Check if the comment has been modified -->
-                            @if (comment.UpdatedDate.HasValue && comment.UpdatedDate.Value != comment.CreatedDate)
-                            {
-                                <small class="text-github">Modified @comment.UpdatedDate?.AddHours(-4).ToString("MMM dd, yyyy  HH:mm")</small>
-                            }
-                        </div>
-                        @if (comment.CanDelete)
-                        {
-                            <div class="comment-actions d-flex">
-                                <button class="delete-comment-btn btn btn-danger me-2" onclick="deleteComment(@comment.Id)"><i class="fa-solid fa-trash"></i></button>
-                                <button class="edit-comment-btn btn btn-primary" onclick="editComment(@comment.Id)"><i class="fa-solid fa-pen"></i></button>
-                            </div>
-                        }
-                        <div class="edit-comment-form mt-3 d-none" id="edit-form-@comment.Id">
-                            <textarea class="form-control mb-2" id="edit-content-@comment.Id">@comment.Content</textarea>
-                            <button class="btn btn-success" onclick="saveComment(@comment.Id)">Save</button>
-                            <button class="btn btn-secondary" onclick="cancelEdit(@comment.Id)">Cancel</button>
-                        </div>
-                    </div>
-                }
-            </div>
-        }
-        else
-        {
-            <p>No comments available for this game. Be the first to comment!</p>
-        }
     </div>
 
-    <!-- Add a New Comment Section -->
     @if (ViewBag.IsAuthenticated)
     {
-        <div class="add-comment-form p-4 rounded  ">
-            <h4 class="mb-4">Add a Comment</h4>
-            <form id="addCommentForm">
-                <input type="hidden" id="gameId" value="@Model.GameDetail.Id" />
-                <div class="form-group mb-3">
-                    <textarea id="commentContent" class="add-comment-textarea form-control" placeholder="Write your comment here..." required></textarea>
-                </div>
-                <button type="button" onclick="addComment()" class="add-comment-btn btn btn-success">Add Comment</button>
-            </form>
+        <div class="container mt-5 rating-submit">
+            <h4>Rate this Game</h4>
+            <div class="stars">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <span class="star" data-value="@i">&#9733;</span> 
+                }
+            </div>
+            <input type="hidden" id="userRating" />
+            <input type="hidden" id="gameId" value="@Model.GameDetail.Id" />
+            <button type="button" onclick="submitRating()" class="btn btn-primary mt-3">Submit Rating</button>
         </div>
     }
     else
     {
-        <div class="add-comment-form text-center w-25 ms-4">
-            <p>Please <a href="@Url.Action("Login", "User")">log in</a> to add a comment.</p>
+        <div class="container mt-5 rating-submit">
+            <p>Please <a href="@Url.Action("Login", "User")">log in</a> to rate this game.</p>
         </div>
     }
-</div>
 
 
-<script>
 
-    let selectedRating = 0;
-
-    // Highlight the stars on hover
-    document.querySelectorAll('.star').forEach(star => {
-        star.addEventListener('mouseover', function () {
-            resetStars();
-            highlightStars(this.getAttribute('data-value'));
-        });
-
-        star.addEventListener('mouseout', function () {
-            resetStars();
-            if (selectedRating > 0) {
-                highlightStars(selectedRating); // Keep the selected rating highlighted
+    <div class="container py-5">
+        <div class="dlcs-container">
+            @foreach (var dlc in Model.GameDetail.DlcNames.Take(3))
+            {
+                <div class="addon-item text-center">
+                    <a asp-controller="Dlc" asp-action="Detail" asp-route-id="@dlc.Id">
+                        <img class="addon-img rounded" src="https://localhost:7047/uploads/images/@dlc.Image" alt="@dlc.Name" />
+                        <p class="fs-5 fw-bold mt-2">@dlc.Name</p>
+                        <h3 class="fs-5 mt-1">$@dlc.Price</h3>
+                    </a>
+                </div>
             }
-        });
+        </div>
+    </div>
 
-        star.addEventListener('click', function () {
-            selectedRating = this.getAttribute('data-value');
-            document.getElementById('userRating').value = selectedRating; // Set the hidden field with the selected rating
-        });
-    });
+    <div class="container mt-5 d-flex justify-content-between">
+        <div class="comment-section p-4 w-100">
+            <h3 class="mb-4">Comments</h3>
+            @if (Model.Contents != null && Model.Contents.Any())
+            {
+                <div class="comments-list">
+                    @foreach (var comment in Model.Contents)
+                    {
+                        <div class="comment-item p-4 mb-4 rounded" id="comment-@comment.Id">
+                            <div class="comment-header d-flex justify-content-between align-items-center mb-2">
+                                <span class="comment-user">@comment.Username</span>
+                                <span class="text-github fs-6 ps-3">@comment.CreatedDate.ToString("MMM dd, yyyy")</span>
+                            </div>
+                            <div class="comment-content mb-3" id="content-@comment.Id">
+                                <p>@comment.Content</p>
+                                @if (comment.UpdatedDate.HasValue && comment.UpdatedDate.Value != comment.CreatedDate)
+                                {
+                                    <small class="text-github">Modified @comment.UpdatedDate?.AddHours(-4).ToString("MMM dd, yyyy  HH:mm")</small>
+                                }
+                            </div>
+                            <div class="comment-reactions d-flex align-items-center mb-2">
+                                <button class="btn btn-light me-2" onclick="reactToComment(@comment.Id, true)">
+                                    👍 Like <span class="badge bg-secondary">@comment.LikeCount</span>
+                                </button>
+                                <button class="btn btn-light" onclick="reactToComment(@comment.Id, false)">
+                                    👎 Dislike <span class="badge bg-secondary">@comment.DislikeCount</span>
+                                </button>
+                            </div>
 
-    // Highlight stars up to the given value
-    function highlightStars(value) {
-        document.querySelectorAll('.star').forEach(star => {
-            if (star.getAttribute('data-value') <= value) {
-                star.classList.add('selected');
+
+
+                            @if (comment.CanDelete)
+                            {
+                                <div class="comment-actions d-flex">
+                                    <button class="delete-comment-btn btn btn-danger me-2" onclick="deleteComment(@comment.Id)">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                    <button class="edit-comment-btn btn btn-primary" onclick="editComment(@comment.Id)">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                </div>
+                            }
+                            <div class="edit-comment-form mt-3 d-none" id="edit-form-@comment.Id">
+                                <textarea class="form-control mb-2" id="edit-content-@comment.Id">@comment.Content</textarea>
+                                <button class="btn btn-success" onclick="saveComment(@comment.Id)">Save</button>
+                                <button class="btn btn-secondary" onclick="cancelEdit(@comment.Id)">Cancel</button>
+                            </div>
+                        </div>
+                    }
+                </div>
             }
-        });
-    }
+            else
+            {
+                <p>No comments available for this game. Be the first to comment!</p>
+            }
+        </div>
 
-    // Reset all stars
-    function resetStars() {
+        @if (ViewBag.IsAuthenticated)
+        {
+            <div class="add-comment-form p-4 rounded">
+                <h4 class="mb-4">Add a Comment</h4>
+                <form id="addCommentForm">
+                    <input type="hidden" id="gameId" value="@Model.GameDetail.Id" />
+                    <div class="form-group mb-3">
+                        <textarea id="commentContent" class="add-comment-textarea form-control" placeholder="Write your comment here..." required></textarea>
+                    </div>
+                    <button type="button" onclick="addComment()" class="add-comment-btn btn btn-success">Add Comment</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="add-comment-form text-center w-25 ms-4">
+                <p>Please <a href="@Url.Action("Login", "User")">log in</a> to add a comment.</p>
+            </div>
+        }
+    </div>
+
+    <script>
+
+        let selectedRating = 0;
+
         document.querySelectorAll('.star').forEach(star => {
-            star.classList.remove('selected');
-            star.classList.remove('hovered');
-        });
-    }
-
-    async function submitRating() {
-        const rating = document.getElementById("userRating").value;
-        const gameId = document.getElementById("gameId").value;
-
-        if (!rating) {
-            alert("Please select a rating.");
-            return;
-        }
-
-        const token = getJwtTokenFromCookie();
-        if (!token) {
-            alert("You must be logged in to submit a rating.");
-            return;
-        }
-
-        const response = await fetch('/Game/SubmitRating', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                GameId: gameId,
-                Score: rating
-            })
-        });
-
-        if (response.ok) {
-            window.location.reload();
-        } else {
-            alert('Failed to submit rating');
-        }
-    }
-
-    function getJwtTokenFromCookie() {
-        const cookieValue = document.cookie.split('; ').find(row => row.startsWith('token='));
-        return cookieValue ? cookieValue.split('=')[1] : null;
-    }
-
-    function getJwtTokenFromCookie() {
-        const cookieValue = document.cookie
-            .split('; ')
-            .find(row => row.startsWith('token=')); // Adjust 'token' to match the name of your JWT token cookie
-        return cookieValue ? cookieValue.split('=')[1] : null;
-    }
-
-
-    $(document).on("click", ".add-to-cart-btn", function () {
-        console.log("Attempting to add game to basket");
-
-        const token = getJwtTokenFromCookie(); // Function to get the JWT token from cookies
-        console.log("Token:", token);
-
-        if (!token) {
-            // If there's no token, the user is not logged in, so show a warning
-            Swal.fire({
-                icon: 'warning',
-                title: 'Please log in',
-                text: 'You need to log in to add games to the basket.',
+            star.addEventListener('mouseover', function () {
+                resetStars();
+                highlightStars(this.getAttribute('data-value'));
             });
-            return;
+
+            star.addEventListener('mouseout', function () {
+                resetStars();
+                if (selectedRating > 0) {
+                    highlightStars(selectedRating); 
+                }
+            });
+
+            star.addEventListener('click', function () {
+                selectedRating = this.getAttribute('data-value');
+                document.getElementById('userRating').value = selectedRating; 
+            });
+        });
+
+        function highlightStars(value) {
+            document.querySelectorAll('.star').forEach(star => {
+                if (star.getAttribute('data-value') <= value) {
+                    star.classList.add('selected');
+                }
+            });
         }
 
-        const gameId = $(this).attr("gameId"); // Get the game ID from the button attribute
+        function resetStars() {
+            document.querySelectorAll('.star').forEach(star => {
+                star.classList.remove('selected');
+                star.classList.remove('hovered');
+            });
+        }
 
-        // Send the AJAX request to add the game to the basket
-        $.ajax({
-            url: `/Basket/AddToBasket?gameId=${gameId}&quantity=1`,  // Assuming your BasketController handles this endpoint
-            type: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`  // Include the JWT token in the request headers
-            },
-            contentType: 'application/json',
-            success: function (response) {
-                // Show success message when the game is added to the basket
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Game added to basket!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            },
-            error: function (xhr, status, error) {
-                // Handle errors, e.g., if the game couldn't be added
-                console.error('Error:', xhr.responseText || error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Failed to add game to basket',
-                    text: 'There was an error adding the game to your basket. Please try again.',
-                });
+        async function submitRating() {
+            const rating = document.getElementById("userRating").value;
+            const gameId = document.getElementById("gameId").value;
+
+            if (!rating) {
+                alert("Please select a rating.");
+                return;
             }
-        });
-    });
 
-    // Add comment
-    async function addComment() {
-        const gameId = document.getElementById("gameId").value;
-        const content = document.getElementById("commentContent").value;
+            const token = getJwtTokenFromCookie();
+            if (!token) {
+                alert("You must be logged in to submit a rating.");
+                return;
+            }
 
-        const response = await fetch('/Game/AddComment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ GameId: gameId, Content: content })
-        });
-
-        if (response.ok) {
-            window.location.reload();
-        } else {
-            alert('Failed to add comment');
-        }
-    }
-
-    // Delete comment
-    async function deleteComment(id) {
-        if (confirm("Are you sure you want to delete this comment?")) {
-            const response = await fetch(`/Game/DeleteComment/${id}`, {
-                method: 'DELETE'
+            const response = await fetch('/Game/SubmitRating', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    GameId: gameId,
+                    Score: rating
+                })
             });
 
             if (response.ok) {
-                document.getElementById(`comment-${id}`).remove();
+                window.location.reload();
             } else {
-                alert('Failed to delete comment');
+                alert('Failed to submit rating');
             }
         }
-    }
 
-    // Edit comment
-    function editComment(id) {
-        document.getElementById(`edit-form-${id}`).classList.remove('d-none');
-        document.getElementById(`content-${id}`).style.display = 'none';
-    }
+        function getJwtTokenFromCookie() {
+            const cookieValue = document.cookie.split('; ').find(row => row.startsWith('token='));
+            return cookieValue ? cookieValue.split('=')[1] : null;
+        }
 
-    // Cancel editing
-    function cancelEdit(id) {
-        document.getElementById(`edit-form-${id}`).classList.add('d-none');
-        document.getElementById(`content-${id}`).style.display = 'block';
-    }
+        function getJwtTokenFromCookie() {
+            const cookieValue = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('token='));
+            return cookieValue ? cookieValue.split('=')[1] : null;
+        }
 
-   async function saveComment(id) {
-        const content = document.getElementById(`edit-content-${id}`).value;
 
-        const response = await fetch(`/Game/UpdateComment/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ Content: content })
+        $(document).on("click", ".add-to-cart-btn", function () {
+            console.log("Attempting to add game to basket");
+
+            const token = getJwtTokenFromCookie();
+            console.log("Token:", token);
+
+            if (!token) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Please log in',
+                    text: 'You need to log in to add games to the basket.',
+                });
+                return;
+            }
+
+            const gameId = $(this).attr("gameId"); 
+
+            $.ajax({
+                url: `/Basket/AddToBasket?gameId=${gameId}&quantity=1`, 
+                type: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`  
+                },
+                contentType: 'application/json',
+                success: function (response) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Game added to basket!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', xhr.responseText || error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to add game to basket',
+                        text: 'There was an error adding the game to your basket. Please try again.',
+                    });
+                }
+            });
         });
 
-        if (response.ok) {
-            window.location.reload();
-        } else {
-            alert('Failed to save comment');
+        // Add comment
+        async function addComment() {
+            const gameId = document.getElementById("gameId").value;
+            const content = document.getElementById("commentContent").value;
+
+            const response = await fetch('/Game/AddComment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ GameId: gameId, Content: content })
+            });
+
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                alert('Failed to add comment');
+            }
         }
-    }
-</script>
+
+        // Delete comment
+        async function deleteComment(id) {
+            if (confirm("Are you sure you want to delete this comment?")) {
+                const response = await fetch(`/Game/DeleteComment/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    document.getElementById(`comment-${id}`).remove();
+                } else {
+                    alert('Failed to delete comment');
+                }
+            }
+        }
+
+        // Edit comment
+        function editComment(id) {
+            document.getElementById(`edit-form-${id}`).classList.remove('d-none');
+            document.getElementById(`content-${id}`).style.display = 'none';
+        }
+
+        // Cancel editing
+        function cancelEdit(id) {
+            document.getElementById(`edit-form-${id}`).classList.add('d-none');
+            document.getElementById(`content-${id}`).style.display = 'block';
+        }
+
+       async function saveComment(id) {
+            const content = document.getElementById(`edit-content-${id}`).value;
+
+            const response = await fetch(`/Game/UpdateComment/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ Content: content })
+            });
+
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                alert('Failed to save comment');
+            }
+        }
+
+        async function reactToComment(commentId, isLike) {
+            const token = getJwtTokenFromCookie();
+            if (!token) {
+                alert("You must be logged in to react.");
+                return;
+            }
+
+            const response = await fetch('/Game/ReactToComment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    CommentId: commentId,
+                    IsLike: isLike
+                })
+            });
+
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                const errorText = await response.text();
+                console.error('Error:', errorText);
+                alert('Failed to record your reaction.');
+            }
+        }
+    </script>
 

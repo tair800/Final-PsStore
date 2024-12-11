@@ -22,6 +22,53 @@ namespace Final.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Final.Core.Entities.Activ", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ActionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EntityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NewData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PerformedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Activities");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Basket", b =>
                 {
                     b.Property<int>("Id")
@@ -248,6 +295,42 @@ namespace Final.Data.Migrations
                     b.HasIndex("CommentId");
 
                     b.ToTable("CommentHistories");
+                });
+
+            modelBuilder.Entity("Final.Core.Entities.CommentReaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsLike")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CommentReaction");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.Dlc", b =>
@@ -884,6 +967,25 @@ namespace Final.Data.Migrations
                     b.Navigation("Comment");
                 });
 
+            modelBuilder.Entity("Final.Core.Entities.CommentReaction", b =>
+                {
+                    b.HasOne("Final.Core.Entities.Comment", "Comment")
+                        .WithMany("CommentReactions")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Final.Core.Entities.User", "User")
+                        .WithMany("CommentReactions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Final.Core.Entities.Dlc", b =>
                 {
                     b.HasOne("Final.Core.Entities.Game", "Game")
@@ -1054,6 +1156,8 @@ namespace Final.Data.Migrations
             modelBuilder.Entity("Final.Core.Entities.Comment", b =>
                 {
                     b.Navigation("CommentHistories");
+
+                    b.Navigation("CommentReactions");
                 });
 
             modelBuilder.Entity("Final.Core.Entities.Dlc", b =>
@@ -1083,6 +1187,8 @@ namespace Final.Data.Migrations
                 {
                     b.Navigation("Basket")
                         .IsRequired();
+
+                    b.Navigation("CommentReactions");
 
                     b.Navigation("Comments");
 

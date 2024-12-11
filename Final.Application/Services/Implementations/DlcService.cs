@@ -138,6 +138,10 @@ namespace Final.Application.Services.Implementations
             await _unitOfWork.dlcRepository.Update(dlc);
             _unitOfWork.Commit();
         }
-
+        public async Task<int> GetCount()
+        {
+            var count = (await _unitOfWork.dlcRepository.GetAll()).Count;
+            return count;
+        }
     }
 }

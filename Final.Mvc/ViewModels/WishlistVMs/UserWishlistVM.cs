@@ -3,7 +3,7 @@
     public class UserWishlistVM
     {
         public string UserId { get; set; }
-        public List<WishlistGamesVM> WishlistGames { get; set; } = new();  // Initialize as empty list
+        public IEnumerable<WishlistGameVM> WishlistGames { get; set; } // Ensure this is IEnumerable
     }
 
 

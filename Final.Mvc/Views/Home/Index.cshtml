@@ -14,7 +14,7 @@
 
 <div class="game-list pb-3">
     <h1 class="pb-2 mb-2">New Games</h1>
-    @Html.Partial("_NewGamesPartial", Model.NewGames)
+    @Html.Partial("_NewGamesPartial", Model.Games)
 
     <h1 class="pb-2 mb-2">All Games</h1>
     @Html.Partial("_AllGamesPartial", Model.Games)
@@ -36,52 +36,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Simple debounce function to limit API calls while typing
-    function debounce(func, delay) {
-        let timer;
-        return function (...args) {
-            clearTimeout(timer);
-            timer = setTimeout(() => func.apply(this, args), delay);
-        };
-    }
-
-    // Debounced search function
-    const debouncedSearch = debounce(function () {
-        const query = document.getElementById('searchInput').value;
-
-        if (query.length < 1) {
-            document.getElementById('searchResults').innerHTML = '<div class="text-center text-muted">Type for searching...</div>';
-            return;
-        }
-
-        // Perform AJAX request to fetch the search results
-        fetch(`/Game/Search?title=${query}`)
-            .then(response => response.text()) // Expecting partial view HTML as response
-            .then(data => {
-                document.getElementById('searchResults').innerHTML = data; // Inject the partial view result
-            })
-            .catch(() => {
-                document.getElementById('searchResults').innerHTML = '<div class="text-center text-danger">Error while searching. Try again later.</div>';
-            });
-    }, 300);
-
 
     //promo
 
@@ -139,11 +93,11 @@
         } else {
             // If user is not logged in, display a message and a login button
             basketContent.innerHTML = `
-                        <div class="alert alert-warning text-center">
-                            <p>You are not logged in. Please log in to view your basket.</p>
-                            <a href="/User/Login" class="btn btn-primary">Go to Login</a>
-                        </div>
-                    `;
+                            <div class="alert alert-warning text-center">
+                                <p>You are not logged in. Please log in to view your basket.</p>
+                                <a href="/User/Login" class="btn btn-primary">Go to Login</a>
+                            </div>
+                        `;
         }
     });
 

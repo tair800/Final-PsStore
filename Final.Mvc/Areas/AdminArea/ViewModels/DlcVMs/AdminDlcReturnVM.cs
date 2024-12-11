@@ -8,7 +8,7 @@
         public string Image { get; set; }
         public int GameId { get; set; }
         public string GameTitle { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime? UpdateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
     }
 }

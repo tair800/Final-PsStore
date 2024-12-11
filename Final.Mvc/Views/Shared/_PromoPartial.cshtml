@@ -10,7 +10,7 @@
     <div class="image-row">
         @if (Model != null && Model.Any())
         {
-            @foreach (var promo in Model.Take(9))
+            @foreach (var promo in Model.Take(8))
             {
                 <div class="image-square">
                     <img src="@promo.Image" alt="@promo.Name" class="square-img" data-promo-img="@promo.Image">

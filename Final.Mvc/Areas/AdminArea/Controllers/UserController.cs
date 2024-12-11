@@ -6,7 +6,9 @@ using System.Text;
 
 namespace YourProjectNamespace.Areas.Admin.Controllers
 {
+
     [Area("AdminArea")]
+
     public class UserController : Controller
     {
         public async Task<IActionResult> Index()

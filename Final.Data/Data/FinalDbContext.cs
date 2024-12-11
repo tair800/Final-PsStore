@@ -23,6 +23,7 @@ namespace Final.Data.Data
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<ChatRoom> ChatRooms { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<Activ> Activities { get; set; }
 
         public FinalDbContext(DbContextOptions<FinalDbContext> options) : base(options)
         {
@@ -32,6 +33,18 @@ namespace Final.Data.Data
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(FinalDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<CommentReaction>()
+       .HasOne(cr => cr.Comment)
+       .WithMany(c => c.CommentReactions)
+       .HasForeignKey(cr => cr.CommentId)
+       .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CommentReaction>()
+                .HasOne(cr => cr.User)
+                .WithMany(u => u.CommentReactions)
+                .HasForeignKey(cr => cr.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }
